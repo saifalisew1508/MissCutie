@@ -72,12 +72,11 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hey* {}
-I am *{}* !
-➻ The most powerful telegram group management with music management bot and i have some aesome and useful features.
+*Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
-──────────────────
-*Click on the help button to get information about my modules and Commands.*
+Join my [updates channel](http://t.me/MissCutieUpdates) to get information on all the latest updates.
+
+Use the /mstart command to view the music panel, and interact with your experience.
 """
 
 buttons = [
@@ -101,17 +100,22 @@ buttons = [
 ]
 
 HELP_STRINGS = f"""
-*➥ {BOT_NAME} exclusive features*
+Hey! My name is *{BOT_NAME}*. I am a group management bot with group voice chat features, here to help you get around and keep the order in your groups!
+I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
-➲ /Donate : Support me 
-  ‣ in pm : will send you help for all supported modules.
-  ‣ in group : will redirect you to pm, with all that help modules.
-➲  /mstart  to start music bot."""
+*Helpful commands:*
+➥ /start: Starts me! You've probably already used this.
+➥ /help: Sends this message; I'll tell you more about myself!
+➥ /donate: Gives you info on how to support me and my creator.
+
+If you have any bugs or questions on how to use me, have a visit at [Supoort](https://t.me/MissCutie_Support/), or head to @MissCutieUpdates.
+ All commands can be used with the following !"""
 
 DONATE_STRING = """hey ,
-  happy to hear that you wanna donate.
-
-you can directly contact my @PrinceXofficial for donating or you can visit my [support chat](f"https://t.me/{SUPPORT_CHAT}") and ask there about donation."""
+So you want to donate? Amazing!
+You can donate on PayPal (https://paypal.me/saifalisew1508), or you can set up a recurring donation on GitHub Sponsors (https://github.com/sponsors/saifalisew1508).
+**UPI :** `saif.9@paytm`
+This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
 IMPORTED = {}
 MIGRATEABLE = []
