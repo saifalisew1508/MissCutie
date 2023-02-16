@@ -18,11 +18,11 @@ async def repo(client, message):
         photo=saif,
         caption=f"""**hey​ {message.from_user.mention()},\n\ni am [{dispatcher.bot.first_name}](t.me/{dispatcher.bot.username})**
 
-**➥ my developer​ :** [CONTACT](tg://user?id={OWNER_ID})
-**➥ python version :** `{y()}`
-**➥ library version :** `{o}` 
-**➥ telethon version :** `{s}` 
-**➥ pyrogram version :** `{z}`
+**➥ My Developer​ :** @PrinceXofficial
+**➥ Python Version :** `{y()}`
+**➥ Library Version :** `{o}` 
+**➥ Telethon Version :** `{s}` 
+**➥ Pyrogram Version :** `{z}`
 
 **group ✘ controller source is now public and now you can make your own bot.**
 """,
@@ -30,10 +30,10 @@ async def repo(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        "• owner ",f"tg://user?id={OWNER_ID}"
+                        "Developer",f"tg://user?id={OWNER_ID}"
                     ),
                     InlineKeyboardButton(
-                        "• repo •",
+                        "Source",
                         url="https://github.com/saifalisew1508/MissCutieRobot",
                     ),
                 ]
