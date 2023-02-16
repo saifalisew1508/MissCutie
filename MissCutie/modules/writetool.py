@@ -18,8 +18,8 @@ async def handwrite(_, message: Message):
         caption = f"""
 sucessfully written text 💘
 
-✨ **written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
-🥀 **reǫuested By :** {message.from_user.mention}
+✨ **Written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
+🥀 **Requested By :** {message.from_user.mention}
 ❄ **link :** `{req}`
 """
         await m.delete()
@@ -41,8 +41,8 @@ sucessfully written text 💘
         caption = f"""
 sucessfully written text 💘
 
-✨ **written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
-🥀 **reǫuested By :** {message.from_user.mention}
+✨ **Written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
+🥀 **Requested By :** {message.from_user.mention}
 ❄ **link :** `{req}`
 """
         await m.delete()
@@ -56,7 +56,7 @@ sucessfully written text 💘
         )
 
 
-__mod_name__ = "WriteTool🚏"
+__mod_name__ = "WriteTool"
 
 __help__ = """
 
