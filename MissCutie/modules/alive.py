@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from telegram import __version__ as lver
 from telethon import __version__ as tver
 
-from MissCutie import SUPPORT_CHAT, pbot,BOT_USERNAME, OWNER_ID
+from MissCutie import SUPPORT_CHAT, pbot,BOT_USERNAME
 
 PHOTO = [
     "https://telegra.ph/file/d2a23fbe48129a7957887.jpg",
@@ -19,7 +19,7 @@ PHOTO = [
 
 saif = [
     [
-        InlineKeyboardButton(text="Owner", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="Owner", url="https://t.me/PrinceXofficial"),
         InlineKeyboardButton(text="Support", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
