@@ -879,20 +879,20 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendAnimation(
+            dispatcher.bot.sendphoto(
                 f"@{SUPPORT_CHAT}",
-                animation="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
+                photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
   {dispatcher.bot.first_name} is alive ...
 
 
-   **Python :** `{y()}`
-   **Library :** `{telever}`
-   **Telethon :** `{tlhver}`
-   **Pyrogran :** `{pyrover}`
+➥ Python :** `{y()}`
+➥ Library :** `{telever}`
+➥ Telethon :** `{tlhver}`
+➥ Pyrogran :** `{pyrover}`
 
 
-made with  By [saif]("t.me/Saifalisew15o8")""",
+Made By @PrinceXofficial")""",
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
