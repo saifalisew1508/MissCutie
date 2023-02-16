@@ -72,12 +72,12 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hey* {} , [🥀](https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg)
-*๏ this is* {} !
-➻ the most powerful telegram group management with music management bot and i have some aesome and useful features.
+*Hey* {}
+I am *{}* !
+➻ The most powerful telegram group management with music management bot and i have some aesome and useful features.
 
 ──────────────────
-*๏ click on the help button to get information about my modules and Commands.*
+*Click on the help button to get information about my modules and Commands.*
 """
 
 buttons = [
@@ -91,19 +91,19 @@ buttons = [
         InlineKeyboardButton(text="Total Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ABOUT", callback_data="saif_"),
-        InlineKeyboardButton(text="SUPPORT", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="About", callback_data="saif_"),
+        InlineKeyboardButton(text="Support", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
-        InlineKeyboardButton(text="OWNER", url="https://t.me/PrinceXofficial"),
-        InlineKeyboardButton(text="MUSIC", callback_data="Music_"),
+        InlineKeyboardButton(text="Owner", url="https://t.me/PrinceXofficial"),
+        InlineKeyboardButton(text="Music", callback_data="Music_"),
     ],
 ]
 
 HELP_STRINGS = f"""
 *➥ {BOT_NAME} exclusive features*
 
-➲ /donate : support me 
+➲ /Donate : Support me 
   ‣ in pm : will send you help for all supported modules.
   ‣ in group : will redirect you to pm, with all that help modules.
 ➲  /mstart  to start music bot."""
@@ -111,7 +111,7 @@ HELP_STRINGS = f"""
 DONATE_STRING = """hey ,
   happy to hear that you wanna donate.
 
-you can directly contact my [developer](tg://user?id={OWNER_ID}") for donating or you can visit my [support chat](f"https://t.me/{SUPPORT_CHAT}") and ask there about donation."""
+you can directly contact my @PrinceXofficial for donating or you can visit my [support chat](f"https://t.me/{SUPPORT_CHAT}") and ask there about donation."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -217,11 +217,10 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             
-            update.effective_message.reply_sticker(
-                "CAACAgUAAxkBAAI33mLYLNLilbRI-sKAAob0P7koTEJNAAIOBAACl42QVKnra4sdzC_uKQQ"
-            )
-            update.effective_message.reply_text(
-                PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
+
+            update.effective_message.reply_photo(
+                START_IMG,
+                caption=PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
