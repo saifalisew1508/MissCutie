@@ -72,7 +72,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hey* {} , [🥀](https://te.legra.ph/file/95fdccc84da9756ac863d.jpg)
+*Hey* {} , [🥀](https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg)
 *๏ this is* {} !
 ➻ the most powerful telegram group management with music management bot and i have some aesome and useful features.
 
