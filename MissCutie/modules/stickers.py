@@ -16,7 +16,7 @@ from telegram.ext import run_async, CallbackContext, CallbackQueryHandler
 from telegram.utils.helpers import mention_html
 
 from MissCutie import dispatcher
-from MissCutie.Plugins.disable import DisableAbleCommandHandler
+from MissCutie.modules.disable import DisableAbleCommandHandler
 
 REDIS = ""
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
