@@ -197,6 +197,6 @@ async def drawText(image_path, text):
     return webp_file
 
 
-__mod_name__ = "mmf⊙"
+__mod_name__ = "Memify"
 __help__ = """ 
-⫸ /mmf  ◉ to memify """
+➥ /mmf <Text> to memify """
