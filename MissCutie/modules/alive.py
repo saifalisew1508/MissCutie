@@ -50,7 +50,7 @@ async def restart(client, m: Message):
     await m.reply_photo(
         lol,
         caption=f"""**Hey, i am [MissCutie](f"t.me/{BOT_USERNAME}")**
-  ➥ **my owner :** [Here](tg://user?id={OWNER_ID}))
+  ➥ **My Owner :** @PrinceXofficial
   
   ➥ **Library Version :** `{lver}`
   
