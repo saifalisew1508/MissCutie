@@ -482,7 +482,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
         )
     elif query.data == "Music_admin":
         query.message.edit_text(
-            text=f"*➥ admin Commandss «*"
+            text=f"*➥ admin Commands*"
             f"""
 just add *c* in the starting of the Commands to use them for channel.
 
@@ -510,7 +510,7 @@ just add *c* in the starting of the Commands to use them for channel.
         )
     elif query.data == "Music_play":
         query.message.edit_text(
-            text=f"*➥ play Commandss «*"
+            text=f"*➥ play Commands*"
             f"""
 /play or /vplay or /cplay  - bot will start playing your given query on voice chat or stream live links on voice chats.
 
