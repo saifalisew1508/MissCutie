@@ -166,17 +166,11 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
-                edited_keyboard = InlineKeyboardMarkup([[
-                    InlineKeyboardButton(text="View Pack",
-                                         url=f"t.me/addstickers/{packname}")
-                ]])
-                await msg.reply_text(
-                    f"<b>Your sticker has been added!</b>"
-                    f"\nEmoji Is : {sticker_emoji}",
-                    reply_markup=edited_keyboard,
-                    parse_mode=ParseMode.HTML,
+                msg.reply_text(
+                    f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
+                    + f"\nemoji is: {sticker_emoji}",
+                    parse_mode=ParseMode.MARKDOWN,
                 )
-
 
             except OSError as e:
                 msg.reply_text("i can only kang images m8.")
@@ -203,32 +197,22 @@ def kang(update: Update, context: CallbackContext):
                         png_sticker=open("kangsticker.png", "rb"),
                         emojis=sticker_emoji,
                     )
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
+                    msg.reply_text(
+                        f"sticker successfully added to [pack](t.me/addstickers/{packname})"
+                        + f"\nEmoji is: {sticker_emoji}",
+                        parse_mode=ParseMode.MARKDOWN,
                     )
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
                     msg.reply_text("max packsize reached. press f to pay respecc.")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
+                    msg.reply_text(
+                        "sticker successfully added to [pack](t.me/addstickers/%s)"
+                        % packname
+                        + "\n"
+                        "emoji is:" + " " + sticker_emoji,
+                        parse_mode=ParseMode.MARKDOWN,
                     )
                 print(e)
 
@@ -261,19 +245,11 @@ def kang(update: Update, context: CallbackContext):
                     tgs_sticker=open("kangsticker.tgs", "rb"),
                     emojis=sticker_emoji,
                 )
-                edited_keyboard = InlineKeyboardMarkup([[
-                    InlineKeyboardButton(
-                        text="View Pack",
-                        url=f"t.me/addstickers/{packname}")
-               ]])
-               await msg.reply_text(
-                   f"<b>Your sticker has been added!</b>"
-                   f"\nEmoji Is : {sticker_emoji}",
-                   reply_markup=edited_keyboard,
-                   parse_mode=ParseMode.HTML,
-               )
-            
-            
+                msg.reply_text(
+                    f"sticker successfully added to [pack](t.me/addstickers/{packname})"
+                    + f"\nEmoji is: {sticker_emoji}",
+                    parse_mode=ParseMode.MARKDOWN,
+                )
             except TelegramError as e:
                 if e.message == "Stickerset_invalid":
                     makepack_internal(
@@ -289,16 +265,12 @@ def kang(update: Update, context: CallbackContext):
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
+                    msg.reply_text(
+                        "sticker successfully added to [pack](t.me/addstickers/%s)"
+                        % packname
+                        + "\n"
+                        "Emoji is:" + " " + sticker_emoji,
+                        parse_mode=ParseMode.MARKDOWN,
                     )
                 print(e)
 
@@ -338,19 +310,11 @@ def kang(update: Update, context: CallbackContext):
                 png_sticker=open("kangsticker.png", "rb"),
                 emojis=sticker_emoji,
             )
-            edited_keyboard = InlineKeyboardMarkup([[
-                InlineKeyboardButton(
-                    text="View Pack",
-                    url=f"t.me/addstickers/{packname}")
-             ]])
-            
-             await msg.reply_text(
-                 f"<b>Your sticker has been added!</b>"
-                 f"\nEmoji Is : {sticker_emoji}",
-                 reply_markup=edited_keyboard,
-                 parse_mode=ParseMode.HTML,
-             )
-                
+            msg.reply_text(
+                f"sticker successfully added to [pack](t.me/addstickers/{packname})"
+                + f"\nEmoji is: {sticker_emoji}",
+                parse_mode=ParseMode.MARKDOWN,
+            )
         except OSError as e:
             msg.reply_text("i can only kang images m8.")
             print(e)
@@ -375,32 +339,26 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
-                edited_keyboard = InlineKeyboardMarkup([[
-                    InlineKeyboardButton(
-                        text="View Pack",
-                        url=f"t.me/addstickers/{packname}")
-                ]])
-                await msg.reply_text(
-                    f"<b>Your sticker has been added!</b>"
-                    f"\nEmoji Is : {sticker_emoji}",
-                    reply_markup=edited_keyboard,
-                    parse_mode=ParseMode.HTML,
+                msg.reply_text(
+                    "sticker successfully added to [pack](t.me/addstickers/%s)"
+                    % packname
+                    + "\n"
+                    + "Emoji is:"
+                    + " "
+                    + sticker_emoji,
+                    parse_mode=ParseMode.MARKDOWN,
                 )
             elif e.message == "Invalid sticker emojis":
                 msg.reply_text("Invalid emoji(s).")
             elif e.message == "Stickers_too_much":
                 msg.reply_text("Max packsize reached. Press F to pay respecc.")
             elif e.message == "Internal Server Error: sticker set not found (500)":
-                edited_keyboard = InlineKeyboardMarkup([[
-                    InlineKeyboardButton(
-                        text="View Pack",
-                        url=f"t.me/addstickers/{packname}")
-                ]])
-                await msg.reply_text(
-                    f"<b>Your sticker has been added!</b>"
-                    f"\nEmoji Is : {sticker_emoji}",
-                    reply_markup=edited_keyboard,
-                    parse_mode=ParseMode.HTML,
+                msg.reply_text(
+                    "sticker successfully added to [pack](t.me/addstickers/%s)"
+                    % packname
+                    + "\n"
+                    "Emoji is:" + " " + sticker_emoji,
+                    parse_mode=ParseMode.MARKDOWN,
                 )
             print(e)
     else:
@@ -461,65 +419,46 @@ def makepack_internal(
     except TelegramError as e:
         print(e)
         if e.message == "Sticker set name is already occupied":
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
-                    )
+            msg.reply_text(
+                "your pack can be found [here](t.me/addstickers/%s)" % packname,
+                parse_mode=ParseMode.MARKDOWN,
+            )
         elif e.message in ("Peer_id_invalid", "bot was blocked By the user"):
             msg.reply_text(
-                "Contact me in PM first.",
+                "contact me in pm first.",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                text="Start", url=f"t.me/{context.bot.username}"
+                                text="start", url=f"t.me/{context.bot.username}"
                             )
                         ]
                     ]
                 ),
             )
         elif e.message == "Internal Server Error: created sticker set not found (500)":
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
-                    )
+            msg.reply_text(
+                "sticker pack successfully created. get it [here](t.me/addstickers/%s)"
+                % packname,
+                parse_mode=ParseMode.MARKDOWN,
+            )
         return
 
     if success:
-                    edited_keyboard = InlineKeyboardMarkup([[
-                        InlineKeyboardButton(
-                            text="View Pack",
-                            url=f"t.me/addstickers/{packname}")
-                    ]])
-                    await msg.reply_text(
-                        f"<b>Your sticker has been added!</b>"
-                        f"\nEmoji Is : {sticker_emoji}",
-                        reply_markup=edited_keyboard,
-                        parse_mode=ParseMode.HTML,
-                    )
+        msg.reply_text(
+            "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
+            % packname,
+            parse_mode=ParseMode.MARKDOWN,
+        )
     else:
         msg.reply_text("Failed to create sticker pack. Possibly due to blek mejik.")
 
 
 __help__ = """
- ➥ /stickerid*:* Reply to a sticker to me to tell you its file id.
- ➥ /getsticker*:* Reply to a sticker to me to upload its raw png file.
- ➥ /kang*:* Reply to a sticker to add it to your pack.
- ➥ /stickers*:* Find stickers for given term on combot sticker catalogue
+ ➥ /stickerid*:* reply to a sticker to me to tell you its file id.
+ ➥ /getsticker*:* reply to a sticker to me to upload its raw png file.
+ ➥ /kang*:* reply to a sticker to add it to your pack.
+ ➥ /stickers*:* find stickers for given term on combot sticker catalogue
 """
 
 __mod_name__ = "Sticker"
