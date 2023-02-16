@@ -879,7 +879,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendphoto(
+            dispatcher.bot.sendPhoto(
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
