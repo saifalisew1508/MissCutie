@@ -95,7 +95,7 @@ buttons = [
         InlineKeyboardButton(text="SUPPORT", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
-        InlineKeyboardButton(text="OWNER", user_id=OWNER_ID),
+        InlineKeyboardButton(text="OWNER", url="https://t.me/PrinceXofficial"),
         InlineKeyboardButton(text="MUSIC", callback_data="Music_"),
     ],
 ]
@@ -396,7 +396,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", user_id=OWNER_ID"
+                            text="Developer", url="https://t.me/PrinceXofficial"
                         ),
                         InlineKeyboardButton(
                             text="Source",
@@ -426,7 +426,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", user_id=OWNER_ID"
+                            text="Developer", url="https://t.me/PrinceXofficial"
                         ),
                         InlineKeyboardButton(
                             text="Github", url="https://github.com/saifalisew1508"
