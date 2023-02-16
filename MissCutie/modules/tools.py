@@ -1,6 +1,6 @@
-# © @AnonymousBoy1025
+# © @SAIFALISEW1508
 
-__mod_name__ = "Tools🛠️"
+__mod_name__ = "Encrypt & Decrypt"
 
 __help__ = """
 
