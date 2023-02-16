@@ -85,4 +85,4 @@ __help__ = """
 ➻ /cute - check your current cuteness
 """
 
-__mod_name__ = "Semxy ☁️"
+__mod_name__ = "Prank"
