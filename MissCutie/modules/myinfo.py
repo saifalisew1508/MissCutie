@@ -29,7 +29,7 @@ async def proboyx(event):
     on = await bot.send_file(
         event.chat_id,
         file=file2,
-        caption=f"Hey {firstname}, \n Click on the button below \n to get info about you",
+        caption=f"Hey {firstname}, \nClick on the button below to get info about you \n\n*Note :* Start Bot in PM first",
         buttons=button,
     )
 
@@ -61,7 +61,7 @@ async def proboyx(event):
     ok7 = await bot.edit_message(event.chat_id, ok6, file=file4, buttons=button)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Information")))
 async def callback_query_handler(event):
     try:
         boy = event.sender_id
