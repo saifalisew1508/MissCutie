@@ -39,7 +39,7 @@ async def restart(client, m: Message):
     accha = await m.reply("⚡")
     await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving..")
-    await asyncio.sleep(0.10)
+    await asyncio.sleep(10.0)
     await accha.edit("ping.. pong.. aliving......")
     await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving..")
