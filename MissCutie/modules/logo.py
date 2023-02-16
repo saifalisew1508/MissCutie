@@ -250,7 +250,7 @@ async def lego(event):
             "`Give some text to create logo  !`\n`Example /logo <saif>`"
         )
         return
-    pesan = await event.reply("**creating your reǫuested logo please wait a sec............**")
+    pesan = await event.reply("**Creating your requested logo please wait a sec...**")
     try:
         text = event.pattern_match.group(1)
         randc = random.choice(LOGO_LINKS)
