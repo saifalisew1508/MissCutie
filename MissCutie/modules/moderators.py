@@ -11,7 +11,7 @@ from MissCutie.modules.log_channel import gloggable
 
 from telegram import Update
 from telegram.ext import CallbackContext
-from telegram.constants import ParseMode
+from telegram import ParseMode
 from telegram.error import BadRequest
 from telegram.helpers import mention_html
 
