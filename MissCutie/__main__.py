@@ -72,7 +72,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*hey* {} , [🥀](https://te.legra.ph/file/95fdccc84da9756ac863d.jpg)
+*Hey* {} , [🥀](https://te.legra.ph/file/95fdccc84da9756ac863d.jpg)
 *๏ this is* {} !
 ➻ the most powerful telegram group management with music management bot and i have some aesome and useful features.
 
@@ -83,7 +83,7 @@ PM_START_TEXT = """
 buttons = [
     [
         InlineKeyboardButton(
-            text="❣add me ❣",
+            text="Add Your Group",
             url=f"https://t.me/{dispatcher.bot.username}?startgroup=true",
         ),
     ],
@@ -95,7 +95,7 @@ buttons = [
         InlineKeyboardButton(text="SUPPORT", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
-        InlineKeyboardButton(text="OWNER", user_id={OWNER_ID}),
+        InlineKeyboardButton(text="OWNER", user_id=OWNER_ID),
         InlineKeyboardButton(text="MUSIC", callback_data="Music_"),
     ],
 ]
@@ -396,7 +396,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", user_id={OWNER_ID}"
+                            text="Developer", user_id=OWNER_ID"
                         ),
                         InlineKeyboardButton(
                             text="Source",
@@ -426,7 +426,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", user_id={OWNER_ID}"
+                            text="Developer", user_id=OWNER_ID"
                         ),
                         InlineKeyboardButton(
                             text="Github", url="https://github.com/saifalisew1508"
