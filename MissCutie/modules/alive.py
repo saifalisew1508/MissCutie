@@ -37,16 +37,16 @@ lol = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
 async def restart(client, m: Message):
     await m.delete()
     accha = await m.reply("⚡")
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving..")
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving......")
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving..")
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.10)
     await accha.edit("ping.. pong.. aliving......")
     await accha.delete()
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.50)
     await m.reply_photo(
         lol,
         caption=f"""**Hey, i am [MissCutie](f"t.me/{BOT_USERNAME}")**
