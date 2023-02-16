@@ -61,7 +61,7 @@ async def proboyx(event):
     ok7 = await bot.edit_message(event.chat_id, ok6, file=file4, buttons=button)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Information")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
 async def callback_query_handler(event):
     try:
         boy = event.sender_id
