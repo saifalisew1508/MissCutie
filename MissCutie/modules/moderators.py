@@ -13,7 +13,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 from telegram import ParseMode
 from telegram.error import BadRequest
-from telegram.helpers import mention_html
+from telegram.utils.helpers import mention_html
 
 
 @gloggable
