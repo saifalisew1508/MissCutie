@@ -883,7 +883,7 @@ def main():
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
-  {dispatcher.bot.first_name} is alive ...
+  {dispatcher.bot.first_name} is Alive ...
 
 
 ➥ Python :** `{y()}`
@@ -892,7 +892,7 @@ def main():
 ➥ Pyrogran :** `{pyrover}`
 
 
-Made By @PrinceXofficial")""",
+Made By @PrinceXofficial""",
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
