@@ -892,7 +892,8 @@ def main():
 ➥ Pyrogran :** `{pyrover}`
 
 
-Made By @PrinceXofficial""",
+Made By @PrinceXofficial
+""",
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
