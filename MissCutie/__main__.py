@@ -910,7 +910,7 @@ Made By @PrinceXofficial
         except BadRequest as e:
             LOGGER.warning(e.message)
 
-    CommandHandler("test", test)
+    test_handler = CommandHandler("test", test)
     start_handler = CommandHandler("start", start)
 
     help_handler = CommandHandler("help", get_help)
