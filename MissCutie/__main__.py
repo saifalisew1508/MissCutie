@@ -108,7 +108,7 @@ I have lots of handy features, such as flood control, a warning system, a note k
 ➥ /help: Sends this message; I'll tell you more about myself!
 ➥ /donate: Gives you info on how to support me and my creator.
 
-If you have any bugs or questions on how to use me, have a visit at [Supoort](https://t.me/MissCutie_Support/), or head to @MissCutieUpdates.
+If you have any bugs or questions on how to use me, have a visit at @MissCutie_Support , or head to @MissCutieUpdates.
  All commands can be used with the following !"""
 
 DONATE_STRING = """Hey {} ,
@@ -366,7 +366,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
     if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*Hey [{member.user['first_name']}](tg://user?id={member.user['id']}), My name is {dispatcher.bot.first_name}*"
+            text=f"*Hey Buddy, My name is {dispatcher.bot.first_name}*"
             "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
             "\n*Written in Python with SQLalchemy and MongoDB as database.*"
             "\n\nAbout bot Library, Databse Users and Chats"
@@ -378,15 +378,15 @@ def saif_about_callback(update: Update, context: CallbackContext):
             f"\n*➥ Total Users * {sql.num_users()}"
             f"\n*➥ Total Chats * {sql.num_chats()}"
             "\n────────────────────"
-            "\n\n➲  i can restrict users."
-            "\n➲  i have an advanced anti-flood system."
-            "\n➲  i can greet users with customizable welcome messages and even set a group's rules."
-            "\n➲  i can warn users until they reach max warns, with each predefined actions such as Ban, mute, kick, etc."
-            "\n➲  i have a note keeping system, blacklists, and even predetermined replies on certain keywords."
-            "\n➲  /mstart  to start music bot."
-            "\n➲  /mhelp  to get  all music help  button."
-            "\n➲  /malive  to cheak  music bot alive or  fumked."
-            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
+            "\n\n➥  i can restrict users."
+            "\n➥  i have an advanced anti-flood system."
+            "\n➥  i can greet users with customizable welcome messages and even set a group's rules."
+            "\n➥  i can warn users until they reach max warns, with each predefined actions such as Ban, mute, kick, etc."
+            "\n➥  i have a note keeping system, blacklists, and even predetermined replies on certain keywords."
+            "\n➥  /mstart  to start music bot."
+            "\n➥  /mhelp  to get  all music help  button."
+            "\n➥  /malive  to cheak  music bot alive or  fumked."
+            f"\n\n➥ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
