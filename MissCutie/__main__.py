@@ -310,7 +310,7 @@ def help_button(update, context):
         if mod_match:
             module = mod_match.group(1)
             text = (
-                "➥ *available Commands for* *{}* :\n".format(
+                "*Available Commands for* *{}* :\n".format(
                     HELPABLE[module].__mod_name__
                 )
                 + HELPABLE[module].__help__
@@ -367,13 +367,17 @@ def saif_about_callback(update: Update, context: CallbackContext):
     if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*Hey,*\n  *this is {dispatcher.bot.first_name}*"
-            "\n*a powerful group management with music management built to help you manage your group easily and to protect your group from scammers and spammers.*"
-            "\n*written in python with sqlalchemy and mongodb as database.*"
-            "\n\n────────────────────"
-            f"\n*➻ Uptime ➥* {uptime}"
-            f"\n*➻ Total Users ➥* {sql.num_users()}"
-            f"\n*➻ Total Chats ➥* {sql.num_chats()}"
+            text=f"*Hey {} My name is {dispatcher.bot.first_name}*"
+            "\n*{dispatcher.bot.first_name} is a Bot developed in *Python* using *Pyrogram, Telethon* and *PTB Library* with *SQLalchemy* and *MongoDB* as database, it's online since 9 January 2022 and it's constantly updated!.*"
+            "\n*Bot Library version and Uptime.*"
+            f"\n*➥ Python       :** `{y()}`"
+            f"\n*➥ PTB Library  :** `{telever}`"
+            f"\n*➥ Telethon     :** `{tlhver}`"
+            f"\n*➥ Pyrogran     :** `{pyrover}`"
+            f"\n*➥ Uptime       :* `{uptime}`"
+            "\n*Bot Users & Group Stats.*"
+            f"\n*➥ Total Users :* {sql.num_users()}"
+            f"\n*➥ Total Chats :* {sql.num_chats()}"
             "\n────────────────────"
             "\n\n➲  i can restrict users."
             "\n➲  i have an advanced anti-flood system."
@@ -486,9 +490,9 @@ def Music_about_callback(update: Update, context: CallbackContext):
         )
     elif query.data == "Music_admin":
         query.message.edit_text(
-            text=f"*➥ admin Commands*"
+            text=f"*➥ Admin Commands*"
             f"""
-just add *c* in the starting of the Commands to use them for channel.
+Just add *c* in the starting of the Commands to use them for channel.
 
 /pause : Pause the current Playing stream.
 
@@ -514,7 +518,7 @@ just add *c* in the starting of the Commands to use them for channel.
         )
     elif query.data == "Music_play":
         query.message.edit_text(
-            text=f"*➥ play Commands*"
+            text=f"*➥ Play Commands*"
             f"""
 /play or /vplay or /cplay  - bot will start playing your given query on voice chat or stream live links on voice chats.
 
@@ -523,8 +527,8 @@ just add *c* in the starting of the Commands to use them for channel.
 /channelplay [chat username or id] or [disable] - connect channel to a group and stream music on channel voice chat from your group.
 
 
-*bot Commandss*
- bot  server playlists:
+*Bot Commands*
+ Bot  server playlists:
 /playlist  - check your saved playlist on servers.
 /deleteplaylist - delete any saved music in your playlist
 /play  - start playing your saved playlist from servers.
@@ -926,7 +930,7 @@ Made By @PrinceXofficial
     donate_handler = CommandHandler("donate", donate)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
-    # dispatcher.add_handler(test_handler)
+    dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(about_callback_handler)
