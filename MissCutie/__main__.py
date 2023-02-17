@@ -387,7 +387,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
             "\n➲  /mstart  to start music bot."
             "\n➲  /mhelp  to get  all music help  button."
             "\n➲  /malive  to cheak  music bot alive or  fumked."
-            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
+            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}."
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
