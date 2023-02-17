@@ -377,16 +377,14 @@ def saif_about_callback(update: Update, context: CallbackContext):
             f"\n*➥ Uptime   :* {uptime}"
             f"\n*➥ Total Users * {sql.num_users()}"
             f"\n*➥ Total Chats * {sql.num_chats()}"
-            "\n────────────────────"
-            "\n\n➥  i can restrict users."
-            "\n➥  i have an advanced anti-flood system."
-            "\n➥  i can greet users with customizable welcome messages and even set a group's rules."
-            "\n➥  i can warn users until they reach max warns, with each predefined actions such as Ban, mute, kick, etc."
-            "\n➥  i have a note keeping system, blacklists, and even predetermined replies on certain keywords."
-            "\n➥  /mstart  to start music bot."
-            "\n➥  /mhelp  to get  all music help  button."
-            "\n➥  /malive  to cheak  music bot alive or  fumked."
-            f"\n\n➥ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
+            "\n\n*Bot Admins.*"
+            "\n• @PrinceXofficial, bot creator and main developer."
+            "\n\n__⚠️ The bot staff cannot assist you in situations involving groups using this bot.__"
+            "\n\n*Supporters*"
+            "\n• [Click here](http://t.me/MissCutieUpdates) to consult the updated list of Official Supporters of the bot."
+            "\n\n• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
+            "\n• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!"
+            f"\n\nClick on the *Commands* buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
