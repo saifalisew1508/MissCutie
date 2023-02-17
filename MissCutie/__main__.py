@@ -108,12 +108,12 @@ I have lots of handy features, such as flood control, a warning system, a note k
 ➥ /help: Sends this message; I'll tell you more about myself!
 ➥ /donate: Gives you info on how to support me and my creator.
 
-If you have any bugs or questions on how to use me, have a heat to [Updates](https://t.me/MissCutie_Support), or visit at @MissCutie_Support.
- All commands can be used with the following !"""
+If you have any bugs or questions on how to use me, visit at @MissCutie_Support.
+All commands can be used with the following !"""
 
 DONATE_STRING = """Hey {} ,
 So you want to donate? Amazing!
-You can donate on PayPal (https://paypal.me/saifalisew1508), or you can set up a recurring donation on GitHub Sponsors (https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
+You can donate on [PayPal](https://paypal.me/saifalisew1508), or you can set up a recurring donation on [GitHub Sponsors](https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
 This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
 IMPORTED = {}
@@ -166,7 +166,7 @@ for module_name in ALL_MODULES:
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
-    dispatcher.bot.send_message(
+        dispatcher.bot.send_message(
         chat_id=chat_id,
         text=text,
         parse_mode=ParseMode.MARKDOWN,
