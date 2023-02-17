@@ -108,7 +108,7 @@ I have lots of handy features, such as flood control, a warning system, a note k
 ➥ /help: Sends this message; I'll tell you more about myself!
 ➥ /donate: Gives you info on how to support me and my creator.
 
-If you have any bugs or questions on how to use me, have a visit at @MissCutie_Support , or head to @MissCutieUpdates.
+If you have any bugs or questions on how to use me, have a heat to [Updates](https://t.me/MissCutie_Support), or visit at @MissCutie_Support.
  All commands can be used with the following !"""
 
 DONATE_STRING = """Hey {} ,
