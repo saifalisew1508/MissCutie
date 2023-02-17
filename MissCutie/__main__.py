@@ -111,10 +111,9 @@ I have lots of handy features, such as flood control, a warning system, a note k
 If you have any bugs or questions on how to use me, have a visit at [Supoort](https://t.me/MissCutie_Support/), or head to @MissCutieUpdates.
  All commands can be used with the following !"""
 
-DONATE_STRING = """hey ,
+DONATE_STRING = """Hey {} ,
 So you want to donate? Amazing!
-You can donate on PayPal (https://paypal.me/saifalisew1508), or you can set up a recurring donation on GitHub Sponsors (https://github.com/sponsors/saifalisew1508).
-**UPI :** `saif.9@paytm`
+You can donate on PayPal (https://paypal.me/saifalisew1508), or you can set up a recurring donation on GitHub Sponsors (https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
 This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
 IMPORTED = {}
@@ -367,17 +366,17 @@ def saif_about_callback(update: Update, context: CallbackContext):
     if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*Hey {} My name is {dispatcher.bot.first_name}*"
-            f"\n*{dispatcher.bot.first_name} is a Bot developed in *Python* using *Pyrogram, Telethon* and *PTB Library* with *SQLalchemy* and *MongoDB* as database, it's online since 9 January 2022 and it's constantly updated!.*"
-            "\n*Bot Library version and Uptime.*"
-            f"\n*➥ Python       :** `{y()}`"
-            f"\n*➥ PTB Library  :** `{telever}`"
-            f"\n*➥ Telethon     :** `{tlhver}`"
-            f"\n*➥ Pyrogran     :** `{pyrover}`"
-            f"\n*➥ Uptime       :* `{uptime}`"
-            "\n*Bot Users & Group Stats.*"
-            f"\n*➥ Total Users :* {sql.num_users()}"
-            f"\n*➥ Total Chats :* {sql.num_chats()}"
+            text=f"*Hey {}, My name is {dispatcher.bot.first_name}*"
+            "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
+            "\n*Written in Python with SQLalchemy and MongoDB as database.*"
+            "\n\nAbout bot Library, Databse Users and Chats"
+            f"\n*➥ Python   :* {y()}"
+            f"\n*➥ Pyrogram :* {pyrover}"
+            f"\n*➥ Telethon :* {tlhver}"
+            f"\n*➥ PTB Lib  :* {telever}"
+            f"\n*➥ Uptime   :* {uptime}"
+            f"\n*➥ Total Users * {sql.num_users()}"
+            f"\n*➥ Total Chats * {sql.num_chats()}"
             "\n────────────────────"
             "\n\n➲  i can restrict users."
             "\n➲  i have an advanced anti-flood system."
@@ -387,7 +386,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
             "\n➲  /mstart  to start music bot."
             "\n➲  /mhelp  to get  all music help  button."
             "\n➲  /malive  to cheak  music bot alive or  fumked."
-            f"\n\n click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
+            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
