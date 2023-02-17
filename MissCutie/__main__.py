@@ -366,7 +366,8 @@ def saif_about_callback(update: Update, context: CallbackContext):
     if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*Hey {}, My name is {dispatcher.bot.first_name}*"
+            text=f"""
+            *Hey {}, My name is {dispatcher.bot.first_name}*"
             "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
             "\n*Written in Python with SQLalchemy and MongoDB as database.*"
             "\n\nAbout bot Library, Databse Users and Chats"
@@ -386,7 +387,8 @@ def saif_about_callback(update: Update, context: CallbackContext):
             "\n➲  /mstart  to start music bot."
             "\n➲  /mhelp  to get  all music help  button."
             "\n➲  /malive  to cheak  music bot alive or  fumked."
-            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.",
+            f"\n\n➻ click on the buttons given below for getting basic help and info about {dispatcher.bot.first_name}.
+            """",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
