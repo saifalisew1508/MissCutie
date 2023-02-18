@@ -100,7 +100,7 @@ buttons = [
 ]
 
 HELP_STRINGS = f"""
-Hey! My name is *{BOT_NAME}*. I am a group management bot with group voice chat features, here to help you get around and keep the order in your groups!
+Hey! I am a group management bot with group voice chat features, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
 *Helpful commands:*
