@@ -108,7 +108,7 @@ Helpful commands:
 ➥ /help: Sends this message; I'll tell you more about myself!
 ➥ /donate: Gives you info on how to support me and my creator.
 
-If you have any bugs or questions on how to use me, visit at @MissCutie_Support.
+If you have any bugs or questions on how to use me, visit at Support Chat.
 All commands can be used with the following !"""
 
 DONATE_STRING = """Hey {} ,
