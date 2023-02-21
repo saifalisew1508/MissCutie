@@ -486,8 +486,8 @@ def makepack_internal(
     png_sticker=None,
     tgs_sticker=None,
 ):
-    name = user.first_name
-    name = name[:50]
+    name = user.username
+    name = name[:32]
     keyboard = InlineKeyboardMarkup(
         [
             [
@@ -502,7 +502,7 @@ def makepack_internal(
         if packnum > 0:
             extra_version = " " + str(packnum)
         if png_sticker:
-            sticker_pack_name = f"{name}'s stic-pack (@{context.bot.username})" + \
+            sticker_pack_name = f"(@{name}) Kang's Pack" + \
                 extra_version
             success = context.bot.create_new_sticker_set(
                 user.id,
