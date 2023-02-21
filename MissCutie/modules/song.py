@@ -37,7 +37,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    m = message.reply("**➥ searching, please wait...**")
+    m = message.reply("**Searching, please wait...**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -55,11 +55,11 @@ def song(client, message):
 
     except Exception as e:
         m.edit(
-            "**😴 song not found on youtube.**\n\n➥ maybe tune galti likha ho, padhai - likhai toh karta nahi tu !"
+            "**Song not found on youtube.**\n\nMaybe tune galti likha ho, padhai - likhai toh karta nahi tu !"
         )
         print(str(e))
         return
-    m.edit("➥ downloading...\n\nplease wait...")
+    m.edit("Downloading...\n\nplease wait...")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -80,7 +80,7 @@ def song(client, message):
         m.delete()
     except Exception as e:
         m.edit(
-            f"**➥ downloading error, report this at ➥ [support chat](t.me/{SUPPORT_CHAT}) 💕**\n\**error :** {e}"
+            f"**Downloading error, report this at [support chat](t.me/{SUPPORT_CHAT}) 💕**\n\**error :** {e}"
         )
         print(e)
 
@@ -161,7 +161,7 @@ async def ytmusic(client, message: Message):
         return
     c_time = time.time()
     file_stark = f"{ytdl_data['id']}.mp4"
-    capy = f"❄ **title :** [{thum}]({mo})\n💫 **channel :** {thums}\n✨ **searched :** {urlissed}\n🥀 **reǫuested By :** {chutiya}"
+    capy = f"❄ **Title :** [{thum}]({mo})\n💫 **Channel Name :** {thums}\n✨ **Searched :** {urlissed}\n🥀 **Requested By :** {chutiya}"
     await client.send_video(
         message.chat.id,
         video=open(file_stark, "rb"),
@@ -173,7 +173,7 @@ async def ytmusic(client, message: Message):
         progress_args=(
             pablo,
             c_time,
-            f"➥ Please wait...\n\nUploading `{urlissed}` from youtube servers...💫",
+            f"Please wait...\n\nUploading `{urlissed}` from youtube servers...💫",
             file_stark,
         ),
     )
