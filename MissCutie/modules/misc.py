@@ -99,6 +99,18 @@ __help__ = """
 *Currency converter:* 
  ➥ /cash <5 USD in INR> convert each other currency
  
+ *Country*
+ ➥ /country <country name>*:* Gathering info about given country
+ 
+ *Encryption & Decryption*
+ ➥ /encrypt*:* Encrypts The Given Text
+ ➥ /decrypt*:* Decrypts Previously Ecrypted Text
+ 
+ *English Tools*
+ ➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+ ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
+ ➥ /synonyms <word>*:* Find the synonyms of a word
+ ➥ /antonyms <word>*:* Find the antonyms of a word
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=Filters.group)
