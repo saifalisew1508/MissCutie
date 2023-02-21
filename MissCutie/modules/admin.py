@@ -35,26 +35,26 @@ def set_sticker(update: Update, context: CallbackContext):
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
         return msg.reply_text(
-            "➥ You haven't permission to change group info !"
+            "You haven't permission to change group info !"
         )
 
     if msg.reply_to_message:
         if not msg.reply_to_message.sticker:
             return msg.reply_text(
-                "➥ Reply to a sticker to set it as group sticker pack !"
+                "Reply to a sticker to set it as group sticker pack !"
             )
         stkr = msg.reply_to_message.sticker.set_name
         try:
             context.bot.set_chat_sticker_set(chat.id, stkr)
-            msg.reply_text(f"➥ seccessfuly set group sticker in {chat.title}!")
+            msg.reply_text(f"Successfully set group sticker in {chat.title}!")
         except BadRequest as excp:
             if excp.message == "Participants_too_few":
                 return msg.reply_text(
-                    "➥ Your group need minimum 100 members to set a sticker pack as a group sticker pack !"
+                    "Your group need minimum 100 members to set a sticker pack as a group sticker pack !"
                 )
             msg.reply_text(f"Error ! {excp.message}.")
     else:
-        msg.reply_text("➥ Reply to a sticker to set it as group sticker pack !")
+        msg.reply_text("Reply to a sticker to set it as group sticker pack !")
 
 
 @run_async
@@ -66,7 +66,7 @@ def setchatpic(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("➥ You haven't permission to change group info !")
+        msg.reply_text("You haven't permission to change group info !")
         return
 
     if msg.reply_to_message:
@@ -75,15 +75,15 @@ def setchatpic(update: Update, context: CallbackContext):
         elif msg.reply_to_message.document:
             pic_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("➥ You can only set a phoyo as group profile pic !")
+            msg.reply_text("You can only set a phoyo as group profile pic !")
             return
-        dlmsg = msg.reply_text("➥ changing group's profile pic...")
+        dlmsg = msg.reply_text("Changing group's profile pic...")
         tpic = context.bot.get_file(pic_id)
         tpic.download("gpic.png")
         try:
             with open("gpic.png", "rb") as chatp:
                 context.bot.set_chat_photo(int(chat.id), photo=chatp)
-                msg.reply_text("➥ successfuly set group profile pic !")
+                msg.reply_text("Successfully set group profile pic !")
         except BadRequest as excp:
             msg.reply_text(f"error while changing group profile pic ! {excp.message}")
         finally:
@@ -91,7 +91,7 @@ def setchatpic(update: Update, context: CallbackContext):
             if os.path.isfile("gpic.png"):
                 os.remove("gpic.png")
     else:
-        msg.reply_text("➥ Reply to a photo or file to set it as group profile pic !")
+        msg.reply_text("Reply to a photo or file to set it as group profile pic !")
 
 
 @run_async
@@ -103,11 +103,11 @@ def rmchatpic(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("➥ You haven't permission to change group info !")
+        msg.reply_text("You haven't permission to change group info !")
         return
     try:
         context.bot.delete_chat_photo(int(chat.id))
-        msg.reply_text("➥ successfully deleted group's default profile pic !")
+        msg.reply_text("Successfully deleted group's default profile pic !")
     except BadRequest as excp:
         msg.reply_text(f"error ! {excp.message}.")
         return
@@ -123,21 +123,21 @@ def set_desc(update: Update, context: CallbackContext):
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
         return msg.reply_text(
-            "➥ You haven't permission to change group info !"
+            "You haven't permission to change group info !"
         )
 
     tesc = msg.text.split(None, 1)
     if len(tesc) >= 2:
         desc = tesc[1]
     else:
-        return msg.reply_text("➥ Really? you want to set an empty group description !")
+        return msg.reply_text("Really? you want to set an empty group description !")
     try:
         if len(desc) > 255:
             return msg.reply_text(
-                "➥ Description must be less than 255 character !"
+                "Description must be less than 255 character !"
             )
         context.bot.set_chat_description(chat.id, desc)
-        msg.reply_text(f"➥ successfully updated chat description in {chat.title}!")
+        msg.reply_text(f"Successfully updated chat description in {chat.title}!")
     except BadRequest as excp:
         msg.reply_text(f"error ! {excp.message}.")
 
@@ -152,18 +152,18 @@ def setchat_title(update: Update, context: CallbackContext):
     args = context.args
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("➥ You haven't permission to change group info !")
+        msg.reply_text("You haven't permission to change group info !")
         return
 
     title = " ".join(args)
     if not title:
-        msg.reply_text("➥ Enter some text to set it as new chat tittle !")
+        msg.reply_text("Enter some text to set it as new chat tittle !")
         return
 
     try:
         context.bot.set_chat_title(int(chat.id), str(title))
         msg.reply_text(
-            f"➥ successfully set <b>{title}</b> as a new chat tittle!",
+            f"Successfully set <b>{title}</b> as a new chat tittle!",
             parse_mode=ParseMode.HTML,
         )
     except BadRequest as excp:
@@ -191,14 +191,14 @@ def promote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("➥ You don't have permission to add new admins !")
+        message.reply_text("You don't have permission to add new admins !")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "➥ I don't know who's that user, never seen him in any chat where im present  !",
+            "I don't know who's that user, never seen him in any chat where im present  !",
         )
         return
 
@@ -208,12 +208,12 @@ def promote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ("administrator", "creator"):
-        message.reply_text("➥ According to me that user already as a admin in this chat !")
+        message.reply_text("According to me that user already as a admin in this chat !")
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "➥ i can't promote myself."
+            "I can't promote myself."
         )
         return
 
@@ -235,16 +235,16 @@ def promote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("➥ As i can see that user is not present here !")
+            message.reply_text("As i can see that user is not present here !")
         else:
             message.reply_text(
-                "➥ Something went wrong, maybe someone promoted that user before me"
+                "Something went wrong, maybe someone promoted that user before me"
             )
         return
 
     bot.sendMessage(
         chat.id,
-        f"<b>➥ Promoting a user in </b> {chat.title}\n\nPromoted user : {mention_html(user_member.user.id, user_member.user.first_name)}\nPromoted by : {mention_html(user.id, user.first_name)}",
+        f"<b>Promoting a user in </b> {chat.title}\n\nPromoted user : {mention_html(user_member.user.id, user_member.user.first_name)}\nPromoted by : {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
 
@@ -278,14 +278,14 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("➥ You don't have permission to add new admins !")
+        message.reply_text("You don't have permission to add new admins !")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "➥ I don't know who's that user, never seen him in any chat where im present  !",
+            "I don't know who's that user, never seen him in any chat where im present  !",
         )
         return
 
@@ -295,12 +295,12 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ("administrator", "creator"):
-        message.reply_text("➥ According to me that user already as a admin here !")
+        message.reply_text("According to me that user already as a admin here !")
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "➥ I can't promote myself."
+            "I can't promote myself."
         )
         return
 
@@ -321,16 +321,16 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("➥ As i can see that user is not present in this chat.")
+            message.reply_text("As i can see that user is not present in this chat.")
         else:
             message.reply_text(
-                "➥ something went wrong, maybe someone promoted that user before me."
+                "Something went wrong, maybe someone promoted that user before me."
             )
         return
 
     bot.sendMessage(
         chat.id,
-        f"<b>➥ low promoting a user in </b>{chat.title}\n\n<b>Promoted :</b> {mention_html(user_member.user.id, user_member.user.first_name)}\nPromoted By : {mention_html(user.id, user.first_name)}",
+        f"<b>Promoting a user in </b>{chat.title}\n\n<b>Promoted :</b> {mention_html(user_member.user.id, user_member.user.first_name)}\nPromoted By : {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
 
@@ -364,14 +364,14 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("➥ You don't have permission to add new admins !")
+        message.reply_text("You don't have permission to add new admins !")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "➥ I don't know who's that user, never seen him in any chat where im present  !",
+            "I don't know who's that user, never seen him in any chat where im present  !",
         )
         return
 
@@ -381,12 +381,12 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ("administrator", "creator"):
-        message.reply_text("➥ acoording to me that user is already as a admin here !")
+        message.reply_text("According to me that user is already as a admin here !")
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "➥ i can't promote myself."
+            "I can't promote myself."
         )
         return
 
@@ -409,10 +409,10 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("➥ as i can see that user is not present in this chat.")
+            message.reply_text("as i can see that user is not present in this chat.")
         else:
             message.reply_text(
-                "➥ something went wrong, maybe someone promoted that user before me."
+                "Something went wrong, maybe someone promoted that user before me."
             )
         return
 
@@ -429,7 +429,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 
     bot.sendMessage(
         chat.id,
-        f"➥ promoting that user with full rights <b>{chat.title}</b>\n\n<b>user : {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoted By : {mention_html(user.id, user.first_name)}</b>",
+        f"Promoting that user with full rights <b>{chat.title}</b>\n\n<b>user : {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoted By : {mention_html(user.id, user.first_name)}</b>",
         parse_mode=ParseMode.HTML,
     )
 
@@ -460,7 +460,7 @@ def demote(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "➥ I don't know who's that user, never seen him in any chat where im present  !",
+            "I don't know who's that user, never seen him in any chat where im present  !",
         )
         return
 
@@ -471,16 +471,16 @@ def demote(update: Update, context: CallbackContext) -> str:
 
     if user_member.status == "creator":
         message.reply_text(
-            "➥ LoL Really ? you want to demote OWNER"
+            "LoL Really ? you want to demote OWNER"
         )
         return
 
     if not user_member.status == "administrator":
-        message.reply_text("➥ according to me that user is not admin here !")
+        message.reply_text("According to me that user is not admin here !")
         return
 
     if user_id == bot.id:
-        message.reply_text("➥ i can't demote myself, but if you want i leave this chat.")
+        message.reply_text("i can't demote myself, but if you want i leave this chat.")
         return
 
     try:
@@ -500,7 +500,7 @@ def demote(update: Update, context: CallbackContext) -> str:
 
         bot.sendMessage(
             chat.id,
-            f"➥ successfully demoted an admin in <b>{chat.title}</b>\n\nDemoted : <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoted by : {mention_html(user.id, user.first_name)}",
+            f"Successfully demoted an admin in <b>{chat.title}</b>\n\nDemoted : <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoted by : {mention_html(user.id, user.first_name)}",
             parse_mode=ParseMode.HTML,
         )
 
@@ -514,7 +514,7 @@ def demote(update: Update, context: CallbackContext) -> str:
         return log_message
     except BadRequest:
         message.reply_text(
-            "➥ An error while demoting maybe i'm not an admin or someone else promoted that user !",
+            "An error while demoting maybe i'm not an admin or someone else promoted that user !",
         )
         return
 
@@ -527,7 +527,7 @@ def refresh_admin(update, _):
     except KeyError:
         pass
 
-    update.effective_message.reply_text("➥ successfully updated admin list !")
+    update.effective_message.reply_text("Successfully updated admin list !")
 
 
 @run_async
@@ -550,50 +550,50 @@ def set_title(update: Update, context: CallbackContext):
 
     if not user_id:
         message.reply_text(
-            "➥ I don't know who's that user, never seen him in any chat where im present  !",
+            "I don't know who's that user, never seen him in any chat where im present  !",
         )
         return
 
     if user_member.status == "creator":
         message.reply_text(
-            "➥ That user is OWNER of this group.",
+            "That user is OWNER of this group.",
         )
         return
 
     if user_member.status != "administrator":
         message.reply_text(
-            "➥ i can only set tittle for admins !",
+            "i can only set tittle for admins !",
         )
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "➥ i can't set tittle for myself.",
+            "i can't set tittle for myself.",
         )
         return
 
     if not title:
         message.reply_text(
-            "➥ you think blank tittle will change something ?"
+            "you think blank tittle will change something ?"
         )
         return
 
     if len(title) > 16:
         message.reply_text(
-            "➥ The tittle lenght is longer than 16 words os characters so truncating it to 16 words.",
+            "The tittle lenght is longer than 16 words os characters so truncating it to 16 words.",
         )
 
     try:
         bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
     except BadRequest:
         message.reply_text(
-            "➥ maybe that user is not Promoted by me or maybe you sent something that i can't be set as tittle."
+            "maybe that user is not Promoted by me or maybe you sent something that i can't be set as tittle."
         )
         return
 
     bot.sendMessage(
         chat.id,
-        f"➥ successfully set tittle for <code>{user_member.user.first_name or user_id}</code> "
+        f"successfully set tittle for <code>{user_member.user.first_name or user_id}</code> "
         f"to <code>{html.escape(title[:16])}</code>!",
         parse_mode=ParseMode.HTML,
     )
@@ -624,7 +624,7 @@ def pin(update: Update, context: CallbackContext) -> str:
     prev_message = update.effective_message.reply_to_message
 
     if prev_message is None:
-        msg.reply_text("➥ Reply to a message to pin that message !")
+        msg.reply_text("Reply to a message to pin that message !")
         return
 
     is_silent = True
@@ -641,7 +641,7 @@ def pin(update: Update, context: CallbackContext) -> str:
                 chat.id, prev_message.message_id, disable_notification=is_silent
             )
             msg.reply_text(
-                f"➥ successfully pinned that message.\nclick on the button below to see that message.",
+                f"Successfully pinned that message.\nclick on the button below to see that message.",
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("MESSAGE", url=f"{message_link}")]]
                 ),
@@ -678,7 +678,7 @@ def unpin(update: Update, context: CallbackContext):
         and user.id not in DRAGONS
     ):
         message.reply_text(
-            "➥ You haven't permission to pin/unpin message in this chat !"
+            "You haven't permission to pin/unpin message in this chat !"
         )
         return
 
@@ -698,7 +698,7 @@ def unpin(update: Update, context: CallbackContext):
         try:
             context.bot.unpinChatMessage(chat.id, prev_message.message_id)
             msg.reply_text(
-                f"➥ Successfully unpinned <a href='{message_link}'> this pinned message</a>.",
+                f"Successfully unpinned <a href='{message_link}'> this pinned message</a>.",
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
             )
@@ -709,11 +709,11 @@ def unpin(update: Update, context: CallbackContext):
     if not prev_message and is_group:
         try:
             context.bot.unpinChatMessage(chat.id)
-            msg.reply_text("➥ Successfully unpinned the last pinned message.")
+            msg.reply_text("Successfully unpinned the last pinned message.")
         except BadRequest as excp:
             if excp.message == "Message to unpin not found":
                 msg.reply_text(
-                    "➥ I can't unpin that message, maybe that message is too old or maybe someone already unpinned it."
+                    "I can't unpin that message, maybe that message is too old or maybe someone already unpinned it."
                 )
             else:
                 raise
@@ -757,7 +757,7 @@ def pinned(update: Update, context: CallbackContext) -> str:
                 [
                     [
                         InlineKeyboardButton(
-                            text="MESSAGE",
+                            text="Message Link",
                             url=f"https://t.me/{link_chat_id}/{pinned_id}",
                         )
                     ]
@@ -767,7 +767,7 @@ def pinned(update: Update, context: CallbackContext) -> str:
 
     else:
         msg.reply_text(
-            f"➥ There's is no pinned message in <b>{html.escape(chat.title)}!</b>",
+            f"There's is no pinned message in <b>{html.escape(chat.title)}!</b>",
             parse_mode=ParseMode.HTML,
         )
 
@@ -789,11 +789,11 @@ def invite(update: Update, context: CallbackContext):
             update.effective_message.reply_text(invitelink)
         else:
             update.effective_message.reply_text(
-                "➥ I heven't permission to access invite link !",
+                "I heven't permission to access invite link !",
             )
     else:
         update.effective_message.reply_text(
-            "➥ i can only only give link for group and channeld !",
+            "i can only only give link for group and channeld !",
         )
 
 
@@ -808,7 +808,7 @@ def adminlist(update, context):
     if update.effective_message.chat.type == "private":
         send_message(
             update.effective_message,
-            "➥ This command only for group.",
+            "This command only for group.",
         )
         return
 
@@ -818,12 +818,12 @@ def adminlist(update, context):
 
     try:
         msg = update.effective_message.reply_text(
-            "➥ Fetching admin list...",
+            "Fetching admin list...",
             parse_mode=ParseMode.HTML,
         )
     except BadRequest:
         msg = update.effective_message.reply_text(
-            "➥ Fetching admin list...",
+            "Fetching admin list...",
             quote=False,
             parse_mode=ParseMode.HTML,
         )
@@ -968,7 +968,7 @@ def button(update: Update, context: CallbackContext) -> str:
             )
     else:
         update.effective_message.edit_text(
-            "➥ An error while demoting, maybe that user not admin here or maybe not in chat !"
+            "An error while demoting, maybe that user not admin here or maybe not in chat !"
         )
         return ""
 
