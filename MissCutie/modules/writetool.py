@@ -51,7 +51,7 @@ sucessfully written text 💘
             photo=req,
             caption=caption,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("• telegraph •", url=f"{req}")]]
+                [[InlineKeyboardButton("Telegraph", url=f"{req}")]]
             ),
         )
 
