@@ -184,7 +184,8 @@ async def ytmusic(client, message: Message):
 
 
 __mod_name__ = "Song-Video"
-__help__ = """*Music*
+__help__ = """
+*Music*
 ➥ /song to download  any song
 ➥ /music to download song
 
