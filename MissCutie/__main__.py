@@ -82,21 +82,18 @@ Use the /mstart command to view the music panel, and interact with your experien
 
 buttons = [
     [
+        InlineKeyboardButton(text="Commands", callback_data="help_back"),
+        InlineKeyboardButton(text="Music", callback_data="Music_"),
+    ],
+    [
+        InlineKeyboardButton(text="About", callback_data="saif_"),
+        InlineKeyboardButton(text="System Stats", callback_data="stats_callback"),
+    ],
+    [
         InlineKeyboardButton(
             text="Add Your Group",
             url=f"https://t.me/{dispatcher.bot.username}?startgroup=true",
         ),
-    ],
-    [
-        InlineKeyboardButton(text="Total Commands", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="Support", url=f"https://t.me/{SUPPORT_CHAT}"),
-    ],
-    [
-        InlineKeyboardButton(text="Owner", url="https://t.me/PrinceXofficial"),
-        InlineKeyboardButton(text="Music", callback_data="Music_"),
     ],
 ]
 
@@ -457,6 +454,15 @@ def saif_about_callback(update: Update, context: CallbackContext):
             timeout=60,
             disable_web_page_preview=False,
         )
+
+
+
+@pbot.on_callback_query(filters.regex("stats_callback"))
+async def stats_callbacc(_, CallbackQuery):
+    text = await bot_sys_stats()
+    await app.answer_callback_query(CallbackQuery.id, text, show_alert=True)
+
+
 
 
 @run_async
@@ -867,6 +873,23 @@ def donate(update: Update, context: CallbackContext):
                 "contact me in pm first to get donation information."
             )
 
+            
+async def bot_sys_stats():
+    bot_uptime = int(time.time() - bot_start_time)
+    cpu = psutil.cpu_percent()
+    mem = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    process = psutil.Process(os.getpid())
+    stats = f"""
+{USERBOT_USERNAME}@PrinceXofficial
+------------------
+UPTIME: {formatter.get_readable_time(bot_uptime)}
+BOT: {round(process.memory_info()[0] / 1024 ** 2)} MB
+CPU: {cpu}%
+RAM: {mem}%
+DISK: {disk}%
+"""
+    return stats
 
 def migrate_chats(update: Update, context: CallbackContext):
     msg = update.effective_message  # type: Optional[Message]
