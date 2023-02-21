@@ -408,7 +408,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
                         ),
                         InlineKeyboardButton(
                             text="Source",
-                            url="https://github.com/saifalisew1508/MissCutieRobotRobot",
+                            url="https://github.com/saifalisew1508/MissCutieRobot",
                         ),
                     ],
                     [
@@ -478,9 +478,9 @@ def Music_about_callback(update: Update, context: CallbackContext):
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="Bot", callback_data="Music_bot"),
+                        InlineKeyboardButton(text=" Bot ", callback_data="Music_bot"),
                         InlineKeyboardButton(
-                            text=" extra ",
+                            text=" Extra ",
                             callback_data="Music_extra",
                         ),
                     ],
