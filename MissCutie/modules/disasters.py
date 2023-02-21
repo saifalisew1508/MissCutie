@@ -631,7 +631,13 @@ Group admins/group owners do not need these commands.
  ➥ /lockdown on/off
  ➥ /leave  to leave chat
  ➥ /gitpull  to pull git
- ➥ /reboot or /restart to restart bo
+ ➥ /reboot or /restart to restart bot
+ 
+ *Eval Commands*
+  *Owner Only*
+ ➥ /eval to evaluate simple code
+ ➥ /ex to execute code
+ ➥ /clear to run clear cmd
 """
 
 SUDO_HANDLER = CommandHandler("addsudo", addsudo)
