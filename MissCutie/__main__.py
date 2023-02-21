@@ -38,6 +38,7 @@ from MissCutie import (
     TOKEN,
     StartTime,
     dispatcher,
+    pbot
     telethn,
     updater,
 )
