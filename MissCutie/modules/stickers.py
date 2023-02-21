@@ -459,6 +459,7 @@ __help__ = """
  ➥ /getsticker*:* reply to a sticker to me to upload its raw png file.
  ➥ /kang*:* reply to a sticker to add it to your pack.
  ➥ /stickers*:* find stickers for given term on combot sticker catalogue
+ ➥ /tiny*:* reply a sticker and see magic
 """
 
 __mod_name__ = "Sticker"
