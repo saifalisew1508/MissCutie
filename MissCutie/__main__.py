@@ -34,6 +34,7 @@ from MissCutie import (
     OWNER_ID,
     START_IMG,
     SUPPORT_CHAT,
+    ALLOW_EXCL,
     TOKEN,
     StartTime,
     dispatcher,
