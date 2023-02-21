@@ -133,11 +133,3 @@ CLEAR_HANDLER = CommandHandler("clearlocals", clear)
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)
 dispatcher.add_handler(CLEAR_HANDLER)
-
-__mod_name__ = "Evals"
-__help__ = """
-★BOT OWNER COMMANDS★
-★ /eval :- to evaluate simple code
-★ /ex :-  to execute code
-★ /clear :- to run clear cmd
-"""
