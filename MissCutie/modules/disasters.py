@@ -627,8 +627,11 @@ Group admins/group owners do not need these commands.
  ➥ /del var <var>*:* Delete existing variable.
  ➥ /logs Get heroku dyno logs.
 
-`⚠️ Read from top`
-Visit @{SUPPORT_CHAT} for more information.
+*Reboot*
+ ➥ /lockdown on/off
+ ➥ /leave  to leave chat
+ ➥ /gitpull  to pull git
+ ➥ /reboot or /restart to restart bo
 """
 
 SUDO_HANDLER = CommandHandler("addsudo", addsudo)
