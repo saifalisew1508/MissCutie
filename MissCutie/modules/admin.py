@@ -226,32 +226,33 @@ def promote(update: Update, context: CallbackContext) -> str:
             user_id,
             can_change_info=bot_member.can_change_info,
             can_post_messages=bot_member.can_post_messages,
+            can_restrict_members=bot_member.can_restrict_members,
             can_edit_messages=bot_member.can_edit_messages,
             can_delete_messages=bot_member.can_delete_messages,
             can_invite_users=bot_member.can_invite_users,
-            # can_manage_voice_chats=bot_member.can_manage_voice_chats,
+            can_manage_voice_chats=bot_member.can_manage_voice_chats,
             can_pin_messages=bot_member.can_pin_messages,
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("➥ as i can see that user is not present here !")
+            message.reply_text("➥ As i can see that user is not present here !")
         else:
             message.reply_text(
-                "➥ something went wrong, maybe someone promoted that user before me"
+                "➥ Something went wrong, maybe someone promoted that user before me"
             )
         return
 
     bot.sendMessage(
         chat.id,
-        f"<b>➥ promoting a user in </b> {chat.title}\n\npromoted user : {mention_html(user_member.user.id, user_member.user.first_name)}\npromoted by : {mention_html(user.id, user.first_name)}",
+        f"<b>➥ Promoting a user in </b> {chat.title}\n\nPromoted user : {mention_html(user_member.user.id, user_member.user.first_name)}\nPromoted by : {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
 
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#promoted\n"
-        f"<b>promoted by :</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>user :</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
+        f"#Promoted\n"
+        f"<b>Promoted by :</b> {mention_html(user.id, user.first_name)}\n"
+        f"<b>User :</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
     )
 
     return log_message
@@ -294,12 +295,12 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ("administrator", "creator"):
-        message.reply_text("➥ according to me that user already as a admin here !")
+        message.reply_text("➥ According to me that user already as a admin here !")
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "➥ i can't promote myself."
+            "➥ I can't promote myself."
         )
         return
 
@@ -310,13 +311,17 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         bot.promoteChatMember(
             chat.id,
             user_id,
+            # can_change_info=bot_member.can_change_info,
+            can_post_messages=bot_member.can_post_messages,
+            can_edit_messages=bot_member.can_edit_messages,
             can_delete_messages=bot_member.can_delete_messages,
             can_invite_users=bot_member.can_invite_users,
+            can_manage_voice_chats=bot_member.can_manage_voice_chats,
             can_pin_messages=bot_member.can_pin_messages,
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("➥ as i can see that user is not present in this chat.")
+            message.reply_text("➥ As i can see that user is not present in this chat.")
         else:
             message.reply_text(
                 "➥ something went wrong, maybe someone promoted that user before me."
@@ -978,7 +983,7 @@ __help__ = """
 ➥ /unpin*:* unpins the currently pinned message
 ➥ /invitelink*:* gets invitelink
 ➥ /promote*:* promotes the user replied to
-➥ /lowpromote*:* promotes the user replied to with half rights
+➥ /admin*:* promotes the user replied to with half rights
 ➥ /fullpromote*:* promotes the user replied to with full rights
 ➥ /demote*:* demotes the user replied to
 ➥ /title <title here>*:* sets a custom title for an admin that the bot promoted
@@ -1010,7 +1015,7 @@ INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite)
 
 PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote)
 FULLPROMOTE_HANDLER = DisableAbleCommandHandler("fullpromote", fullpromote)
-LOW_PROMOTE_HANDLER = DisableAbleCommandHandler("lowpromote", lowpromote)
+LOW_PROMOTE_HANDLER = DisableAbleCommandHandler("admin", lowpromote)
 DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote)
 
 SET_TITLE_HANDLER = CommandHandler("title", set_title)
