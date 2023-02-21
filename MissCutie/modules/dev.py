@@ -91,9 +91,5 @@ dispatcher.add_handler(LEAVE_HANDLER)
 dispatcher.add_handler(GITPULL_HANDLER)
 dispatcher.add_handler(RESTART_HANDLER)
 
-__mod_name__ = "Dev"
-__help__ = """➥ /lockdown on/off
-➥ /leave  to leave chat
-➥ /gitpull  to pull git
-➥ /reboot or /restart to restart bot """
+
 __handlers__ = [LEAVE_HANDLER, GITPULL_HANDLER, RESTART_HANDLER, ALLOWGROUPS_HANDLER]
