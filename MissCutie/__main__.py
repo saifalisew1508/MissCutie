@@ -88,7 +88,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="Owner", user_id="OWNER_ID"),
+        InlineKeyboardButton(text="Owner", url="t.me/PrinceXofficial"),
     ],
     [
         InlineKeyboardButton(
