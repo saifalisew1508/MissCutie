@@ -141,7 +141,7 @@ def kang(update, context):
             sticker_emoji = "🙂"
 
         adding_process = message.reply_text(
-            "<b>Your [sticker](t.me/addstickers/{packname}) will be added in few seconds, please wait...</b>",
+            "<b>Your sticker will be added in few seconds, please wait...</b>",
             parse_mode=ParseMode.HTML
         )
 
