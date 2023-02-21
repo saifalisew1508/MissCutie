@@ -188,6 +188,6 @@ __help__ = """*Music*
 ➥ /song to download  any song
 ➥ /music to download song
 
-*Video
+*Video*
 ➥ /video to download video song
 ➥ /vsong to download video song """
