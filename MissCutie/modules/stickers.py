@@ -1,6 +1,8 @@
 import math
 import os
 import urllib.request as urllib
+from io import BytesIO
+from urllib.parse import quote as urlquote
 from html import escape
 
 import requests
@@ -13,7 +15,7 @@ from telegram import (
     TelegramError,
     Update,
 )
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext, CallbackQueryHandler, run_async
 from telegram.utils.helpers import mention_html
 
 from MissCutie import dispatcher
