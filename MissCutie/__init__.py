@@ -158,6 +158,7 @@ telethn = TelegramClient("saif", API_ID, API_HASH)
 pbot = Client("MissCutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
+bot_start_time = time.time()
 
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
