@@ -1,13 +1,10 @@
 import importlib
 import re
-import os
-import time
 import psutil
 from platform import python_version as y
 from sys import argv
 
 from pyrogram import __version__ as pyrover
-from pyrogram import filters, idle
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram import __version__ as telever
 from telegram.error import (
@@ -41,8 +38,6 @@ from MissCutie import (
     TOKEN,
     StartTime,
     dispatcher,
-    pbot,
-    bot_start_time,
     telethn,
     updater,
 )
@@ -91,7 +86,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="System Stats", callback_data="stats_callback"),
+        InlineKeyboardButton(text="Owner", user_id="OWNER_ID"),
     ],
     [
         InlineKeyboardButton(
@@ -458,15 +453,6 @@ def saif_about_callback(update: Update, context: CallbackContext):
             timeout=60,
             disable_web_page_preview=False,
         )
-
-
-
-@pbot.on_callback_query(filters.regex("stats_callback"))
-async def stats_callbacc(_, CallbackQuery):
-    text = await bot_sys_stats()
-    await pbot.answer_callback_query(CallbackQuery.id, text, show_alert=True)
-
-
 
 
 @run_async
@@ -877,23 +863,7 @@ def donate(update: Update, context: CallbackContext):
                 "contact me in pm first to get donation information."
             )
 
-            
-async def bot_sys_stats():
-    bot_uptime = int(time.time() - bot_start_time)
-    cpu = psutil.cpu_percent()
-    mem = psutil.virtual_memory().percent
-    disk = psutil.disk_usage("/").percent
-    process = psutil.Process(os.getpid())
-    stats = f"""
-{BOT_USERNAME}@PrinceXofficial
-------------------
-UPTIME: {formatter.get_readable_time(bot_uptime)}
-BOT: {round(process.memory_info()[0] / 1024 ** 2)} MB
-CPU: {cpu}%
-RAM: {mem}%
-DISK: {disk}%
-"""
-    return stats
+
 
 def migrate_chats(update: Update, context: CallbackContext):
     msg = update.effective_message  # type: Optional[Message]
