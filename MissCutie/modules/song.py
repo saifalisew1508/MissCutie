@@ -173,7 +173,7 @@ async def ytmusic(client, message: Message):
         progress_args=(
             pablo,
             c_time,
-            f"➥ please wait...\n\nuploading `{urlissed}` from youtube servers...💫",
+            f"➥ Please wait...\n\nUploading `{urlissed}` from youtube servers...💫",
             file_stark,
         ),
     )
@@ -184,7 +184,10 @@ async def ytmusic(client, message: Message):
 
 
 __mod_name__ = "Song-Video"
-__help__ = """➥ /song to download  any song
-           or ➥ /music to download song 
-              ➥ /video to download video song
-           Or ➥ /vsong to download video song """
+__help__ = """*Music*
+➥ /song to download  any song
+➥ /music to download song
+
+*Video
+➥ /video to download video song
+➥ /vsong to download video song """
