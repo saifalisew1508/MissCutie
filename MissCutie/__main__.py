@@ -5,6 +5,7 @@ from platform import python_version as y
 from sys import argv
 
 from pyrogram import __version__ as pyrover
+from pyrogram import filters, idle
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram import __version__ as telever
 from telegram.error import (
@@ -460,7 +461,7 @@ def saif_about_callback(update: Update, context: CallbackContext):
 @pbot.on_callback_query(filters.regex("stats_callback"))
 async def stats_callbacc(_, CallbackQuery):
     text = await bot_sys_stats()
-    await app.answer_callback_query(CallbackQuery.id, text, show_alert=True)
+    await pbot.answer_callback_query(CallbackQuery.id, text, show_alert=True)
 
 
 
