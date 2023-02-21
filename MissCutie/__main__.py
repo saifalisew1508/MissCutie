@@ -1,6 +1,7 @@
 import importlib
 import re
 import time
+import psutil
 from platform import python_version as y
 from sys import argv
 
@@ -40,6 +41,7 @@ from MissCutie import (
     StartTime,
     dispatcher,
     pbot,
+    bot_start_time,
     telethn,
     updater,
 )
@@ -882,7 +884,7 @@ async def bot_sys_stats():
     disk = psutil.disk_usage("/").percent
     process = psutil.Process(os.getpid())
     stats = f"""
-{USERBOT_USERNAME}@PrinceXofficial
+{BOT_USERNAME}@PrinceXofficial
 ------------------
 UPTIME: {formatter.get_readable_time(bot_uptime)}
 BOT: {round(process.memory_info()[0] / 1024 ** 2)} MB
