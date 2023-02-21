@@ -317,12 +317,13 @@ dispatcher.add_handler(BRAINANIMATION_HANDLER)
 
 __help__ = """
 *Fake animation Command*
- ➥ /love - use it if u have girlfriend
- ➥ /hack -  to hack any user telegram id
- ➥ /moon    - to wish gn to ur love
- ➥ /kill  -  to kill  ur gf dad
- ➥ /bombs -  to sucide urself
- ➥ /police - to call mastermind police
- ➥ By  @MissCutie_Support
+ - /love - use it if u have girlfriend
+ - /hack -  to hack any user telegram id
+ - /moon    - to wish gn to ur love
+ - /kill  -  to kill  ur gf dad
+ - /bombs -  to sucide urself
+ - /police - to call mastermind police
+ 
+ By  @MissCutie_Support
 """
 __mod_name__ = "Animation"
