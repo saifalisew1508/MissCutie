@@ -57,6 +57,3 @@ dispatcher.add_handler(CONVERTER_HANDLER)
 
 __command_list__ = ["cash"]
 __handlers__ = [CONVERTER_HANDLER]
-__mod_name__ = "Currency"
-__help__ = """➥ /cash  convert each other currency 
-➥ /convert or try """
