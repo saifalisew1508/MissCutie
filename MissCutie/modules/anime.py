@@ -141,8 +141,8 @@ dispatcher.add_handler(QUOTES_HANDLER)
 
 __mod_name__ = "Anime-Quotes"
 __help__ = """ 
-/quote :- Write Quotes📝
-/animequotes :- Write AnimeQuotes 📝
+ ➥ /quote :- Write Quotes📝
+ ➥ /animequotes :- Write AnimeQuotes 📝
  """
 
 __command_list__ = [
