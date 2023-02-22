@@ -33,8 +33,3 @@ async def generate_response(prompt):
     )
     message = completions.choices[0].text
     return message
-
-__mod_name__ = "ChatGPT"
-__help__ = """
-➥ /chatgpt*:* ask any question?
-"""
