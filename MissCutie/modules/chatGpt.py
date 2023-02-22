@@ -4,7 +4,7 @@ from telethon import TelegramClient, events
 import asyncio
 
 
-from MissCutie import telethn
+from MissCutie import telethn, BOT_NAME
 
 # Your OpenAI API key
 openai.api_key = "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"
