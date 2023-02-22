@@ -23,6 +23,3 @@ async def handle_new_message(event):
             # If the message matches the filter, delete it and warn the user
             await message.delete()
             await telethn.send_message(chat, f"Sorry, {event.sender.first_name}, NSFW content is not allowed in this group!")
-
-# Start the client
-client.run_until_disconnected()
