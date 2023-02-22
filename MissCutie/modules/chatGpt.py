@@ -1,18 +1,39 @@
-from pyrogram import Client, filters
-from MissCutie import  pbot as bot
-
 import openai
+import telethon
+from telethon import TelegramClient, events
+import asyncio
 
-@bot.on_message(filters.command('chatgpt'))
-async def chat(bot, message):
-    try:
-        input = message.text.split(' ', 1)[1]
-        openai.api_key = "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"
-        resp = openai.Completion.create(
-            model='text-davinci-003', prompt=input)
-        await message.reply_text(resp.choices[0].text)
-    except Exception as e:
-        await message.reply_text(f"Error {e}")
+
+from MissCutie import telethn
+
+# Your OpenAI API key
+openai.api_key = "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"
+
+
+# Your GPT model ID
+model_id = "text-davinci-002"
+
+# The maximum number of tokens to generate
+max_tokens = 50
+
+# Register the event handler for incoming messages
+@telethn.on(events.NewMessage(incoming=True))
+async def handle_new_message(event):
+    # Generate a response using GPT
+    response = await generate_response(event.message.text)
+    # Send the response back to the user
+    await client.send_message(event.message.peer_id, response)
+
+async def generate_response(prompt):
+    # Call the OpenAI API to generate a response
+    completions = openai.Completion.create(
+        engine=model_id,
+        prompt=prompt,
+        max_tokens=max_tokens,
+    )
+    message = completions.choices[0].text
+    return message
+
 __mod_name__ = "ChatGPT"
 __help__ = """
 ➥ /chatgpt*:* ask any question?
