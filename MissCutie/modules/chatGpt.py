@@ -22,7 +22,7 @@ async def handle_new_message(event):
     # Generate a response using GPT
     response = await generate_response(event.message.text)
     # Send the response back to the user
-    await client.send_message(event.message.peer_id, response)
+    await telethn.send_message(event.message.peer_id, response)
 
 async def generate_response(prompt):
     # Call the OpenAI API to generate a response
