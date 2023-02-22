@@ -337,15 +337,15 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "developer", url="https://t.me/itz_mst_boi"
+                                "Developer", url="https://t.me/PrinceXofficial"
                             ),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/MissCutie_Support/26"
+                                "Support", url="https://t.me/MissCutie_Support"
                             ),
                         ],
                         [
                             InlineKeyboardButton(
-                                text="➕add me to your group➕",
+                                text="➕ Add Me To Your Group ➕",
                                 url=f"https://t.me/groupcontrollertgbot?startgroup=true",
                             ),
                         ],
@@ -366,7 +366,7 @@ def info(update: Update, context: CallbackContext):
                                 "Developer", url="https://t.me/PrinceXofficial"
                             ),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/MissCutie_Support/26"
+                                "Support", url="https://t.me/MissCutie_Support"
                             ),
                         ],
                         [
