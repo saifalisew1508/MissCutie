@@ -17,7 +17,7 @@ model_id = "text-davinci-003"
 max_tokens = 50
 
 # Register the event handler for incoming messages
-@telethn.on(events.NewMessage(incoming=True))
+@telethn.on(events.NewMessage(pattern="^[!/]chat ?(.*)"))
 async def handle_new_message(event):
     if event.is_reply:
         replied = await event.get_reply_message()
