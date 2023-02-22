@@ -19,6 +19,9 @@ max_tokens = 50
 # Register the event handler for incoming messages
 @telethn.on(events.NewMessage(incoming=True))
 async def handle_new_message(event):
+    if event.is_reply:
+        replied = await event.get_reply_message()
+        sender = replied.sender
     # Generate a response using GPT
     response = await generate_response(event.message.text)
     # Send the response back to the user
