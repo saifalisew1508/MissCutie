@@ -14,7 +14,7 @@ openai.api_key = "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"
 model_id = "text-davinci-003"
 
 # The maximum number of tokens to generate
-max_tokens = 250
+max_tokens = 4096
 
 # Register the event handler for incoming messages
 @telethn.on(events.NewMessage(pattern="^[!/]chat ?(.*)"))
