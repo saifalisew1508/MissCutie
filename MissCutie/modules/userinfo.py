@@ -245,21 +245,21 @@ def info(update: Update, context: CallbackContext):
     rep = message.reply_text("<code>appraising...</code>", parse_mode=ParseMode.HTML)
 
     text = (
-        f"ㅤ ㅤㅤ      ✦ user info ✦\n•❅─────✧❅✦❅✧─────❅•\n"
-        f"➻ <b>user id:</b> <code>{user.id}</code>\n"
-        f"➻ <b>first name:</b> {html.escape(user.first_name)}"
+        f"ㅤ ㅤㅤ      ✦ User Info ✦\n•❅─────✧❅✦❅✧─────❅•\n"
+        f"➥ <b>User ID:</b> <code>{user.id}</code>\n"
+        f"➻ <b>First Name:</b> {html.escape(user.first_name)}"
     )
 
     if user.last_name:
-        text += f"\n➻ <b>last name:</b> {html.escape(user.last_name)}"
+        text += f"\n➥ <b>Last Name:</b> {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\n➻ <b>username:</b> @{html.escape(user.username)}"
+        text += f"\n➥ <b>Username:</b> @{html.escape(user.username)}"
 
-    text += f"\n➻ <b>link:</b> {mention_html(user.id, 'link')}"
+    text += f"\n➥ <b>Link:</b> {mention_html(user.id, 'link')}"
 
-    if chat.type != "private" and user_id != bot.id:
-        _stext = "\n➻ <b>presence:</b> <code>{}</code>"
+    if chat.type != "Private" and user_id != bot.id:
+        _stext = "\n➥ <b>Presence:</b> <code>{}</code>"
 
         afk_st = is_afk(user.id)
         if afk_st:
@@ -275,31 +275,31 @@ def info(update: Update, context: CallbackContext):
                     text += _stext.format("admin")
     if user_id not in [bot.id, 777000, 1087968824]:
         userhp = hpmanager(user)
-        text += f"\n\n<b>health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
+        text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
 
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nthe disaster level of this user is <b>god</b>.\n"
+        text += "\n\nThe Disaster Level Of This User Is <b>OWNER</b>.\n"
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nthis user is a member of <b>anon association</b>.\n"
+        text += "\n\nThis User Is A Member Of <b>BOT DEVS</b>.\n"
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nthe disaster level of this user is <b>dragon</b>.\n"
+        text += "\n\nThe Disaster Level Of This User Is <b>DRAGON</b>.\n"
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nthe disaster level of this user is <b>demon</b>.\n"
+        text += "\n\nThe Disaster Level Of This User Is <b>DEMON</b>.\n"
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nthe disaster level of this user is <b>tiger</b>.\n"
+        text += "\n\nThe Disaster Level Of This User Is <b>TIGER</b>.\n"
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nthe disaster level of this user is <b>wolf</b>.\n"
+        text += "\n\nThe Disaster Level Of This User Is <b>WOLF</b>.\n"
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' \n[<a href="https://t.me/MissCutie_Support/26">click here to know what is disaster levels.</a>]'.format(
+        text += ' \n[<a href="https://t.me/MissCutie_Support">Click Here To Know What Is Disaster Levels.</a>]'.format(
             bot.username
         )
 
@@ -452,7 +452,7 @@ def set_about_me(update: Update, context: CallbackContext):
 @run_async
 @sudo_plus
 def stats(update: Update, context: CallbackContext):
-    stats = "<b> current stats of group controller:</b>\n" + "\n".join(
+    stats = "<b> Current Stats Of MiiCutie :</b>\n" + "\n".join(
         [mod.__stats__() for mod in STATS]
     )
     result = re.sub(r"(\d+)", r"<code>\1</code>", stats)
