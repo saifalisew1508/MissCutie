@@ -16,7 +16,7 @@ def detect_nsfw(message):
         # https://tfhub.dev/google/collections/nsfw/1
         # If the media is NSFW, delete the message
         if nsfw_score > threshold:
-            client.delete_messages(message.chat_id, message.id)
+            telethn.delete_messages(message.chat_id, message.id)
 
 # Define the message handler function
 @telethn.on(events.NewMessage())
