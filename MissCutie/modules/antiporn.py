@@ -1,25 +1,26 @@
-from telethon import TelegramClient, events, sync
+from telethon import TelegramClient, events, utils
+from telethon.tl.types import MessageMediaPhoto, MessageMediaDocument
+import os
 from MissCutie import telethn
-import re
 
 
 
-# Define a regex pattern to match any messages containing NSFW content
-pattern = re.compile(r'.*\b(nsfw|nudity|porn|sex)\b.*', re.IGNORECASE)
+# Define the NSFW detector function
+def detect_nsfw(message):
+    # Check if the message contains a photo or a document
+    if isinstance(message.media, MessageMediaPhoto) or isinstance(message.media, MessageMediaDocument):
+        # Download the media and save it to a file
+        media = client.download_media(message.media, file=os.path.basename(message.file.name))
+        # Use a NSFW detection library to check if the media contains NSFW content
+        # For example, you can use the NSFW model provided by TensorFlow Hub:
+        # https://tfhub.dev/google/collections/nsfw/1
+        # If the media is NSFW, delete the message
+        if nsfw_score > threshold:
+            client.delete_messages(message.chat_id, message.id)
 
-# Define a function to handle incoming messages
-@telethn.on(events.NewMessage(incoming=True))
+# Define the message handler function
+@telethn.on(events.NewMessage())
 async def handle_new_message(event):
     message = event.message
-    if message.media and message.media.photo:
-        # If the message contains a photo, check if it matches the filter
-        if re.match(pattern, message.message):
-            # If the message matches the filter, delete it and warn the user
-            await message.delete()
-            await telethn.send_message(chat, f"Sorry, {event.sender.first_name}, NSFW content is not allowed in this group!")
-    elif message.message:
-        # If the message contains text, check if it matches the filter
-        if re.match(pattern, message.message):
-            # If the message matches the filter, delete it and warn the user
-            await message.delete()
-            await telethn.send_message(chat, f"Sorry, {event.sender.first_name}, NSFW content is not allowed in this group!")
+    detect_nsfw(message)
+
