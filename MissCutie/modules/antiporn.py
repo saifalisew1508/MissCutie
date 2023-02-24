@@ -10,7 +10,7 @@ def detect_nsfw(message):
     # Check if the message contains a photo or a document
     if isinstance(message.media, MessageMediaPhoto) or isinstance(message.media, MessageMediaDocument):
         # Download the media and save it to a file
-        media = client.download_media(message.media, file=os.path.basename(message.file.name))
+        media = telethn.download_media(message.media, file=os.path.basename(message.file.name))
         # Use a NSFW detection library to check if the media contains NSFW content
         # For example, you can use the NSFW model provided by TensorFlow Hub:
         # https://tfhub.dev/google/collections/nsfw/1
