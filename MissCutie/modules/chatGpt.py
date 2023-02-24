@@ -11,7 +11,7 @@ openai.api_key = "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"
 
 
 # Your GPT model ID
-model_id = "turingbotai/GPT3_India"
+model_id = "turingbotai"
 
 # The maximum number of tokens to generate
 max_tokens = 400
