@@ -1,26 +1,26 @@
-from telethon import TelegramClient, events, utils
-from telethon.tl.types import MessageMediaPhoto, MessageMediaDocument
-import os
 from MissCutie import telethn
+from telethon import TelegramClient, events, types, functions
+from telethon.errors import MessageNotModifiedError
+from telethon.utils import pack_bot_file_id
+from telethon.tl.types import MessageMediaDocument
+from telethon.extensions import markdown
+from telethon.nsfw import check_nsfw
 
+# Setup your Telethon client here
 
+NSFW_THRESHOLD = 0.5  # Set the NSFW score threshold
 
-# Define the NSFW detector function
-def detect_nsfw(message):
-    # Check if the message contains a photo or a document
-    if isinstance(message.media, MessageMediaPhoto) or isinstance(message.media, MessageMediaDocument):
-        # Download the media and save it to a file
-        media = telethn.download_media(message.media, file=os.path.basename(message.file.name))
-        # Use a NSFW detection library to check if the media contains NSFW content
-        # For example, you can use the NSFW model provided by TensorFlow Hub:
-        # https://tfhub.dev/google/collections/nsfw/1
-        # If the media is NSFW, delete the message
-        if nsfw_score > threshold:
-            telethn.delete_messages(message.chat_id, message.id)
-
-# Define the message handler function
 @telethn.on(events.NewMessage())
 async def handle_new_message(event):
-    message = event.message
-    detect_nsfw(message)
-
+    if event.media:
+        if isinstance(event.media, MessageMediaDocument):
+            document = event.media.document
+            if document.mime_type.startswith('image/') or document.mime_type.startswith('video/'):
+                file_id = pack_bot_file_id(document.id, document.access_hash)
+                file = await telethn.download_media(document, file='.')
+                nsfw_score = await check_nsfw(file)
+                if nsfw_score >= NSFW_THRESHOLD:
+                    await event.delete()
+                    await telethn.send_message(event.chat_id, f"NSFW content detected and deleted. NSFW score: {nsfw_score}")
+                    
+# Start your Telethon client here
