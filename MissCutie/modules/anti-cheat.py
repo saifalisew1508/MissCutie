@@ -1,4 +1,5 @@
-from telethon import Telegramtelethn, events, functions, types
+from telethon import TelegramClient, events, functions, types
+from MissCutie import telethn
 
 
 # Dictionary to keep track of banned members for each chat
