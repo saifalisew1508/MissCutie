@@ -1,3 +1,5 @@
+'''
+
 from MissCutie import telethn
 from telethon import TelegramClient, events, types, functions
 from telethon.errors import MessageNotModifiedError
@@ -23,4 +25,6 @@ async def handle_new_message(event):
                     await event.delete()
                     await telethn.send_message(event.chat_id, f"NSFW content detected and deleted. NSFW score: {nsfw_score}")
                     
-# Start your Telethon client here
+
+
+'''
