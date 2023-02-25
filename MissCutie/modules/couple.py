@@ -5,7 +5,7 @@ from pyrogram import filters
 from pyrogram.enums import ChatType
 
 from MissCutie import pbot
-from MissCutie.utils.mongo import get_couple, save_couple
+from MissCutie.modules.mongo.couple_mongo import get_couple, save_couple
 
 # Date and time
 def dt():
