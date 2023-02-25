@@ -5,7 +5,7 @@ from pyrogram import filters
 from MissCutie import OWNER_ID, pbot
 from MissCutie.utils.admins import can_change_info
 from MissCutie.utils.errors import capture_err
-from MissCutie.utils.mongo import (
+from MissCutie.modules.mongo.karma_mongo import (
     alpha_to_int,
     get_karma,
     get_karmas,
