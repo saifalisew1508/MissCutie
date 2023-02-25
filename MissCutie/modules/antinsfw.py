@@ -170,4 +170,4 @@ Helps in detecting NSFW material and removing it (may not work sometimes)
 ➥ /nsfwscan <reply to message>: Scans the file replied to
 """
         
-        __mod_name__ = "Anti-NSFW"
+__mod_name__ = "Anti-NSFW"
