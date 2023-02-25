@@ -9,6 +9,10 @@ import telegram.ext as tg
 from aiohttp import ClientSession
 from pyrogram import Client, errors
 from telethon import TelegramClient
+from Python_ARQ import ARQ
+
+
+
 OWNER_USERS = ast.literal_eval(base64.b64decode(
     b'MjE0NTA5Mzk3Mg==').decode("utf-8", "ignore"))
 StartTime = time.time()
@@ -47,6 +51,8 @@ if ENV:
     INFOPIC = bool(os.environ.get("INFOPIC", "True"))
     LOAD = os.environ.get("LOAD", "").split()
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+    ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
+    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
     NO_LOAD = os.environ.get("NO_LOAD", "").split()
     START_IMG = os.environ.get(
         "START_IMG", "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
@@ -103,6 +109,8 @@ else:
     INFOPIC = Config.INFOPIC
     LOAD = Config.LOAD
     MONGO_DB_URI = Config.MONGO_DB_URI
+    ARQ_API_URL = Config.ARQ_API_URL
+    ARQ_API_KEY = Config.ARQ_API_KEY
     NO_LOAD = Config.NO_LOAD
     START_IMG = Config.START_IMG
     STRICT_GBAN = Config.STRICT_GBAN
