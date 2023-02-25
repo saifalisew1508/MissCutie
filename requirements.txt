@@ -55,3 +55,4 @@ youtube_search_python
 openai
 psutil
 fontTools # QuoteLy module
+python-arq
