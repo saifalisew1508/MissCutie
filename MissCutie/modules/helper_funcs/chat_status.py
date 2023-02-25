@@ -367,7 +367,7 @@ def user_can_ban(func):
             and user not in DRAGONS
             and user not in [777000, 1087968824]
         ):
-            update.effective_message.reply_text("ðŸ˜¹ Sorry You can't do that")
+            update.effective_message.reply_text("Sorry You can't do that Kid")
             return ""
         return func(update, context, *args, **kwargs)
 
