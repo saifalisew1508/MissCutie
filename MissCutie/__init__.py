@@ -51,8 +51,8 @@ if ENV:
     INFOPIC = bool(os.environ.get("INFOPIC", "True"))
     LOAD = os.environ.get("LOAD", "").split()
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
-    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
+    ARQ_API_URL = os.environ.get("ARQ_API_URL", http://arq.hamker.dev)
+    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", IMAGSZ-UZELHZ-ZLRKZV-MOJOIK-ARQ)
     NO_LOAD = os.environ.get("NO_LOAD", "").split()
     START_IMG = os.environ.get(
         "START_IMG", "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
