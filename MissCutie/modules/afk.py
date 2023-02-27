@@ -30,7 +30,7 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
     return ping_time
 
-@app.on_message(filters.command(["afk", f"afk@szrosebot"]))
+@app.on_message(filters.command(["afk", f"afk@MissCutieRobot"]))
 async def going_afk(_, message: Message):
     if message.sender_chat:
         return
