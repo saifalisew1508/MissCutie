@@ -3,10 +3,12 @@ import time
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MissCutie import pbot, botusername
+from MissCutie import pbot, BOT_USERNAME
 from MissCutie.modules.mongo.afkdb import add_afk, is_afk, remove_afk
 from MissCutie.utils.afk import get_readable_time, put_cleanmode
 
+
+BOT_USERNAME = botusername
 
 @pbot.on_message(filters.command(["afk", f"afk@{botusername}"]) & ~filters.edited)
 async def active_afk(_, message: Message):
