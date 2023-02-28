@@ -1,117 +1,171 @@
-import asyncio
+import html
+import random
 
-from typing import Union
-from datetime import datetime, timedelta
-from MissCutie import cleanmode, pbot
-from MissCutie.modules.mongo.cleanafk import is_cleanmode_on
-from pyrogram.errors import FloodWait
-from pyrogram.types import InlineKeyboardButton
+from telegram import MessageEntity, Update
+from telegram.error import BadRequest
+from telegram.ext import CallbackContext, Filters, MessageHandler, run_async
 
+from MissCutie import dispatcher
+from MissCutie.modules.disable import (
+    DisableAbleCommandHandler,
+    DisableAbleMessageHandler,
+)
+from MissCutie.modules.sql import afk_sql as sql
+from MissCutie.modules.users import get_user_id
 
-def get_readable_time(seconds: int) -> str:
-    count = 0
-    ping_time = ""
-    time_list = []
-    time_suffix_list = ["s", "m", "h", "days"]
-    while count < 4:
-        count += 1
-        if count < 3:
-            remainder, result = divmod(seconds, 60)
-        else:
-            remainder, result = divmod(seconds, 24)
-        if seconds == 0 and remainder == 0:
-            break
-        time_list.append(int(result))
-        seconds = int(remainder)
-    for i in range(len(time_list)):
-        time_list[i] = str(time_list[i]) + time_suffix_list[i]
-    if len(time_list) == 4:
-        ping_time += time_list.pop() + ", "
-    time_list.reverse()
-    ping_time += ":".join(time_list)
-    return ping_time
+AFK_GROUP = 7
+AFK_REPLY_GROUP = 8
 
 
-async def put_cleanmode(chat_id, message_id):
-    if chat_id not in cleanmode:
-        cleanmode[chat_id] = []
-    time_now = datetime.now()
-    put = {
-        "msg_id": message_id,
-        "timer_after": time_now + timedelta(minutes=5),
-    }
-    cleanmode[chat_id].append(put)
+@run_async
+def afk(update: Update, context: CallbackContext):
+    args = update.effective_message.text.split(None, 1)
+    user = update.effective_user
+
+    if not user:  # ignore channels
+        return
+
+    if user.id in [777000, 1087968824]:
+        return
+
+    notice = ""
+    if len(args) >= 2:
+        reason = args[1]
+        if len(reason) > 100:
+            reason = reason[:100]
+            notice = "\nYour afk reason was shortened to 100 characters."
+    else:
+        reason = ""
+
+    sql.set_afk(update.effective_user.id, reason)
+    fname = update.effective_user.first_name
+    try:
+        update.effective_message.reply_text(
+            "{} is away from keyboard➥ {}".format(fname, notice)
+        )
+    except BadRequest:
+        pass
 
 
-async def auto_clean():
-    while not await asyncio.sleep(30):
+@run_async
+def no_longer_afk(update: Update, context: CallbackContext):
+    user = update.effective_user
+    message = update.effective_message
+
+    if not user:  # ignore channels
+        return
+
+    res = sql.rm_afk(user.id)
+    if res:
+        if message.new_chat_members:  # dont say msg
+            return
+        firstname = update.effective_user.first_name
         try:
-            for chat_id in cleanmode:
-                if not await is_cleanmode_on(chat_id):
-                    continue
-                for x in cleanmode[chat_id]:
-                    if datetime.now() > x["timer_after"]:
-                        try:
-                            await app.delete_messages(chat_id, x["msg_id"])
-                        except FloodWait as e:
-                            await asyncio.sleep(e.x)
-                        except:
-                            continue
-                    else:
-                        continue
+            options = [
+                "{} Is back here!",
+                "{} Is back!",
+                "{} Is now in the chat!",
+                "{} Is awake!",
+                "{} Is back online!",
+                "{} Is finally here!",
+                "Welcome back! {}",
+                "Where is {}?\nin the chat?",
+            ]
+            chosen_option = random.choice(options)
+            update.effective_message.reply_text(chosen_option.format(firstname))
         except:
-            continue
+            return
 
 
-asyncio.create_task(auto_clean())
+@run_async
+def reply_afk(update: Update, context: CallbackContext):
+    bot = context.bot
+    message = update.effective_message
+    userc = update.effective_user
+    userc_id = userc.id
+    if message.entities and message.parse_entities(
+        [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]
+    ):
+        entities = message.parse_entities(
+            [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]
+        )
+
+        chk_users = []
+        for ent in entities:
+            if ent.type == MessageEntity.TEXT_MENTION:
+                user_id = ent.user.id
+                fst_name = ent.user.first_name
+
+                if user_id in chk_users:
+                    return
+                chk_users.append(user_id)
+
+            if ent.type != MessageEntity.MENTION:
+                return
+
+            user_id = get_user_id(message.text[ent.offset : ent.offset + ent.length])
+            if not user_id:
+                # Should never happen, since for a user to become AFK they must have spoken. Maybe changed username?
+                return
+
+            if user_id in chk_users:
+                return
+            chk_users.append(user_id)
+
+            try:
+                chat = bot.get_chat(user_id)
+            except BadRequest:
+                print("Error: Could not fetch userid {} for AFK module".format(user_id))
+                return
+            fst_name = chat.first_name
+
+            check_afk(update, context, user_id, fst_name, userc_id)
+
+    elif message.reply_to_message:
+        user_id = message.reply_to_message.from_user.id
+        fst_name = message.reply_to_message.from_user.first_name
+        check_afk(update, context, user_id, fst_name, userc_id)
 
 
-RANDOM = [
-    "https://telegra.ph//file/0879fbdb307005c1fa8ab.jpg",
-    "https://telegra.ph//file/19e3a9d5c0985702497fb.jpg",
-    "https://telegra.ph//file/b5fa277081dddbddd0b12.jpg",
-    "https://telegra.ph//file/96e96245fe1afb82d0398.jpg",
-    "https://telegra.ph//file/fb140807129a3ccb60164.jpg",
-    "https://telegra.ph//file/09c9ea0e2660efae6f62a.jpg",
-    "https://telegra.ph//file/3b59b15e1914b4fa18b71.jpg",
-    "https://telegra.ph//file/efb26cc17eef6fe82d910.jpg",
-    "https://telegra.ph//file/ab4925a050e07b00f63c5.jpg",
-    "https://telegra.ph//file/d169a77fd52b46e421414.jpg",
-    "https://telegra.ph//file/dab9fc41f214f9cded1bb.jpg",
-    "https://telegra.ph//file/e05d6e4faff7497c5ae56.jpg",
-    "https://telegra.ph//file/1e54f0fff666dd53da66f.jpg",
-    "https://telegra.ph//file/18e98c60b253d4d926f5f.jpg",
-    "https://telegra.ph//file/b1f7d9702f8ea590b2e0c.jpg",
-    "https://telegra.ph//file/7bb62c8a0f399f6ee1f33.jpg",
-    "https://telegra.ph//file/dd00c759805082830b6b6.jpg",
-    "https://telegra.ph//file/3b996e3241cf93d102adc.jpg",
-    "https://telegra.ph//file/610cc4522c7d0f69e1eb8.jpg",
-    "https://telegra.ph//file/bc97b1e9bbe6d6db36984.jpg",
-    "https://telegra.ph//file/2ddf3521636d4b17df6dd.jpg",
-    "https://telegra.ph//file/72e4414f618111ea90a57.jpg",
-    "https://telegra.ph//file/a958417dcd966d341bfe2.jpg",
-    "https://telegra.ph//file/0afd9c2f70c6328a1e53a.jpg",
-    "https://telegra.ph//file/82ff887aad046c3bcc9a3.jpg",
-    "https://telegra.ph//file/8ba64d5506c23acb67ff4.jpg",
-    "https://telegra.ph//file/8ba64d5506c23acb67ff4.jpg",
-    "https://telegra.ph//file/a7cba6e78bb63e1b4aefb.jpg",
-    "https://telegra.ph//file/f8ba75bdbb9931cbc8229.jpg",
-    "https://telegra.ph//file/07bb5f805178ec24871d3.jpg"
+def check_afk(update, context, user_id, fst_name, userc_id):
+    if sql.is_afk(user_id):
+        user = sql.check_afk_status(user_id)
+        if int(userc_id) == int(user_id):
+            return
+        if not user.reason:
+            res = "{} is AFK".format(fst_name)
+            update.effective_message.reply_text(res)
+        else:
+            res = "{} Is AFK.\nReason➪ <code>{}</code>".format(
+                html.escape(fst_name), html.escape(user.reason)
+            )
+            update.effective_message.reply_text(res, parse_mode="html")
+
+
+__help__ = """
+*Away From Keyboard*
+ ➥ /afk <reason>*:* mark yourself as AFK(away from keyboard).
+ ➥ bye <reason>*:* same as the afk command - but not a command.
+When marked as AFK, any mentions will be replied to with a message to say you're not available!
+"""
+
+AFK_HANDLER = DisableAbleCommandHandler("afk", afk)
+AFK_REGEX_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"^(?i)bye(.*)$"), afk, friendly="afk"
+)
+NO_AFK_HANDLER = MessageHandler(Filters.all & Filters.group, no_longer_afk)
+AFK_REPLY_HANDLER = MessageHandler(Filters.all & Filters.group, reply_afk)
+
+dispatcher.add_handler(AFK_HANDLER, AFK_GROUP)
+dispatcher.add_handler(AFK_REGEX_HANDLER, AFK_GROUP)
+dispatcher.add_handler(NO_AFK_HANDLER, AFK_GROUP)
+dispatcher.add_handler(AFK_REPLY_HANDLER, AFK_REPLY_GROUP)
+
+__mod_name__ = "AFK"
+__command_list__ = ["afk"]
+__handlers__ = [
+    (AFK_HANDLER, AFK_GROUP),
+    (AFK_REGEX_HANDLER, AFK_GROUP),
+    (NO_AFK_HANDLER, AFK_GROUP),
+    (AFK_REPLY_HANDLER, AFK_REPLY_GROUP),
 ]
-
-
-
-def settings_markup(status: Union[bool, str] = None):
-    buttons = [
-        [
-            InlineKeyboardButton(text="🔄 Clean Mode", callback_data="cleanmode_answer"),
-            InlineKeyboardButton(
-                text="✅ Enabled" if status == True else "❌ Disabled",
-                callback_data="CLEANMODE",
-            ),
-        ],
-        [
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data="close"),
-        ],
-    ]
-    return buttons
