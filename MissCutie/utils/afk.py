@@ -2,7 +2,7 @@ import asyncio
 
 from typing import Union
 from datetime import datetime, timedelta
-from MissCutie import cleanmode, pbot, BOTNAME
+from MissCutie import cleanmode, pbot
 from MissCutie.modules.mongo.cleanafk import is_cleanmode_on
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton
