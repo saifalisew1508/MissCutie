@@ -1,189 +1,171 @@
-import time
+import html
+import random
 
-from pyrogram import filters
-from pyrogram.types import Message
+from telegram import MessageEntity, Update
+from telegram.error import BadRequest
+from telegram.ext import CallbackContext, Filters, MessageHandler, run_async
 
-from MissCutie import pbot, BOT_USERNAME
-from MissCutie.modules.mongo.afkdb import add_afk, is_afk, remove_afk
-from MissCutie.utils.afk import get_readable_time, put_cleanmode
+from MissCutie import dispatcher
+from MissCutie.modules.disable import (
+    DisableAbleCommandHandler,
+    DisableAbleMessageHandler,
+)
+from MissCutie.modules.sql import afk_sql as sql
+from MissCutie.modules.users import get_user_id
+
+AFK_GROUP = 7
+AFK_REPLY_GROUP = 8
 
 
-BOT_USERNAME = botusername
+@run_async
+def afk(update: Update, context: CallbackContext):
+    args = update.effective_message.text.split(None, 1)
+    user = update.effective_user
 
-@pbot.on_message(filters.command(["afk", f"afk@{botusername}"]) & ~filters.edited)
-async def active_afk(_, message: Message):
-    if message.sender_chat:
+    if not user:  # ignore channels
         return
-    user_id = message.from_user.id
-    verifier, reasondb = await is_afk(user_id)
-    if verifier:
-        await remove_afk(user_id)
-        try:
-            afktype = reasondb["type"]
-            timeafk = reasondb["time"]
-            data = reasondb["data"]
-            reasonafk = reasondb["reason"]
-            seenago = get_readable_time((int(time.time() - timeafk)))
-            if afktype == "text":
-                send = await message.reply_text(
-                    f"**{message.from_user.first_name}** is back online and was away for {seenago}",
-                    disable_web_page_preview=True,
-                )
-            if afktype == "text_reason":
-                send = await message.reply_text(
-                    f"**{message.from_user.first_name}** is back online and was away for {seenago}\n\nReason: `{reasonafk}`",
-                    disable_web_page_preview=True,
-                )
-            if afktype == "animation":
-                if str(reasonafk) == "None":
-                    send =  await message.reply_animation(
-                        data,
-                        caption=f"**{message.from_user.first_name}** is back online and was away for {seenago}",
-                    )
-                else:
-                    send = await message.reply_animation(
-                        data,
-                        caption=f"**{message.from_user.first_name}** is back online and was away for {seenago}\n\nReason: `{reasonafk}`",
-                    )
-            if afktype == "photo":
-                if str(reasonafk) == "None":
-                    send = await message.reply_photo(
-                        photo=f"downloads/{user_id}.jpg",
-                        caption=f"**{message.from_user.first_name}** is back online and was away for {seenago}",
-                    )
-                else:
-                    send = await message.reply_photo(
-                        photo=f"downloads/{user_id}.jpg",
-                        caption=f"**{message.from_user.first_name}** is back online and was away for {seenago}\n\nReason: `{reasonafk}`",
-                    )
-        except Exception as e:
-            send =  await message.reply_text(
-                f"**{message.from_user.first_name}** is back online",
-                disable_web_page_preview=True,
-            )
-        await put_cleanmode(message.chat.id, send.message_id)
+
+    if user.id in [777000, 1087968824]:
         return
-    if len(message.command) == 1 and not message.reply_to_message:
-        details = {
-            "type": "text",
-            "time": time.time(),
-            "data": None,
-            "reason": None,
-        }
-    elif len(message.command) > 1 and not message.reply_to_message:
-        _reason = (message.text.split(None, 1)[1].strip())[:100]
-        details = {
-            "type": "text_reason",
-            "time": time.time(),
-            "data": None,
-            "reason": _reason,
-        }
-    elif (
-        len(message.command) == 1
-        and message.reply_to_message.animation
-    ):
-        _data = message.reply_to_message.animation.file_id
-        details = {
-            "type": "animation",
-            "time": time.time(),
-            "data": _data,
-            "reason": None,
-        }
-    elif (
-        len(message.command) > 1
-        and message.reply_to_message.animation
-    ):
-        _data = message.reply_to_message.animation.file_id
-        _reason = (message.text.split(None, 1)[1].strip())[:100]
-        details = {
-            "type": "animation",
-            "time": time.time(),
-            "data": _data,
-            "reason": _reason,
-        }
-    elif len(message.command) == 1 and message.reply_to_message.photo:
-        await pbot.download_media(
-            message.reply_to_message, file_name=f"{user_id}.jpg"
-        )
-        details = {
-            "type": "photo",
-            "time": time.time(),
-            "data": None,
-            "reason": None,
-        }
-    elif len(message.command) > 1 and message.reply_to_message.photo:
-        await pbot.download_media(
-            message.reply_to_message, file_name=f"{user_id}.jpg"
-        )
-        _reason = message.text.split(None, 1)[1].strip()
-        details = {
-            "type": "photo",
-            "time": time.time(),
-            "data": None,
-            "reason": _reason,
-        }
-    elif (
-        len(message.command) == 1 and message.reply_to_message.sticker
-    ):
-        if message.reply_to_message.sticker.is_animated:
-            details = {
-                "type": "text",
-                "time": time.time(),
-                "data": None,
-                "reason": None,
-            }
-        else:
-            await pbot.download_media(
-                message.reply_to_message, file_name=f"{user_id}.jpg"
-            )
-            details = {
-                "type": "photo",
-                "time": time.time(),
-                "data": None,
-                "reason": None,
-            }
-    elif (
-        len(message.command) > 1 and message.reply_to_message.sticker
-    ):
-        _reason = (message.text.split(None, 1)[1].strip())[:100]
-        if message.reply_to_message.sticker.is_animated:
-            details = {
-                "type": "text_reason",
-                "time": time.time(),
-                "data": None,
-                "reason": _reason,
-            }
-        else:
-            await pbot.download_media(
-                message.reply_to_message, file_name=f"{user_id}.jpg"
-            )
-            details = {
-                "type": "photo",
-                "time": time.time(),
-                "data": None,
-                "reason": _reason,
-            }
+
+    notice = ""
+    if len(args) >= 2:
+        reason = args[1]
+        if len(reason) > 100:
+            reason = reason[:100]
+            notice = "\nYour afk reason was shortened to 100 characters."
     else:
-        details = {
-            "type": "text",
-            "time": time.time(),
-            "data": None,
-            "reason": None,
-        }
+        reason = ""
 
-    await add_afk(user_id, details)
-    send = await message.reply_text(
-        f"{message.from_user.first_name} is now afk!"
-    )
-    await put_cleanmode(message.chat.id, send.message_id)
-    
-__mod_name__ = "AFK"
+    sql.set_afk(update.effective_user.id, reason)
+    fname = update.effective_user.first_name
+    try:
+        update.effective_message.reply_text(
+            "{} is away from keyboard➥ {}".format(fname, notice)
+        )
+    except BadRequest:
+        pass
 
-__help__ = """Welcome to @MissCutieRobot Help Section.
-- When someone mentions you in a chat, the user will be notified you are AFK. You can even provide a reason for going AFK, which will be provided to the user as well.
-/afk - This will set you offline.
-/afk [Reason] - This will set you offline with a reason.
-/afk [Replied to a Sticker/Photo] - This will set you offline with an image or sticker.
-/afk [Replied to a Sticker/Photo] [Reason] - This will set you afk with an image and reason both.
-/settings - To change or edit basic settings of AFK Bot.
+
+@run_async
+def no_longer_afk(update: Update, context: CallbackContext):
+    user = update.effective_user
+    message = update.effective_message
+
+    if not user:  # ignore channels
+        return
+
+    res = sql.rm_afk(user.id)
+    if res:
+        if message.new_chat_members:  # dont say msg
+            return
+        firstname = update.effective_user.first_name
+        try:
+            options = [
+                "{} Is back here!",
+                "{} Is back!",
+                "{} Is now in the chat!",
+                "{} Is awake!",
+                "{} Is back online!",
+                "{} Is finally here!",
+                "Welcome back! {}",
+                "Where is {}?\nin the chat?",
+            ]
+            chosen_option = random.choice(options)
+            update.effective_message.reply_text(chosen_option.format(firstname))
+        except:
+            return
+
+
+@run_async
+def reply_afk(update: Update, context: CallbackContext):
+    bot = context.bot
+    message = update.effective_message
+    userc = update.effective_user
+    userc_id = userc.id
+    if message.entities and message.parse_entities(
+        [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]
+    ):
+        entities = message.parse_entities(
+            [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]
+        )
+
+        chk_users = []
+        for ent in entities:
+            if ent.type == MessageEntity.TEXT_MENTION:
+                user_id = ent.user.id
+                fst_name = ent.user.first_name
+
+                if user_id in chk_users:
+                    return
+                chk_users.append(user_id)
+
+            if ent.type != MessageEntity.MENTION:
+                return
+
+            user_id = get_user_id(message.text[ent.offset : ent.offset + ent.length])
+            if not user_id:
+                # Should never happen, since for a user to become AFK they must have spoken. Maybe changed username?
+                return
+
+            if user_id in chk_users:
+                return
+            chk_users.append(user_id)
+
+            try:
+                chat = bot.get_chat(user_id)
+            except BadRequest:
+                print("Error: Could not fetch userid {} for AFK module".format(user_id))
+                return
+            fst_name = chat.first_name
+
+            check_afk(update, context, user_id, fst_name, userc_id)
+
+    elif message.reply_to_message:
+        user_id = message.reply_to_message.from_user.id
+        fst_name = message.reply_to_message.from_user.first_name
+        check_afk(update, context, user_id, fst_name, userc_id)
+
+
+def check_afk(update, context, user_id, fst_name, userc_id):
+    if sql.is_afk(user_id):
+        user = sql.check_afk_status(user_id)
+        if int(userc_id) == int(user_id):
+            return
+        if not user.reason:
+            res = "{} is AFK".format(fst_name)
+            update.effective_message.reply_text(res)
+        else:
+            res = "{} Is AFK.\nReason➪ <code>{}</code>".format(
+                html.escape(fst_name), html.escape(user.reason)
+            )
+            update.effective_message.reply_text(res, parse_mode="html")
+
+
+__help__ = """
+*Away From Keyboard*
+ ➥ /afk <reason>*:* mark yourself as AFK(away from keyboard).
+ ➥ bye <reason>*:* same as the afk command - but not a command.
+When marked as AFK, any mentions will be replied to with a message to say you're not available!
 """
+
+AFK_HANDLER = DisableAbleCommandHandler("afk", afk)
+AFK_REGEX_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"^(?i)bye(.*)$"), afk, friendly="afk"
+)
+NO_AFK_HANDLER = MessageHandler(Filters.all & Filters.group, no_longer_afk)
+AFK_REPLY_HANDLER = MessageHandler(Filters.all & Filters.group, reply_afk)
+
+dispatcher.add_handler(AFK_HANDLER, AFK_GROUP)
+dispatcher.add_handler(AFK_REGEX_HANDLER, AFK_GROUP)
+dispatcher.add_handler(NO_AFK_HANDLER, AFK_GROUP)
+dispatcher.add_handler(AFK_REPLY_HANDLER, AFK_REPLY_GROUP)
+
+__mod_name__ = "AFK"
+__command_list__ = ["afk"]
+__handlers__ = [
+    (AFK_HANDLER, AFK_GROUP),
+    (AFK_REGEX_HANDLER, AFK_GROUP),
+    (NO_AFK_HANDLER, AFK_GROUP),
+    (AFK_REPLY_HANDLER, AFK_REPLY_GROUP),
+]
