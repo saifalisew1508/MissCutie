@@ -3,7 +3,7 @@ import time
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MissCutie import pbot, BOT_USERNAME
+from MissCutie import pbot, BOT_USERNAME, BOTNAME
 from MissCutie.modules.mongo.afkdb import add_afk, is_afk, remove_afk
 from MissCutie.utils.afk import get_readable_time, put_cleanmode
 
