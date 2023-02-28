@@ -41,7 +41,7 @@ def afk(update: Update, context: CallbackContext):
     fname = update.effective_user.first_name
     try:
         update.effective_message.reply_text(
-            "{} is away from keyboard➥ {}".format(fname, notice)
+            "{} is away from keyboard {}".format(fname, notice)
         )
     except BadRequest:
         pass
