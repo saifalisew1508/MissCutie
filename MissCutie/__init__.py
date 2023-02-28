@@ -163,6 +163,9 @@ dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
 bot_start_time = time.time()
 
+# for afk module
+cleanmode = {}
+
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
 BOT_NAME = dispatcher.bot.first_name
