@@ -3,7 +3,7 @@ import time
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MissCutie import pbot, BOT_USERNAME, BOTNAME
+from MissCutie import pbot, BOT_USERNAME
 from MissCutie.modules.mongo.afkdb import add_afk, is_afk, remove_afk
 from MissCutie.utils.afk import get_readable_time, put_cleanmode
 
@@ -179,7 +179,7 @@ async def active_afk(_, message: Message):
     
 __mod_name__ = "AFK"
 
-__help__ = """Welcome to {BOTNAME}'s Help Section.
+__help__ = """Welcome to @MissCutieRobot Help Section.
 - When someone mentions you in a chat, the user will be notified you are AFK. You can even provide a reason for going AFK, which will be provided to the user as well.
 /afk - This will set you offline.
 /afk [Reason] - This will set you offline with a reason.
