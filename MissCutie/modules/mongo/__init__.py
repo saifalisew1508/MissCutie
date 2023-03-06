@@ -1,9 +1,13 @@
 from sys import exit as exiter
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
+from motor.motor_asyncio import AsyncIOMotorClient
 from MissCutie import MONGO_DB_URI as DB_URI
 from MissCutie import *
 import pymongo
+
+mongo_client = AsyncIOMotorClient(DB_URI)
+db = mongo_client.MissCutie
 
 
 taggeddb = db.tagallert
