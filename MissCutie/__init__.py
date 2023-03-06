@@ -127,6 +127,7 @@ else:
     TEMP_DOWNLOAD_DIRECTORY = Config.TEMP_DOWNLOAD_DIRECTORY
     TOKEN = Config.TOKEN
     TIME_API_KEY = Config.TIME_API_KEY
+    ARQ_API_KEY = Config.ARQ_API_KEY
     WORKERS = Config.WORKERS
 
     try:
