@@ -53,5 +53,5 @@ yt_dlp
 youtube_search
 youtube_search_python
 openai
-psutil
 fontTools # QuoteLy module
+pymongo[srv]
