@@ -1,24 +1,19 @@
 import html
-import contextlib
-import MissCutie.modules.sql.moderators_sql as sql
-
-from MissCutie import dispatcher
+import MissCutie.modules.sql.mod_sql as sql
 from MissCutie.modules.disable import DisableAbleCommandHandler
-from MissCutie.modules.helper_funcs.chat_status import user_admin
+from MissCutie import dispatcher, DRAGONS
 from MissCutie.modules.helper_funcs.extraction import extract_user
-from MissCutie.modules.log_channel import gloggable
-
-
-from telegram import Update
-from telegram.ext import CallbackContext
-from telegram import ParseMode
-from telegram.error import BadRequest
+from telegram.ext import CallbackContext, run_async, CallbackQueryHandler
+from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.utils.helpers import mention_html
+from telegram.error import BadRequest
+from MissCutie.modules.helper_funcs.chat_status import user_admin
+from MissCutie.modules.log_channel import loggable
 
-
-@gloggable
+@run_async
+@loggable
 @user_admin
-async def mod(update: Update, context: CallbackContext) -> None:
+def mod(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -26,24 +21,27 @@ async def mod(update: Update, context: CallbackContext) -> None:
     user = update.effective_user
     user_id = extract_user(message, args)
     if not user_id:
-        await message.reply_text(
+        message.reply_text(
             "I don't know who you're talking about, you're going to need to specify a user!"
         )
         return ""
-    with contextlib.suppress(BadRequest):
-        member = await chat.get_member(user_id)
-
-    if member.status in ("administrator", "creator"):
-        await message.reply_text("No need to Modertor an Admin!")
+    try:
+        member = chat.get_member(user_id)
+    except BadRequest:
+        return ""
+    if member.status == "administrator" or member.status == "creator":
+        message.reply_text(
+            "No need to Modertor an Admin!"
+        )
         return ""
     if sql.is_modd(message.chat_id, user_id):
-        await message.reply_text(
+        message.reply_text(
             f"[{member.user['first_name']}](tg://user?id={member.user['id']}) is already moderator in {chat_title}",
             parse_mode=ParseMode.MARKDOWN,
         )
         return ""
     sql.mod(message.chat_id, user_id)
-    await message.reply_text(
+    message.reply_text(
         f"[{member.user['first_name']}](tg://user?id={member.user['id']}) has been moderator in {chat_title}",
         parse_mode=ParseMode.MARKDOWN,
     )
@@ -51,14 +49,15 @@ async def mod(update: Update, context: CallbackContext) -> None:
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#MODERATOR\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
+        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
+    )
 
     return log_message
 
-
-@gloggable
+@run_async
+@loggable
 @user_admin
-async def dismod(update: Update, context: CallbackContext) -> None:
+def dismod(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -66,35 +65,36 @@ async def dismod(update: Update, context: CallbackContext) -> None:
     user = update.effective_user
     user_id = extract_user(message, args)
     if not user_id:
-        await message.reply_text(
+        message.reply_text(
             "I don't know who you're talking about, you're going to need to specify a user!"
         )
         return ""
     try:
-        member = await chat.get_member(user_id)
+        member = chat.get_member(user_id)
     except BadRequest:
         return ""
-    if member.status in ("administrator", "creator"):
-        await update.effective_message.reply_text("This Is User Admin")
+    if member.status == "administrator" or member.status == "creator":
+        message.reply_text("This Is User Admin")
         return ""
     if not sql.is_modd(message.chat_id, user_id):
-        await message.reply_text(
-            f"{member.user['first_name']} isn't moderator yet!")
+        message.reply_text(f"{member.user['first_name']} isn't moderator yet!")
         return ""
     sql.dismod(message.chat_id, user_id)
-    await message.reply_text(
-        f"{member.user['first_name']} is no longer moderator in {chat_title}.")
+    message.reply_text(
+        f"{member.user['first_name']} is no longer moderator in {chat_title}."
+    )
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#UNMODERTOR\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
+        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
+    )
 
     return log_message
 
-
+@run_async
 @user_admin
-async def modd(update: Update):
+def modd(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -104,55 +104,56 @@ async def modd(update: Update):
         member = chat.get_member(int(i.user_id))
         msg += f"{member.user['first_name']}\n"
     if msg.endswith("moderator.\n"):
-        await message.reply_text(f"No users are Moderator in {chat_title}.")
+        message.reply_text(f"No users are Moderator in {chat_title}.")
         return ""
-    await message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+    else:
+        message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
-
-async def modr(update: Update, context: CallbackContext) -> None:
+@run_async
+def modr(update, context):
     message = update.effective_message
     chat = update.effective_chat
     args = context.args
     user_id = extract_user(message, args)
-    member = await chat.get_member(user_id)
+    member = chat.get_member(int(user_id))
     if not user_id:
-        await message.reply_text(
+        message.reply_text(
             "I don't know who you're talking about, you're going to need to specify a user!"
         )
         return ""
     if sql.is_modd(message.chat_id, user_id):
-        await message.reply_text(
-            f"{member.user['first_name']} is an moderator user.")
+        message.reply_text(
+            f"{member.user['first_name']} is an moderator user."
+        )
     else:
-        await message.reply_text(
-            f"{member.user['first_name']} is not an moderator user.")
-
-
-__mod_name__ = "Moderation"
-
-dispatcher.add_handler(DisableAbleCommandHandler("addmod", mod))
-dispatcher.add_handler(DisableAbleCommandHandler("rmmod", dismod))
-dispatcher.add_handler(DisableAbleCommandHandler("modlist", modd))
-dispatcher.add_handler(DisableAbleCommandHandler("modcheck", modr))
-
-
+        message.reply_text(
+            f"{member.user['first_name']} is not an moderator user."
+        )
 
 __help__ = """
 Sometimes, you don't trust but want to make user manager of your group then you can make him/her moderator.
 Maybe not enough to make them admin, but you might be ok with ban, mute, and warn not.
 That's what modcheck are for - mod of trustworthy users to allow to manage your group.
 
-*Admins commands*:
-
-➥ /modcheck: Check a user's modcheck status in this chat.
-➥ /mod: mod of a user can ban, mute, and warn.
-➥ /unmod: Unmod of a user. They will now can't ban, mute and warn anyone.
-➥ /modlist: List all mod users.
+*Commands*:
+➥ /addmod *:* moderator of a user. 
+➥ /rmmod *:* Unmoderator of a user.
+➥ /modcheck *:* moderation cheak of a user.
+➥ /modlist *:* moderation user list.
 """
 
-__command_list__ = [
-    "addmod",
-    "rmmod",
-    "modlist",
-    "modcheck",
-]
+
+ADDMOD = DisableAbleCommandHandler("addmod", mod)
+RMMOD = DisableAbleCommandHandler("rmmod", dismod)
+MODLIST = DisableAbleCommandHandler("modlist", modd)
+MODCHECK = DisableAbleCommandHandler("modcheck", modr)
+dispatcher.add_handler(ADDMOD)
+dispatcher.add_handler(RMMOD)
+dispatcher.add_handler(MODLIST)
+dispatcher.add_handler(MODCHECK)
+
+__mod_name__ = "Moderators"
+
+
+__command_list__ = ["addmod", "rmmod", "modlist", "modcheck"]
+__handlers__ = [ADDMOD, RMMOD, MODLIST, MODCHECK]
