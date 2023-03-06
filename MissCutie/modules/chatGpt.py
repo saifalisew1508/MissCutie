@@ -41,8 +41,11 @@ async def generate_response(prompt):
 
 
 __help__ = f"""
-*{BOT_NAME} has an ChatGPT whic provides you a seemingless chatting experience :*
- ➥  /chat *:* ask Your Queries
+*{BOT_NAME} has an ChatGPT & KukiChat whic provides you a seemingless chatting experience :*
+ ➥ /chat *:* ask Your Queries
+ ➥ /chatbot *:* Shows chatbot control panel
+ ➥ /chatbot on *:* Enable Chat Bot
+ ➥ /chatbot off *:* Disable Chat Bot
 """
 
 __mod_name__ = "ChatGPT"
