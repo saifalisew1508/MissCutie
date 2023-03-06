@@ -140,14 +140,6 @@ def chatbot(update: Update, context: CallbackContext):
         message.reply_text(results["reply"])
 
 
-__help__ = f"""
-*{BOT_NAME} has an chatbot whic provides you a seemingless chatting experience :*
-
- ➥  /chatbot *:* Shows chatbot control panel
-"""
-
-__mod_name__ = "ChatBot "
-
 
 CHATBOTK_HANDLER = CommandHandler("chatbot", cutie)
 ADD_CHAT_HANDLER = CallbackQueryHandler(cutieadd, pattern=r"add_chat")
