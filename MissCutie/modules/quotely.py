@@ -8,6 +8,7 @@ import json
 import math
 import ssl
 import aiohttp
+from aiohttp import ClientSession
 
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
