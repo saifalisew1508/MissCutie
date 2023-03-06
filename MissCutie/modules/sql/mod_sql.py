@@ -1,13 +1,12 @@
 import threading
 
-from sqlalchemy import Column, String
-from sqlalchemy.sql.sqltypes import BigInteger
+from sqlalchemy import Column, String, BigInteger
 
 from MissCutie.modules.sql import BASE, SESSION
 
 
 class Mods(BASE):
-    __tablename__ = "moderators"
+    __tablename__ = "mod"
     chat_id = Column(String(14), primary_key=True)
     user_id = Column(BigInteger, primary_key=True)
 
@@ -16,7 +15,7 @@ class Mods(BASE):
         self.user_id = user_id
 
     def __repr__(self):
-        return f"<Mod {self.user_id}>"
+        return "<Mod %s>" % self.user_id
 
 
 Mods.__table__.create(checkfirst=True)
@@ -40,12 +39,14 @@ def is_modd(chat_id, user_id):
 
 def dismod(chat_id, user_id):
     with MOD_INSERTION_LOCK:
-        if dismod_user := SESSION.query(Mods).get((str(chat_id), user_id)):
+        dismod_user = SESSION.query(Mods).get((str(chat_id), user_id))
+        if dismod_user:
             SESSION.delete(dismod_user)
             SESSION.commit()
             return True
-        SESSION.close()
-        return False
+        else:
+            SESSION.close()
+            return False
 
 
 def list_modd(chat_id):
