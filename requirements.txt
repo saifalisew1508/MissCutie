@@ -58,3 +58,5 @@ pymongo
 img2pdf
 gtts
 python-arq
+ujson
+zalgo-text
