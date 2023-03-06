@@ -92,7 +92,7 @@ def cutieadd(update: Update, context: CallbackContext) -> str:
 @gloggable
 def cutie(update: Update, context: CallbackContext):
     message = update.effective_message
-    msg = "• Choose an option to enable or disable chat bot"
+    msg = "Choose an option to enable or disable chat bot"
     keyboard = InlineKeyboardMarkup(
         [
             [
