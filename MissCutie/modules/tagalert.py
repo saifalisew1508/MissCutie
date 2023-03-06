@@ -261,3 +261,19 @@ async def mentioned_alert(client, message):
         message.continue_propagation()
     except:
         return message.continue_propagation()
+    
+    
+__mod_name__ = "Tag-Alert"
+
+__HELP__ = """
+Too many mentions.. Cant you manage them all alone..
+Here is the solution
+If you are tagged/mentioned in a group where TotalSecurity is present
+TotalSecurity will notify it to you via private message after enabling tag alerts
+**Commands**
+- /tagalert `on` : Turn tag alerts on
+- /tagalert `off` : Turn tag alert off
+**Example:**
+If you are mentioned in a group TotalSecurity will tell you who mentioned you, 
+message that you are tagged in and which group is that.
+"""
