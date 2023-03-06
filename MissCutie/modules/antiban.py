@@ -1,54 +1,80 @@
-from pyrogram import Client
-from pyrogram.raw import functions, types
-from pyrogram.raw.base import Update
+import asyncio
+from pyrogram import filters
+from MissCutie import pbot as app
+from pyrogram.types import Message
+from MissCutie import eor
+from MissCutie.utils.errors import capture_err
+
+active_channel = []
+
+async def channel_toggle(db, message: Message):
+    status = message.text.split(None, 1)[1].lower()
+    chat_id = message.chat.id
+    if status == "on":
+        if chat_id not in db:
+            db.append(chat_id)
+            text = "**Anti Channel Mode `enabled` ✅. I will delete all message that send with channel names. Dare to leap**"
+            return await eor(message, text=text)
+        await eor(message, text="antichannel Is Already Enabled.")
+    elif status == "off":
+        if chat_id in db:
+            db.remove(chat_id)
+            return await eor(message, text="antichannel Disabled!")
+        await eor(message, text=f"**Anti Channel Mode Successfully Deactivated In The Chat** {message.chat.id} ❌")
+    else:
+        await eor(message, text="I undestand `/antichannel on` and `/antichannel off` only")
 
 
-@Client.on_raw_update()
-async def channel_handler(client: Client, update: Update, _, chats: dict):
-    while True:
-        try:
-            # Check for message that are from channel
-            if not isinstance(update, types.UpdateNewChannelMessage) or not isinstance(
-                update.message.from_id, types.PeerChannel
-            ):
-                return
-            # Basic data
-            message = update.message
-            chat_id = int(f"-100{message.peer_id.channel_id}")
-            channel_id = int(f"-100{message.from_id.channel_id}")
-            # Check enable or not
-            # Check for linked or free channel
-            if (
-                message.fwd_from
-                and message.fwd_from.saved_from_peer
-                == message.fwd_from.from_id
-                == message.from_id
-            ) or channel_id == chat_id:
-                return
-            # Delete the message sent by channel and ban it
-            await client.send(
-                functions.channels.EditBanned(
-                    channel=await client.resolve_peer(chat_id),
-                    participant=await client.resolve_peer(channel_id),
-                    banned_rights=types.ChatBannedRights(
-                        until_date=0,
-                        view_messages=True,
-                        send_messages=True,
-                        send_media=True,
-                        send_stickers=True,
-                        send_gifs=True,
-                        send_games=True,
-                        send_polls=True,
-                    ),
-                )
-            )
-            await client.delete_messages(chat_id, message.id)
-            await client.send_message(
-                int(chat_id),
-                f"#𝙰𝙽𝚃𝙸𝙲𝙷𝙰𝙽𝙽𝙴𝙻\n\n᛭ 𝚂𝙴𝙽𝙳𝙴𝚁 𝙸𝙳: `{channel_id}`\n᛭ 𝚃𝙰𝙺𝙴𝙽 𝙰𝙲𝚃𝙸𝙾𝙽: `DELETE BAN`",
-                disable_web_page_preview=True,
-            )
-            break
-        except Exception as e:
-            print(e)
-            break
+# Enabled | Disable antichannel
+
+
+@app.on_message(filters.command("antichannel"))
+@capture_err
+async def antichannel_status(_, message: Message):
+    if len(message.command) != 2:
+        return await eor(message, text="I undestand `/antichannel on` and `/antichannel off` only")
+    await channel_toggle(active_channel, message)
+
+
+
+@app.on_message(
+    (
+        filters.document
+        | filters.photo
+        | filters.sticker
+        | filters.animation
+        | filters.video
+        | filters.text
+    )
+    & ~filters.private,
+    group=41,
+)
+async def anitchnl(_, message):
+  chat_id = message.chat.id
+  if message.sender_chat:
+    sender = message.sender_chat.id 
+    if message.chat.id not in active_channel:
+        return
+    if chat_id == sender:
+        return
+    else:
+        await message.delete()
+        ti = await message.reply_text("**A anti-channel message detected. I deleted it..!**")
+        await asyncio.sleep(7)
+        await ti.delete()        
+
+__mod_name__ = "Anti-Channel"
+__help__ = """
+your groups to stop anonymous channels sending messages into your chats.
+**Type of messages**
+        - document
+        - photo
+        - sticker
+        - animation
+        - video
+        - text
+        
+**Admin Commands:**
+ - /antichannel [on / off] - Anti- channel  function 
+**Note** : If linked channel  send any containing characters in this type when on  function no del    
+ """
