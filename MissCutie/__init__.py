@@ -11,6 +11,7 @@ from pyrogram import Client, errors
 from pyrogram.types import Message
 from telethon import TelegramClient
 from inspect import getfullargspec
+from Python_ARQ import ARQ
 
 
 
@@ -71,6 +72,8 @@ if ENV:
     TOKEN = os.environ.get("TOKEN", None)
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     WORKERS = int(os.environ.get("WORKERS", 8))
+    ARQ_API_URL = "https://arq.hamker.in"
+    ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
 
     try:
         OWNER_ID = int(os.environ.get("OWNER_ID", None))
@@ -174,6 +177,7 @@ dispatcher = updater.dispatcher
 aiohttpsession = ClientSession()
 bot_start_time = time.time()
 
+arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
 print("[INFO]: Getting Bot Info...")
 BOT_ID = dispatcher.bot.id
