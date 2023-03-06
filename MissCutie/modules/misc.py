@@ -111,6 +111,10 @@ __help__ = """
  ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
  ➥ /synonyms <word>*:* Find the synonyms of a word
  ➥ /antonyms <word>*:* Find the antonyms of a word
+ 
+  *QR Code Tools*
+ ➥ /getqr: get the qr code content from the replied qr code
+ ➥ /makeqr <content>: make a qr code from the given message (text, link, etc...)
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=Filters.group)
