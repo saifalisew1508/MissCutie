@@ -7,8 +7,6 @@ import base64
 import json
 import math
 import ssl
-import aiohttp
-from aiohttp import ClientSession
 
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
@@ -20,7 +18,8 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column
 
 from MissCutie.events import register
-from MissCutie import telethn
+
+
 from asyncio import sleep
 
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
@@ -118,7 +117,7 @@ class Quotly:
             if is_fwd.from_id:
                 id_ = get_peer_id(is_fwd.from_id)
                 try:
-                    sender = await event.telethn.get_entity(id_)
+                    sender = await event.client.get_entity(id_)
                     name = get_display_name(sender)
                 except ValueError:
                     pass
@@ -234,13 +233,13 @@ async def async_searcher(
         raise DependencyMissingError(
             "'aiohttp' is not installed!\nthis function requires aiohttp to be installed."
         )
-    async with aiohttp.telethnSession(headers=headers) as telethn:
+    async with aiohttp.ClientSession(headers=headers) as client:
         if post:
-            data = await telethn.post(
+            data = await client.post(
                 url, json=json, data=data, ssl=ssl, *args, **kwargs
             )
         else:
-            data = await telethn.get(url, params=params, ssl=ssl, *args, **kwargs)
+            data = await client.get(url, params=params, ssl=ssl, *args, **kwargs)
         if re_json:
             return await data.json()
         if re_content:
@@ -300,7 +299,7 @@ async def eor(event, text=None, **args):
         if "file" in args and args["file"] and not event.media:
             await event.delete()
             try:
-                ok = await event.telethn.send_message(event.chat_id, text, **args)
+                ok = await event.client.send_message(event.chat_id, text, **args)
             except MessageNotModifiedError:
                 pass
         else:
@@ -313,7 +312,7 @@ async def eor(event, text=None, **args):
             except MessageNotModifiedError:
                 pass
     else:
-        ok = await event.telethn.send_message(event.chat_id, text, **args)
+        ok = await event.client.send_message(event.chat_id, text, **args)
 
     if time:
         await sleep(time)
@@ -355,8 +354,8 @@ async def quott_(event):
             spli_[0].isdigit() and int(spli_[0]) in range(1, 21)
         ):
             if spli_[0].isdigit():
-                if not event.telethn._bot:
-                    reply_ = await event.telethn.get_messages(
+                if not event.client._bot:
+                    reply_ = await event.client.get_messages(
                         event.chat_id,
                         min_id=event.reply_to_msg_id - 1,
                         reverse=True,
@@ -366,7 +365,7 @@ async def quott_(event):
                     id_ = reply.id
                     reply_ = []
                     for msg_ in range(id_, id_ + int(spli_[0])):
-                        msh = await event.telethn.get_messages(event.chat_id, ids=msg_)
+                        msh = await event.client.get_messages(event.chat_id, ids=msg_)
                         if msh:
                             reply_.append(msh)
             else:
@@ -383,8 +382,8 @@ async def quott_(event):
     if match:
         if match[0].startswith("@") or match[0].isdigit():
             try:
-                match_ = await event.telethn.parse_id(match[0])
-                user = await event.telethn.get_entity(match_)
+                match_ = await event.client.parse_id(match[0])
+                user = await event.client.get_entity(match_)
             except ValueError:
                 pass
             match = match[1] if len(match) == 2 else None
