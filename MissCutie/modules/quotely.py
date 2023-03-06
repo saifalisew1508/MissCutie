@@ -39,7 +39,7 @@ def isArgInt(message: Message) -> list:
     except ValueError:
         return [False, 0]
 
-@app.on_message(filters.command("q") & ~filters.private & ~filters.edited)
+@app.on_message(filters.command("q") & ~filters.private)
 @capture_err
 async def quotly_func(client, message: Message):
     if not message.reply_to_message:
