@@ -7,6 +7,7 @@ import base64
 import json
 import math
 import ssl
+import aiohttp
 
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
