@@ -120,6 +120,15 @@ So you want to donate? Amazing!
 You can donate on [PayPal](https://paypal.me/saifalisew1508), or you can set up a recurring donation on [GitHub Sponsors](https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
 This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
+MUSIC_TEXT = """Hey {} ,
+Click on the buttons below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
+
+All commands can be used with: /
+"""
+
+
+
+
 IMPORTED = {}
 MIGRATEABLE = []
 HELPABLE = {}
@@ -419,8 +428,8 @@ def saif_about_callback(update: Update, context: CallbackContext):
         )
     elif query.data == "saif_support":
         query.message.edit_text(
-            text="*๏ click on the buttons given below to get help and more information about me.*"
-            f"\n\nif you found any bug in {dispatcher.bot.first_name} or if you wanna give feedback about the {dispatcher.bot.first_name}, please report it at support chat.",
+            text="*Click on the buttons given below to get help and more information about me.*"
+            f"\n\nIf you found any bug in {dispatcher.bot.first_name} or if you wanna give feedback about the {dispatcher.bot.first_name}, please report it at support chat.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -462,9 +471,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "Music_":
         query.message.edit_text(
-            text=f"""
- here is help menu for music 
-""",
+            text=MUSIC_TEXT,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
