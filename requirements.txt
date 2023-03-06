@@ -56,3 +56,4 @@ openai
 fontTools # QuoteLy module
 pymongo
 img2pdf
+gtts
