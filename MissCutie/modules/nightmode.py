@@ -3,6 +3,7 @@ from telethon import functions, types
 from telethon.tl.types import ChatBannedRights
 
 from MissCutie import telethn as tbot
+from MissCutie import BOT_NAME
 from MissCutie.events import register
 from MissCutie.modules.sql.night_mode_sql import (
     add_nightmode,
@@ -109,7 +110,7 @@ async def job_close():
         try:
             await tbot.send_message(
                 int(warner.chat_id),
-                "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started ! \n**Powered By Adventure Robot**",
+                "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started ! \n**Powered By {BOT_NAME}**",
             )
             await tbot(
                 functions.messages.EditChatDefaultBannedRightsRequest(
@@ -134,7 +135,7 @@ async def job_open():
         try:
             await tbot.send_message(
                 int(warner.chat_id),
-                "06:00 Am, Group Is Opening.\n**Powered By Adventure Robot**",
+                "06:00 Am, Group Is Opening.\n**Powered By {BOT_NAME}**",
             )
             await tbot(
                 functions.messages.EditChatDefaultBannedRightsRequest(
@@ -159,4 +160,4 @@ __help__ = """
 *Note:* Night Mode chats get Automatically closed at 12 am(IST) and Automatically openned at 6 am(IST) to Prevent Night Spams.
 """
 
-__mod_name__ = "Night​-Mode"
+__mod_name__ = "Night-Mode"
