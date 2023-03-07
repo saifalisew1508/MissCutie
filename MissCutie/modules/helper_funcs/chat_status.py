@@ -596,4 +596,4 @@ def check_perms(update: Update, type: str):
 # Workaround for circular import with connection.py
 from MissCutie.modules import connection
 
-connected = connection.
+connected = connection.connected
