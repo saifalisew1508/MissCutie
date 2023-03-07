@@ -1,3 +1,4 @@
+"""
 import html
 import re
 
@@ -102,3 +103,4 @@ def decline_joinreq(update: Update, context: CallbackContext) -> str:
 
 
 dispatcher.add_handler(ChatJoinRequestHandler(callback=chat_join_req, run_async=True))
+"""
