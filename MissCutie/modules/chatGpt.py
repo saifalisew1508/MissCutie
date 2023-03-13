@@ -7,14 +7,14 @@ import asyncio
 from MissCutie import telethn, BOT_NAME
 
 # Your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 # Your GPT model ID
 model_id = "text-davinci-003"
 
 # The maximum number of tokens to generate
-max_tokens = 400
+max_tokens = 1000
 
 # Register the event handler for incoming messages
 @telethn.on(events.NewMessage(pattern="^[!/]chat ?(.*)"))
