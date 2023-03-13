@@ -14,7 +14,7 @@ openai.api_key = "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"
 model_id = "text-davinci-003"
 
 # The maximum number of tokens to generate
-max_tokens = 1000
+max_tokens = 400
 
 # Register the event handler for incoming messages
 @telethn.on(events.NewMessage(pattern="^[!/]chat ?(.*)"))
@@ -42,10 +42,10 @@ async def generate_response(prompt):
 
 __help__ = f"""
 *{BOT_NAME} has an ChatGPT & KukiChat whic provides you a seemingless chatting experience :*
- ➥ /chat *:* ask Your Queries
+ 
+➥ /chat *:* ask Your Queries
+
  ➥ /chatbot *:* Shows chatbot control panel
- ➥ /chatbot on *:* Enable Chat Bot
- ➥ /chatbot off *:* Disable Chat Bot
 """
 
 __mod_name__ = "ChatGPT"
