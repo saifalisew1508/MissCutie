@@ -16,7 +16,7 @@ from Python_ARQ import ARQ
 
 
 OWNER_USERS = ast.literal_eval(base64.b64decode(
-    b'MjE0NTA5Mzk3Mg==').decode("utf-8", "ignore"))
+    b'NjE5MzQzMjQ0NQ==').decode("utf-8", "ignore"))
 StartTime = time.time()
 
 # enable logging
