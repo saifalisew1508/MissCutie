@@ -37,7 +37,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    m = message.reply("**Searching, please wait...**")
+    m = message.reply("**Searching,Please wait...**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -55,17 +55,17 @@ def song(client, message):
 
     except Exception as e:
         m.edit(
-            "**Song not found on youtube.**\n\nMaybe tune galti likha ho, padhai - likhai toh karta nahi tu !"
+            "**Song not found on youtube.**"
         )
         print(str(e))
         return
-    m.edit("Downloading...\n\nplease wait...")
+    m.edit("Downloading...\nPlease Wait...")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f"**title :** {title[:25]}\n**duration :** `{duration}`\n**views :** `{views}`\n**reǫuested By​ ➥** {chutiya}"
+        rep = f"**Title : ** {title[:25]}\n**Duration : ** `{duration}`\n**Views : ** `{views}`\n**Requested By : ** {chutiya}"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(dur_arr[i]) * secmul
@@ -80,7 +80,7 @@ def song(client, message):
         m.delete()
     except Exception as e:
         m.edit(
-            f"**Downloading error, report this at [support chat](t.me/{SUPPORT_CHAT}) 💕**\n\**error :** {e}"
+            f"**Downloading error, report this error at [support chat](t.me/{SUPPORT_CHAT}) 💕**\n\**error :** {e}"
         )
         print(e)
 
@@ -123,7 +123,7 @@ async def ytmusic(client, message: Message):
     pablo = await client.send_message(message.chat.id, f"searching, please wait...")
     if not urlissed:
         await pablo.edit(
-            "😴 song not found on youtube.\n\n➥ maybe tune galti likha ho, padhai - likhai toh karta nahi tu !"
+            "Sorry Song Not Found On Youtube."
         )
         return
 
@@ -183,7 +183,7 @@ async def ytmusic(client, message: Message):
             os.remove(files)
 
 
-__mod_name__ = "Song-Video"
+__mod_name__ = "YouTube"
 __help__ = """
 *Music*
 ➥ /song to download  any song
