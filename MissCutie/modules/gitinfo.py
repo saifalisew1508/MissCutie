@@ -15,7 +15,7 @@ async def github(_, message):
     async with ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
-                return await message.reply_text("404")
+                return await message.reply_text("No Github Account Founded For This Username")
             result = await request.json()
             try:
                 url = result["html_url"]
@@ -30,16 +30,16 @@ async def github(_, message):
                 followers = result["followers"]
                 following = result["following"]
                 caption = f"""**Info Of {name}**
-**username :** `{username}`
-**bio :** `{bio}`
-**profile link :** [Here]({url})
-**company :** `{company}`
-**created on:** `{created_at}`
-**repositories :** `{repositories}`
-**blog :** `{blog}`
-**location :** `{location}`
-**followers  :** `{followers}`
-**following :** `{following}`"""
+**Username :** `{username}`
+**Bio :** `{bio}`
+**Profile link :** [{name}]({url})
+**Company :** `{company}`
+**Created on:** `{created_at}`
+**Repositories :** `{repositories}`
+**Blog :** `{blog}`
+**Location :** `{location}`
+**Followers  :** `{followers}`
+**Following :** `{following}`"""
             except:
                 print(str(e))
     await message.reply_photo(photo=avatar_url, caption=caption)
