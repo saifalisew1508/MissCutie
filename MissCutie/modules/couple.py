@@ -32,7 +32,7 @@ tomorrow = str(dt_tom())
 
 @pbot.on_message(filters.command(["couple", "couples"]))
 async def couple(_, message):
-    if message.chat.type == "private":
+    if message.chat.type == ChatType.PRIVATE:
         return await message.reply_text("This command only works in groups.")
     try:
         chat_id = message.chat.id
