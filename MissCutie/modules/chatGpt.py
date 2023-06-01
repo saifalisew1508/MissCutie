@@ -1,5 +1,5 @@
 import openai
-from telethon import Telegramtelethn, events
+from telethon import TelegramClient, events
 from MissCutie import telethn, BOT_NAME
 
 # Set up your OpenAI API credentials
