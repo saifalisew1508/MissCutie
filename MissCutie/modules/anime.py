@@ -10,14 +10,14 @@ from MissCutie.modules.disable import DisableAbleCommandHandler
 
 
 def anime_quote():
-    url = "https://animechan.vercel.app/api/random"
+    url = "https://kyoko.rei.my.id/api/quotes.php"
     # since text attribute returns dictionary like string
     response = requests.get(url)
     try:
         dic = json.loads(response.text)
     except Exception:
         pass
-    quote = dic["quote"]
+    quote = dic["english"]
     character = dic["character"]
     anime = dic["anime"]
     return quote, character, anime
