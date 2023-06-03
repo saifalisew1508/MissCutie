@@ -50,6 +50,7 @@ alphabet_detector
 wget
 nekos.py
 yt_dlp
+youtube_dl
 youtube_search
 youtube_search_python
 openai
