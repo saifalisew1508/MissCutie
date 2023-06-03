@@ -1,9 +1,13 @@
+
+from MissCutie import telethn as client
+
+
 import youtube_dl
 from telethon.sync import TelegramClient
 from telethon import events
 from telethon.tl.types import InputFile
 from youtubesearchpython import VideosSearch
-from MissCutie import telethn as client
+
 
 ydl_opts = {
     'format': 'bestaudio/best',
@@ -32,6 +36,7 @@ async def handle_song(event):
             video = videos[0]
             url = video['link']
             title = video['title']
+            uploader = video['channel']['name']
             filename = f'{title}.mp3'
 
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
@@ -42,10 +47,10 @@ async def handle_song(event):
                 result = await client.upload_file(f)
                 audio_input_file = InputFile(result.file_id, result.parts, result.name)
 
-            await client.send_file(chat, file=audio_input_file, caption=title)
+            caption = f"Title: {title}\nUploader: {uploader}"
+            await client.send_file(chat, file=audio_input_file, caption=caption)
             await event.respond('Song downloaded and sent.')
         else:
             await event.respond('No search results found for the given song name.')
     except Exception as e:
         await event.respond(f'An error occurred: {str(e)}')
-
