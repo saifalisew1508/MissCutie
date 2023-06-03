@@ -10,7 +10,7 @@ db = {}
 
 @bot.on(events.NewMessage(pattern="^[!?@/]MissCutieRobot$"))
 async def stsrt(event):
-    await event.reply("**Heya, I am a Whisper Bot function for Cutiepii!**",
+    await event.reply("**Heya, this is whisper tool for @MissCutieRobot Write a whisper message to your crush in public group !**",
                       buttons=[[Button.switch_inline("Go Inline", query="")]])
 
 
@@ -21,9 +21,9 @@ async def die(event):
     me = (await bot.get_me()).username
     dn = event.builder.article(
         title="It's a whisper bot!",
-        description="It's a whisper Bot function for Cutiepii!\n(c) Reeshuxd",
+        description="It's a whisper function By @MissCutieRobot !\n(c) Enjoy Privately in public group",
         text=
-        f"**It's a whisper bot**\n`@{me} wspr Username|Message`\n**(c) Reeshuxd**",
+        f"**It's a whisper function By @MissCutieRobot \n`@{me} [Username] [Message]`\n**(c) Enjoy**",
         buttons=[[Button.switch_inline(" Go Inline ", query="wspr ")]])
     await event.answer([dn])
 
