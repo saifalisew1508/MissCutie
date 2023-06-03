@@ -15,11 +15,11 @@ ydl_opts = {
 }
 
 
-@client.on(events.NewMessage(pattern='/song'))
+@client.on(events.NewMessage(pattern='/yt'))
 async def handle_song(event):
     chat = await event.get_chat()
     message = event.message
-    song_name = message.text.replace('/song', '').strip()
+    song_name = message.text.replace('/yt', '').strip()
 
     if not song_name:
         await event.respond('Please provide a song name.')
