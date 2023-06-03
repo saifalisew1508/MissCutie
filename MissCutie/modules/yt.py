@@ -9,6 +9,7 @@ from telethon.tl.types import InputFile
 from youtubesearchpython import VideosSearch
 
 
+
 ydl_opts = {
     'format': 'bestaudio/best',
     'postprocessors': [{
@@ -29,14 +30,15 @@ async def handle_song(event):
         await event.respond('Please provide a song name.')
         return
 
-    query = f'{song_name} lyrics'
     try:
-        videos = VideosSearch(query, limit=1).result()['result']
-        if len(videos) > 0:
+        videos_search = VideosSearch(song_name, limit=1)
+        result = videos_search.result()
+        videos = result["result"]
+        if videos:
             video = videos[0]
-            url = video['link']
-            title = video['title']
-            uploader = video['channel']['name']
+            url = video["link"]
+            title = video["title"]
+            uploader = video["channel"]
             filename = f'{title}.mp3'
 
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
