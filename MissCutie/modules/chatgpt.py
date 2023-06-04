@@ -58,21 +58,6 @@ async def img(client, message):
         # await msg.delete()
 
 
-__MODULE__ = "openai"
-__HELP__ = f"""
-✘ Bantuan Untuk OpenAI
-
-๏ Perintah: <code>/ai</code> [query]
-◉ Penjelasan: Untuk mengajukan pertanyaan ke AI
-
-๏ Perintah: <code>/img</code> [query]
-◉ Penjelasan: Untuk mencari gambar ke AI
-"""
-        
-        
-        
-        
-        
 __help__ = f"""
 *{BOT_NAME} has an ChatGPT & KukiChat whic provides you a seemingless chatting experience :*
  
