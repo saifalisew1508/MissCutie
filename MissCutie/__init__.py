@@ -74,7 +74,7 @@ if ENV:
     WORKERS = int(os.environ.get("WORKERS", 8))
     ARQ_API_URL = "https://arq.hamker.in"
     ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
-    OPENAI_API = "4rde2g7cprXOamWae3eMT3BlbkFJQ5yINbloY7KISJuN2DC7"
+    OPENAI_API = "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"
 
     try:
         OWNER_ID = int(os.environ.get("OWNER_ID", None))
