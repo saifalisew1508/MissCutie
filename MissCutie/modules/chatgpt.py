@@ -1,42 +1,73 @@
-# Copyright (C) 2020-2023 TeamKillerX <https://github.com/TeamKillerX>
-#
-# This file is part of TeamKillerX project,
-# and licensed under GNU Affero General Public License v3.
-# See the GNU Affero General Public License for more details.
-#
-# All rights reserved. See COPYING, AUTHORS.
-#
+from io import *
 
-import requests
-import os
-import json
-import random
-import asyncio
-from pyrogram import *
+import openai
+from kynaylibs.nan.utils.http import *
+from pyrogram import filters
 from pyrogram.types import *
-from pyrogram.errors import MessageNotModified
-from MissCutie import BOT_NAME, OPENAI_API, pbot as ren
 
-CMD_HANDLER = ["!", "/"] # your change handler
+from MissCutie import OPENAI_API, pbot, BOT_NAME
 
-cmd = CMD_HANDLER
 
-@ren.on_message(filters.command(["ai", "ask"], cmd) & filters.private | filters.group)
-async def chatgpt(c: Client, m: Message):
-    randydev = (m.text.split(None, 1)[1] if len(m.command) != 1 else None)
-    if not randydev:
-       await m.reply(f"use command <code>/{m.command[0]} [question]</code> to ask questions using the API.")
-       return
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {OPENAI_API}"}
+class OpenAi:
+    def text(self):
+        openai.api_key = OPENAI_API
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=f"<b>Q: <code>{self}</code>\nA:</b>",
+            temperature=0,
+            max_tokens=500,
+            top_p=1.0,
+            frequency_penalty=0.0,
+            presence_penalty=0.0,
+        )
+        return response.choices[0].text
 
-    json_data = {"prompt": randydev, "model": "text-davinci-003", "temperature": 0.5, "max_tokens": 1024, "n": 1, "stop": None, "top_p": 0.3, "frequency_penalty": 0.5}
+    def photo(self):
+        openai.api_key = OPENAI_API
+        response = openai.Image.create(prompt=self, n=1, size="1024x1024")
+        return response["data"][0]["url"]
+
+
+@pbot.on_message(filters.me & filters.command(["ai", "ask"]))
+async def ai(client, message):
+    if len(message.command) == 1:
+        return await message.edit_text(
+            f"Type <code>/ai [question]</code> to use OpenAI"
+        )
+    msg = await message.edit_text("`Processing...`")
+    biji = message.text.split(None, 1)[1]
     try:
-        response = requests.post("https://api.openai.com/v1/completions", headers=headers, json=json_data).json()
-        await c.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
-        await asyncio.sleep(2)
-        await c.send_message(m.chat.id, response["choices"][0]["text"], reply_to_message_id=m.id)
-    except Exception:
-        await c.send_message(m.chat.id, "Yahh, sorry i can't get your answer.", reply_to_message_id=m.id)
+        response = OpenAi.text(biji)
+        await msg.edit_text(f"**Q:** {biji}\n\n**A:** {response}")
+    except Exception as e:
+        await msg.edit_text(f"**There is an error!!\n`{e}`**")
+
+
+@pbot.on_message(filters.me & filters.command(["img"]))
+async def img(client, message):
+    if len(message.command) == 1:
+        return await eor(
+            message, f"Type <code>/img [question]</code> to use OpenAI"
+        )
+    try:
+        biji = message.text.split(None, 1)[1]
+        response = OpenAi.photo(biji)
+        await pbot.send_photo(message.chat.id, response)
+    except Exception as e:
+        await message.edit(f"**There is an error!!\n`{e}`**")
+        # await msg.delete()
+
+
+__MODULE__ = "openai"
+__HELP__ = f"""
+✘ Bantuan Untuk OpenAI
+
+๏ Perintah: <code>/ai</code> [query]
+◉ Penjelasan: Untuk mengajukan pertanyaan ke AI
+
+๏ Perintah: <code>/img</code> [query]
+◉ Penjelasan: Untuk mencari gambar ke AI
+"""
         
         
         
@@ -45,7 +76,12 @@ async def chatgpt(c: Client, m: Message):
 __help__ = f"""
 *{BOT_NAME} has an ChatGPT & KukiChat whic provides you a seemingless chatting experience :*
  
- ➥ /ask or /ai *:* ask Your Queries
+    Command: /ai [query]
+ ➥ Explanation: To ask a question to AI
+
+    Command: /img [query]
+ ➥ Explanation: To search for images to AI
+
  ➥ /chatbot *:* Shows chatbot control panel
 """
 
