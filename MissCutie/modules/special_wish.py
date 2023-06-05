@@ -5,15 +5,15 @@ from MissCutie.events import register
 
 MORNING_PHOTO = "https://te.legra.ph/file/7a18675abd9b75230735d.mp4"
 NIGHT_PHOTO = "https://te.legra.ph/file/4e959d8f074bef7061463.mp4"
-MORNING_QUOTE = f" Welcome this beautiful morning with a smile on your face. I hope you'll have a great day today. Wishing you a very good morning! {event.sender.first_name}"
-NIGHT_QUOTE = f"Good night I hope tomorrow is the best day in your life. {event.sender.first_name}"
+MORNING_QUOTE = "Welcome this beautiful morning with a smile on your face. I hope you'll have a great day today. Wishing you a very good morning! {event.sender.first_name}"
+NIGHT_QUOTE = "Good night I hope tomorrow is the best day in your life. {event.sender.first_name}"
 
 
 BUTTON = [
     [
         InlineKeyboardButton(
             text="Contact Me",
-            url=f"https://t.me/MissCutieRobot",
+            url="https://t.me/MissCutieRobot",
         ),
     ],
 ]
