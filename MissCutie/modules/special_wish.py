@@ -1,6 +1,6 @@
 from telethon import Button
 
-from MissCutie import tbot
+from MissCutie import telethn as tbot
 from MissCutie.events import register
 
 MORNING_PHOTO = "https://te.legra.ph/file/7a18675abd9b75230735d.mp4"
