@@ -1,3 +1,4 @@
+"""
 from telethon import Button
 
 from MissCutie import telethn as tbot
@@ -28,3 +29,4 @@ async def awake(event):
 @register(pattern=("Good Night"))
 async def awake(event):
     await tbot.send_file(event.chat_id, NIGHT_PHOTO, caption=NIGHT_QUOTE, buttons=BUTTON)
+"""
