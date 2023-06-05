@@ -5,7 +5,7 @@ import requests
 from gtts import gTTS, gTTSError
 from telethon.tl import functions, types
 
-from MissCutie import tbot
+from MissCutie import telethn as tbot
 from MissCutie.events import register
 
 IBM_WATSON_CRED_PASSWORD = ""
