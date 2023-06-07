@@ -43,7 +43,11 @@
 
 <details><summary><h3>𝗖𝗥𝗘𝗗𝗜𝗧😎</h3></summary>
   
-  # <p align="center"><a href="https://github.com/noob-kittu/YoneRobot"><img src="https://github-readme-stats.vercel.app/api/pin?username=noob-kittu&show_icons=true&theme=dracula&hide_border=true&repo=YoneRobot"></a></p>
+<a href="https://github.com/PaulSonOfLars/tgbot"><img src="https://github-readme-stats.vercel.app/api/pin?username=PaulSonOfLars&show_icons=true&theme=dracula&hide_border=true&repo=tgbot"></a>
+<a href="https://github.com/python-telegram-bot/python-telegram-bot"><img src="https://github-readme-stats.vercel.app/api/pin?username=python-telegram-bot&show_icons=true&theme=dracula&hide_border=true&repo=python-telegram-bot"></a>
+<a href="https://github.com/pyrogram/pyrogram"><img src="https://github-readme-stats.vercel.app/api/pin?username=pyrogram&show_icons=true&theme=dracula&hide_border=true&repo=pyrogram"></a>
+<a href="https://github.com/LonamiWebs/telethon"><img src="https://github-readme-stats.vercel.app/api/pin?username=LonamiWebs&show_icons=true&theme=dracula&hide_border=true&repo=telethon"></a>
+</p>
 
 <p align="center">
 
