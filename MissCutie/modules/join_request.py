@@ -3,7 +3,7 @@ import re
 
 from telegram import ParseMode
 from telegram.ext import (
-    ChatJoinRequestHandler
+    ChatJoinRequestHandler,
     CallbackContext,
     CallbackQueryHandler,
     CommandHandler,
