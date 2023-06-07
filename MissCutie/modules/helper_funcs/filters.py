@@ -1,7 +1,8 @@
+from emoji import UNICODE_EMOJI
 from telegram import Message
 from telegram.ext import MessageFilter
 
-from MissCutie import DEMONS, DEV_USERS, DRAGONS
+from MissCutie import DEMONS, DEV_USERS
 
 
 class CustomFilters:
@@ -13,15 +14,9 @@ class CustomFilters:
 
     class _Sudoers(MessageFilter):
         def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DRAGONS)
-
-    sudo_filter = _Sudoers()
-
-    class _Developers(MessageFilter):
-        def filter(self, message: Message):
             return bool(message.from_user and message.from_user.id in DEV_USERS)
 
-    dev_filter = _Developers()
+    dev_filter = _Sudoers()
 
     class _MimeType(MessageFilter):
         def __init__(self, mimetype):
@@ -30,7 +25,7 @@ class CustomFilters:
 
         def filter(self, message: Message):
             return bool(
-                message.document and message.document.mime_type == self.mime_type,
+                message.document and message.document.mime_type == self.mime_type
             )
 
     mime_type = _MimeType
@@ -42,7 +37,39 @@ class CustomFilters:
                 or message.sticker
                 or message.photo
                 or message.document
-                or message.video,
+                or message.video
             )
 
     has_text = _HasText()
+
+    class _HasEmoji(MessageFilter):
+        def filter(self, message: Message):
+            text = ""
+            if message.text:
+                text = message.text
+            for emoji in UNICODE_EMOJI:
+                for letter in text:
+                    if letter == emoji:
+                        return True
+            return False
+
+    has_emoji = _HasEmoji()
+
+    class _IsEmoji(MessageFilter):
+        def filter(self, message: Message):
+            if message.text and len(message.text) == 1:
+                for emoji in UNICODE_EMOJI:
+                    for letter in message.text:
+                        if letter == emoji:
+                            return True
+            return False
+
+    is_emoji = _IsEmoji()
+
+    class _IsAnonChannel(MessageFilter):
+        def filter(self, message: Message):
+            if message.from_user and message.from_user.id == 136817688:
+                return True
+            return False
+
+    is_anon_channel = _IsAnonChannel()
