@@ -19,7 +19,6 @@ from telegram.utils.helpers import mention_html
 
 from MissCutie import dispatcher
 from MissCutie.modules.helper_funcs.chat_status import bot_admin, user_can_restrict_no_reply
-from MissCutie.modules.helper_funcs.decorators import MissCutiecallback
 from MissCutie.modules.log_channel import loggable
 
 
