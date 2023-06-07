@@ -4,7 +4,7 @@
  * @lastModified  2022-12-01 09:32:31
  * @projectName   MissKatyPyro
  * Copyright @YasirPedia All rights reserved
-"""
+
 from pyrogram import filters
 from pyrogram.errors import UserAlreadyParticipant, UserIsBlocked
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -61,3 +61,5 @@ async def decline_chat(c, q):
         await q.message.edit("Kamu sudah di acc join grup, jadi ga perlu menekan button.")
     except Exception as err:
         await q.message.edit(err)
+
+"""
