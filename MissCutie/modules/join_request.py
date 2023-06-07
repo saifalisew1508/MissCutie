@@ -49,7 +49,7 @@ def chat_join_req(upd: Update, ctx: CallbackContext):
     )
 
 
-@MissCutiecallback(pattern=r"cb_approve=")
+
 @user_can_restrict_no_reply
 @bot_admin
 @loggable
@@ -79,7 +79,7 @@ def approve_joinreq(update: Update, context: CallbackContext) -> str:
         update.effective_message.edit_text(str(e))
 
 
-@MissCutiecallback(pattern=r"cb_decline=")
+
 @user_can_restrict_no_reply
 @bot_admin
 @loggable
@@ -110,3 +110,5 @@ def decline_joinreq(update: Update, context: CallbackContext) -> str:
 
 
 dispatcher.add_handler(ChatJoinRequestHandler(callback=chat_join_req, run_async=True))
+dispatcher.add_handler(CallbackQueryHandler(callback=approve_joinreq, pattern=r"cb_approve="))
+dispatcher.add_handler(CallbackQueryHandler(callback=decline_joinreq, pattern=r"cb_decline="))
