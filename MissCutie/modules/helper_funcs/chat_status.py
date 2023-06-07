@@ -229,6 +229,42 @@ def user_admin_no_reply(func):
     return is_not_admin_no_reply
 
 
+
+def user_can_restrict_no_reply(func):
+    @wraps(func)
+    def u_can_restrict_noreply(
+        update: Update, context: CallbackContext, *args, **kwargs
+    ):
+        context.bot
+        user = update.effective_user
+        chat = update.effective_chat
+        query = update.callback_query
+        member = chat.get_member(user.id)
+
+        if user:
+            if (
+                member.can_restrict_members
+                or member.status == "creator"
+                or user.id in DRAGONS
+            ):
+                return func(update, context, *args, **kwargs)
+            elif member.status == "administrator":
+                query.answer("You're missing the `can_restrict_members` permission.")
+            else:
+                query.answer(
+                    "You need to be admin with `can_restrict_users` permission to do this."
+                )
+        elif DEL_CMDS and " " not in update.effective_message.text:
+            try:
+                update.effective_message.delete()
+            except:
+                pass
+
+    return u_can_restrict_noreply
+
+
+
+
 def user_not_admin(func):
     @wraps(func)
     def is_not_admin(update: Update, context: CallbackContext, *args, **kwargs):
