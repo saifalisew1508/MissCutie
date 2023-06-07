@@ -1,3 +1,4 @@
+"""
 from typing import List, Optional, Union
 
 from telegram.ext import (
@@ -177,3 +178,4 @@ MissCutiecmd = MissCutieTelegramHandler(n).command
 MissCutiemsg = MissCutieTelegramHandler(n).message
 MissCutiecallback = MissCutieTelegramHandler(n).callbackquery
 MissCutieinline = MissCutieTelegramHandler(n).inlinequery
+"""
