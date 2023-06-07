@@ -837,7 +837,7 @@ def adminlist(update, context):
         custom_title = admin.custom_title
 
         if user.first_name == "":
-            name = "☠ Deleted accounts"
+            name = "Deleted accounts"
         else:
             name = "{}".format(
                 mention_html(
@@ -878,8 +878,8 @@ def adminlist(update, context):
                     html.escape(user.first_name + " " + (user.last_name or "")),
                 ),
             )
-        # if user.username:
-        #    name = escape_markdown("@" + user.username)
+        if user.username:
+           name = escape_markdown("@" + user.username)
         if status == "administrator":
             if custom_title:
                 try:
@@ -964,7 +964,7 @@ def button(update: Update, context: CallbackContext) -> str:
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#DEMOTE\n"
                 f"<b>Demoted by :</b> {mention_html(user.id, user.first_name)}\n"
-                f"<b>user :</b> {mention_html(member.user.id, member.user.first_name)}"
+                f"<b>User :</b> {mention_html(member.user.id, member.user.first_name)}"
             )
     else:
         update.effective_message.edit_text(
