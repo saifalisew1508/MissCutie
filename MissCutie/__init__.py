@@ -195,6 +195,7 @@ ALIVE_TEXT = [
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
+PyroGram = TOKEN.split(":")[0]
 pgram = Client(
     name=PyroGram,
     api_id=API_ID,
