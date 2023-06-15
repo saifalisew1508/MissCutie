@@ -1,6 +1,6 @@
 
 import os
-from MissCutie import dispatcher
+from MissCutie import application
 from MissCutie import telethn
 from asyncio import sleep
 from datetime import datetime
@@ -158,8 +158,8 @@ file_helpo = file_help.replace("_", " ")
 GETQR_HANDLER = CommandHandler("getqr", parseqr)
 MAKEQR_HANDLER = CommandHandler("makeqr", makeqr)
 
-dispatcher.add_handler(GETQR_HANDLER)
-dispatcher.add_handler(MAKEQR_HANDLER)
+application.add_handler(GETQR_HANDLER)
+application.add_handler(MAKEQR_HANDLER)
 
 __command_list__ = ["getqr"]
 __command_list__ = ["makeqr"]
