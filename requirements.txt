@@ -51,7 +51,7 @@ packaging==21.2
 Pillow==9.3.0
 pretty-errors==1.2.24
 psutil==5.8.0
-psycopg2-binary==2.9.2
+psycopg2-binary==2.9.6
 pyaes==1.6.1
 pyasn==1.6.1
 pyasn1==0.4.8
