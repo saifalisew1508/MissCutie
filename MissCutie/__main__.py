@@ -139,7 +139,7 @@ Enjoy With {}
 All commands can be used with: /
 """
 
-
+START_IMG = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
 
 
 IMPORTED = {}
