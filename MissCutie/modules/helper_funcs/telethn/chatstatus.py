@@ -1,7 +1,6 @@
-from telethon.tl.types import ChannelParticipantsAdmins
-
-from MissCutie import DRAGONS
 from MissCutie.modules.helper_funcs.telethn import IMMUNE_USERS, telethn
+from MissCutie import DRAGONS
+from telethon.tl.types import ChannelParticipantsAdmins
 
 
 async def user_is_ban_protected(user_id: int, message):
@@ -10,7 +9,7 @@ async def user_is_ban_protected(user_id: int, message):
         return True
 
     async for user in telethn.iter_participants(
-        message.chat_id, filter=ChannelParticipantsAdmins
+        message.chat_id, filter=ChannelParticipantsAdmins,
     ):
         if user_id == user.id:
             status = True
@@ -24,7 +23,7 @@ async def user_is_admin(user_id: int, message):
         return True
 
     async for user in telethn.iter_participants(
-        message.chat_id, filter=ChannelParticipantsAdmins
+        message.chat_id, filter=ChannelParticipantsAdmins,
     ):
         if user_id == user.id or user_id in DRAGONS:
             status = True
@@ -35,7 +34,7 @@ async def user_is_admin(user_id: int, message):
 async def is_user_admin(user_id: int, chat_id):
     status = False
     async for user in telethn.iter_participants(
-        chat_id, filter=ChannelParticipantsAdmins
+        chat_id, filter=ChannelParticipantsAdmins,
     ):
         if user_id == user.id or user_id in DRAGONS:
             status = True
@@ -43,13 +42,13 @@ async def is_user_admin(user_id: int, chat_id):
     return status
 
 
-async def saif_is_admin(chat_id: int):
+async def bot_is_admin(chat_id: int):
     status = False
-    saif = await telethn.get_me()
+    bot = await telethn.get_me()
     async for user in telethn.iter_participants(
-        chat_id, filter=ChannelParticipantsAdmins
+        chat_id, filter=ChannelParticipantsAdmins,
     ):
-        if saif.id == user.id:
+        if bot.id == user.id:
             status = True
             break
     return status
@@ -108,3 +107,12 @@ async def can_delete_messages(message):
         return status
     else:
         return False
+
+async def user_can_purge(user_id: int, message):
+    status = False
+    if message.is_private:
+        return True
+
+    perms = await telethn.get_permissions(message.chat_id, user_id)
+    status = perms.delete_messages
+    return status 
