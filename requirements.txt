@@ -17,6 +17,7 @@ charset-normalizer==2.0.7
 click==8.0.3
 coffeehouse==2.2.6
 colorama==0.4.4
+countryinfo==0.1.2
 cryptography==41.0.0
 CurrencyConverter==0.16.5
 decorator==5.1.0
@@ -58,6 +59,7 @@ pyasn==1.6.1
 pyasn1==0.4.8
 pycparser==2.21
 pynewtonmath==1.0.1
+pydictionary==2.0.1
 pyparsing==2.4.7
 pyperclip==1.8.2
 pyrate-limiter==2.4.7
@@ -76,6 +78,8 @@ rfc3986==1.5.0
 rsa==4.7.2
 sgmllib3k==1.0.0
 simplejson==3.17.5
+search_engine_parser==0.6.8
+secureme==0.0.4
 six==1.16.0
 sniffio==1.2.0
 soupsieve==2.3.1
@@ -113,3 +117,4 @@ pymongo
 img2pdf
 gtts
 python-arq
+unzip
