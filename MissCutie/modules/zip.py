@@ -5,7 +5,7 @@ import zipfile
 from telethon import types
 from telethon.tl import functions
 
-from MissCutie import TEMP_DOWNLOAD_DIRECTORY
+from MissCutie import TEMP_DOWNLOAD_LOC
 from MissCutie import telethn as client
 from MissCutie.events import register
 
@@ -48,14 +48,14 @@ async def _(event):
             return
 
     mone = await event.reply("⏳️ Please wait...")
-    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+    if not os.path.isdir(TEMP_DOWNLOAD_LOC):
+        os.makedirs(TEMP_DOWNLOAD_LOC)
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
         try:
             time.time()
             downloaded_file_name = await event.client.download_media(
-                reply_message, TEMP_DOWNLOAD_DIRECTORY
+                reply_message, TEMP_DOWNLOAD_LOC
             )
             directory_name = downloaded_file_name
         except Exception as e:  # pylint:disable=C0103,W0703
@@ -86,8 +86,8 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
 
-extracted = TEMP_DOWNLOAD_DIRECTORY + "extracted/"
-thumb_image_path = TEMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+extracted = TEMP_DOWNLOAD_LOC + "extracted/"
+thumb_image_path = TEMP_DOWNLOAD_LOC + "/thumb_image.jpg"
 if not os.path.isdir(extracted):
     os.makedirs(extracted)
 
@@ -130,15 +130,15 @@ async def _(event):
             return
 
     mone = await event.reply("Processing...")
-    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+    if not os.path.isdir(TEMP_DOWNLOAD_LOC):
+        os.makedirs(TEMP_DOWNLOAD_LOC)
     if event.reply_to_msg_id:
         start = datetime.now()
         reply_message = await event.get_reply_message()
         try:
             time.time()
             downloaded_file_name = await client.download_media(
-                reply_message, TEMP_DOWNLOAD_DIRECTORY
+                reply_message, TEMP_DOWNLOAD_LOC
             )
         except Exception as e:
             await mone.reply(str(e))
