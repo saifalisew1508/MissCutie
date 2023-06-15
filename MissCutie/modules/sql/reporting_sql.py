@@ -1,9 +1,8 @@
 import threading
 from typing import Union
 
-from sqlalchemy import BigInteger, Boolean, Column, String
-
 from MissCutie.modules.sql import BASE, SESSION
+from sqlalchemy import Boolean, Column, Integer, String, BigInteger
 
 
 class ReportingUserSettings(BASE):

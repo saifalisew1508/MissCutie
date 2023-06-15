@@ -1,10 +1,9 @@
 # Note: chat_id's are stored as strings because the int is too large to be stored in a PSQL database.
 import threading
 
-from sqlalchemy import BigInteger, Boolean, Column, String, UnicodeText, distinct, func
-
 from MissCutie.modules.helper_funcs.msg_types import Types
 from MissCutie.modules.sql import BASE, SESSION
+from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, distinct, func
 
 
 class Notes(BASE):
@@ -15,7 +14,7 @@ class Notes(BASE):
     file = Column(UnicodeText)
     is_reply = Column(Boolean, default=False)
     has_buttons = Column(Boolean, default=False)
-    msgtype = Column(BigInteger, default=Types.BUTTON_TEXT.value)
+    msgtype = Column(Integer, default=Types.BUTTON_TEXT.value)
 
     def __init__(self, chat_id, name, value, msgtype, file=None):
         self.chat_id = str(chat_id)  # ensure string
@@ -30,7 +29,7 @@ class Notes(BASE):
 
 class Buttons(BASE):
     __tablename__ = "note_urls"
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     chat_id = Column(String(14), primary_key=True)
     note_name = Column(UnicodeText, primary_key=True)
     name = Column(UnicodeText, nullable=False)
@@ -63,7 +62,7 @@ def add_note_to_db(chat_id, note_name, note_data, msgtype, buttons=None, file=No
                 prev_buttons = (
                     SESSION.query(Buttons)
                     .filter(
-                        Buttons.chat_id == str(chat_id), Buttons.note_name == note_name
+                        Buttons.chat_id == str(chat_id), Buttons.note_name == note_name,
                     )
                     .all()
                 )
@@ -71,7 +70,7 @@ def add_note_to_db(chat_id, note_name, note_data, msgtype, buttons=None, file=No
                     SESSION.delete(btn)
             SESSION.delete(prev)
         note = Notes(
-            str(chat_id), note_name, note_data or "", msgtype=msgtype.value, file=file
+            str(chat_id), note_name, note_data or "", msgtype=msgtype.value, file=file,
         )
         SESSION.add(note)
         SESSION.commit()
@@ -103,7 +102,7 @@ def rm_note(chat_id, note_name):
                 buttons = (
                     SESSION.query(Buttons)
                     .filter(
-                        Buttons.chat_id == str(chat_id), Buttons.note_name == note_name
+                        Buttons.chat_id == str(chat_id), Buttons.note_name == note_name,
                     )
                     .all()
                 )

@@ -2,22 +2,20 @@ import random
 import threading
 from typing import Union
 
-from sqlalchemy import BigInteger, Boolean, Column, Integer, String, UnicodeText
-
 from MissCutie.modules.helper_funcs.msg_types import Types
 from MissCutie.modules.sql import BASE, SESSION
+from sqlalchemy import BigInteger, Boolean, Column, Integer, String, UnicodeText
 
 DEFAULT_WELCOME = "Hey {first}, how are you?"
 DEFAULT_GOODBYE = "Nice knowing ya!"
 
 DEFAULT_WELCOME_MESSAGES = [
-    "{first} is here!",
+    "{first} is here!",  # Discord welcome messages copied
     "Ready player {first}",
     "Genos, {first} is here.",
     "A wild {first} appeared.",
     "{first} came in like a Lion!",
     "{first} has joined your party.",
-    "Arre dekho dekho koun aaya\n{first} aaya {first} aaya",
     "{first} just joined. Can I get a heal?",
     "{first} just joined the chat - asdgfhak!",
     "{first} just joined. Everyone, look busy!",
@@ -51,24 +49,24 @@ DEFAULT_WELCOME_MESSAGES = [
     "Hello. Is it {first} you're looking for?",
     "{first} has joined. Stay awhile and listen!",
     "Roses are red, violets are blue, {first} joined this chat with you",
-    "Welcome {first}, Avoid Punches if you can!",
+    "Welcome {first}, Avoid Getting Kicked if you can!",
     "It's a bird! It's a plane! - Nope, its {first}!",
-    "{first} Joined! - Ok.",
+    "{first} Joined! - Ok.",  # Discord welcome messages end.
     "All Hail {first}!",
     "Hi, {first}. Don't lurk, only Villans do that.",
     "{first} has joined the battle bus.",
-    "A new Challenger enters!",
+    "A new Challenger enters!",  # Tekken
     "Ok!",
     "{first} just fell into the chat!",
     "Something just fell from the sky! - oh, its {first}.",
     "{first} Just teleported into the chat!",
-    "Hi, {first}, show me your Hunter License!",
-    "I'm looking for Garo, oh wait nvm it's {first}.",
+    "Hi, {first}, show me your Hunter License!",  # Hunter Hunter
+    "I'm looking for Garo, oh wait nvm it's {first}.",  # One Punch man s2
     "Welcome {first}, leaving is not an option!",
     "Run Forest! ..I mean...{first}.",
-    "{first} do 100 push-ups, 100 sit-ups, 100 squats, and 10km running EVERY SINGLE DAY!!!",
-    "Huh?\nDid someone with a disaster level just join?\nOh wait, it's just {first}.",
-    "Hey, {first}, ever heard the King Engine?",
+    "{first} do 100 push-ups, 100 sit-ups, 100 squats, and 10km running EVERY SINGLE DAY!!!",  # One Punch ma
+    "Huh?\nDid someone with a disaster level just join?\nOh wait, it's just {first}.",  # One Punch ma
+    "Hey, {first}, ever heard the King Engine?",  # One Punch ma
     "Hey, {first}, empty your pockets.",
     "Hey, {first}!, are you strong?",
     "Call the Avengers! - {first} just joined the chat.",
@@ -92,8 +90,7 @@ DEFAULT_WELCOME_MESSAGES = [
     "Everyone stop what you’re doing, We are now in the presence of {first}.",
     "Hey {first}, do you wanna know how I got these scars?",
     "Welcome {first}, drop your weapons and proceed to the spy scanner.",
-    "Stay safe {first}, Keep 3 meters social distances between your messages.",
-    "Hey {first}, Do you know I once One-punched a meteorite?",
+    "Stay safe {first}, Keep 3 meters social distances between your messages.",  # Corona memes lmao
     "You’re here now {first}, Resistance is futile",
     "{first} just arrived, the force is strong with this one.",
     "{first} just joined on president’s orders.",
@@ -111,40 +108,40 @@ DEFAULT_WELCOME_MESSAGES = [
     "Ladies and gentlemen, I give you ...  {first}.",
     "Behold my new evil scheme, the {first}-Inator.",
     "Ah, {first} the Platypus, you're just in time... to be trapped.",
-    "{first} just arrived. Diable Jamble!",
-    "{first} just arrived. Aschente!",
-    "{first} say Aschente to swear by the pledges.",
-    "{first} just joined. El Psy congroo!",
-    "Irasshaimase {first}!",
-    "Hi {first}, what is 1000-7?",
-    "Come. I don't want to destroy this place",
-    "I... am... Whitebeard!...wait..wrong anime.",
-    "Hey {first}...have you ever heard these words?",
-    "Can't a guy get a little sleep around here?",
-    "It's time someone put you in your place, {first}.",
-    "Unit-01's reactivated..",
-    "Prepare for trouble...And make it double",
-    "Hey {first}, are You Challenging Me?",
-    "Oh? You're Approaching Me?",
-    "Ho… mukatta kuruno ka?",
-    "I can't beat the shit out of you without getting closer",
-    "Ho ho! Then come as close as you'd like.",
-    "Hoho! Dewa juubun chikazukanai youi",
-    "Guess who survived his time in Hell, {first}.",
-    "How many loaves of bread have you eaten in your lifetime?",
-    "What did you say? Depending on your answer, I may have to kick your ass!",
-    "Oh? You're approaching me? Instead of running away, you come right to me? Even though your grandfather, Joseph, told you the secret of The World, like an exam student scrambling to finish the problems on an exam until the last moments before the chime?",
-    "Rerorerorerorerorero.",
+    "{first} just arrived. Diable Jamble!",  # One Piece Sanji
+    "{first} just arrived. Aschente!",  # No Game No Life
+    "{first} say Aschente to swear by the pledges.",  # No Game No Life
+    "{first} just joined. El Psy congroo!",  # Steins Gate
+    "Irasshaimase {first}!",  # weeabo shit
+    "Hi {first}, what is 1000-7?",  # tokyo ghoul
+    "Come. I don't want to destroy this place",  # hunter x hunter
+    "I... am... Whitebeard!...wait..wrong anime.",  # one Piece
+    "Hey {first}...have you ever heard these words?",  # BNHA
+    "Can't a guy get a little sleep around here?",  # Kamina Falls – Gurren Lagann
+    "It's time someone put you in your place, {first}.",  # Hellsing
+    "Unit-01's reactivated..",  # Neon Genesis: Evangelion
+    "Prepare for trouble...And make it double",  # Pokemon
+    "Hey {first}, are You Challenging Me?",  # Shaggy
+    "Oh? You're Approaching Me?",  # jojo
+    "Ho… mukatta kuruno ka?",  # jojo jap ver
+    "I can't beat the shit out of you without getting closer",  # jojo
+    "Ho ho! Then come as close as you'd like.",  # jojo
+    "Hoho! Dewa juubun chikazukanai youi",  # jojo jap ver
+    "Guess who survived his time in Hell, {first}.",  # jojo
+    "How many loaves of bread have you eaten in your lifetime?",  # jojo
+    "What did you say? Depending on your answer, I may have to kick your ass!",  # jojo
+    "Oh? You're approaching me? Instead of running away, you come right to me? Even though your grandfather, Joseph, told you the secret of The World, like an exam student scrambling to finish the problems on an exam until the last moments before the chime?",  # jojo
+    "Rerorerorerorerorero.",  # jojo
     "{first} just warped into the group!",
     "I..it's..it's just {first}.",
     "Sugoi, Dekai. {first} Joined!",
-    "{first}, do you know gods of death love apples?",
-    "I'll take a potato chip.... and eat it",
-    "Oshiete oshiete yo sono shikumi wo!",
-    "Kaizoku ou ni...nvm wrong anime.",
-    "{first} just joined! Gear.....second!",
+    "{first}, do you know gods of death love apples?",  # Death Note owo
+    "I'll take a potato chip.... and eat it",  # Death Note owo
+    "Oshiete oshiete yo sono shikumi wo!",  # Tokyo Ghoul
+    "Kaizoku ou ni...nvm wrong anime.",  # op
+    "{first} just joined! Gear.....second!",  # Op
     "Omae wa mou....shindeiru",
-    "Hey {first}, the leaf village lotus blooms twice!",
+    "Hey {first}, the leaf village lotus blooms twice!",  # Naruto stuff begins from here
     "{first} Joined! Omote renge!",
     "{first}! I, Madara! declare you the strongest",
     "{first}, this time I'll lend you my power. ",  # Kyuubi to naruto
@@ -152,11 +149,11 @@ DEFAULT_WELCOME_MESSAGES = [
     "In the jungle, you must wait...until the dice read five or eight.",  # Jumanji stuff
     "Dr.{first} Famed archeologist and international explorer,\nWelcome to Jumanji!\nJumanji's Fate is up to you now.",
     "{first}, this will not be an easy mission - monkeys slow the expedition.",  # End of Jumanji stuff
-    "Remember, remember, the Fifth of November, the Gunpowder Treason and Plot. I know of no reason why the Gunpowder Treason should ever be forgot.",  # V for Vendetta
-    "The only verdict is vengeance; a vendetta, held as a votive not in vain, for the value and veracity of such shall one day vindicate the vigilant and the virtuous.",  # V for Vendetta
-    "Behind {first} there is more than just flesh. Beneath this user there is an idea... and ideas are bulletproof.",  # V for Vendetta
-    "Love your rage, not your cage.",  # V for Vendetta
-    "Get your stinking paws off me, you damned dirty ape!",  # Planet of the apes
+    "Remember, remember, the Fifth of November, the Gunpowder Treason and Plot. I know of no reason why the Gunpowder Treason should ever be forgot.", #V for Vendetta
+    "The only verdict is vengeance; a vendetta, held as a votive not in vain, for the value and veracity of such shall one day vindicate the vigilant and the virtuous.", #V for Vendetta
+    "Behind {first} there is more than just flesh. Beneath this user there is an idea... and ideas are bulletproof.", #V for Vendetta
+    "Love your rage, not your cage.", #V for Vendetta
+    "Get your stinking paws off me, you damned dirty ape!", #Planet of the apes
     "Elementary, my dear {first}.",
     "I'm back - {first}.",
     "Bond. {first} Bond.",
@@ -200,7 +197,7 @@ DEFAULT_GOODBYE_MESSAGES = [
     "What do you want to do today?",
     "You are dark inside",
     "Have you seen the exit?",
-    "Get a  pet it will cheer you up.",
+    "Get a baby pet it will cheer you up.",
     "Your princess is in another castle.",
     "You are playing it wrong give me the controller",
     "Trust good people",
@@ -235,7 +232,7 @@ class Welcome(BASE):
     custom_content = Column(UnicodeText, default=None)
 
     custom_welcome = Column(
-        UnicodeText, default=random.choice(DEFAULT_WELCOME_MESSAGES)
+        UnicodeText, default=random.choice(DEFAULT_WELCOME_MESSAGES),
     )
     welcome_type = Column(Integer, default=Types.TEXT.value)
 
@@ -251,7 +248,7 @@ class Welcome(BASE):
 
     def __repr__(self):
         return "<Chat {} should Welcome new users: {}>".format(
-            self.chat_id, self.should_welcome
+            self.chat_id, self.should_welcome,
         )
 
 
@@ -297,7 +294,7 @@ class WelcomeMute(BASE):
 
 class WelcomeMuteUsers(BASE):
     __tablename__ = "human_checks"
-    user_id = Column(Integer, primary_key=True)
+    user_id = Column(BigInteger, primary_key=True)
     chat_id = Column(String(14), primary_key=True)
     human_check = Column(Boolean)
 
@@ -462,7 +459,7 @@ def set_gdbye_preference(chat_id, should_goodbye):
 
 
 def set_custom_welcome(
-    chat_id, custom_content, custom_welcome, welcome_type, buttons=None
+    chat_id, custom_content, custom_welcome, welcome_type, buttons=None,
 ):
     if buttons is None:
         buttons = []

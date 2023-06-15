@@ -1,9 +1,9 @@
 # New chat added -> setup permissions
 import threading
 
-from sqlalchemy import Boolean, Column, String
+from sqlalchemy import Column, String, Boolean
 
-from MissCutie.modules.sql import BASE, SESSION
+from MissCutie.modules.sql import SESSION, BASE
 
 
 class Permissions(BASE):
@@ -27,6 +27,16 @@ class Permissions(BASE):
     button = Column(Boolean, default=False)
     egame = Column(Boolean, default=False)
     inline = Column(Boolean, default=False)
+    phone = Column(Boolean, default=False)
+    command = Column(Boolean, default=False)
+    email = Column(Boolean, default=False)
+    anonchannel = Column(Boolean, default=False)
+    forwardchannel = Column(Boolean, default=False)
+    forwardbot = Column(Boolean, default=False)
+    videonote = Column(Boolean, default=False)
+    emojicustom = Column(Boolean, default=False)
+    stickerpremium = Column(Boolean, default=False)
+    stickeranimated = Column(Boolean, default=False)
 
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)  # ensure string
@@ -47,6 +57,16 @@ class Permissions(BASE):
         self.button = False
         self.egame = False
         self.inline = False
+        self.phone = False
+        self.command = False
+        self.email = False
+        self.anonchannel = False
+        self.forwardchannel = False
+        self.forwardbot = False
+        self.videonote = False
+        self.emojicustom = False
+        self.stickerpremium = False
+        self.stickeranimated = False
 
     def __repr__(self):
         return "<Permissions for %s>" % self.chat_id
@@ -60,6 +80,9 @@ class Restrictions(BASE):
     media = Column(Boolean, default=False)
     other = Column(Boolean, default=False)
     preview = Column(Boolean, default=False)
+    info = Column(Boolean, default=False)
+    invite = Column(Boolean, default=False)
+    topics = Column(Boolean, default=False)
 
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)  # ensure string
@@ -67,6 +90,9 @@ class Restrictions(BASE):
         self.media = False
         self.other = False
         self.preview = False
+        self.info = False
+        self.invite = False
+        self.topics = False
 
     def __repr__(self):
         return "<Restrictions for %s>" % self.chat_id
@@ -145,6 +171,26 @@ def update_lock(chat_id, lock_type, locked):
             curr_perm.egame = locked
         elif lock_type == "inline":
             curr_perm.inline = locked
+        elif lock_type == "phone":
+            curr_perm.phone = locked
+        elif lock_type == "command":
+            curr_perm.command = locked
+        elif lock_type == "email":
+            curr_perm.email = locked
+        elif lock_type == "anonchannel":
+            curr_perm.anonchannel = locked
+        elif lock_type == "forwardchannel":
+            curr_perm.forwardchannel = locked
+        elif lock_type == "forwardbot":
+            curr_perm.forwardbot = locked
+        elif lock_type == "videonote":
+            curr_perm.videonote = locked
+        elif lock_type == "emojicustom":
+            curr_perm.emojicustom = locked
+        elif lock_type == "stickerpremium":
+            curr_perm.stickerpremium = locked
+        elif lock_type == "stickeranimated":
+            curr_perm.stickeranimated = locked
 
         SESSION.add(curr_perm)
         SESSION.commit()
@@ -164,11 +210,20 @@ def update_restriction(chat_id, restr_type, locked):
             curr_restr.other = locked
         elif restr_type == "previews":
             curr_restr.preview = locked
+        elif restr_type == "info":
+            curr_restr.info = locked
+        elif restr_type == "invite":
+            curr_restr.invite = locked
+        elif restr_type == "topics":
+            curr_restr.topics = locked
         elif restr_type == "all":
             curr_restr.messages = locked
             curr_restr.media = locked
             curr_restr.other = locked
             curr_restr.preview = locked
+            curr_restr.info = locked
+            curr_restr.invite = locked
+            curr_restr.topcis = locked
         SESSION.add(curr_restr)
         SESSION.commit()
 
@@ -214,6 +269,26 @@ def is_locked(chat_id, lock_type):
         return curr_perm.egame
     elif lock_type == "inline":
         return curr_perm.inline
+    elif lock_type == "phone":
+        return curr_perm.phone
+    elif lock_type == "command":
+        return curr_perm.command
+    elif lock_type == "email":
+        return curr_perm.email
+    elif lock_type == "anonchannel":
+        return curr_perm.anonchannel
+    elif lock_type == "forwardchannel":
+        return curr_perm.forwardchannel
+    elif lock_type == "forwardbot":
+        return curr_perm.forwardbot
+    elif lock_type == "videonote":
+        return curr_perm.videonote
+    elif lock_type == "emojicustom":
+        return curr_perm.emojicustom
+    elif lock_type == "stickerpremium":
+        return curr_perm.stickerpremium
+    elif lock_type == "stickeranimated":
+        return curr_perm.stickeranimated
 
 
 def is_restr_locked(chat_id, lock_type):
@@ -231,12 +306,21 @@ def is_restr_locked(chat_id, lock_type):
         return curr_restr.other
     elif lock_type == "previews":
         return curr_restr.preview
+    elif lock_type == "info":
+        return curr_restr.info
+    elif lock_type == "invite":
+        return curr_restr.invite
+    elif lock_type == "topics":
+        return curr_restr.topics
     elif lock_type == "all":
         return (
             curr_restr.messages
             and curr_restr.media
             and curr_restr.other
             and curr_restr.preview
+            and curr_restr.info
+            and curr_restr.invite
+            and curr_restr.topics
         )
 
 

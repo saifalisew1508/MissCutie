@@ -2,9 +2,9 @@ import threading
 import time
 from typing import Union
 
-from sqlalchemy import BigInteger, Boolean, Column, String, UnicodeText
+from sqlalchemy import Column, String, Boolean, UnicodeText, Integer, BigInteger
 
-from MissCutie.modules.sql import BASE, SESSION
+from MissCutie.modules.sql import SESSION, BASE
 
 
 class ChatAccessConnectionSettings(BASE):
@@ -18,7 +18,7 @@ class ChatAccessConnectionSettings(BASE):
 
     def __repr__(self):
         return "<Chat access settings ({}) is {}>".format(
-            self.chat_id, self.allow_connect_to_chat
+            self.chat_id, self.allow_connect_to_chat,
         )
 
 
@@ -37,7 +37,7 @@ class ConnectionHistory(BASE):
     user_id = Column(BigInteger, primary_key=True)
     chat_id = Column(String(14), primary_key=True)
     chat_name = Column(UnicodeText)
-    conn_time = Column(BigInteger)
+    conn_time = Column(Integer)
 
     def __init__(self, user_id, chat_id, chat_name, conn_time):
         self.user_id = user_id
@@ -134,7 +134,7 @@ def add_history_conn(user_id, chat_id, chat_name):
             if chat_id in getchat_id:
                 todeltime = getchat_id[str(chat_id)]
                 delold = SESSION.query(ConnectionHistory).get(
-                    (int(user_id), str(chat_id))
+                    (int(user_id), str(chat_id)),
                 )
                 if delold:
                     SESSION.delete(delold)
@@ -146,7 +146,7 @@ def add_history_conn(user_id, chat_id, chat_name):
                 for x in todel:
                     chat_old = HISTORY_CONNECT[int(user_id)][x]["chat_id"]
                     delold = SESSION.query(ConnectionHistory).get(
-                        (int(user_id), str(chat_old))
+                        (int(user_id), str(chat_old)),
                     )
                     if delold:
                         SESSION.delete(delold)

@@ -1,17 +1,17 @@
 import threading
 
+from MissCutie import application
+from MissCutie.modules.sql import BASE, SESSION
 from sqlalchemy import (
-    BigInteger,
     Column,
     ForeignKey,
+    Integer,
+    BigInteger,
     String,
     UnicodeText,
     UniqueConstraint,
     func,
 )
-
-from MissCutie import dispatcher
-from MissCutie.modules.sql import BASE, SESSION
 
 
 class Users(BASE):
@@ -42,7 +42,7 @@ class Chats(BASE):
 
 class ChatMembers(BASE):
     __tablename__ = "chat_members"
-    priv_chat_id = Column(BigInteger, primary_key=True)
+    priv_chat_id = Column(Integer, primary_key=True)
     # NOTE: Use dual primary key instead of private primary key?
     chat = Column(
         String(14),
@@ -78,7 +78,7 @@ INSERTION_LOCK = threading.RLock()
 
 def ensure_bot_in_db():
     with INSERTION_LOCK:
-        bot = Users(dispatcher.bot.id, dispatcher.bot.username)
+        bot = Users(application.bot.id, application.bot.username)
         SESSION.merge(bot)
         SESSION.commit()
 

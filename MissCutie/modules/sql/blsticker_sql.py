@@ -1,8 +1,7 @@
 import threading
 
-from sqlalchemy import BigInteger, Column, String, UnicodeText, distinct, func
-
 from MissCutie.modules.sql import BASE, SESSION
+from sqlalchemy import Column, Integer, String, UnicodeText, distinct, func
 
 
 class StickersFilters(BASE):
@@ -21,14 +20,14 @@ class StickersFilters(BASE):
         return bool(
             isinstance(other, StickersFilters)
             and self.chat_id == other.chat_id
-            and self.trigger == other.trigger
+            and self.trigger == other.trigger,
         )
 
 
 class StickerSettings(BASE):
     __tablename__ = "blsticker_settings"
     chat_id = Column(String(14), primary_key=True)
-    blacklist_type = Column(BigInteger, default=1)
+    blacklist_type = Column(Integer, default=1)
     value = Column(UnicodeText, default="0")
 
     def __init__(self, chat_id, blacklist_type=1, value="0"):
@@ -38,7 +37,7 @@ class StickerSettings(BASE):
 
     def __repr__(self):
         return "<{} will executing {} for blacklist trigger.>".format(
-            self.chat_id, self.blacklist_type
+            self.chat_id, self.blacklist_type,
         )
 
 
@@ -124,7 +123,7 @@ def set_blacklist_strength(chat_id, blacklist_type, value):
         curr_setting = SESSION.query(StickerSettings).get(str(chat_id))
         if not curr_setting:
             curr_setting = StickerSettings(
-                chat_id, blacklist_type=int(blacklist_type), value=value
+                chat_id, blacklist_type=int(blacklist_type), value=value,
             )
 
         curr_setting.blacklist_type = int(blacklist_type)

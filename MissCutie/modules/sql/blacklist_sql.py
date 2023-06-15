@@ -1,8 +1,8 @@
 import threading
 
-from sqlalchemy import BigInteger, Column, String, UnicodeText, distinct, func
+from sqlalchemy import func, distinct, Column, String, UnicodeText, Integer
 
-from MissCutie.modules.sql import BASE, SESSION
+from MissCutie.modules.sql import SESSION, BASE
 
 
 class BlackListFilters(BASE):
@@ -21,14 +21,14 @@ class BlackListFilters(BASE):
         return bool(
             isinstance(other, BlackListFilters)
             and self.chat_id == other.chat_id
-            and self.trigger == other.trigger
+            and self.trigger == other.trigger,
         )
 
 
 class BlacklistSettings(BASE):
     __tablename__ = "blacklist_settings"
     chat_id = Column(String(14), primary_key=True)
-    blacklist_type = Column(BigInteger, default=1)
+    blacklist_type = Column(Integer, default=1)
     value = Column(UnicodeText, default="0")
 
     def __init__(self, chat_id, blacklist_type=1, value="0"):
@@ -38,7 +38,7 @@ class BlacklistSettings(BASE):
 
     def __repr__(self):
         return "<{} will executing {} for blacklist trigger.>".format(
-            self.chat_id, self.blacklist_type
+            self.chat_id, self.blacklist_type,
         )
 
 
@@ -124,7 +124,7 @@ def set_blacklist_strength(chat_id, blacklist_type, value):
         curr_setting = SESSION.query(BlacklistSettings).get(str(chat_id))
         if not curr_setting:
             curr_setting = BlacklistSettings(
-                chat_id, blacklist_type=int(blacklist_type), value=value
+                chat_id, blacklist_type=int(blacklist_type), value=value,
             )
 
         curr_setting.blacklist_type = int(blacklist_type)
