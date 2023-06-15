@@ -6,7 +6,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import __version__ as o
 from telethon import __version__ as s
 
-from MissCutie import OWNER_ID, BOT_NAME, dispatcher
+from MissCutie import OWNER_ID, BOT_NAME, application
 from MissCutie import pbot as client
 
 saif = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
@@ -16,7 +16,7 @@ saif = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
 async def repo(client, message):
     await message.reply_photo(
         photo=saif,
-        caption=f"""**Hey {message.from_user.mention()},\n\ni am [{dispatcher.bot.first_name}](t.me/{dispatcher.bot.username})**
+        caption=f"""**Hey {message.from_user.mention()},\n\ni am [{application.bot.first_name}](t.me/{application.bot.username})**
 
 **➥ My Developer :** @PrinceXofficial
 **➥ Python Version :** `{y()}`
