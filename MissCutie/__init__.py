@@ -14,6 +14,8 @@ from pyrogram import __version__ as pyrover
 from pyrogram import Client, errors
 from pyrogram.types import Message
 
+from Python_ARQ import ARQ
+
 from telegram.ext import Application
 from telegram.error import BadRequest, Forbidden
 from telethon.sessions import MemorySession
@@ -98,9 +100,12 @@ if ENV:
     AI_API_KEY = os.environ.get("AI_API_KEY", None)
     WALL_API = os.environ.get("WALL_API", None)
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
-    ARQ_API_URL = "https://arq.hamker.in"
-    ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
+    ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
+    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+    BOT_ID = os.environ.get("BOT_ID", 5810582849)
+    BOT_NAME = os.environ.get("BOT_NAME", "Cutie")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "MissCutieRobot")
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
@@ -157,6 +162,9 @@ else:
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
     MONGO_DB_URI = Config.MONGO_DB_URI
     ARQ_API_KEY = Config.ARQ_API_KEY
+    BOT_ID = Config.BOT_ID
+    BOT_NAME = Config.BOT_NAME
+    BOT_USERNAME = Config.BOT_USERNAME
 
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
@@ -191,9 +199,7 @@ DEV_USERS = list(DEV_USERS)
 
 # Bot Info
 
-BOT_ID = 5810582849
-BOT_NAME = Cutie
-BOT_USERNAME = MissCutieRobot
+ 
 
 
 
