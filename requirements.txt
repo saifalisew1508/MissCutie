@@ -93,7 +93,7 @@ spongemock==0.3.4
 SQLAlchemy==1.4.32
 telegraph==2.1.0
 Telethon==1.28.5
-TgCrypto==1.2.2
+TgCrypto==1.2.5
 tornado==6.3.2
 tqdm==4.62.3
 typing-extensions==3.10.0.2
