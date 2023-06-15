@@ -1,3 +1,4 @@
+"""
 from pyrogram import filters, Client
 from pyrogram.errors import UserAlreadyParticipant, UserIsBlocked
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ChatJoinRequest
@@ -53,3 +54,4 @@ async def decline_chat(c, q):
         await q.message.edit("Kamu sudah di acc join grup, jadi ga perlu menekan button.")
     except Exception as err:
         await q.message.edit(err)
+"""
