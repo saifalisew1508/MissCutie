@@ -1,21 +1,23 @@
 import datetime
 from typing import List
 
-import requests
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
-
-from MissCutie import TIME_API_KEY, dispatcher
+from httpx import AsyncClient
+from MissCutie import TIME_API_KEY, application
 from MissCutie.modules.disable import DisableAbleCommandHandler
+from telegram import Update
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes
 
 
-def generate_time(to_find: str, findtype: List[str]) -> str:
-    data = requests.get(
+async def generate_time(to_find: str, findtype: List[str]) -> str:
+    async with AsyncClient() as client:
+        r = await client.get(
         f"https://api.timezonedb.com/v2.1/list-time-zone"
         f"?key={TIME_API_KEY}"
         f"&format=json"
-        f"&fields=countryCode,countryName,zoneName,gmtOffset,timestamp,dst"
-    ).json()
+        f"&fields=countryCode,countryName,zoneName,gmtOffset,timestamp,dst",
+    )
+    data = r.json()
 
     for zone in data["zones"]:
         for eachtype in findtype:
@@ -34,7 +36,7 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 day_fmt = r"%A"
                 gmt_offset = zone["gmtOffset"]
                 timestamp = datetime.datetime.now(
-                    datetime.timezone.utc
+                    datetime.timezone.utc,
                 ) + datetime.timedelta(seconds=gmt_offset)
                 current_date = timestamp.strftime(date_fmt)
                 current_time = timestamp.strftime(time_fmt)
@@ -59,27 +61,26 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
     return result
 
 
-@run_async
-def gettime(update: Update, context: CallbackContext):
+async def gettime(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
 
     try:
         query = message.text.strip().split(" ", 1)[1]
     except:
-        message.reply_text("Provide a country name/abbreviation/timezone to find.")
+        await message.reply_text("Provide a country name/abbreviation/timezone to find.")
         return
-    send_message = message.reply_text(
-        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML
+    send_message = await message.reply_text(
+        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML,
     )
 
     query_timezone = query.lower()
     if len(query_timezone) == 2:
-        result = generate_time(query_timezone, ["countryCode"])
+        result = await generate_time(query_timezone, ["countryCode"])
     else:
-        result = generate_time(query_timezone, ["zoneName", "countryName"])
+        result = await generate_time(query_timezone, ["zoneName", "countryName"])
 
     if not result:
-        send_message.edit_text(
+        await send_message.edit_text(
             f"Timezone info not available for <b>{query}</b>\n"
             '<b>All Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>',
             parse_mode=ParseMode.HTML,
@@ -87,22 +88,14 @@ def gettime(update: Update, context: CallbackContext):
         )
         return
 
-    send_message.edit_text(
-        result, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+    await send_message.edit_text(
+        result, parse_mode=ParseMode.HTML, disable_web_page_preview=True,
     )
 
 
-__help__ = """
- ➥ /time <query>*:* Gives information about a timezone.
-*Available queries:* Country Code/Country Name/Timezone Name
- ➥ ⏰ [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+TIME_HANDLER = DisableAbleCommandHandler("time", gettime, block=False)
 
-💡 Ex:- /time IN *:* It will shows Indian current time and date..
-"""
-
-TIME_HANDLER = DisableAbleCommandHandler("time", gettime)
-
-dispatcher.add_handler(TIME_HANDLER)
+application.add_handler(TIME_HANDLER)
 
 __mod_name__ = "Time"
 __command_list__ = ["time"]

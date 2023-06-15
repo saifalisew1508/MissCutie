@@ -1,32 +1,27 @@
-import requests
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
-
-from MissCutie import dispatcher
+from httpx import AsyncClient
+from MissCutie import application
 from MissCutie.modules.disable import DisableAbleCommandHandler
+from telegram import Update
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes
 
 
-@run_async
-def ud(update: Update, context: CallbackContext):
+async def ud(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     text = message.text[len("/ud ") :]
-    results = requests.get(
-        f"https://api.urbandictionary.com/v0/define?term={text}"
-    ).json()
+    async with AsyncClient() as client:
+        r = await client.get(f"https://api.urbandictionary.com/v0/define?term={text}")
+    results = r.json()
     try:
         reply_text = f'*{text}*\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
     except:
         reply_text = "No results found."
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
+    await message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
-UD_HANDLER = DisableAbleCommandHandler(["ud"], ud)
+UD_HANDLER = DisableAbleCommandHandler(["ud"], ud, block=False)
 
-dispatcher.add_handler(UD_HANDLER)
+application.add_handler(UD_HANDLER)
 
-__help__ = """
-➥ /ud (text) *:* Searchs the given text on Urban Dictionary and sends you the information.
-"""
-__mod_name__ = "UrBan"
 __command_list__ = ["ud"]
 __handlers__ = [UD_HANDLER]

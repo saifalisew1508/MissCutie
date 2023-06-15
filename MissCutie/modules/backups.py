@@ -1,47 +1,46 @@
-import json
-import os
-import time
+import json, time, os
 from io import BytesIO
 
-from telegram import ParseMode
+from telegram import Message, Update
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, run_async
+from telegram.ext import CommandHandler, ContextTypes
+
+import MissCutie.modules.sql.notes_sql as sql
+from MissCutie import application, LOGGER, OWNER_ID, JOIN_LOGGER, SUPPORT_CHAT
+from MissCutie.__main__ import DATA_IMPORT
+from MissCutie.modules.helper_funcs.chat_status import check_admin
+from MissCutie.modules.helper_funcs.alternate import typing_action
+
+# from MissCutie.modules.rules import get_rules
+import MissCutie.modules.sql.rules_sql as rulessql
 
 # from MissCutie.modules.sql import warns_sql as warnssql
 import MissCutie.modules.sql.blacklist_sql as blacklistsql
+from MissCutie.modules.sql import disable_sql as disabledsql
 
 # from MissCutie.modules.sql import cust_filters_sql as filtersql
 # import MissCutie.modules.sql.welcome_sql as welcsql
 import MissCutie.modules.sql.locks_sql as locksql
-import MissCutie.modules.sql.notes_sql as sql
-
-# from MissCutie.modules.rules import get_rules
-import MissCutie.modules.sql.rules_sql as rulessql
-from MissCutie import EVENT_LOGS,OWNER_ID, SUPPORT_CHAT, dispatcher
-from MissCutie.__main__ import DATA_IMPORT
 from MissCutie.modules.connection import connected
-from MissCutie.modules.helper_funcs.alternate import typing_action
-from MissCutie.modules.helper_funcs.chat_status import user_admin
-from MissCutie.modules.sql import disable_sql as disabledsql
 
-
-@run_async
-@user_admin
 @typing_action
-def import_data(update, context):
+@check_admin(is_user=True)
+async def import_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = update.effective_message
     chat = update.effective_chat
     user = update.effective_user
     # TODO: allow uploading doc with command, not just as reply
     # only work with a doc
 
-    conn = connected(context.bot, update, chat, user.id, need_admin=True)
+    conn = await connected(context.bot, update, chat, user.id, need_admin=True)
     if conn:
-        chat = dispatcher.bot.getChat(conn)
-        chat_name = dispatcher.bot.getChat(conn).title
+        chat = await application.bot.getChat(conn)
+        chat_obj = await application.bot.getChat(conn)
+        chat_name = chat_obj.title
     else:
         if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text("This is a group only command!")
+            await update.effective_message.reply_text("This is a group only command!")
             return ""
 
         chat = update.effective_chat
@@ -49,22 +48,22 @@ def import_data(update, context):
 
     if msg.reply_to_message and msg.reply_to_message.document:
         try:
-            file_info = context.bot.get_file(msg.reply_to_message.document.file_id)
+            file_info = await context.bot.get_file(msg.reply_to_message.document.file_id)
         except BadRequest:
-            msg.reply_text(
-                "Try downloading and uploading the file yourself again, This one seem broken to me!"
+            await msg.reply_text(
+                "Try downloading and uploading the file yourself again, This one seem broken to me!",
             )
             return
 
         with BytesIO() as file:
-            file_info.download(out=file)
+            await file_info.download_to_memory(out=file)
             file.seek(0)
             data = json.load(file)
 
         # only import one group
         if len(data) > 1 and str(chat.id) not in data:
-            msg.reply_text(
-                "There are more than one group in this file and the chat.id is not same! How am i supposed to import it?"
+            await msg.reply_text(
+                "There are more than one group in this file and the chat.id is not same! How am i supposed to import it?",
             )
             return
 
@@ -73,7 +72,7 @@ def import_data(update, context):
             if data.get(str(chat.id)) is None:
                 if conn:
                     text = "Backup comes from another chat, I can't return another chat to chat *{}*".format(
-                        chat_name
+                        chat_name,
                     )
                 else:
                     text = "Backup comes from another chat, I can't return another chat to this chat"
@@ -84,7 +83,7 @@ def import_data(update, context):
         try:
             if str(context.bot.id) != str(data[str(chat.id)]["bot"]):
                 return msg.reply_text(
-                    "Backup from another bot that is not suggested might cause the problem, documents, photos, videos, audios, records might not work as it should be."
+                    "Backup from another bot that is not suggested might cause the problem, documents, photos, videos, audios, records might not work as it should be.",
                 )
         except Exception:
             pass
@@ -96,13 +95,16 @@ def import_data(update, context):
 
         try:
             for mod in DATA_IMPORT:
-                mod.__import_data__(str(chat.id), data)
+                try:
+                    await mod.__import_data__(str(chat.id), data, msg)
+                except TypeError:
+                    pass
         except Exception:
-            msg.reply_text(
-                f"An error occurred while recovering your data. The process failed. If you experience a problem with this, please take it to @{SUPPORT_CHAT}"
+            await msg.reply_text(
+                f"An error occurred while recovering your data. The process failed. If you experience a problem with this, please take it to @{SUPPORT_CHAT}",
             )
 
-            EVENT_LOGS.exception(
+            LOGGER.exception(
                 "Imprt for the chat %s with the name %s failed.",
                 str(chat.id),
                 str(chat.title),
@@ -116,26 +118,28 @@ def import_data(update, context):
             text = "Backup fully restored on *{}*.".format(chat_name)
         else:
             text = "Backup fully restored"
-        msg.reply_text(text, parse_mode="markdown")
+        await msg.reply_text(text, parse_mode="markdown")
+    else:
+        await msg.reply_text("You have to reply to exported backup document.")
+        return
 
 
-@run_async
-@user_admin
-def export_data(update, context):
+@check_admin(is_user=True)
+async def export_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_data = context.chat_data
     msg = update.effective_message  # type: Optional[Message]
     user = update.effective_user  # type: Optional[User]
     chat_id = update.effective_chat.id
     chat = update.effective_chat
     current_chat_id = update.effective_chat.id
-    conn = connected(context.bot, update, chat, user.id, need_admin=True)
+    conn = await connected(context.bot, update, chat, user.id, need_admin=True)
     if conn:
-        chat = dispatcher.bot.getChat(conn)
+        chat = await application.bot.getChat(conn)
         chat_id = conn
-        # chat_name = dispatcher.bot.getChat(conn).title
+        # chat_name = await application.bot.getChat(conn).title
     else:
         if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text("This is a group only command!")
+            await update.effective_message.reply_text("This is a group only command!")
             return ""
         chat = update.effective_chat
         chat_id = update.effective_chat.id
@@ -147,11 +151,11 @@ def export_data(update, context):
     if checkchat.get("status"):
         if jam <= int(checkchat.get("value")):
             timeformatt = time.strftime(
-                "%H:%M:%S %d/%m/%Y", time.localtime(checkchat.get("value"))
+                "%H:%M:%S %d/%m/%Y", time.localtime(checkchat.get("value")),
             )
-            update.effective_message.reply_text(
+            await update.effective_message.reply_text(
                 "You can only backup once a day!\nYou can backup again in about `{}`".format(
-                    timeformatt
+                    timeformatt,
                 ),
                 parse_mode=ParseMode.MARKDOWN,
             )
@@ -184,47 +188,47 @@ def export_data(update, context):
                 countbtn += 1
                 if btn.same_line:
                     buttonlist.append(
-                        ("{}".format(btn.name), "{}".format(btn.url), True)
+                        ("{}".format(btn.name), "{}".format(btn.url), True),
                     )
                 else:
                     buttonlist.append(
-                        ("{}".format(btn.name), "{}".format(btn.url), False)
+                        ("{}".format(btn.name), "{}".format(btn.url), False),
                     )
             isicat += "###button###: {}<###button###>{}<###splitter###>".format(
-                note.value, str(buttonlist)
+                note.value, str(buttonlist),
             )
             buttonlist.clear()
         elif note.msgtype == 2:
             isicat += "###sticker###:{}<###splitter###>".format(note.file)
         elif note.msgtype == 3:
             isicat += "###file###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         elif note.msgtype == 4:
             isicat += "###photo###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         elif note.msgtype == 5:
             isicat += "###audio###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         elif note.msgtype == 6:
             isicat += "###voice###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         elif note.msgtype == 7:
             isicat += "###video###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         elif note.msgtype == 8:
             isicat += "###video_note###:{}<###TYPESPLIT###>{}<###splitter###>".format(
-                note.file, note.value
+                note.file, note.value,
             )
         else:
             isicat += "{}<###splitter###>".format(note.value)
     notes = {
         "#{}".format(namacat.split("<###splitter###>")[x]): "{}".format(
-            isicat.split("<###splitter###>")[x]
+            isicat.split("<###splitter###>")[x],
         )
         for x in range(count)
     }
@@ -305,7 +309,7 @@ def export_data(update, context):
                     curr_restr.media,
                     curr_restr.other,
                     curr_restr.preview,
-                ]
+                ],
             ),
         }
     else:
@@ -328,27 +332,27 @@ def export_data(update, context):
     baccinfo = json.dumps(backup, indent=4)
     with open("MissCutie{}.backup".format(chat_id), "w") as f:
         f.write(str(baccinfo))
-    context.bot.sendChatAction(current_chat_id, "upload_document")
+    await context.bot.sendChatAction(current_chat_id, "upload_document")
     tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
     try:
-        context.bot.sendMessage(
-            EVENT_LOGS,
+        await context.bot.sendMessage(
+            JOIN_LOGGER,
             "*Successfully imported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(
-                chat.title, chat_id, tgl
+                chat.title, chat_id, tgl,
             ),
             parse_mode=ParseMode.MARKDOWN,
         )
     except BadRequest:
         pass
-    context.bot.sendDocument(
+    await context.bot.sendDocument(
         current_chat_id,
         document=open("MissCutie{}.backup".format(chat_id), "rb"),
-        caption="📤*Successfully Exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `MissCutie-Backup` was specially made for notes 📚.".format(
-            chat.title, chat_id, tgl
+        caption="*Successfully Exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `MissCutie-Backup` was specially made for notes.".format(
+            chat.title, chat_id, tgl,
         ),
-        timeout=360,
         reply_to_message_id=msg.message_id,
         parse_mode=ParseMode.MARKDOWN,
+        message_thread_id=msg.message_thread_id if chat.is_forum else None
     )
     os.remove("MissCutie{}.backup".format(chat_id))  # Cleaning file
 
@@ -368,20 +372,20 @@ def get_chat(chat_id, chat_data):
         return {"status": False, "value": False}
 
 
-__mod_name__ = "Backup"
+__mod_name__ = "Backups"
 
 __help__ = """
 *Only for group owner:*
 
- ➥ /import: Reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy! \
+ • /import: Reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy! \
  Note that files / photos cannot be imported due to telegram restrictions.
 
- ➥ /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons) \
+ • /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons) \
 
 """
 
-IMPORT_HANDLER = CommandHandler("import", import_data)
-EXPORT_HANDLER = CommandHandler("export", export_data, pass_chat_data=True)
+IMPORT_HANDLER = CommandHandler("import", import_data, block=False)
+EXPORT_HANDLER = CommandHandler("export", export_data, block=False)
 
-dispatcher.add_handler(IMPORT_HANDLER)
-dispatcher.add_handler(EXPORT_HANDLER)
+application.add_handler(IMPORT_HANDLER)
+application.add_handler(EXPORT_HANDLER)

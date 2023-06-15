@@ -1,15 +1,15 @@
-import html
-import io
-import random
-import sys
 import traceback
 
+from httpx import AsyncClient
+import html
+import random
+import sys
 import pretty_errors
-import requests
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import CallbackContext, CommandHandler
-
-from MissCutie import DEV_USERS, OWNER_ID, dispatcher
+import io
+import os
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ContextTypes, CommandHandler
+from MissCutie import application, DEV_USERS, OWNER_ID
 
 pretty_errors.mono()
 
@@ -38,7 +38,7 @@ class ErrorsDict(dict):
 errors = ErrorsDict()
 
 
-def error_callback(update: Update, context: CallbackContext):
+async def error_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update:
         return
     if context.error in errors:
@@ -47,7 +47,7 @@ def error_callback(update: Update, context: CallbackContext):
         stringio = io.StringIO()
         pretty_errors.output_stderr = stringio
         output = pretty_errors.excepthook(
-            type(context.error), context.error, context.error.__traceback__
+            type(context.error), context.error, context.error.__traceback__,
         )
         pretty_errors.output_stderr = sys.stderr
         pretty_error = stringio.getvalue()
@@ -55,52 +55,50 @@ def error_callback(update: Update, context: CallbackContext):
     except:
         pretty_error = "Failed to create pretty error."
     tb_list = traceback.format_exception(
-        None, context.error, context.error.__traceback__
+        None, context.error, context.error.__traceback__,
     )
     tb = "".join(tb_list)
     pretty_message = (
-        "{}\n"
+        f"{pretty_error}\n"
         "-------------------------------------------------------------------------------\n"
         "An exception was raised while handling an update\n"
-        "User: {}\n"
-        "Chat: {} {}\n"
-        "Callback data: {}\n"
-        "Message: {}\n\n"
-        "Full Traceback: {}"
-    ).format(
-        pretty_error,
-        update.effective_user.id,
-        update.effective_chat.title if update.effective_chat else "",
-        update.effective_chat.id if update.effective_chat else "",
-        update.callback_query.data if update.callback_query else "None",
-        update.effective_message.text if update.effective_message else "No message",
-        tb,
+        f"User: {update.effective_user.id}\n"
+        f"Chat: {update.effective_chat.title if update.effective_chat else ''} {update.effective_chat.id if update.effective_chat else ''}\n"
+        f"Callback data: {update.callback_query.data if update.callback_query else None}\n"
+        f"Message: {update.effective_message.text if update.effective_message else 'No message'}\n\n"
+        f"Full Traceback: {tb}"
     )
-    key = requests.post(
-        "https://nekobin.com/api/documents", json={"content": pretty_message}
-    ).json()
+    async with AsyncClient() as client:
+        r = await client.post(
+        "https://nekobin.com/api/documents", json={"content": pretty_message},
+    )
+    key = r.json()
     e = html.escape(f"{context.error}")
     if not key.get("result", {}).get("key"):
         with open("error.txt", "w+") as f:
             f.write(pretty_message)
-        context.bot.send_document(
+        await context.bot.send_document(
             OWNER_ID,
-            open("error.txt", "rb"),
-            caption=f"#{context.error.identifier}\n<b>An unknown error occured:</b>\n<code>{e}</code>",
-            parse_mode="html",
+                open("error.txt", "rb"),
+                caption=f"#{context.error.identifier}\n<b>An unknown error occured:</b>\n<code>{e}</code>",
+                parse_mode="html",
         )
+        if os.path.isfile("error.txt"):
+            os.remove("error.txt")
         return
     key = key.get("result").get("key")
     url = f"https://nekobin.com/{key}.py"
-    context.bot.send_message(
+    await context.bot.send_message(
         OWNER_ID,
-        text=f"#{context.error.identifier}\n<b>An unknown error occured:</b>\n<code>{e}</code>",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Nekobin", url=url)]]),
+            text=f"#{context.error.identifier}\n<b>An unknown error occured:</b>\n<code>{e}</code>",
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Nekobin", url=url)]],
+            ),
         parse_mode="html",
     )
 
 
-def list_errors(update: Update, context: CallbackContext):
+async def list_errors(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in DEV_USERS:
         return
     e = {
@@ -113,15 +111,18 @@ def list_errors(update: Update, context: CallbackContext):
     if len(msg) > 4096:
         with open("errors_msg.txt", "w+") as f:
             f.write(msg)
-        context.bot.send_document(
+        await context.bot.send_document(
             update.effective_chat.id,
             open("errors_msg.txt", "rb"),
             caption=f"Too many errors have occured..",
             parse_mode="html",
+            message_thread_id=update.effective_message.message_thread_id if update.effective_chat.is_forum else None
         )
+        if os.path.isfile("errors_msg.txt"):
+            os.remove("errors_msg.txt")
         return
-    update.effective_message.reply_text(msg, parse_mode="html")
+    await update.effective_message.reply_text(msg, parse_mode="html")
 
 
-dispatcher.add_error_handler(error_callback)
-dispatcher.add_handler(CommandHandler("errors", list_errors))
+application.add_error_handler(error_callback)
+application.add_handler(CommandHandler("errors", list_errors))

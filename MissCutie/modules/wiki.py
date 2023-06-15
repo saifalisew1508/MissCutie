@@ -1,36 +1,37 @@
 import wikipedia
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
+from MissCutie import application
+from MissCutie.modules.disable import DisableAbleCommandHandler
+from telegram import Update
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes
 from wikipedia.exceptions import DisambiguationError, PageError
 
-from MissCutie import dispatcher
-from MissCutie.modules.disable import DisableAbleCommandHandler
-
-
-@run_async
-def wiki(update: Update, context: CallbackContext):
+async def wiki(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = (
         update.effective_message.reply_to_message
-        if update.effective_message.reply_to_message
+        if update.effective_message.reply_to_message and not update.effective_message.reply_to_message.forum_topic_created
         else update.effective_message
     )
     res = ""
-    if msg == update.effective_message:
-        search = msg.text.split(" ", maxsplit=1)[1]
-    else:
-        search = msg.text
+    args = context.args
+
+    if not args:
+        return await update.effective_message.reply_text(
+            "You should give something to search for :)"
+        )
+    search = " ".join(args)
     try:
         res = wikipedia.summary(search)
     except DisambiguationError as e:
-        update.message.reply_text(
+        await update.message.reply_text(
             "Disambiguated pages found! Adjust your query accordingly.\n<i>{}</i>".format(
-                e
+                e,
             ),
             parse_mode=ParseMode.HTML,
         )
     except PageError as e:
-        update.message.reply_text(
-            "<code>{}</code>".format(e), parse_mode=ParseMode.HTML
+        await update.message.reply_text(
+            "<code>{}</code>".format(e), parse_mode=ParseMode.HTML,
         )
     if res:
         result = f"<b>{search}</b>\n\n"
@@ -40,7 +41,7 @@ def wiki(update: Update, context: CallbackContext):
             with open("result.txt", "w") as f:
                 f.write(f"{result}\n\nUwU OwO OmO UmU")
             with open("result.txt", "rb") as f:
-                context.bot.send_document(
+                await context.bot.send_document(
                     document=f,
                     filename=f.name,
                     reply_to_message_id=update.message.message_id,
@@ -48,15 +49,10 @@ def wiki(update: Update, context: CallbackContext):
                     parse_mode=ParseMode.HTML,
                 )
         else:
-            update.message.reply_text(
-                result, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+            await update.message.reply_text(
+                result, parse_mode=ParseMode.HTML, disable_web_page_preview=True,
             )
 
 
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
-dispatcher.add_handler(WIKI_HANDLER)
-
-__help__ = """
-➥ /wiki (text) *:* Searchs about the given text on wikipedia.
-"""
-__mod_name__ = "Wikipedia"
+WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, block=False)
+application.add_handler(WIKI_HANDLER)

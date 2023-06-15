@@ -1,10 +1,9 @@
 import random
 
-from telegram import Update
-from telegram.ext import CallbackContext, run_async
-
-from MissCutie import dispatcher
+from MissCutie import application
 from MissCutie.modules.disable import DisableAbleCommandHandler
+from telegram import Update
+from telegram.ext import ContextTypes
 
 reactions = [
     "( ͡° ͜ʖ ͡°)",
@@ -212,19 +211,18 @@ reactions = [
 ]
 
 
-@run_async
-def react(update: Update, context: CallbackContext):
+async def react(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     react = random.choice(reactions)
     if message.reply_to_message:
-        message.reply_to_message.reply_text(react)
+        await message.reply_to_message.reply_text(react)
     else:
-        message.reply_text(react)
+        await message.reply_text(react)
 
 
-REACT_HANDLER = DisableAbleCommandHandler("react", react)
+REACT_HANDLER = DisableAbleCommandHandler("react", react, block=False)
 
-dispatcher.add_handler(REACT_HANDLER)
+application.add_handler(REACT_HANDLER)
 
 __command_list__ = ["react"]
 __handlers__ = [REACT_HANDLER]

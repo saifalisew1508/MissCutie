@@ -14,18 +14,18 @@ RUN_STRINGS = (
     "Run everyone, they just dropped a bomb 💣💣",
     "And they disappeared forever, never to be seen again.",
     "Legend has it, they're still running.",
-    "Hasta la vista, Baby.",
+    "Hasta la vista, baby.",
     "Ah, what a waste. I liked that one.",
     "As The Doctor would say... RUN!",
 )
 
 GIFS = [
-    "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE",
-    "CgACAgUAAx0CU_rCTAABAjdgX1s4NVaeCls6YaH3p43vgdCRwQIAAqsAA4P_MFUYQhyoR-kgpRsE",
-    "CgACAgUAAx0CU_rCTAABAjdSX1s3fq5iEJ64YeQLKI8cD7CSuSEAAlUBAAJu09hW5iqWB0hTPD4bBA",
+    "CgACAgQAAxkBAANdYY45LwHQspbyUKfLsljQ1VbnfPIAAmgIAAJWQ9FRuPlBpmxWiJ0iBA",
+    "CgACAgUAAxkBAANeYY45PBEp3bbIj1GBKU1gLVOTMPIAAqsAA4P_MFXiRs56_YXxFCIE",
+    "CgACAgUAAxkBAANfYY45QzEgC_JrvRfPJ5fQ5iPhVywAAlUBAAJu09hWQ8hi_Rai--4iBA",
 ]
 
-SLAP_saif_TEMPLATES = (
+SLAP_ZEROTWO_TEMPLATES = (
     "Slap me one more time and I'll mute you.",
     "Stop slapping me. REEEEEEEEEEEEEE.",
     [
@@ -67,7 +67,7 @@ SLAP_TEMPLATES = (
     "{user1} {hits} {user2} with a bat!.",
     "{user1} {hits} {user2} with a Taijutsu Kick!.",
     "{user1} {hits} {user2} with X-Gloves!.",
-    "{user1} {hits} {user2} with a Jet Punch!.",
+    "{user1} {hits} {user2} with a Jet kick!.",
     "{user1} {hits} {user2} with a Jet Pistol!.",
     "{user1} {hits} {user2} with a United States of Smash!.",
     "{user1} {hits} {user2} with a Detroit Smash!.",
@@ -78,10 +78,10 @@ SLAP_TEMPLATES = (
     "{user1} {hits} {user2} with a Carolina Smash!.",
     "{user1} {hits} {user2} with a King Kong Gun!.",
     "{user1} {hits} {user2} with a baseball bat - metal one.!.",
-    "*Serious punches {user2}*.",
-    "*Normal punches {user2}*.",
-    "*Consecutive Normal punches {user2}*.",
-    "*Two Handed Consecutive Normal Punches {user2}*.",
+    "*Serious kicks {user2}*.",
+    "*Normal kicks {user2}*.",
+    "*Consecutive Normal kicks {user2}*.",
+    "*Two Handed Consecutive Normal kicks {user2}*.",
     "*Ignores {user2} to let them die of embarassment*.",
     "*points at {user2}* What's with this sassy... lost child?.",
     "*Hits {user2} with a Fire Tornado*.",
@@ -125,7 +125,7 @@ SLAP_TEMPLATES = (
     "{user2} ate a bat and discovered a new disease.",
     "{user1} folded {user2} into a paper plane",
     "{user1} served {user2} some bat soup.",
-    "{user2} was sent to his home, the planet of the apes.",
+    "{user2} was sent to their home, the planet of the apes.",
     "{user1} kicked {user2} out of a moving train.",
     "{user2} just killed John Wick’s dog.",
     "{user1} performed an Avada Kedavra spell on {user2}.",
@@ -136,7 +136,7 @@ SLAP_TEMPLATES = (
     "You know what’s worse than Dad jokes? {user2}!",
     "{user1} took all of {user2}'s cookies.",
     "{user2} wa mou.......Shindeiru! - {user1}.",
-    "{user2} lost his race piece!",  # No game no life reference
+    "{user2} lost their race piece!",  # No game no life reference
     "Shut up {user2}, you are just {user2}.",  # No game no life reference
     "{user1} hits {user2} with Aka si anse!",  # No game no life reference
     "@NeoTheKitty scratches {user2}",  # Pixels pet cat - @NeoTheKitty
@@ -192,7 +192,10 @@ PAT_STICKERS = (
     "CAACAgQAAxkBAALRXF9Xs6XmIeDbnoL1wiDky0TdX-CvAAKKAQAC1TMzC9A3CtiT2rqVGwQ",
 )
 
-PING_STRING = ("i am alive ! 🖤",)
+PING_STRING = (
+    "PONG!!",
+    "I am here!",
+)
 
 ITEMS = (
     "cast iron skillet",
@@ -284,7 +287,7 @@ EYES = [
     ["⚆"],
     ["⊜"],
     [">"],
-    ["➥"],
+    ["❍"],
     ["￣"],
     ["─"],
     ["✿"],

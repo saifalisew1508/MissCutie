@@ -1,145 +1,121 @@
 from typing import Optional
 
+import MissCutie.modules.sql.rules_sql as sql
+from MissCutie import application
+from MissCutie.modules.helper_funcs.chat_status import check_admin
+from MissCutie.modules.helper_funcs.string_handling import markdown_parser, markdown_to_html
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message,
-    ParseMode,
     Update,
     User,
 )
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler
-from telegram.utils.helpers import escape_markdown
-
-import MissCutie.modules.sql.rules_sql as sql
-from MissCutie import dispatcher
-from MissCutie.modules.helper_funcs.chat_status import connection_status, user_admin
-from MissCutie.modules.helper_funcs.string_handling import markdown_parser
+from telegram.ext import ContextTypes, CommandHandler, filters
+from telegram.helpers import escape_markdown
 
 
-@connection_status
-def get_rules(update: Update, context: CallbackContext):
-    args = context.args
-    here = args and args[0] == "here"
+async def get_rules(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    # connection_status sets update.effective_chat
-    real_chat = update.effective_message.chat
-    dest_chat = real_chat.id if here else None
-    send_rules(update, chat_id, real_chat.type == real_chat.PRIVATE or here, dest_chat)
+    await send_rules(update, chat_id)
 
 
 # Do not async - not from a handler
-def send_rules(update, chat_id, from_pm=False, dest_chat=None):
-    bot = dispatcher.bot
+async def send_rules(update, chat_id, from_pm=False):
+    bot = application.bot
     user = update.effective_user  # type: Optional[User]
     reply_msg = update.message.reply_to_message
-    dest_chat = dest_chat or user.id
     try:
-        chat = bot.get_chat(chat_id)
+        chat = await bot.get_chat(chat_id)
     except BadRequest as excp:
         if excp.message == "Chat not found" and from_pm:
-            bot.send_message(
-                dest_chat,
+            await bot.send_message(
+                user.id,
                 "The rules shortcut for this chat hasn't been set properly! Ask admins to "
                 "fix this.\nMaybe they forgot the hyphen in ID",
+                message_thread_id= update.effective_message.message_thread_id if chat.is_forum else None,
             )
             return
         else:
             raise
 
     rules = sql.get_rules(chat_id)
-    text = f"The rules for *{escape_markdown(chat.title)}* are:\n\n{rules}"
+    text = f"The rules for <b>{escape_markdown(chat.title, 2)}</b> are:\n\n{markdown_to_html(rules)}"
 
     if from_pm and rules:
-        bot.send_message(
-            dest_chat,
-            text,
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
+        await bot.send_message(
+            user.id, text, parse_mode=ParseMode.HTML, disable_web_page_preview=True,
         )
     elif from_pm:
-        bot.send_message(
-            dest_chat,
+        await bot.send_message(
+            user.id,
             "The group admins haven't set any rules for this chat yet. "
             "This probably doesn't mean it's lawless though...!",
         )
-    elif rules and reply_msg:
-        reply_msg.reply_text(
-            "click on the button below to get rules.",
+    elif rules and reply_msg and not reply_msg.forum_topic_created:
+        await reply_msg.reply_text(
+            "Please click the button below to see the rules.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="• rules •",
-                            url=f"t.me/{bot.username}?start={chat_id}",
+                            text="Rules", url=f"t.me/{bot.username}?start={chat_id}",
                         ),
                     ],
                 ],
             ),
         )
     elif rules:
-        update.effective_message.reply_text(
-            "click on the button below to get rules.",
+        await update.effective_message.reply_text(
+            "Please click the button below to see the rules.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="• rules •",
-                            url=f"t.me/{bot.username}?start={chat_id}",
+                            text="Rules", url=f"t.me/{bot.username}?start={chat_id}",
                         ),
                     ],
                 ],
             ),
         )
     else:
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             "The group admins haven't set any rules for this chat yet. "
             "This probably doesn't mean it's lawless though...!",
         )
 
 
-@connection_status
-@user_admin
-def set_rules(update: Update, context: CallbackContext):
+@check_admin(is_user=True)
+async def set_rules(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     msg = update.effective_message  # type: Optional[Message]
     raw_text = msg.text
     args = raw_text.split(None, 1)  # use python's maxsplit to separate cmd and args
-    txt = entities = None
     if len(args) == 2:
         txt = args[1]
-        entities = msg.parse_entities()
-    elif msg.reply_to_message:
-        txt = msg.reply_to_message.text
-        entities = msg.reply_to_message.parse_entities()
-    if txt:
         offset = len(txt) - len(raw_text)  # set correct offset relative to command
         markdown_rules = markdown_parser(
-            txt,
-            entities=entities,
-            offset=offset,
+            txt, entities=msg.parse_entities(), offset=offset,
         )
 
         sql.set_rules(chat_id, markdown_rules)
-        update.effective_message.reply_text("Successfully set rules for this group.")
-    else:
-        update.effective_message.reply_text("There's... no rules?")
+        await update.effective_message.reply_text("Successfully set rules for this group.")
 
 
-@connection_status
-@user_admin
-def clear_rules(update: Update, context: CallbackContext):
+@check_admin(is_user=True)
+async def clear_rules(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     sql.set_rules(chat_id, "")
-    update.effective_message.reply_text("Successfully cleared rules!")
+    await update.effective_message.reply_text("Successfully cleared rules!")
 
 
 def __stats__():
-    return f"• {sql.num_chats()} groups have rules."
+    return f"• {sql.num_chats()} chats have rules set."
 
 
-def __import_data__(chat_id, data):
+async def __import_data__(chat_id, data, message):
     # set chat rules
     rules = data.get("info", {}).get("rules", "")
     sql.set_rules(chat_id, rules)
@@ -154,19 +130,19 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- ‣ `/rules`*:* get the rules for this chat.
- ‣ `/rules here`*:* get the rules for this chat but send it in the chat.
+ • `/rules`*:* get the rules for this chat.
+
 *Admins only:*
- ‣ `/setrules <your rules here>`*:* set the rules for this chat.
- ‣ `/clearrules`*:* clear the rules for this chat.
+ • `/setrules <your rules here>`*:* set the rules for this chat.
+ • `/clearrules`*:* clear the rules for this chat.
 """
 
 __mod_name__ = "Rules"
 
-GET_RULES_HANDLER = CommandHandler("rules", get_rules)
-SET_RULES_HANDLER = CommandHandler("setrules", set_rules)
-RESET_RULES_HANDLER = CommandHandler("clearrules", clear_rules)
+GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=filters.ChatType.GROUPS, block=False)
+SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=filters.ChatType.GROUPS, block=False)
+RESET_RULES_HANDLER = CommandHandler("clearrules", clear_rules, filters=filters.ChatType.GROUPS, block=False)
 
-dispatcher.add_handler(GET_RULES_HANDLER)
-dispatcher.add_handler(SET_RULES_HANDLER)
-dispatcher.add_handler(RESET_RULES_HANDLER)
+application.add_handler(GET_RULES_HANDLER)
+application.add_handler(SET_RULES_HANDLER)
+application.add_handler(RESET_RULES_HANDLER)
