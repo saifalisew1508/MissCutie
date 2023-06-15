@@ -1,4 +1,4 @@
-FROM python:3.9.6-slim-buster
+FROM python:3.11.4-slim-buster
 
 
 # Pypi package Repo upgrade
