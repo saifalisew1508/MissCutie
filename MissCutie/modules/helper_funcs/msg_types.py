@@ -1,8 +1,7 @@
 from enum import IntEnum, unique
 
-from telegram import Message
-
 from MissCutie.modules.helper_funcs.string_handling import button_markdown_parser
+from telegram import Message
 
 
 @unique
@@ -29,7 +28,7 @@ def get_note_type(msg: Message):
     # determine what the contents of the filter are - text, image, sticker, etc
     if len(args) >= 3:
         offset = len(args[2]) - len(
-            raw_text
+            raw_text,
         )  # set correct offset relative to command + notename
         text, buttons = button_markdown_parser(
             args[2],
@@ -41,7 +40,7 @@ def get_note_type(msg: Message):
         else:
             data_type = Types.TEXT
 
-    elif msg.reply_to_message:
+    elif msg.reply_to_message and not msg.reply_to_message.forum_topic_created:
         entities = msg.reply_to_message.parse_entities()
         msgtext = msg.reply_to_message.text or msg.reply_to_message.caption
         if len(args) >= 2 and msg.reply_to_message.text:  # not caption, text
@@ -90,57 +89,58 @@ def get_welcome_type(msg: Message):
     text = ""
 
     try:
-        if msg.reply_to_message:
+        if msg.reply_to_message and not msg.reply_to_message.forum_topic_created:
             if msg.reply_to_message.text:
                 args = msg.reply_to_message.text
             else:
                 args = msg.reply_to_message.caption
         else:
             args = msg.text.split(
-                None, 1
+                None, 1,
             )  # use python's maxsplit to separate cmd and args
     except AttributeError:
         args = False
 
-    if msg.reply_to_message and msg.reply_to_message.sticker:
-        content = msg.reply_to_message.sticker.file_id
-        text = None
-        data_type = Types.STICKER
+    if msg.reply_to_message and not msg.reply_to_message.forum_topic_created:
+        if msg.reply_to_message.sticker:
+            content = msg.reply_to_message.sticker.file_id
+            text = None
+            data_type = Types.STICKER
 
-    elif msg.reply_to_message and msg.reply_to_message.document:
-        content = msg.reply_to_message.document.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.DOCUMENT
+        elif msg.reply_to_message.document:
+            content = msg.reply_to_message.document.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.DOCUMENT
 
-    elif msg.reply_to_message and msg.reply_to_message.photo:
-        content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
-        text = msg.reply_to_message.caption
-        data_type = Types.PHOTO
+        elif msg.reply_to_message.photo:
+            content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
+            text = msg.reply_to_message.caption
+            data_type = Types.PHOTO
 
-    elif msg.reply_to_message and msg.reply_to_message.audio:
-        content = msg.reply_to_message.audio.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.AUDIO
+        elif msg.reply_to_message.audio:
+            content = msg.reply_to_message.audio.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.AUDIO
 
-    elif msg.reply_to_message and msg.reply_to_message.voice:
-        content = msg.reply_to_message.voice.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.VOICE
+        elif msg.reply_to_message.voice:
+            content = msg.reply_to_message.voice.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.VOICE
 
-    elif msg.reply_to_message and msg.reply_to_message.video:
-        content = msg.reply_to_message.video.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.VIDEO
+        elif msg.reply_to_message.video:
+            content = msg.reply_to_message.video.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.VIDEO
 
-    elif msg.reply_to_message and msg.reply_to_message.video_note:
-        content = msg.reply_to_message.video_note.file_id
-        text = None
-        data_type = Types.VIDEO_NOTE
+        elif msg.reply_to_message and msg.reply_to_message.video_note:
+            content = msg.reply_to_message.video_note.file_id
+            text = None
+            data_type = Types.VIDEO_NOTE
 
     buttons = []
     # determine what the contents of the filter are - text, image, sticker, etc
     if args:
-        if msg.reply_to_message:
+        if msg.reply_to_message and not msg.reply_to_message.forum_topic_created:
             argumen = (
                 msg.reply_to_message.caption if msg.reply_to_message.caption else ""
             )
@@ -149,11 +149,11 @@ def get_welcome_type(msg: Message):
         else:
             argumen = args[1]
             offset = len(argumen) - len(
-                msg.text
+                msg.text,
             )  # set correct offset relative to command + notename
             entities = msg.parse_entities()
         text, buttons = button_markdown_parser(
-            argumen, entities=entities, offset=offset
+            argumen, entities=entities, offset=offset,
         )
 
     if not data_type:
@@ -171,57 +171,74 @@ def get_filter_type(msg: Message):
         content = None
         text = msg.text.split(None, 2)[2]
         data_type = Types.TEXT
-
-    elif (
-        msg.reply_to_message
-        and msg.reply_to_message.text
-        and len(msg.text.split()) >= 2
-    ):
+        media_spoiler = None
+    elif msg.reply_to_message and msg.reply_to_message.forum_topic_created:
         content = None
-        text = msg.reply_to_message.text
+        text = msg.text.split(None, 2)[2]
         data_type = Types.TEXT
+        media_spoiler = None
+    elif msg.reply_to_message and not msg.reply_to_message.forum_topic_created:    
+        if (
+            msg.reply_to_message.text
+            and len(msg.text.split()) >= 2
+        ):
+            content = None
+            text = msg.reply_to_message.text
+            data_type = Types.TEXT
+            media_spoiler = None
 
-    elif msg.reply_to_message and msg.reply_to_message.sticker:
-        content = msg.reply_to_message.sticker.file_id
-        text = None
-        data_type = Types.STICKER
+        elif msg.reply_to_message.sticker:
+            content = msg.reply_to_message.sticker.file_id
+            text = None
+            data_type = Types.STICKER
+            media_spoiler = None
 
-    elif msg.reply_to_message and msg.reply_to_message.document:
-        content = msg.reply_to_message.document.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.DOCUMENT
+        elif msg.reply_to_message.document:
+            content = msg.reply_to_message.document.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.DOCUMENT
+            media_spoiler = None
 
-    elif msg.reply_to_message and msg.reply_to_message.photo:
-        content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
-        text = msg.reply_to_message.caption
-        data_type = Types.PHOTO
+        elif msg.reply_to_message.photo:
+            content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
+            text = msg.reply_to_message.caption
+            data_type = Types.PHOTO
+            media_spoiler = msg.reply_to_message.has_media_spoiler
 
-    elif msg.reply_to_message and msg.reply_to_message.audio:
-        content = msg.reply_to_message.audio.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.AUDIO
+        elif msg.reply_to_message.audio:
+            content = msg.reply_to_message.audio.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.AUDIO
+            media_spoiler = None
 
-    elif msg.reply_to_message and msg.reply_to_message.voice:
-        content = msg.reply_to_message.voice.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.VOICE
+        elif msg.reply_to_message.voice:
+            content = msg.reply_to_message.voice.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.VOICE
+            media_spoiler = None
 
-    elif msg.reply_to_message and msg.reply_to_message.video:
-        content = msg.reply_to_message.video.file_id
-        text = msg.reply_to_message.caption
-        data_type = Types.VIDEO
+        elif msg.reply_to_message.video:
+            content = msg.reply_to_message.video.file_id
+            text = msg.reply_to_message.caption
+            data_type = Types.VIDEO
+            media_spoiler = msg.reply_to_message.has_media_spoiler
 
-    elif msg.reply_to_message and msg.reply_to_message.video_note:
-        content = msg.reply_to_message.video_note.file_id
-        text = None
-        data_type = Types.VIDEO_NOTE
+        elif msg.reply_to_message.video_note:
+            content = msg.reply_to_message.video_note.file_id
+            text = None
+            data_type = Types.VIDEO_NOTE
+            media_spoiler = None
 
+        else:
+            text = None
+            data_type = None
+            content = None
+            media_spoiler = None
     else:
         text = None
         data_type = None
         content = None
+        media_spoiler = None
 
-    return text, data_type, content
 
-
-##
+    return text, data_type, content, media_spoiler

@@ -5,12 +5,13 @@ from typing import Dict, List
 import bleach
 import markdown2
 from emoji import unicode_codes
-from telegram import MessageEntity
-from telegram.utils.helpers import escape_markdown
 
-# NOTE: the url \ escape may cause double escape
+from telegram import MessageEntity
+from telegram.helpers import escape_markdown
+
+# NOTE: the url \ escape may cause double escapes
 # match * (bold) (don't escape if in url)
-# match _ (italics) (don't escape if in url]
+# match _ (italics) (don't escape if in url)
 # match ` (code)
 # match []() (markdown link)
 # else, escape *, _, `, and [
@@ -19,7 +20,7 @@ MATCH_MD = re.compile(
     r"_(.*?)_|"
     r"`(.*?)`|"
     r"(?<!\\)(\[.*?\])(\(.*?\))|"
-    r"(?P<esc>[*_`\[])"
+    r"(?P<esc>[*_`\[])",
 )
 
 # regex to find []() links -> hyperlinks/buttons
@@ -46,15 +47,14 @@ def _selective_escape(to_parse: str) -> str:
     return to_parse
 
 
-# This is a fun one.
 def get_emoji_regexp():
     global _EMOJI_REGEXP
     if _EMOJI_REGEXP is None:
         emojis = sorted(unicode_codes.EMOJI_DATA, key=len, reverse=True)
-        pattern = "(" + "|".join(re.escape(u) for u in emojis) + ")"
+        pattern = u'(' + u'|'.join(re.escape(u) for u in emojis) + u')'
     return re.compile(pattern)
 
-
+# This is a fun one.
 def _calc_emoji_offset(to_calc) -> int:
     # Get all emoji in text.
     emoticons = get_emoji_regexp().finditer(to_calc)
@@ -66,7 +66,7 @@ def _calc_emoji_offset(to_calc) -> int:
 
 
 def markdown_parser(
-    txt: str, entities: Dict[MessageEntity, str] = None, offset: int = 0
+    txt: str, entities: Dict[MessageEntity, str] = None, offset: int = 0,
 ) -> str:
     """
     Parse a string, escaping all invalid markdown entities.
@@ -97,7 +97,7 @@ def markdown_parser(
         end = ent.offset + offset + ent.length - 1  # end of entity
 
         # we only care about code, url, text links
-        if ent.type in ("code", "url", "text_link"):
+        if ent.type in ("code", "url", "text_link", "spoiler"):
             # count emoji to switch counter
             count = _calc_emoji_offset(txt[:start])
             start -= count
@@ -114,7 +114,7 @@ def markdown_parser(
                 else:
                     # TODO: investigate possible offset bug when lots of emoji are present
                     res += _selective_escape(txt[prev:start] or "") + escape_markdown(
-                        ent_text
+                        ent_text, 2
                     )
 
             # code handling
@@ -124,8 +124,11 @@ def markdown_parser(
             # handle markdown/html links
             elif ent.type == "text_link":
                 res += _selective_escape(txt[prev:start]) + "[{}]({})".format(
-                    ent_text, ent.url
+                    ent_text, ent.url,
                 )
+            # handle spoiler
+            elif ent.type == "spoiler":
+                res += _selective_escape(txt[prev:start]) + "||"+ent_text+"||"
 
             end += 1
 
@@ -140,7 +143,7 @@ def markdown_parser(
 
 
 def button_markdown_parser(
-    txt: str, entities: Dict[MessageEntity, str] = None, offset: int = 0
+    txt: str, entities: Dict[MessageEntity, str] = None, offset: int = 0,
 ) -> (str, List):
     markdown_note = markdown_parser(txt, entities, offset)
     prev = 0
@@ -259,13 +262,12 @@ def escape_chars(text: str, to_escape: List[str]) -> str:
         new_text += x
     return new_text
 
-
-def extract_time(message, time_val):
+async def extract_time(message, time_val):
     if any(time_val.endswith(unit) for unit in ("m", "h", "d")):
         unit = time_val[-1]
         time_num = time_val[:-1]  # type: str
         if not time_num.isdigit():
-            message.reply_text("Invalid time amount specified.")
+            await message.reply_text("Invalid time amount specified.")
             return ""
 
         if unit == "m":
@@ -279,19 +281,25 @@ def extract_time(message, time_val):
             return ""
         return bantime
     else:
-        message.reply_text(
+        await message.reply_text(
             "Invalid time type specified. Expected m,h, or d, got: {}".format(
-                time_val[-1]
-            )
+                time_val[-1],
+            ),
         )
         return ""
 
 
-def markdown_to_html(text):
+
+def markdown_to_html(text:str):
     text = text.replace("*", "**")
     text = text.replace("`", "```")
     text = text.replace("~", "~~")
+
+    spoiler_pattern = re.compile(r"\|\|(?=\S)(.+?)(?<=\S)\|\|", re.S)
+    text = spoiler_pattern.sub(r"<tg-spoiler>\1</tg-spoiler>", text)
+
+
     _html = markdown2.markdown(text, extras=["strike", "underline"])
     return bleach.clean(
-        _html, tags=["strong", "em", "a", "code", "pre", "strike", "u"], strip=True
+        _html, tags=["strong", "em", "a", "code", "pre", "strike", "u", "tg-spoiler"], strip=True,
     )[:-1]
