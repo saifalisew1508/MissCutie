@@ -24,7 +24,8 @@ from MissCutie import (
     TELETHON_VERSION,
     application,
     StartTime,
-    telethn)
+    telethn,
+    pbot)
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
