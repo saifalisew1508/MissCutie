@@ -196,7 +196,7 @@ telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
 PyroGram = TOKEN.split(":")[0]
-pgram = Client(
+pbot = Client(
     name=PyroGram,
     api_id=API_ID,
     api_hash=API_HASH,
