@@ -98,7 +98,9 @@ if ENV:
     AI_API_KEY = os.environ.get("AI_API_KEY", None)
     WALL_API = os.environ.get("WALL_API", None)
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
-
+    ARQ_API_URL = "https://arq.hamker.in"
+    ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
+    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
@@ -153,6 +155,8 @@ else:
     INFOPIC = Config.INFOPIC
     TEMP_DOWNLOAD_LOC = Config.TEMP_DOWNLOAD_LOC
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
+    MONGO_DB_URI = Config.MONGO_DB_URI
+    ARQ_API_KEY = Config.ARQ_API_KEY
 
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
@@ -176,7 +180,7 @@ ALIVE_TEXT = [
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-app = Client("MissCutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+pbot = Client("MissCutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
 
 application = Application.builder().token(TOKEN).concurrent_updates(True).build()
@@ -184,6 +188,12 @@ asyncio.get_event_loop().run_until_complete(application.bot.initialize())
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
+
+# Bot Info
+
+BOT_ID = 5810582849
+BOT_NAME = Cutie
+BOT_USERNAME = MissCutieRobot
 
 
 
