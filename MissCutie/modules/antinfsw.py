@@ -4,7 +4,7 @@ from pyrogram import filters
 
 from MissCutie import pbot, arq
 from MissCutie.utils.errors import capture_err
-from MissCutie.modules.helper_funcs.chat_status import user_admin
+from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.mongo.nsfw_mongo import is_nsfw_on, nsfw_off, nsfw_on
 
 
@@ -139,7 +139,7 @@ async def nsfw_scan_command(_, message):
 
 
 @pbot.on_message(filters.command("antinsfw") & ~filters.private)
-@user_admin
+@check_admin(permission="can_restrict_members", is_both=True)
 async def nsfw_enable_disable(_, message):
     if len(message.command) != 2:
         await message.reply_text("Usage: /antinsfw [on/off]")
