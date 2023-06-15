@@ -18,6 +18,9 @@ class Config(object):
     API_ID = 23738177  # integer value, dont use ""
     API_HASH = "d54a6609d5cc5ba0094ee206791e1490"
     TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    BOT_ID = "BOT_ID"
+    BOT_NAME = "BOT_NAME"
+    BOT_USERNAME = "BOT_USERNAME"
     OWNER_ID = 1930139488  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "PrinceXofficial"
     SUPPORT_CHAT = "MissCutie_Support"  # Your own group for support, do not add the @
@@ -30,8 +33,8 @@ class Config(object):
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = "something://somewhat:user@hosturl:port/databasename"  # needed for any database modules
-    MONGO_DB_URI = ""
-    ARQ_API_KEY = ""
+    MONGO_DB_URI = "MONGO_DB_URI"
+    ARQ_API_KEY = "ARQ_API_KEY"
     LOAD = []
     NO_LOAD = ["rss", "cleaner", "connection", "math"]
     WEBHOOK = False
