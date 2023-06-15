@@ -13,6 +13,8 @@ from telethon import __version__ as tlhver
 from pyrogram import __version__ as pyrover
 from pyrogram import Client, errors
 from pyrogram.types import Message
+from pyrogram.enums import ParseMode
+from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
 
 from Python_ARQ import ARQ
 
@@ -193,7 +195,18 @@ ALIVE_TEXT = [
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-pbot = Client("MissCutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+pgram = Client(
+    name=PyroGram,
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=TOKEN,
+    workers=min(32, os.cpu_count() + 4),
+    parse_mode=ParseMode.DEFAULT,
+    sleep_threshold=60,
+    in_memory=True,
+)
+
+
 aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
