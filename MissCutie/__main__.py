@@ -934,14 +934,12 @@ async def send_alive(context: ContextTypes.DEFAULT_TYPE):
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
-  {context.bot.first_name} is Alive ...
+Hey developer's {context.bot.first_name} online now.
 
-
-➥ Python :** `{PYTHON_VERSION}`
-➥ Library :** `{PTB_VERSION}`
-➥ Telethon :** `{TELETHON_VERSION}`
-➥ Pyrogram :** `{PYRO_VERSION}`
-
+**Python      : {PYTHON_VERSION}**
+**Telethon    : {TELETHON_VERSION}**
+**Pyrogram    : {PYRO_VERSION}**
+**Python-Telegram-Bot :** {PTB_VERSION}**
 
 Made By @PrinceXofficial
 """,
