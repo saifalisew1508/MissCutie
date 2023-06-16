@@ -956,6 +956,8 @@ Made By @PrinceXofficial
 
 
 def main():
+    
+    application.job_queue.run_repeating(send_alive, interval=3600, first=10)
 
     start_handler = CommandHandler("start", start, block=False)
 
