@@ -930,7 +930,7 @@ async def migrate_chats(update: Update, _: ContextTypes.DEFAULT_TYPE):
 async def send_alive(context: ContextTypes.DEFAULT_TYPE):
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            context.bot.send_photo(
+            await context.bot.send_photo(
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
