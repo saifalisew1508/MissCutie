@@ -947,7 +947,7 @@ Made By @PrinceXofficial
 """,
                 parse_mode=ParseMode.MARKDOWN,
             )
-        except Unauthorized:
+        except Forbidden:
             LOGGER.warning(
                 f"Bot isn't able to send message to @{SUPPORT_CHAT}, go and check!"
             )
