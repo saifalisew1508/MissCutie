@@ -925,17 +925,16 @@ async def migrate_chats(update: Update, _: ContextTypes.DEFAULT_TYPE):
 
     LOGGER.info("Successfully migrated!")
     raise ApplicationHandlerStop
-
-
-def main():
-
+    
+    
+async def send_alive(context: ContextTypes.DEFAULT_TYPE):
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            application.bot.send_photo(
+            context.bot.send_photo(
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
-  {application.bot.first_name} is Alive ...
+  {context.bot.first_name} is Alive ...
 
 
 ➥ Python :** `{PYTHON_VERSION}`
@@ -955,6 +954,8 @@ Made By @PrinceXofficial
         except BadRequest as e:
             LOGGER.warning(e.message)
 
+
+def main():
 
     start_handler = CommandHandler("start", start, block=False)
 
