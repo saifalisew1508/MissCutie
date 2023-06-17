@@ -401,3 +401,13 @@ async def quott_(event):
     os.remove(file)
     await msg.delete()
     return message
+
+__help__ = """
+➥ /q - To quote a message.
+➥ /q [INTEGER] - To quote more than 1 messages.
+➥ /q r - to quote a message with it's reply
+➥ /q r [INTEGER] To quote more than 1 reply messages.
+"""
+__mod_name__ = "QuoteLy"
+
+
