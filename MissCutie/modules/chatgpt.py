@@ -8,8 +8,9 @@ from pyrogram.errors import MessageTooLong
 
 from MissCutie import pbot as app
 
-from MissCutie.utils import post_to_telegraph, check_time_gap
-from MissCutie.utils.http import http
+from MissCutie.utils.media_helper import post_to_telegraph 
+from MissCutie.utils.time_gap import check_time_gap
+from MissCutie.utils.post import http
 from MissCutie.utils.ratelimiter import ratelimiter
 from MissCutie import OPENAI_API, DEV_USERS as SUDO
 
