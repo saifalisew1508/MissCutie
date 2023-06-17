@@ -18,7 +18,7 @@ openai.api_key = OPENAI_API
 
 # This only for testing things, since maybe in future it will got blocked
 @app.on_message(filters.command("bard"))
-async def bard_chatbot(self: Client, ctx: Message, strings):
+async def bard_chatbot(self: Client, ctx: Message):
     if len(ctx.command) == 1:
         return await ctx.reply_msg("Please use command <code>/{cmd} [question]</code> to ask your question.format(cmd=ctx.command[0])", quote=True, del_in=5)
     msg = await ctx.reply_msg("Wait a moment looking for your answer.", quote=True)
