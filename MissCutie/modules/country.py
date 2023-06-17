@@ -86,13 +86,13 @@ async def msg(event):
 <b>Country's Capital :</b> {capital}
 <b>Country's Currency :</b> {currencies}
 <b>Country's Flag :</b> {okie}
-<b>demoym:</b> {HmM}
+<b>Demoym:</b> {HmM}
 <b>Country Type :</b> {EsCoBaR}
 <b>Iso Names :</b> {iso}
 <b>Languages :</b> {lMAO}
 <b>Native Names :</b> {nonive}
 <b>Populations :</b> {waste}
-<b>region :</b> {reg}
+<b>Region :</b> {reg}
 <b>Sub Region :</b> {sub}
 <b>Time Zones :</b> {tom}
 <b>Total level domain :</b> {lanester}
