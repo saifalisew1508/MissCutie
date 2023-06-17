@@ -125,12 +125,12 @@ And the following:
 """.format(application.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 
-DONATE_STRING = """Hey {} ,
-So you want to donate? Amazing!
+DONATE_STRING = """Hey {},
+So you want to donate {} ? Amazing!
 You can donate on [PayPal](https://paypal.me/saifalisew1508), or you can set up a recurring donation on [GitHub Sponsors](https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
 This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
-MUSIC_TEXT = """Heyaaaaaaaa {} ,
+MUSIC_TEXT = """Heyaaaa {},
 
 Click on the buttons below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
 
@@ -874,11 +874,14 @@ async def get_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_message.from_user
+    first_name = update.effective_user.first_name 
     chat = update.effective_chat  # type: Optional[Chat]
     bot = context.bot
     if chat.type == "private":
         await update.effective_message.reply_text(
-            DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+            DONATE_STRING,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True
         )
 
         if OWNER_ID != 1930139488 and DONATION_LINK:
@@ -893,7 +896,8 @@ async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await bot.send_message(
                 user.id,
-                DONATE_STRING,
+                DONATE_STRING.format(escape_markdown(first_name), 
+                                     escape_markdown(context.bot.first_name)),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
             )
