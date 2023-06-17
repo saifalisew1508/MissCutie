@@ -6,7 +6,7 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from pyrogram.errors import MessageTooLong
 
-from misskaty import app
+from MissCutie import pbot as app
 
 from MissCutie.utils import post_to_telegraph, check_time_gap
 from MissCutie.utils.http import http
