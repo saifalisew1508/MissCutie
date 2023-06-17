@@ -69,7 +69,7 @@ async def bug(_, msg: Message):
                                        callback_data="close_reply")]]),
         )
 
-        thumb = "https://i.pinimg.com/564x/f2/47/8b/f2478ba4e193470ebcdf61a2ad0f33ce.jpg"
+        thumb = "https://www.upwork.com/catalog-images-resized/42702e3f95408aff535f8721368da41b/large@2x"
 
         await pbot.send_photo(
             SUPPORT_CHAT,
