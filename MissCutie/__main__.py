@@ -131,9 +131,10 @@ You can donate on [PayPal](https://paypal.me/saifalisew1508), or you can set up 
 This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
 
 MUSIC_TEXT = """Heyaaaaaaaa {} ,
+
 Click on the buttons below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
 
-*Note* its may possible to sometimes music bot slow or down. don't worry its a temporary problem it will be fix soon.
+*Note ➨* Due to Music Bot and Modular Group Help Bot running on the same server it may be possible that sometimes Music Bot may slow down. Don't worry this is a temporary problem it will be fixed soon by our developers and server managers.
 
 Enjoy With {}
 
