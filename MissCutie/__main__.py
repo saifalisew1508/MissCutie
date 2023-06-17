@@ -879,7 +879,8 @@ async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     if chat.type == "private":
         await update.effective_message.reply_text(
-            DONATE_STRING,
+            DONATE_STRING.format(escape_markdown(first_name), 
+                                 escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True
         )
@@ -907,7 +908,7 @@ async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         except Forbidden:
             await update.effective_message.reply_text(
-                "contact me in pm first to get donation information.",
+                "Contact me in PM first to get donation information.",
             )
 
 
