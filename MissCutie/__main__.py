@@ -86,7 +86,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 *Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
-Join my [updates channel](http://t.me/MissCutieUpdates) to get information on all the latest updates.
+Join my [updates channel](http://t.me/BotXNews) to get information on all the latest updates.
 
 Use the /mstart command to view the music panel, and interact with your experience.
 """
@@ -98,7 +98,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="Owner", url="t.me/PrinceXofficial"),
+        InlineKeyboardButton(text="Updates", url="t.me/BotXNews"),
     ],
     [
         InlineKeyboardButton(
@@ -420,7 +420,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                             text="Support", url=f"https://t.me/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="Updates", url=f"https://t.me/MissCutie_Support"
+                            text="Updates", url=f"https://t.me/BotXNews"
                         ),
                     ],
                     [
@@ -947,7 +947,7 @@ Hey developer's {context.bot.first_name} online now.
 **Pyrogram    : {PYRO_VERSION}**
 **Python-Telegram-Bot :** {PTB_VERSION}**
 
-Made By @PrinceXofficial
+Presented By @BotXNews
 """,
                 parse_mode=ParseMode.MARKDOWN,
             )
