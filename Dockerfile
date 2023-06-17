@@ -3,7 +3,15 @@ FROM python:3.9.6-slim-buster
 
 # Pypi package Repo upgrade
 RUN apt-get install -y ffmpeg python3-pip curl
-RUN apt-get update && apt-get install libgl1
+RUN apt update && apt upgrade -y && \
+    apt install --no-install-recommends -y \
+    libgl1 \
+    bzip2 \
+    unzip \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
+
+
+
 RUN pip3 install --upgrade pip setuptools
 ENV PATH="/home/bot/bin:$PATH"
 
