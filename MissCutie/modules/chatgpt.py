@@ -20,7 +20,7 @@ openai.api_key = "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"
 @app.on_message(filters.command("bard"))
 async def bard_chatbot(self: Client, ctx: Message):
     if len(ctx.command) == 1:
-        return await ctx.reply_msg("Please use command <code>/{cmd} [question]</code> to ask your question.format(cmd=ctx.command[0])", quote=True, del_in=5)
+        return await ctx.reply_msg("Please use command /bard [question] to ask your question", quote=True, del_in=5)
     msg = await ctx.reply_msg("Wait a moment looking for your answer.", quote=True)
     data = {'message': ctx.input, 'session_id':'XQjzKRYITZ7fhplF-rXa_GTynUwdctKq4aGm-lqUCCJzF98xqDulL9UKopIadNpQn0lvnA.'}
     try:
@@ -33,7 +33,7 @@ async def bard_chatbot(self: Client, ctx: Message):
 @ratelimiter
 async def openai_chatbot(self: Client, ctx: Message):
     if len(ctx.command) == 1:
-        return await ctx.reply_msg(Please use command <code>/{cmd} [question]</code> to ask your question.format(cmd=ctx.command[0]), quote=True, del_in=5)
+        return await ctx.reply_msg("Please use command /ask [question] to ask your question.", quote=True, del_in=5)
     uid = ctx.from_user.id if ctx.from_user else ctx.sender_chat.id
     is_in_gap, sleep_time = await check_time_gap(uid)
     if is_in_gap and (uid not in SUDO):
