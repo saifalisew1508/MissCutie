@@ -1,4 +1,4 @@
-from pyrogram import Client, filters, __version__
+from pyrogram import filters, __version__
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery  
 from asyncio.exceptions import TimeoutError
 from telethon.sync import TelegramClient
@@ -21,6 +21,8 @@ from telethon.errors import (
     SessionPasswordNeededError,
     PasswordHashInvalidError
 )
+
+from MissCutie import pbot as Client
 
 ERROR_MESSAGE = "Oops! An exception occurred! \n\n**Error** : {}"
            
