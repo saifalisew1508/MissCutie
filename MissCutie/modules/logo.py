@@ -69,7 +69,7 @@ def nospace(s):
     return s
 
 
-@pbot.on_message(filters.command(["logo"]) & ~filters.edited & ~filters.bot)
+@pbot.on_message(filters.command(["logo"]))
 async def logogen(client, message):
     pablo = await client.send_message(message.chat.id,"`Creating The Logo.....`")
     Godzilla = nospace(message.text.strip().split(None, 1)[1].lower())
