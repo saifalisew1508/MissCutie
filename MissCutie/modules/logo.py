@@ -85,7 +85,7 @@ async def logogen(client, message):
              "Creating Logo")
     name = lmao[0]
     mainne(name, typeo)
-    url = requests.get(f"https://www.brandcrowd.com/maker/logos?text={name}&searchtext={typeo}&searchService=").history[1].url)
+    url = requests.get(f"https://www.brandcrowd.com/maker/logos?text={name}&searchtext={typeo}&searchService=").history[10].url
     imgcaption = f"""
 Random Logo Genarated Successfully✅
 
