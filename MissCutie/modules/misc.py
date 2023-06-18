@@ -90,12 +90,28 @@ __help__ = """
  ➥ /paste*:* Saves replied content to `nekobin.com` and replies with a url
 *React:*
  ➥ /react*:* Reacts with a random reaction
+ *Zip*
+ ➥ /zip*:* reply to a telegram file to compress it in .zip format
+ ➥ /unzip*:* reply to a telegram file to decompress it from the .zip format
 *Urban Dictonary:*
  ➥ /ud <word>*:* Type the word or expression you want to search use
 *Wikipedia:*
  ➥ /wiki <query>*:* wikipedia your query
 *Wallpapers:*
  ➥ /wall <query>*:* get a wallpaper from wall.alphacoders.com
+*QR Code Tools*
+ ➥ /getqr: get the qr code content from the replied qr code
+ ➥ /makeqr <content>: make a qr code from the given message (text, link, etc...)
+*Encryption & Decryption*
+ ➥ /encrypt*:* Encrypts The Given Text
+ ➥ /decrypt*:* Decrypts Previously Ecrypted Text
+*Country*
+ ➥ /country <country name>*:* Gathering info about given country
+*English Tools*
+ ➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+ ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
+ ➥ /synonyms <word>*:* Find the synonyms of a word
+ ➥ /antonyms <word>*:* Find the antonyms of a word
 *Currency converter:*
  ➥ /cash*:* currency converter
 Example:
