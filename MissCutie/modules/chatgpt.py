@@ -12,9 +12,9 @@ from MissCutie.utils.media_helper import post_to_telegraph
 from MissCutie.utils.time_gap import check_time_gap
 from MissCutie.utils.post import http
 from MissCutie.utils.ratelimiter import ratelimiter
-from MissCutie import OPENAI_API, DEV_USERS as SUDO
+from MissCutie import DEV_USERS as SUDO
 
-openai.api_key = OPENAI_API
+openai.api_key = "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"
 
 # This only for testing things, since maybe in future it will got blocked
 @app.on_message(filters.command("bard"))
