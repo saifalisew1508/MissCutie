@@ -180,16 +180,3 @@ async def get_users(show):
     )
 
     os.remove("userslist.txt")
-
-
-__mod_name__ = "Unbanall"
-__help__ = """ 
-
-
-➥ /unbanall : unBan all mamber 
-
-➥ /unmuteall : unmute all mamber
-
-➥ /users : get group users list
-
-"""
