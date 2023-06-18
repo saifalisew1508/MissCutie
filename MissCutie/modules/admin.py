@@ -916,6 +916,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 __help__ = """
+*Any User*
 ➥ /admins*:* list of admins in the chat
 
 *Admins only:*
