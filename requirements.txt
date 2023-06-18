@@ -1,7 +1,7 @@
 aiohttp==3.8.0
 aiosignal==1.2.0
 alphabet-detector==0.0.7
-anyio==3.3.4
+anyio==3.7.0
 APScheduler==3.9.1
 async-lru==1.0.2
 async-timeout==4.0.1
