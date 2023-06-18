@@ -96,13 +96,3 @@ async def rm_deletedacc(show):
             f"\n`{del_a}` **Admin zombies not deleted.**"
         )
     await memek.edit(del_status)
-
-
-__help__ = """
-*Remove Deleted Accounts*
- ➥ /zombies *:* Starts searching for deleted accounts in the group.
- ➥ /zombies clean *:* Removes the deleted accounts from the group.
-"""
-
-
-__mod_name__ = "Zombie"
