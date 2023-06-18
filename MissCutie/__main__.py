@@ -88,7 +88,7 @@ PM_START_TEXT = """
 
 Join my [updates channel](http://t.me/BotXNews) to get information on all the latest updates.
 
-Use the /mstart command to view the music panel, and interact with your experience.
+Use the /donate command to donate our devlopers
 """
 
 buttons = [
