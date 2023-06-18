@@ -1,63 +1,41 @@
-import openai
+# Copyright (C) 2020-2023 TeamKillerX <https://github.com/TeamKillerX>
+#
+# This file is part of TeamKillerX project,
+# and licensed under GNU Affero General Public License v3.
+# See the GNU Affero General Public License for more details.
+#
+# All rights reserved. See COPYING, AUTHORS.
+#
+
+import requests
+import os
+import json
+import random
 import asyncio
-import html
-from aiohttp import ClientSession
-from pyrogram import filters, Client
-from pyrogram.types import Message
-from pyrogram.errors import MessageTooLong
+from pyrogram import *
+from pyrogram.types import *
+from pyrogram.errors import MessageNotModified 
 
-from MissCutie import pbot as app
+from MissCutie import pbot as ren
+CMD_HANDLER = ["!", "/"] # your change handler
 
-from MissCutie.utils.media_helper import post_to_telegraph 
-from MissCutie.utils.time_gap import check_time_gap
-from MissCutie.utils.post import http
-from MissCutie.utils.ratelimiter import ratelimiter
-from MissCutie import DEV_USERS as SUDO
+cmd = CMD_HANDLER
 
-openai.api_key = "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"
+OPENAI_API = "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"
 
-# This only for testing things, since maybe in future it will got blocked
-@app.on_message(filters.command("bard"))
-async def bard_chatbot(self: Client, ctx: Message):
-    if len(ctx.command) == 1:
-        return await ctx.reply_text("Please use command /bard [question] to ask your question", quote=True, del_in=5)
-    msg = await ctx.reply_text("Wait a moment looking for your answer.", quote=True)
-    data = {'message': ctx.input, 'session_id':'XQjzKRYITZ7fhplF-rXa_GTynUwdctKq4aGm-lqUCCJzF98xqDulL9UKopIadNpQn0lvnA.'}
+@ren.on_message(filters.command(["ai", "ask"], cmd) & filters.private | filters.group)
+async def chatgpt(c: Client, m: Message):
+    randydev = (m.text.split(None, 1)[1] if len(m.command) != 1 else None)
+    if not randydev:
+       await m.reply(f"use command <code>/{m.command[0]} [question]</code> to ask questions using the API.")
+       return
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {OPENAI_API}"}
+
+    json_data = {"prompt": randydev, "model": "text-davinci-003", "temperature": 0.5, "max_tokens": 1024, "n": 1, "stop": None, "top_p": 0.3, "frequency_penalty": 0.5}
     try:
-        req = await http.post("https://bard-api-rho.vercel.app/ask", json=data)
-        await msg.edit_msg(req.json().get("content"))
-    except Exception as e:
-        await msg.edit_msg(str(e))
-
-@app.on_message(filters.command("ask"))
-@ratelimiter
-async def openai_chatbot(self: Client, ctx: Message):
-    if len(ctx.command) == 1:
-        return await ctx.reply_text("Please use command /ask [question] to ask your question.", quote=True, del_in=5)
-    uid = ctx.from_user.id if ctx.from_user else ctx.sender_chat.id
-    is_in_gap, sleep_time = await check_time_gap(uid)
-    if is_in_gap and (uid not in SUDO):
-        return await ctx.reply_text("Don't spam please, please wait {tm} second or i will ban you from this bot", del_in=5)
-    openai.aiosession.set(ClientSession())
-    pertanyaan = ctx.input
-    msg = await ctx.reply_text("Wait a moment looking for your answer..", quote=True)
-    num = 0
-    answer = ""
-    try:
-        response = await openai.ChatCompletion.acreate(model="gpt-3.5-turbo", messages=[{"role": "user", "content": pertanyaan}], temperature=0.7, stream=True)
-        async for chunk in response:
-            if not chunk.choices[0].delta or chunk.choices[0].delta.get("role"):
-                continue
-            num += 1
-            answer += chunk.choices[0].delta.content
-            if num == 30:
-                await msg.edit_msg(answer)
-                await asyncio.sleep(1.5)
-                num = 0
-        await msg.edit_msg(answer)
-    except MessageTooLong:
-        answerlink = await post_to_telegraph(False, "MissCutie ChatBot ", html.escape(answer))
-        await msg.edit_text("Question for your answer has exceeded TG text limit, check this link to view.\n\n{answerlink}".format(answerlink=answerlink), disable_web_page_preview=True)
-    except Exception as err:
-        await msg.edit_msg(f"ERROR: {str(err)}")
-    await openai.aiosession.get().close()
+        response = requests.post("https://api.openai.com/v1/completions", headers=headers, json=json_data).json()
+        await c.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
+        await asyncio.sleep(2)
+        await c.send_message(m.chat.id, response["choices"][0]["text"], reply_to_message_id=m.id)
+    except Exception:
+        await c.send_message(m.chat.id, "Yahh, sorry i can't get your answer.", reply_to_message_id=m.id)
