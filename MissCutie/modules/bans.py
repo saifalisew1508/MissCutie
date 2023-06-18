@@ -658,14 +658,14 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return log
       
 __help__ = """
- • `/kickme`*:* kicks the user who issued the command
+ ➥ `/kickme`*:* kicks the user who issued the command
 
 *Admins only:*
- • `/ban <userhandle>`*:* bans a user/channel. (via handle, or reply)
- • `/sban <userhandle>`*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
- • `/tban <userhandle> x(m/h/d)`*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
- • `/unban <userhandle>`*:* unbans a user/channel. (via handle, or reply)
- • `/kick <userhandle>`*:* kicks a user out of the group, (via handle, or reply)
+ ➥ `/ban <userhandle>`*:* bans a user/channel. (via handle, or reply)
+ ➥ `/sban <userhandle>`*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
+ ➥ `/tban <userhandle> x(m/h/d)`*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
+ ➥ `/unban <userhandle>`*:* unbans a user/channel. (via handle, or reply)
+ ➥ `/kick <userhandle>`*:* kicks a user out of the group, (via handle, or reply)
 
  NOTE:
     Banning or UnBanning channels only work if you reply to their message, so don't use their username to ban/unban.
