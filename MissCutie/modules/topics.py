@@ -7,67 +7,67 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
-# from MissCutie.modules.sql.topics_sql import (del_action_topic,
-#                                                get_action_topic,
-#                                                set_action_topic)
+from MissCutie.modules.sql.topics_sql import (del_action_topic,
+                                              get_action_topic,
+                                              set_action_topic)
 
 
-# @loggable
-# @check_admin(permission="can_manage_topics", is_both=True)
-# async def set_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     message = update.effective_message
-#     chat = update.effective_chat
-#     user = update.effective_user
-    
-#     if chat.is_forum:
-#         topic_id = message.message_thread_id
-#         topic_chat = get_action_topic(chat.id)
-#         if topic_chat:
-#             await message.reply_text("Already a topic for actions enabled in this group, you can remove it and add new one.")
-#             return ""
-#         else:
-#             set_action_topic(chat.id, topic_id)
-#             await message.reply_text("I have successfully set this topic for actions.")
-#             log_message = (
-#                 f"<b>{html.escape(chat.title)}:</b>\n"
-#                 f"#ACTIONTOPIC\n"
-#                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-#                 f"<b>Topic ID:</b>{message.message_thread_id}"
-#             )
-#             return log_message
-#     else:
-#         await message.reply_text("Action Topic can be only enabled in Groups with Topic support.")
-#         return ""
+@loggable
+@check_admin(permission="can_manage_topics", is_both=True)
+async def set_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message = update.effective_message
+    chat = update.effective_chat
+    user = update.effective_user
+  
+    if chat.is_forum:
+        topic_id = message.message_thread_id
+        topic_chat = get_action_topic(chat.id)
+        if topic_chat:
+            await message.reply_text("Already a topic for actions enabled in this group, you can remove it and add new one.")
+            return ""
+        else:
+            set_action_topic(chat.id, topic_id)
+            await message.reply_text("I have successfully set this topic for actions.")
+            log_message = (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"#ACTIONTOPIC\n"
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+                f"<b>Topic ID:</b>{message.message_thread_id}"
+            )
+            return log_message
+    else:
+        await message.reply_text("Action Topic can be only enabled in Groups with Topic support.")
+        return ""
 
-# @loggable
-# @check_admin(permission="can_manage_topics", is_both=True)
-# async def del_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     message = update.effective_message
-#     chat = update.effective_chat
-#     user = update.effective_user
+@loggable
+@check_admin(permission="can_manage_topics", is_both=True)
+async def del_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message = update.effective_message
+    chat = update.effective_chat
+    user = update.effective_user
 
-#     if chat.is_forum:
-#         topic_chat = get_action_topic(chat.id)
-#         if topic_chat:
-#             res = del_action_topic(chat.id)
-#             if res:
-#                 await message.reply_text(f"Successfully removed the old topic ({topic_chat}) chat for actions, You can set new one now.")
-#                 log_message = (
-#                     f"<b>{html.escape(chat.title)}:</b>\n"
-#                     f"#DELACTIONTOPIC\n"
-#                     f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-#                     f"<b>Topic ID:</b>{topic_chat}"
-#                 )
-#                 return log_message
-#             else:
-#                 await message.reply_text("I don't know this it didn't work, try again.")
-#                 return ""
-#         else:
-#             await message.reply_text("It seems like you haven't set any topic for actions, you can set one by using /setactiontopic in the topic.")
-#             return ""
-#     else:
-#         await message.reply_text("Action Topic can be only removed in Groups with Topic support.")
-#         return ""
+    if chat.is_forum:
+        topic_chat = get_action_topic(chat.id)
+        if topic_chat:
+            res = del_action_topic(chat.id)
+            if res:
+                await message.reply_text(f"Successfully removed the old topic ({topic_chat}) chat for actions, You can set new one now.")
+                log_message = (
+                    f"<b>{html.escape(chat.title)}:</b>\n"
+                    f"#DELACTIONTOPIC\n"
+                    f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+                    f"<b>Topic ID:</b>{topic_chat}"
+                )
+                return log_message
+            else:
+                await message.reply_text("I don't know this it didn't work, try again.")
+                return ""
+        else:
+            await message.reply_text("It seems like you haven't set any topic for actions, you can set one by using /setactiontopic in the topic.")
+            return ""
+    else:
+        await message.reply_text("Action Topic can be only removed in Groups with Topic support.")
+        return ""
 
 @loggable
 @check_admin(permission="can_manage_topics", is_both=True)
@@ -206,22 +206,23 @@ create, delete, close and reopen topics in your chat.
  ➥ `/topicnew`*:* Create new topic, requires topic name to create.
  ➥ `/topicdel`*:* Delete an existing topic, requires topic ID to delete.  
  ➥ `/topicclose`*:* Close an existing topic, requires topic ID to close.
- ➥ `/topicopen`*:* Open an already closed topic, requires topic ID to open.  
+ ➥ `/topicopen`*:* Open an already closed topic, requires topic ID to open.
+ ➥ `/setactiontopic`*:* Set issuing topic for action messages such as welcome, goodbye, warns, bans,..etc
+ ➥ `/delactiontopic`*:* Delete default topic for actions messages.
 """
 
-#  ➥ `/setactiontopic`*:* Set issuing topic for action messages such as welcome, goodbye, warns, bans,..etc
-#  ➥ `/delactiontopic`*:* Delete default topic for actions messages.
 
 
-# SET_TOPIC_HANDLER = CommandHandler("setactiontopic", set_topic_action, block=False)
-# DEL_TOPIC_HANDLER = CommandHandler("delactiontopic", del_topic_action, block=False)
+
+SET_TOPIC_HANDLER = CommandHandler("setactiontopic", set_topic_action, block=False)
+DEL_TOPIC_HANDLER = CommandHandler("delactiontopic", del_topic_action, block=False)
 CREATE_TOPIC_HANDLER = CommandHandler("topicnew", create_topic, block=False)
 DELETE_TOPIC_HANDLER = CommandHandler("topicdel", delete_topic, block=False)
 CLOSE_TOPIC_HANDLER = CommandHandler("topicclose", close_topic, block=False)
 OPEN_TOPIC_HANDLER = CommandHandler("topicopen", open_topic, block=False)
 
-# application.add_handler(SET_TOPIC_HANDLER)
-# application.add_handler(DEL_TOPIC_HANDLER)
+application.add_handler(SET_TOPIC_HANDLER)
+application.add_handler(DEL_TOPIC_HANDLER)
 application.add_handler(CREATE_TOPIC_HANDLER)
 application.add_handler(DELETE_TOPIC_HANDLER)
 application.add_handler(CLOSE_TOPIC_HANDLER)
@@ -232,13 +233,14 @@ __command_list__ = [
     "setactiontopic",
     "delactiontopic",
     "topicnew",
+    "topicdel",
     "topicclose",
     "topicopen",
 ]
 
 __handlers__ = [
-    # SET_TOPIC_HANDLER,
-    # DEL_TOPIC_HANDLER,
+    SET_TOPIC_HANDLER,
+    DEL_TOPIC_HANDLER,
     CREATE_TOPIC_HANDLER,
     DELETE_TOPIC_HANDLER,
     CLOSE_TOPIC_HANDLER,
