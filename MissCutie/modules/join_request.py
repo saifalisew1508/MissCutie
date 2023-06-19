@@ -22,7 +22,7 @@ from MissCutie.modules.log_channel import loggable
 
 @check_admin(permission="can_invite_users", is_both=True)
 @loggable
-async def set_requests(update: Update, context: CallbackContext) -> Optional[str]:
+async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Optional[str]:
     message = update.effective_message
     chat = update.effective_chat
     args = context.args
