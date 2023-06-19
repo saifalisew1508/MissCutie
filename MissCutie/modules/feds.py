@@ -1,3 +1,4 @@
+"""
 import ast
 import csv
 import json
@@ -2400,7 +2401,7 @@ FED_USERS = """*🎩 Any user:*
 
 
 __mod_name__ = "Federations"
-
+"""
 async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
 	update.effective_chat.id,
