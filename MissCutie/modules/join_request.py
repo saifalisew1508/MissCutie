@@ -107,10 +107,43 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     except Exception as e:
         await update.effective_message.edit_text(str(e))
         pass
+    
 
+@loggable
+@check_admin(permission="can_invite_users", is_both=True)
+async def approve_all_join_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    bot = context.bot
+    chat = update.effective_chat
+    try:
+        join_requests = await bot.get_chat(chat.id).get_members(filter_status='kicked')
+        for join_request in join_requests:
+            user_id = join_request.user.id
+            try:
+                await bot.approve_chat_join_request(chat.id, user_id)
+                joined_mention = mention_html(user_id, html.escape(join_request.user.first_name))
+                admin_mention = mention_html(update.effective_user.id, html.escape(update.effective_user.first_name))
+                await update.message.reply_text(
+                    f"{joined_mention}'s join request was approved by {admin_mention}.",
+                    parse_mode="HTML"
+                )
+                logmsg = (
+                    f"<b>{html.escape(chat.title)}:</b>\n"
+                    f"#JOIN_REQUEST\n"
+                    f"Approved\n"
+                    f"<b>Admin:</b> {admin_mention}\n"
+                    f"<b>User:</b> {joined_mention}\n"
+                )
+                print(logmsg)  # Adjust logging or storage as needed
+            except Exception as e:
+                await update.message.reply_text(str(e))
 
+        await update.message.reply_text("All pending join requests have been approved.")
+    except Exception as e:
+        await update.message.reply_text(str(e))
 
+approve_all_handler = CommandHandler('approveall', approve_all_join_requests)
 
 application.add_handler(ChatJoinRequestHandler(callback=chat_join_req, block=False))
 application.add_handler(CallbackQueryHandler(callback=approve_joinReq, pattern=r"cb_approve="))
 application.add_handler(CallbackQueryHandler(callback=decline_joinReq, pattern=r"cb_decline="))
+application.add_handler(approve_all_handler)
