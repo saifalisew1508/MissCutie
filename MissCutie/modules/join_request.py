@@ -17,6 +17,7 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
+from MissCutie.modules.sql.join_request import enable_join_req, disable_join_req, join_req_status, migrate_chat
 
 
 
@@ -191,6 +192,13 @@ async def approve_all_join_requests(update: Update, context: ContextTypes.DEFAUL
         await update.message.reply_text("All pending join requests have been approved.")
     except Exception as e:
         await update.message.reply_text(str(e))
+        
+
+        
+def __migrate__(old_chat_id, new_chat_id):
+    migrate_chat(old_chat_id, new_chat_id)
+    
+    
 
 approve_all_handler = CommandHandler('approveall', approve_all_join_requests)
 set_requests_handler = CommandHandler('joinrequest', set_requests)
