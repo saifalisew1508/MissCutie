@@ -2406,6 +2406,7 @@ async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 	update.effective_chat.id,
 	"FED_OWNER"),
         parse_mode=ParseMode.MARKDOWN,
+	disable_web_page_preview=False,
     )
 
 
@@ -2415,6 +2416,7 @@ async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update.effective_chat.id,
 	"FED_ADMIN",
         parse_mode=ParseMode.MARKDOWN,
+	disable_web_page_preview=False,
     )
 
 
@@ -2424,6 +2426,7 @@ async def fed_user_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update.effective_chat.id,
 	"FED_USER",
         parse_mode=ParseMode.MARKDOWN,
+	disable_web_page_preview=False,
     )
 
 
