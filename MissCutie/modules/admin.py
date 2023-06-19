@@ -923,19 +923,19 @@ __help__ = """
 ➥ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
 ➥ /unpin*:* unpins the currently pinned message
 ➥ /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
-➥ /del: deletes the message you replied to
-➥ /purge: deletes all messages between this and the replied to message.
-➥ /purge <integer X>: deletes the replied message, and X messages following it if replied to a message.
+➥ /del*:* deletes the message you replied to
+➥ /purge*:* deletes all messages between this and the replied to message.
+➥ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
 ➥ /invitelink*:* gets invitelink
 ➥ /promote*:* promotes the user replied to
 ➥ /demote*:* demotes the user replied to
-➥ /title <title here>`*:* sets a custom title for an admin that the bot promoted
+➥ /title <title here>*:* sets a custom title for an admin that the bot promoted
 ➥ /admincache*:* force refresh the admins list
-➥ /zombies *:* Starts searching for deleted accounts in the group.
-➥ /zombies clean *:* Removes the deleted accounts from the group.
-➥ /unbanall : unBan all mamber 
-➥ /unmuteall : unmute all mamber
-➥ /users : get group users list
+➥ /zombies*:* Starts searching for deleted accounts in the group.
+➥ /zombies clean*:* Removes the deleted accounts from the group.
+➥ /unbanall*:* unBan all mamber 
+➥ /unmuteall*:* unmute all mamber
+➥ /users*:* get group users list
 """
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist, block=False)
