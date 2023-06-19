@@ -2443,7 +2443,7 @@ async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await bot.answer_callback_query(query.id)
 
 
-def get_help(chat):
+async def get_help(chat):
     return [chat, "feds_help",
             [
                 InlineKeyboardButton(text="Feds Admins", callback_data="fed_help_admin"),
