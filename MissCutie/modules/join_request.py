@@ -115,7 +115,7 @@ async def approve_all_join_requests(update: Update, context: ContextTypes.DEFAUL
     bot = context.bot
     chat = update.effective_chat
     try:
-        join_requests = await bot.get_chat(chat.id).get_members(filter_status='kicked')
+        join_requests = await bot.get_chat_members_count(chat.id)
         for join_request in join_requests:
             user_id = join_request.user.id
             try:
