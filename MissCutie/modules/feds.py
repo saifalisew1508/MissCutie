@@ -2375,7 +2375,7 @@ help_text = """
 Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
 But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?\n
 *No longer!* With Federation, you can make a ban in one chat overlap with all other chats.\n
-You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n
+You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.
 """
 
 FED_ADMIN = """*🔱 Fed Admins:*
@@ -2388,13 +2388,13 @@ FED_ADMIN = """*🔱 Fed Admins:*
  ➥ /fedadmins*:* Show Federation admin
  ➥ /fbanlist*:* Displays all users who are victimized at the Federation at this time
  ➥ /fedchats*:* Get all the chats that are connected in the Federation
- ➥ /chatfed *:* See the Federation in the current chat\n"""
+ ➥ /chatfed *:* See the Federation in the current chat"""
 
 
 FED_USERS = """*🎩 Any user:*
  ➥ /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
  ➥ /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
- ➥ /frules*:* See Federation regulations\n"""
+ ➥ /frules*:* See Federation regulations"""
 
 
 
@@ -2406,7 +2406,6 @@ async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 	update.effective_chat.id,
 	"FED_OWNER"),
         parse_mode=ParseMode.MARKDOWN,
-	disable_web_page_preview=False,
     )
 
 
@@ -2416,7 +2415,6 @@ async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update.effective_chat.id,
 	"FED_ADMIN",
         parse_mode=ParseMode.MARKDOWN,
-	disable_web_page_preview=False,
     )
 
 
@@ -2426,7 +2424,6 @@ async def fed_user_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update.effective_chat.id,
 	"FED_USER",
         parse_mode=ParseMode.MARKDOWN,
-	disable_web_page_preview=False,
     )
 
 
