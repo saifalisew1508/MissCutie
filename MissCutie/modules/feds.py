@@ -2357,9 +2357,7 @@ def get_chat(chat_id, chat_data):
 
 
 
-async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.effective_message.reply_text(
-        """*👑 Fed Owner Only:*
+FED_OWNER = """*👑 Fed Owner Only:*
  ➥ /newfed <fed_name>*:* Creates a Federation, One allowed per user
  ➥ /renamefed <fed_id> <new_fed_name>*:* Renames the fed id to a new name
  ➥ /delfed <fed_id>*:* Delete a Federation, and any information related to it. Will not cancel blocked users
@@ -2370,15 +2368,17 @@ async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
  ➥ /setfedlog <fed_id>*:* Sets the group as a fed log report base for the federation
  ➥ /unsetfedlog <fed_id>*:* Removed the group as a fed log report base for the federation
  ➥ /fbroadcast <message>*:* Broadcasts a messages to all groups that have joined your fed
- ➥ /fedsubs*:* Shows the feds your group is subscribed to `(broken rn)`""",
-        parse_mode=ParseMode.MARKDOWN,
-    )
+ ➥ /fedsubs*:* Shows the feds your group is subscribed to `(broken rn)`"""
 
 
+help_text = """
+Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
+But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?\n
+*No longer!* With Federation, you can make a ban in one chat overlap with all other chats.\n
+You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n
+"""
 
-async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.effective_message.reply_text(
-        """*🔱 Fed Admins:*
+FED_ADMIN = """*🔱 Fed Admins:*
  ➥ /fban <user> <reason>*:* Fed bans a user
  ➥ /unfban <user> <reason>*:* Removes a user from a fed ban
  ➥ /fedinfo <fed_id>*:* Information about the specified Federation
@@ -2388,7 +2388,32 @@ async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
  ➥ /fedadmins*:* Show Federation admin
  ➥ /fbanlist*:* Displays all users who are victimized at the Federation at this time
  ➥ /fedchats*:* Get all the chats that are connected in the Federation
- ➥ /chatfed *:* See the Federation in the current chat\n""",
+ ➥ /chatfed *:* See the Federation in the current chat\n"""
+
+
+FED_USERS = """*🎩 Any user:*
+ ➥ /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
+ ➥ /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
+ ➥ /frules*:* See Federation regulations\n"""
+
+
+
+
+__mod_name__ = "Federations"
+
+async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.effective_message.reply_text(
+	update.effective_chat.id,
+	"FED_OWNER"),
+        parse_mode=ParseMode.MARKDOWN,
+    )
+
+
+
+async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.effective_message.reply_text(
+        update.effective_chat.id,
+	"FED_ADMIN",
         parse_mode=ParseMode.MARKDOWN,
     )
 
@@ -2396,29 +2421,43 @@ async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def fed_user_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
-        """*🎩 Any user:*
- ➥ /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
- ➥ /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
- ➥ /frules*:* See Federation regulations\n""",
+        update.effective_chat.id,
+	"FED_USER",
         parse_mode=ParseMode.MARKDOWN,
     )
 
 
-__mod_name__ = "Federations"
+async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    bot = context.bot
+    help_info = query.data.split("fed_help_")[1]
+    if help_info == "owner":
+        help_text = await update.effective_chat.id, "FED_OWNER"
+    elif help_info == "admin":
+        help_text = await update.effective_chat.id, "FED_ADMIN"
+    elif help_info == "user":
+        help_text = await update.effective_chat.id, "FED_USER"
+    await query.message.edit_text(
+        text=help_text,
+        parse_mode=ParseMode.MARKDOWN,
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton(text="Back", callback_data=f"help_module({__mod_name__.lower()})"),
+            InlineKeyboardButton(text='Support', url='https://t.me/BotXNews')]]
+        ),
+    )
+    bot.answer_callback_query(query.id)
 
-__help__ = """
-Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
-But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?\n
-*No longer!* With Federation, you can make a ban in one chat overlap with all other chats.\n
-You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n
 
-*Commands:*\n
-Feds are now divided into 3 sections for your ease.
- ➥ /fedownerhelp*:* Provides help for fed creation and owner only commands
- ➥ /fedadminhelp*:* Provides help for fed administration commands
- ➥ /feduserhelp*:* Provides help for commands anyone can use
-
-"""
+def get_help(chat):
+    return [gs(chat, "feds_help"),
+    [
+        InlineKeyboardButton(text="Feds Admins", callback_data="fed_help_admin"),
+        InlineKeyboardButton(text="Feds Owners", callback_data="fed_help_owner")
+    ],
+    [
+        InlineKeyboardButton(text="Users Commands", callback_data="fed_help_user")
+    ],
+]
 
 NEW_FED_HANDLER = CommandHandler("newfed", new_fed, block=False)
 DEL_FED_HANDLER = CommandHandler("delfed", del_fed, block=False)
@@ -2450,6 +2489,7 @@ DELETEBTN_FED_HANDLER = CallbackQueryHandler(del_fed_button, pattern=r"rmfed_", 
 FED_OWNER_HELP_HANDLER = CommandHandler("fedownerhelp", fed_owner_help, block=False)
 FED_ADMIN_HELP_HANDLER = CommandHandler("fedadminhelp", fed_admin_help, block=False)
 FED_USER_HELP_HANDLER = CommandHandler("feduserhelp", fed_user_help, block=False)
+FED_HELP_MOD = CallbackQueryHandler(fed_help, pattern=r"feds_help", block=False)
 
 application.add_handler(NEW_FED_HANDLER)
 application.add_handler(DEL_FED_HANDLER)
@@ -2481,3 +2521,4 @@ application.add_handler(DELETEBTN_FED_HANDLER)
 application.add_handler(FED_OWNER_HELP_HANDLER)
 application.add_handler(FED_ADMIN_HELP_HANDLER)
 application.add_handler(FED_USER_HELP_HANDLER)
+application.add_handler(FED_HELP_MOD)
