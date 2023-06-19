@@ -1,7 +1,11 @@
 import threading
 
+from sqlalchemy import Boolean, BigInteger
+from sqlalchemy.sql.sqltypes import String
+from sqlalchemy import Column
+
 from MissCutie.modules.sql import BASE, SESSION
-from sqlalchemy import Column, String, distinct, func
+
 
 class JoinRequestSettings(BASE):
     __tablename__ = "join_request_settings"
