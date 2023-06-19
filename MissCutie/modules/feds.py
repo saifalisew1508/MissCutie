@@ -2403,26 +2403,21 @@ __mod_name__ = "Federations"
 
 async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
-	update.effective_chat.id,
-	"FED_OWNER"),
+        "FED_OWNER",
         parse_mode=ParseMode.MARKDOWN,
     )
-
 
 
 async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
-        update.effective_chat.id,
-	"FED_ADMIN",
+        "FED_ADMIN",
         parse_mode=ParseMode.MARKDOWN,
     )
 
 
-
 async def fed_user_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
-        update.effective_chat.id,
-	"FED_USER",
+        "FED_USER",
         parse_mode=ParseMode.MARKDOWN,
     )
 
@@ -2432,32 +2427,33 @@ async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     help_info = query.data.split("fed_help_")[1]
     if help_info == "owner":
-        help_text = await update.effective_chat.id, "FED_OWNER"
+        help_text = "FED_OWNER"
     elif help_info == "admin":
-        help_text = await update.effective_chat.id, "FED_ADMIN"
+        help_text = "FED_ADMIN"
     elif help_info == "user":
-        help_text = await update.effective_chat.id, "FED_USER"
+        help_text = "FED_USER"
     await query.message.edit_text(
         text=help_text,
         parse_mode=ParseMode.MARKDOWN,
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="Back", callback_data=f"help_module({__mod_name__.lower()})"),
-            InlineKeyboardButton(text='Support', url='https://t.me/BotXNews')]]
+              InlineKeyboardButton(text='Support', url='https://t.me/BotXNews')]]
         ),
     )
-    bot.answer_callback_query(query.id)
+    await bot.answer_callback_query(query.id)
 
 
 def get_help(chat):
     return [gs(chat, "feds_help"),
-    [
-        InlineKeyboardButton(text="Feds Admins", callback_data="fed_help_admin"),
-        InlineKeyboardButton(text="Feds Owners", callback_data="fed_help_owner")
-    ],
-    [
-        InlineKeyboardButton(text="Users Commands", callback_data="fed_help_user")
-    ],
-]
+            [
+                InlineKeyboardButton(text="Feds Admins", callback_data="fed_help_admin"),
+                InlineKeyboardButton(text="Feds Owners", callback_data="fed_help_owner")
+            ],
+            [
+                InlineKeyboardButton(text="Users Commands", callback_data="fed_help_user")
+            ],
+            ]
+
 
 NEW_FED_HANDLER = CommandHandler("newfed", new_fed, block=False)
 DEL_FED_HANDLER = CommandHandler("delfed", del_fed, block=False)
