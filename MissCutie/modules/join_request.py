@@ -19,6 +19,54 @@ from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
 
 
+
+@check_admin(permission="can_invite_users", is_both=True)
+@loggable
+def set_requests(update: Update, context: CallbackContext) -> Optional[str]:
+    message = update.effective_message
+    chat = update.effective_chat
+    args = context.args
+    user = update.effective_user
+
+    if len(args) > 0:
+        s = args[0].lower()
+
+        if s in ["yes", "on", "true"]:
+            enable_join_req(chat.id)
+            await message.reply_html(
+                "Enabled join request menu in {}\nI will send a button menu to approve/decline new requests".format(
+                    html.escape(chat.title)))
+            log_message = (
+                f"#JOINREQUESTS\n"
+                f"Enabled\n"
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
+            )
+            return log_message
+
+        elif s in ["off", "no", "false"]:
+            disable_join_req(chat.id)
+            await message.reply_html(
+                "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
+                    html.escape(chat.title)))
+            log_message = (
+                f"#JOINREQUESTS\n"
+                f"Disabled\n"
+                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
+            )
+            return log_message
+
+        else:
+            await message.reply_text("Unrecognized arguments {}".format(s))
+            return
+
+    await message.reply_html(
+        "Join requests setting is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
+        "When this setting is on, I will send a message with Approve/Decline buttons on every join request".format(
+            join_req_status(chat.id), html.escape(chat.title)))
+    return
+
+
+
 async def chat_join_req(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     user = update.chat_join_request.from_user
