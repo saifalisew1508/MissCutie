@@ -129,10 +129,11 @@ async def modr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         return ""
     if sql.is_modd(message.chat_id, user_id):
         await message.reply_text(
-            f"{member.user['first_name']} is an moderator user.")
+            f"{member.user.first_name} is a moderator user.")
     else:
         await message.reply_text(
-            f"{member.user['first_name']} is not an moderator user.")
+            f"{member.user.first_name} is not a moderator user.")
+
         
 
 ADD_MOD_HANDLER = DisableAbleCommandHandler("addmod", mod, block=False)
