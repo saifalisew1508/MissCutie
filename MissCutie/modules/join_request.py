@@ -1,4 +1,3 @@
-"""
 import re
 import html
 
@@ -59,8 +58,8 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         bot.approve_chat_join_request(chat.id, user_id)
         joined_user = bot.get_chat_member(chat.id, user_id)
-        joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
-        admin_mention = mention_html(user.id, html.escape(user.first_name))
+        joined_mention = mention_html(joined_user.user.id, html.escape(joined_user.user.first_name))
+        admin_mention = mention_html(update.effective_user.id, html.escape(update.effective_user.first_name))
         await update.effective_message.edit_text(
                 f"{joined_mention}'s join request was approved by {admin_mention}.",
                 parse_mode="HTML",
@@ -91,8 +90,8 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         bot.decline_chat_join_request(chat.id, user_id)
         joined_user = bot.get_chat_member(chat.id, user_id)
-        joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
-        admin_mention = mention_html(user.id, html.escape(user.first_name))
+        joined_mention = mention_html(joined_user.user.id, html.escape(joined_user.user.first_name))
+        admin_mention = mention_html(update.effective_user.id, html.escape(update.effective_user.first_name))
         await update.effective_message.edit_text(
                 f"{joined_mention}'s join request was declined by {admin_mention}.",
                 parse_mode="HTML",
@@ -113,5 +112,3 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 application.add_handler(ChatJoinRequestHandler(callback=chat_join_req, block=False))
 application.add_handler(CallbackQueryHandler(callback=approve_joinReq, pattern=r"cb_approve="))
 application.add_handler(CallbackQueryHandler(callback=decline_joinReq, pattern=r"cb_decline="))
-
-"""
