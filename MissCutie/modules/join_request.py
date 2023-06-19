@@ -107,7 +107,8 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     except Exception as e:
         await update.effective_message.edit_text(str(e))
         pass
-    
+
+
 
 @loggable
 @check_admin(permission="can_invite_users", is_both=True)
@@ -115,8 +116,10 @@ async def approve_all_join_requests(update: Update, context: ContextTypes.DEFAUL
     bot = context.bot
     chat = update.effective_chat
     try:
-        join_requests = await bot.get_chat_members_count(chat.id)
+        join_requests = await bot.get_chat_members(chat.id)
         for join_request in join_requests:
+            if join_request.status == 'kicked' or join_request.status == 'left':
+                continue
             user_id = join_request.user.id
             try:
                 await bot.approve_chat_join_request(chat.id, user_id)
