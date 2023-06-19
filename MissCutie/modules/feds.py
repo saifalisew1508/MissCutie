@@ -2444,7 +2444,7 @@ async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def get_help(chat):
-    return [gs(chat, "feds_help"),
+    return [chat, "feds_help",
             [
                 InlineKeyboardButton(text="Feds Admins", callback_data="fed_help_admin"),
                 InlineKeyboardButton(text="Feds Owners", callback_data="fed_help_owner")
