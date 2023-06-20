@@ -41,7 +41,7 @@ from telegram.ext import (
 )
 from telegram.helpers import mention_html, mention_markdown
 
-# Hello bot owner, I spended for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
+# Hello bot owner, I spended for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo & AyraHikari & saifalisew1508 too
 # Federation by MrYacha 2018-2019
 # Federation rework by Mizukito Akito 2019
 # Federation update v2 by Ayra Hikari 2019
@@ -50,6 +50,8 @@ from telegram.helpers import mention_html, mention_markdown
 # Time spended on updating version to v2 = 26+ hours by @AyraHikari
 # Total spended for making this features is 68+ hours
 LOGGER.info("Original federation module by MrYacha, reworked by Mizukito Akito (@peaktogoo) on Telegram.")
+LOGGER.info("Original federation module by MrYacha, Time spended on updating version to v2 = 26+ hours by @AyraHikari")
+LOGGER.info("Original federation module by MrYacha, reworked and update to PTB=20.X by @saifalisew1508")
 
 FBAN_ERRORS = {
     "User is an administrator of the chat",
