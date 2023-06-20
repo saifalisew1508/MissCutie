@@ -5,7 +5,6 @@ import re
 import random
 
 from MissCutie import (
-    ALIVE_TEXT,
     ALLOW_EXCL,
     CERT_PATH,
     DONATION_LINK,
