@@ -110,9 +110,6 @@ if ENV:
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    BOT_ID = os.environ.get("BOT_ID", 5810582849)
-    BOT_NAME = os.environ.get("BOT_NAME", "Cutie")
-    BOT_USERNAME = os.environ.get("BOT_USERNAME", "MissCutieRobot")
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
@@ -169,9 +166,6 @@ else:
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
     MONGO_DB_URI = Config.MONGO_DB_URI
     ARQ_API_KEY = Config.ARQ_API_KEY
-    BOT_ID = Config.BOT_ID
-    BOT_NAME = Config.BOT_NAME
-    BOT_USERNAME = Config.BOT_USERNAME
 
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
@@ -182,19 +176,13 @@ else:
         raise Exception("Your blacklisted chats list does not contain valid integers.")
         
 DEV_USERS.add(OWNER_ID)
-ALIVE_TEXT = [
-    "Hey developer's I'm online now.",
-    "Hey fellas how ya doing",
-    "Woah this day going to be so good!",
-    "Wait guys I'm not dead yet, so count me in",
-    "Sending alive message became my hobby, here goes another one",
-    "What a worst day! Hey guys, How ya doing",
-    "Somebody help, this server is killing me"
-]
+
+# Telethon Client
 
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
+
 PyroGram = TOKEN.split(":")[0]
 pbot = Client(
     name=PyroGram,
@@ -218,6 +206,10 @@ DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 
 # Bot Info
+
+BOT_ID = application.bot.id
+BOT_NAME = application.bot.first_name
+BOT_USERNAME = application.bot.username
 
  
 
