@@ -2365,14 +2365,14 @@ async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
  ➥ /newfed <fed_name>*:* Creates a Federation, One allowed per user
  ➥ /renamefed <fed_id> <new_fed_name>*:* Renames the fed id to a new name
  ➥ /delfed <fed_id>*:* Delete a Federation, and any information related to it. Will not cancel blocked users
- ➥ /fpromote <user>*:* Assigns the user as a federation admin. Enables all commands for the user under `Fed Admins`
+ ➥ /fpromote <user>*:* Assigns the user as a federation admin. Enables all commands for the user under Fed Admins
  ➥ /fdemote <user>*:* Drops the User from the admin Federation to a normal User
  ➥ /subfed <fed_id>*:* Subscribes to a given fed ID, bans from that subscribed fed will also happen in your fed
  ➥ /unsubfed <fed_id>*:* Unsubscribes to a given fed ID
  ➥ /setfedlog <fed_id>*:* Sets the group as a fed log report base for the federation
  ➥ /unsetfedlog <fed_id>*:* Removed the group as a fed log report base for the federation
  ➥ /fbroadcast <message>*:* Broadcasts a messages to all groups that have joined your fed
- ➥ /fedsubs*:* Shows the feds your group is subscribed to `(broken rn)`""",
+ ➥ /fedsubs*:* Shows the feds your group is subscribed to""",
         parse_mode=ParseMode.MARKDOWN,
     )
 
