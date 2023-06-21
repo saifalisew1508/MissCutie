@@ -394,7 +394,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", url="https://t.me/PrinceXofficial"
+                            text="Developer", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
                             text="Source",
@@ -424,7 +424,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", url="https://t.me/PrinceXofficial"
+                            text="Developer", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
                             text="Github", url="https://github.com/saifalisew1508"
