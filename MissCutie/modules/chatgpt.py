@@ -36,6 +36,6 @@ async def chatgpt(c: Client, m: Message):
         response = requests.post("https://api.openai.com/v1/completions", headers=headers, json=json_data).json()
         await c.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         await asyncio.sleep(2)
-        await c.send_message(m.chat.id, response["choices"][0]["text"], reply_to_message_id=m.message_id)
+        await c.send_message(m.chat.id, response["choices"][0]["text"], reply_to_message_id=m.id)
     except Exception:
-        await c.send_message(m.chat.id, "Sorry, I couldn't retrieve the answer.", reply_to_message_id=m.message_id)
+        await c.send_message(m.chat.id, "Sorry, I couldn't retrieve the answer.", reply_to_message_id=m.id)
