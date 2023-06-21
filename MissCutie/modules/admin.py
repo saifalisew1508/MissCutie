@@ -932,8 +932,10 @@ __help__ = """
 ➥ `/admincache`*:* force refresh the admins list
 ➥ `/zombies`*:* Starts searching for deleted accounts in the group.
 ➥ `/zombies clean`*:* Removes the deleted accounts from the group.
-➥ `/unbanall`*:* unBan all mamber 
-➥ `/unmuteall`*:* unmute all mamber
+➥ `approveall` approve all pending join request (only for Groups)
+➥ `joinrequest <yes|on|true/no|off|false>` To activate join request acceptabe button
+➥ `/unbanall`*:* Unban all banned members in Group 
+➥ `/unmuteall`*:* Unmute all banned members in Group
 ➥ `/users`*:* get group users list
 """
 
