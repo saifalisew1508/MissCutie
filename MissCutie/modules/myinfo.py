@@ -12,7 +12,7 @@ from MissCutie import BOT_NAME
 
 edit_time = 5
 """ =======================𝑴𝒊𝒔𝒔𝑪𝒖𝒕𝒊𝒆 𝑹𝒐𝒃𝒐𝒕====================== """
-file2 = "https://simple.wikipedia.org/wiki/Information#/media/File:Messagebox_info.svg"
+file2 = "https://graph.org/file/eec70867b0bbef60d6fc1.jpg"
 
 """ =======================𝑴𝒊𝒔𝒔𝑪𝒖𝒕𝒊𝒆 𝑹𝒐𝒃𝒐𝒕====================== """
 
