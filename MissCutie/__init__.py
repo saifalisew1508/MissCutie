@@ -109,6 +109,7 @@ if ENV:
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", None)
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
@@ -166,6 +167,7 @@ else:
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
     MONGO_DB_URI = Config.MONGO_DB_URI
     ARQ_API_KEY = Config.ARQ_API_KEY
+    OPENAI_API_KEY = Config.OPENAI_API_KEY
 
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
