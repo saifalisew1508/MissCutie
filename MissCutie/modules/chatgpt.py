@@ -40,5 +40,5 @@ def chatGPT_message(question):
     return response
 
 
-application.add_handler(CommandHandler("gpt", gpt))
-application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
+application.add_handler(CommandHandler("gpt", gpt, block=False))
+application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
