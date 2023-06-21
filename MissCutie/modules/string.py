@@ -155,7 +155,7 @@ async def cancelled(msg):
     
     
 @Client.on_callback_query()
-async def _callbacks(bot: Client, callback_query: CallbackQuery, msg: Message)):
+async def _callbacks(bot: Client, callback_query: CallbackQuery, msg: Message):
     user = await bot.get_me()
     user_id = callback_query.from_user.id
     mention = msg.from_user.mention
