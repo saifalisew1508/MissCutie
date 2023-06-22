@@ -17,8 +17,8 @@ async def carbon_func(_, message):
          try: 
              txt = message.text.split(None, 1)[1] 
          except IndexError: 
-             return await message.reply_text("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ.") 
-     m = await message.reply_text("Keep Patience Carbon Generating for your text") 
+             return await message.reply_text("Reply to a TEXT.message or give me some text\n Example : /carbon <@MissCutieRobot/>.") 
+     m = await message.reply_text("Keep Patience Carbon Generating for your text\n Example : /carbon <@MissCutieRobot/>") 
      carbon = await make_carbon(txt) 
      await m.edit_text("Sending Carbon Generated image to you") 
      await pbot.send_photo( 
