@@ -68,6 +68,7 @@ pydictionary==2.0.1
 pyparsing==2.4.7
 pyperclip==1.8.2
 pyrate-limiter==2.10.0
+pyfiglet==0.8.post1
 Pyrogram==2.0.106
 PySocks==1.7.1
 python-dotenv==0.19.2
@@ -75,7 +76,6 @@ python-telegram-bot==20.3
 python-whatanime==0.1.2
 pytz==2021.3
 pytz-deprecation-shim==0.1.0.post0
-pyrate_limiter
 regex==2023.6.3
 requests==2.31.0
 rfc==0.1.0
