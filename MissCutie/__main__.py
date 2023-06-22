@@ -24,7 +24,6 @@ from MissCutie import (
     BOT_NAME,
     BOT_USERNAME,
     BOT_ID,
-    BOT_PIC,
     application,
     StartTime,
     telethn,
@@ -246,23 +245,26 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode=ParseMode.MARKDOWN,
             )
     else:
-        await update.effective_message.reply_photo(
-            START_IMG,
-            caption="f"""
-Heyyya {context.bot.first_name} is online since {uptime}
-
-**Python : v{PYTHON_VERSION}**
-**Telethon : v{TELETHON_VERSION}**
-**Pyrogram : v{PYRO_VERSION}**
-**Python Telegram Bot : v{PTB_VERSION}**
-**Telegram Bot API :** v{BOT_API_VERSION}**
-**{BOT_NAME} : v{BOT_VERSION}**
-
-Presented By @BotXNews
-""",
-            parse_mode=ParseMode.MARKDOWN,
+        await update.effective_message.reply_text(
+            "Hello I'm Still running successfully on v{}\n<b>Haven't slept since:</b> <code>{}</code>\n<b>Python:</b> <code>v{}</code>\n<b>Telethon:</b> <code>v{}</code>\n<b>Pyrogram:</b> <code>v{}</code>\n<b>Python Telegram Bot:</b> <code>v{}</code>\n<b>Telegram Bot API:</b> <code>v{}</code>".format(
+                BOT_VERSION,uptime,PYTHON_VERSION,TELETHON_VERSION,PYRO_VERSION,PTB_VERSION,BOT_API_VERSION,
+            ),
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Get Help",
+                            url="t.me/{}?start=help".format(context.bot.username),
+                        ),
+                        InlineKeyboardButton(
+                            text=str("Devloper"),
+                            url="tg://user?id={OWNER_ID}",
+                        ),
+                    ],
+                ],
+            ),
         )
-
 
 
 
