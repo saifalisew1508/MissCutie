@@ -247,11 +247,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
     else:
         await update.effective_message.reply_photo(
-            BOT_PIC,
-            caption="i am alive   !\n<b>i didn't slept since​:</b> <code>{}</code>".format(
-                uptime
-            ),
-            parse_mode=ParseMode.HTML,
+            START_IMG,
+            caption="f"""
+Heyyya {context.bot.first_name} is online since {uptime}
+
+**Python : v{PYTHON_VERSION}**
+**Telethon : v{TELETHON_VERSION}**
+**Pyrogram : v{PYRO_VERSION}**
+**Python Telegram Bot : v{PTB_VERSION}**
+**Telegram Bot API :** v{BOT_API_VERSION}**
+**{BOT_NAME} : v{BOT_VERSION}**
+
+Presented By @BotXNews
+""",
+            parse_mode=ParseMode.MARKDOWN,
         )
 
 
