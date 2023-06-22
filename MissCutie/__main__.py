@@ -24,6 +24,7 @@ from MissCutie import (
     BOT_NAME,
     BOT_USERNAME,
     BOT_ID,
+    BOT_PIC,
     application,
     StartTime,
     telethn,
@@ -246,7 +247,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
     else:
         await update.effective_message.reply_photo(
-            START_IMG,
+            BOT_PIC,
             caption="i am alive   !\n<b>i didn't slept since​:</b> <code>{}</code>".format(
                 uptime
             ),
