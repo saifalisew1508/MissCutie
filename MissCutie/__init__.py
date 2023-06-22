@@ -212,7 +212,7 @@ DEV_USERS = list(DEV_USERS)
 BOT_ID = application.bot.id
 BOT_NAME = application.bot.first_name
 BOT_USERNAME = application.bot.username
-BOT_PIC = application.bot.profile_photos
+# BOT_PIC = application.bot.profile_photos
 
  
 
