@@ -34,7 +34,7 @@ from telegram import (
     InlineKeyboardMarkup,
     Update,
 )
-# from MissCutie.modules.sql.topics_sql import get_action_topic
+from MissCutie.modules.sql.topics_sql import get_action_topic
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import (
@@ -76,7 +76,7 @@ async def send(update: Update, message, keyboard, backup_message):
     chat = update.effective_chat
     cleanserv = sql.clean_service(chat.id)
     reply = update.effective_message.message_id
-    # topic_chat = get_action_topic(chat.id)
+    topic_chat = get_action_topic(chat.id)
     # Clean service welcome
     if cleanserv:
         try:
@@ -201,7 +201,7 @@ async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     msg = update.effective_message
 
-    # topic_chat = get_action_topic(chat.id)
+    topic_chat = get_action_topic(chat.id)
 
     should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
     welc_mutes = sql.welcome_mutes(chat.id)
@@ -589,14 +589,14 @@ async def left_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Give the devs a special goodbye
             elif left_mem.id in DEV_USERS:
                 await update.effective_message.reply_text(
-                    "See you later at the Zero Two's Association!",
+                    "See you later at the @PublicSource_Chat!",
                     reply_to_message_id=reply,
                 )
                 return
 
             # if media goodbye, use appropriate function for it
             if goodbye_type != sql.Types.TEXT and goodbye_type != sql.Types.BUTTON_TEXT:
-                # topic_chat = get_action_topic(chat.id)
+                topic_chat = get_action_topic(chat.id)
                 await ENUM_FUNC_MAP[goodbye_type](chat.id, cust_goodbye)
                 return
 
@@ -654,7 +654,7 @@ async def left_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     chat = update.effective_chat
-    # topic_chat = get_action_topic(chat.id)
+    topic_chat = get_action_topic(chat.id)
     # if no args, show current replies.
     if not args or args[0].lower() == "noformat":
         noformat = True
@@ -716,7 +716,7 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def goodbye(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     chat = update.effective_chat
-    # topic_chat = get_action_topic(chat.id)
+    topic_chat = get_action_topic(chat.id)
 
     if not args or args[0] == "noformat":
         noformat = True
@@ -1010,7 +1010,7 @@ async def user_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pass
         if member_dict["should_welc"]:
             if member_dict["media_wel"]:
-                # topic_chat = get_action_topic(chat.id)
+                topic_chat = get_action_topic(chat.id)
                 sent = await ENUM_FUNC_MAP[member_dict["welc_type"]](
                     member_dict["chat_id"],
                     member_dict["cust_content"],
@@ -1092,15 +1092,15 @@ async def welcome_mute_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 # TODO: get welcome data from group butler snap
-# def __import_data__(chat_id, data):
-#     welcome = data.get('info', {}).get('rules')
-#     welcome = welcome.replace('$username', '{username}')
-#     welcome = welcome.replace('$name', '{fullname}')
-#     welcome = welcome.replace('$id', '{id}')
-#     welcome = welcome.replace('$title', '{chatname}')
-#     welcome = welcome.replace('$surname', '{lastname}')
-#     welcome = welcome.replace('$rules', '{rules}')
-#     sql.set_custom_welcome(chat_id, welcome, sql.Types.TEXT)
+def __import_data__(chat_id, data):
+    welcome = data.get('info', {}).get('rules')
+    welcome = welcome.replace('$username', '{username}')
+    welcome = welcome.replace('$name', '{fullname}')
+    welcome = welcome.replace('$id', '{id}')
+    welcome = welcome.replace('$title', '{chatname}')
+    welcome = welcome.replace('$surname', '{lastname}')
+    welcome = welcome.replace('$rules', '{rules}')
+    sql.set_custom_welcome(chat_id, welcome, sql.Types.TEXT)
 
 
 def __migrate__(old_chat_id, new_chat_id):
