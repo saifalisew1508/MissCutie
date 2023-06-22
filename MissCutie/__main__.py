@@ -259,7 +259,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         ),
                         InlineKeyboardButton(
                             text=str("Devloper"),
-                            url="tg://user?id={OWNER_ID}",
+                            url="tg://user?id={}".format(OWNER_ID),
                         ),
                     ],
                 ],
