@@ -21,6 +21,9 @@ from MissCutie import (
     BOT_API_VERSION,
     PYRO_VERSION,
     TELETHON_VERSION,
+    BOT_NAME,
+    BOT_USERNAME,
+    BOT_ID,
     application,
     StartTime,
     telethn,
@@ -365,17 +368,17 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
             "\n*Written in Python with SQLalchemy and MongoDB as database.*"
             "\n\nAbout bot Library, Databse Users and Chats"
-            f"\n*➥ Python          :* {PYTHON_VERSION}"
-            f"\n*➥ Pyrogram     :* {PYRO_VERSION}"
-            f"\n*➥ Telethon       :* {TELETHON_VERSION}"
-            f"\n*➥ PTB Library  :* {PTB_VERSION}"
-            f"\n*➥ Bot-Api-Version :* {BOT_API_VERSION}"
-            f"\n*➥ Bot-Version :* {BOT_VERSION}"
-            f"\n*➥ Uptime          :* {uptime}"
-            f"\n*➥ Total Users  :* {sql.num_users()}"
-            f"\n*➥ Total Chats  :* {sql.num_chats()}"
+            f"\n*➥ Python :* v{PYTHON_VERSION}"
+            f"\n*➥ Pyrogram :* v{PYRO_VERSION}"
+            f"\n*➥ Telethon :* v{TELETHON_VERSION}"
+            f"\n*➥ Python Telegram Bot :* v{PTB_VERSION}"
+            f"\n*➥ Telegram Bot API :* v{BOT_API_VERSION}"
+            f"\n*➥ {BOT_NAME} :* v{BOT_VERSION}"
+            f"\n*➥ Uptime :* {uptime}"
+            f"\n*➥ Total Users :* {sql.num_users()}"
+            f"\n*➥ Total Chats :* {sql.num_chats()}"
             "\n\n*Bot Admins.*"
-            "\n• @PrinceXofficial, bot creator and main developer."
+            "\n• @LostedPerson, bot creator and main developer."
             "\n\n__⚠️ The bot staff cannot assist you in situations involving groups using this bot.__"
             "\n\n*Supporters*"
             "\n• [Click here](http://t.me/MissCutieUpdates) to consult the updated list of Official Supporters of the bot."
@@ -943,12 +946,12 @@ async def send_alive(context: ContextTypes.DEFAULT_TYPE):
                 caption=f"""
 Hey developer's {context.bot.first_name} online now.
 
-**Python      : {PYTHON_VERSION}**
-**Telethon    : {TELETHON_VERSION}**
-**Pyrogram    : {PYRO_VERSION}**
-**Python-Telegram-Bot : {PTB_VERSION}**
-**Bot-Api-Version :** {BOT_API_VERSION}**
-**Bot-Version : {BOT_VERSION}**
+**Python : v{PYTHON_VERSION}**
+**Telethon : v{TELETHON_VERSION}**
+**Pyrogram : v{PYRO_VERSION}**
+**Python Telegram Bot : v{PTB_VERSION}**
+**Telegram Bot API :** v{BOT_API_VERSION}**
+**{BOT_NAME} : v{BOT_VERSION}**
 
 Presented By @BotXNews
 """,
