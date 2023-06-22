@@ -12,12 +12,12 @@
 <details><summary><h3>BOT STATS🏆</h3></summary>
   
 
-[![](https://img.shields.io/badge/MissCutie-v1.0-darkgreen)](#)
+[![](https://img.shields.io/badge/MissCutie-v2.0-darkgreen)](#)
 [![Stars](https://img.shields.io/github/stars/saifalisew1508/MissCutieRobot?style=flat-square&color=yellow)](https://github.com/saifalisew1508/MissCutieRobot/stargazers)
 [![Forks](https://img.shields.io/github/forks/saifalisew1508/MissCutieRobot?style=flat-square&color=orange)](https://github.com/saifalisew1508/MissCutieRobot/fork)
 [![Size](https://img.shields.io/github/repo-size/saifalisew1508/MissCutieRobot?style=flat-square&color=green)](https://github.com/saifalisew1508/MissCutieRobot)   
-[![PTB](https://img.shields.io/badge/PTB-v13.15-blue)](https://docs.python-telegram-bot.org/)
-[![Telethon](https://img.shields.io/badge/Telethon-1.24.0-blue)](https://docs.telethon.dev/)
+[![PTB](https://img.shields.io/badge/PythonTelegramBot-v20.3-blue)](https://docs.python-telegram-bot.org/)
+[![Telethon](https://img.shields.io/badge/Telethon-1.28.5-blue)](https://docs.telethon.dev/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/saifalisew1508/MissCutieRobot/graphs/commit-activity)
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/saifalisew1508/MissCutieRobot)
 [![Contributors](https://img.shields.io/github/contributors/saifalisew1508/MissCutieRobot?style=flat-square&color=green)](https://github.com/saifalisew1508/MissCutieRobot/graphs/contributors)
