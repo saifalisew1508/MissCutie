@@ -229,10 +229,6 @@ Blue text cleaner removed any made up commands that people send in your chat.
  ➥ `/ignoreblue <word>`*:* prevent auto cleaning of the command
  ➥ `/unignoreblue <word>`*:* remove prevent auto cleaning of the command
  ➥ `/listblue`*:* list currently whitelisted commands
-
- *Following are Disasters only commands, admins cannot use these:*
- ➥ `/gignoreblue <word>`*:* globally ignorea bluetext cleaning of saved word across Zero Two.
- ➥ `/ungignoreblue <word>`*:* remove said command from global cleaning list
 """
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("cleanblue", set_blue_text_must_click, block=False)
@@ -257,7 +253,8 @@ application.add_handler(REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER)
 application.add_handler(LIST_CLEAN_BLUE_TEXT_HANDLER)
 application.add_handler(CLEAN_BLUE_TEXT_HANDLER, BLUE_TEXT_CLEAN_GROUP)
 
-__mod_name__ = "Bluetext Cleaning"
+__mod_name__ = "Blue-Cleaning"
+
 __handlers__ = [
     SET_CLEAN_BLUE_TEXT_HANDLER,
     ADD_CLEAN_BLUE_TEXT_HANDLER,
