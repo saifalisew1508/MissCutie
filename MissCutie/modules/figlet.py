@@ -1,5 +1,4 @@
 import pyfiglet
-from telethon import TelegramClient, event, sync
 from MissCutie.events import register
 
 
