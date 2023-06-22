@@ -369,6 +369,8 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             f"\n*➥ Pyrogram     :* {PYRO_VERSION}"
             f"\n*➥ Telethon       :* {TELETHON_VERSION}"
             f"\n*➥ PTB Library  :* {PTB_VERSION}"
+            f"\n*➥ Bot-Api-Version :* {BOT_API_VERSION}"
+            f"\n*➥ Bot-Version :* {BOT_VERSION}"
             f"\n*➥ Uptime          :* {uptime}"
             f"\n*➥ Total Users  :* {sql.num_users()}"
             f"\n*➥ Total Chats  :* {sql.num_chats()}"
@@ -944,7 +946,9 @@ Hey developer's {context.bot.first_name} online now.
 **Python      : {PYTHON_VERSION}**
 **Telethon    : {TELETHON_VERSION}**
 **Pyrogram    : {PYRO_VERSION}**
-**Python-Telegram-Bot :** {PTB_VERSION}**
+**Python-Telegram-Bot : {PTB_VERSION}**
+**Bot-Api-Version :** {BOT_API_VERSION}**
+**Bot-Version : {BOT_VERSION}**
 
 Presented By @BotXNews
 """,
