@@ -1,4 +1,3 @@
-"""
 from telethon import events, TelegramClient, Button
 import logging
 from telethon.tl.functions.users import GetFullUserRequest as us
