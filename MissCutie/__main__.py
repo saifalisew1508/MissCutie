@@ -169,6 +169,9 @@ for module_name in ALL_MODULES:
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
 
+  	if hasattr(imported_module, "__button__") and imported_module.__button__:
+        HELPABLE[imported_module.__mod_name__.lower()] = imported_module
+
     # Chats to migrate on chat_migrated events
     if hasattr(imported_module, "__migrate__"):
         MIGRATEABLE.append(imported_module)
@@ -254,11 +257,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Get Help",
+                            text="Get Help ⚙️",
                             url="t.me/{}?start=help".format(context.bot.username),
                         ),
                         InlineKeyboardButton(
-                            text=str("Devloper"),
+                            text=str("Developer 🧑‍💻"),
                             url="tg://user?id={}".format(OWNER_ID),
                         ),
                     ],
@@ -415,7 +418,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                         ),
                         InlineKeyboardButton(
                             text="Source",
-                            url="https://github.com/saifalisew1508/MissCutieRobot",
+                            url="tg://emoji?id=5368324170671202286",
                         ),
                     ],
                     [
@@ -478,16 +481,16 @@ async def Music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                 [
                     [
                         InlineKeyboardButton(
-                            text=" Admin ", callback_data="Music_admin"
+                            text="Admin 🤴", callback_data="Music_admin"
                         ),
                         InlineKeyboardButton(
-                            text=" Play ", callback_data="Music_play"
+                            text="Play 🎶", callback_data="Music_play"
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text=" Bot ", callback_data="Music_bot"),
+                        InlineKeyboardButton(text="Bot 🤖", callback_data="Music_bot"),
                         InlineKeyboardButton(
-                            text=" Extra ",
+                            text="Extra 🔧",
                             callback_data="Music_extra",
                         ),
                     ],
