@@ -114,7 +114,7 @@ heroku3
 wget
 nekos.py
 yt_dlp
-youtube_dl==2022.11.29
+youtube_dl
 youtube_search
 youtube_search_python
 openai
