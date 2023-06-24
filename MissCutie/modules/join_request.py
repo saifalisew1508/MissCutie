@@ -156,44 +156,7 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     except Exception as e:
         await update.effective_message.edit_text(str(e))
         pass
-
-
-
-@loggable
-@check_admin(permission="can_invite_users", is_both=True)
-async def approve_all_join_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    bot = context.bot
-    chat = update.effective_chat
-    try:
-        join_requests = await bot.get_chat_members(chat.id)
-        for join_request in join_requests:
-            if join_request.status == 'kicked' or join_request.status == 'left':
-                continue
-            user_id = join_request.user.id
-            try:
-                await bot.approve_chat_join_request(chat.id, user_id)
-                joined_mention = mention_html(user_id, html.escape(join_request.user.first_name))
-                admin_mention = mention_html(update.effective_user.id, html.escape(update.effective_user.first_name))
-                await update.message.reply_text(
-                    f"{joined_mention}'s join request was approved by {admin_mention}.",
-                    parse_mode="HTML"
-                )
-                logmsg = (
-                    f"<b>{html.escape(chat.title)}:</b>\n"
-                    f"#JOIN_REQUEST\n"
-                    f"Approved\n"
-                    f"<b>Admin:</b> {admin_mention}\n"
-                    f"<b>User:</b> {joined_mention}\n"
-                )
-                print(logmsg)  # Adjust logging or storage as needed
-            except Exception as e:
-                await update.message.reply_text(str(e))
-
-        await update.message.reply_text("All pending join requests have been approved.")
-    except Exception as e:
-        await update.message.reply_text(str(e))
         
-
         
 def __migrate__(old_chat_id, new_chat_id):
     migrate_chat(old_chat_id, new_chat_id)
