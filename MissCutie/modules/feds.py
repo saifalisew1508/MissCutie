@@ -2431,8 +2431,7 @@ def __help__(chat):
     ],
     [
         InlineKeyboardButton(text="Users Commands", callback_data="fed_help_user")
-    ],
-]
+    ]
 
 NEW_FED_HANDLER = CommandHandler("newfed", new_fed, block=False)
 DEL_FED_HANDLER = CommandHandler("delfed", del_fed, block=False)
