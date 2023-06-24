@@ -117,7 +117,7 @@ if ENV:
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
     
-    TEMP_DOWNLOAD_LOC = os.environ.get("TEMP_DOWNLOAD_LOC", None)
+    TEMP_DOWNLOAD_LOC = os.environ.get("TEMP_DOWNLOAD_LOC",  "./")
 
 
     try:
