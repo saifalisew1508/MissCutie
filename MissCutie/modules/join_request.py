@@ -163,11 +163,8 @@ def __migrate__(old_chat_id, new_chat_id):
     
     
 
-approve_all_handler = CommandHandler('approveall', approve_all_join_requests)
-set_requests_handler = CommandHandler('joinrequest', set_requests)
 
+application.add_handler(CommandHandler('joinrequest', set_requests))
 application.add_handler(ChatJoinRequestHandler(callback=chat_join_req, block=False))
 application.add_handler(CallbackQueryHandler(callback=approve_joinReq, pattern=r"cb_approve="))
 application.add_handler(CallbackQueryHandler(callback=decline_joinReq, pattern=r"cb_decline="))
-application.add_handler(approve_all_handler)
-application.add_handler(set_requests_handler)
