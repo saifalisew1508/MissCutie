@@ -9,12 +9,12 @@ from MissCutie import application, OPENAI_API_KEY
 
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_message = update.message.text.lower()
-    if user_message in ["hi", "hello", "coé", "oi"]:
-        await update.message.reply_text(f"Hello, how can I help you?")
-    if user_message in ["time?", "time", "hora"]:
-        await update.message.reply_text(f" TIME - {datetime.now()}")
+# async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+#     user_message = update.message.text.lower()
+#     if user_message in ["hi", "hello", "coé", "oi"]:
+#         await update.message.reply_text(f"Hello, how can I help you?")
+#     if user_message in ["time?", "time", "hora"]:
+#         await update.message.reply_text(f" TIME - {datetime.now()}")
     # return f"You sent the following: {user_message}"
 
 
@@ -41,4 +41,4 @@ def chatGPT_message(question):
 
 
 application.add_handler(CommandHandler("gpt", gpt, block=False))
-application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
+# application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
