@@ -1,108 +1,129 @@
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-import youtube_dl
-from MissCutie import pbot as app
+import os
+
+import requests
+import wget
+import yt_dlp
+from pyrogram import filters
+from youtube_search import YoutubeSearch
+from yt_dlp import YoutubeDL
+
+from MissCutie import pbot as bot
 
 
-
-def download_audio(url, quality):
+@bot.on_message(filters.command("video"))
+async def vsong(client, message):
     ydl_opts = {
-        'format': f'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': quality,
-        }],
-        'outtmpl': '%(title)s.%(ext)s',
+        "format": "best",
+        "keepvideo": True,
+        "prefer_ffmpeg": False,
+        "geo_bypass": True,
+        "outtmpl": "%(title)s.%(ext)s",
+        "quite": True,
     }
+    query = " ".join(message.command[1:])
+    try:
+        results = YoutubeSearch(query, max_results=1).to_dict()
+        link = f"https://youtube.com{results[0]['url_suffix']}"
+        title = results[0]["title"][:40]
+        thumbnail = results[0]["thumbnails"][0]
+        thumb_name = f"{title}.jpg"
+        thumb = requests.get(thumbnail, allow_redirects=True)
+        open(thumb_name, "wb").write(thumb.content)
+        results[0]["duration"]
+        results[0]["url_suffix"]
+        results[0]["views"]
+        message.from_user.mention
+    except Exception as e:
+        print(e)
+    try:
+        msg = await message.reply("Video on Process 💫")
+        with YoutubeDL(ydl_opts) as ytdl:
+            ytdl_data = ytdl.extract_info(link, download=True)
+            file_name = ytdl.prepare_filename(ytdl_data)
+    except Exception as e:
+        return await msg.edit(f"🚫 Error: {e}")
+    preview = wget.download(thumbnail)
+    await msg.edit("Process Complete..\n Now Uploading...")
+    title = ytdl_data["title"]
+    await message.reply_video(
+        file_name,
+        duration=int(ytdl_data["duration"]),
+        thumb=preview,
+        caption=f"{title}\nRequested by {message.from_user.mention}",
+    )
 
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(url, download=False)
-        video_title = info_dict.get('title', None)
-        ydl.download([url])
-
-    return video_title
-
-
-def download_video(url, quality):
-    ydl_opts = {
-        'format': f'bestvideo[height<={quality}]+bestaudio/best[height<={quality}]',
-        'outtmpl': '%(title)s.%(ext)s',
-    }
-
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(url, download=False)
-        video_title = info_dict.get('title', None)
-        ydl.download([url])
-
-    return video_title
-
-
-@app.on_message(filters.command("song", prefixes="/"))
-async def handle_song_command(client, message):
-    song_name = message.text.split(" ", 1)[1]
-    chat_id = message.chat.id
-
-    # Send a message asking for the user's choice (audio or video)
-    keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton("Audio", callback_data=f"audio|{song_name}"),
-            InlineKeyboardButton("Video", callback_data=f"video|{song_name}")
-        ]
-    ])
-
-    await app.send_message(chat_id, "Select your preferred option:", reply_markup=keyboard)
-
-
-@app.on_callback_query()
-async def handle_callback_query(client, callback_query):
-    query = callback_query.data
-    chat_id = callback_query.message.chat.id
-
-    if query.startswith("audio"):
-        option, song_name = query.split("|")
-        # Ask for the audio quality
-        keyboard = InlineKeyboardMarkup([
-            [
-                InlineKeyboardButton("High", callback_data=f"audio_quality|{song_name}|high"),
-                InlineKeyboardButton("Medium", callback_data=f"audio_quality|{song_name}|medium"),
-                InlineKeyboardButton("Low", callback_data=f"audio_quality|{song_name}|low")
-            ]
-        ])
-
-        await app.edit_message_text(chat_id, callback_query.message.message_id, "Select audio quality:", reply_markup=keyboard)
-
-    elif query.startswith("video"):
-        option, song_name = query.split("|")
-        # Ask for the video quality
-        keyboard = InlineKeyboardMarkup([
-            [
-                InlineKeyboardButton("HD", callback_data=f"video_quality|{song_name}|hd"),
-                InlineKeyboardButton("SD", callback_data=f"video_quality|{song_name}|sd"),
-                InlineKeyboardButton("Low", callback_data=f"video_quality|{song_name}|low")
-            ]
-        ])
-
-        await app.edit_message_text(chat_id, callback_query.message.message_id, "Select video quality:", reply_markup=keyboard)
-
-    elif query.startswith("audio_quality"):
-        option, song_name, quality = query.split("|")
-        url = f"https://www.youtube.com/results?search_query={song_name}"
-        video_title = download_audio(url, quality)
-        await app.send_audio(chat_id, audio=f"{video_title}.mp3", title=video_title)
-
-    elif query.startswith("video_quality"):
-        option, song_name, quality = query.split("|")
-        url = f"https://www.youtube.com/results?search_query={song_name}"
-        video_title = download_video(url, quality)
-        await app.send_video(chat_id, video=f"{video_title}.mp4", caption=video_title)
+    await msg.delete()
+    try:
+        os.remove(file_name)
+    except Exception as e:
+        print(e)
 
 
+flex = {}
+chat_watcher_group = 3
 
 
+ydl_opts = {
+    "format": "best",
+    "keepvideo": True,
+    "prefer_ffmpeg": False,
+    "geo_bypass": True,
+    "outtmpl": "%(title)s.%(ext)s",
+    "quite": True,
+}
 
 
+@bot.on_message(filters.command("song"))
+def download_song(_, message):
+    query = " ".join(message.command[1:])
+    print(query)
+    m = message.reply("🔄 Searching....")
+    ydl_ops = {"format": "bestaudio[ext=m4a]"}
+    try:
+        results = YoutubeSearch(query, max_results=1).to_dict()
+        link = f"https://youtube.com{results[0]['url_suffix']}"
+        title = results[0]["title"][:40]
+        thumbnail = results[0]["thumbnails"][0]
+        thumb_name = f"{title}.jpg"
+        thumb = requests.get(thumbnail, allow_redirects=True)
+        open(thumb_name, "wb").write(thumb.content)
+        duration = results[0]["duration"]
 
+    except Exception as e:
+        m.edit(
+            "⚠️ No results were found. Make sure you typed the information correctly"
+        )
+        print(str(e))
+        return
+    m.edit("📥 Downloading...")
+    try:
+        with yt_dlp.YoutubeDL(ydl_ops) as ydl:
+            info_dict = ydl.extract_info(link, download=False)
+            audio_file = ydl.prepare_filename(info_dict)
+            ydl.process_info(info_dict)
+        secmul, dur, dur_arr = 1, 0, duration.split(":")
+        for i in range(len(dur_arr) - 1, -1, -1):
+            dur += int(float(dur_arr[i])) * secmul
+            secmul *= 60
+        m.edit("📤 Uploading...")
+
+        message.reply_audio(
+            audio_file,
+            thumb=thumb_name,
+            title=title,
+            caption=f"{title}\nRequested by {message.from_user.mention}",
+            duration=dur,
+        )
+        m.delete()
+    except Exception as e:
+        m.edit(" - An error !!")
+        print(e)
+
+    try:
+        os.remove(audio_file)
+        os.remove(thumb_name)
+    except Exception as e:
+        print(e)
 
 
 __help__ = """
