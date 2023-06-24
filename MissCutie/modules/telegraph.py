@@ -46,16 +46,16 @@ async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     file = reply_msg.video.get_file()
                     file_name = reply_msg.video.file_name
 
-                downloaded_file = file.download_to_drive(TEMP_DOWNLOAD_LOC + "/" + file_name)
+                downloaded_file = await file.download(TEMP_DOWNLOAD_LOC + "/" + file_name)
                 await msg.edit_text("<code>Downloaded image/video</code>", parse_mode="html")
 
                 try:
-                    media_url = telegrph.upload.upload_file(downloaded_file)
+                    media_url = await telegrph.upload.upload_file(downloaded_file)
                 except telegrph.exceptions.TelegraphException as exc:
                     await msg.edit_text(f"ERROR: {exc}")
                 else:
                     await msg.edit_text(
-                        f"Succesfully uploaded to [telegra.ph](https://telegra.ph{media_url[0]})",
+                        f"Successfully uploaded to [telegra.ph](https://telegra.ph{media_url[0]})",
                         parse_mode="markdown",
                     )
             elif args[0] == "t":
@@ -67,7 +67,7 @@ async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text = reply_msg.text
                 text = text.replace("\n", "<br>")
 
-                response = telegrph.create_page(
+                response = await telegrph.create_page(
                     page_title, html_content=text
                 )
 
