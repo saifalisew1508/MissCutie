@@ -97,7 +97,7 @@ if ENV:
     API_HASH = os.environ.get("API_HASH", None)
     DONATION_LINK = os.environ.get("DONATION_LINK")
     LOAD = os.environ.get("LOAD", "").split()
-    NO_LOAD = os.environ.get("NO_LOAD")
+    NO_LOAD = os.environ.get("NO_LOAD", "translation rss cleaner connection math").split()
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
     STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
     WORKERS = int(os.environ.get("WORKERS", 8))
@@ -225,5 +225,6 @@ from MissCutie.modules.helper_funcs.handlers import (
 )
 
 # make sure the regex handler can take extra kwargs
+
 tg.CommandHandler = CustomCommandHandler
 tg.MessageHandler = CustomMessageHandler
