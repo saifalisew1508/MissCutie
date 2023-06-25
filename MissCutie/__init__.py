@@ -29,7 +29,7 @@ from dotenv import load_dotenv
 
 #database version import 
 from sqlalchemy import __version__ as sql_version
-from pymongo import __version as mongo_version
+from pymongo import __version__ as mongo_version
 
 
 
