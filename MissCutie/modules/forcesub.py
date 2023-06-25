@@ -199,7 +199,7 @@ def config(client: Client, message: Message):
 
 __help__ = """
 *Force Subscribe*:
-- Cutiepii Robot 愛 can mute members who are not subscribed your channel until they subscribe
+- @MissCutieRobot can mute members who are not subscribed your channel until they subscribe
 - When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
 
 *Setup*
@@ -207,11 +207,11 @@ __help__ = """
 Note: Only creator of the group can setup me and i will not allow force subscribe again if not done so.
 
 *Commmands*:
-➛ /forcesubscribe*:* To get the current settings.
-➛ /forcesubscribe <no/off/disable>*:* To turn of ForceSubscribe.
-➛ /forcesubscribe <channel username>*:* To turn on and setup the channel.
-➛ /forcesubscribe clear*:* To unmute all members who muted by me.
+- /forcesubscribe*:* To get the current settings.
+- /forcesubscribe <no/off/disable>*:* To turn of ForceSubscribe.
+- /forcesubscribe <channel username>*:* To turn on and setup the channel.
+- /forcesubscribe clear*:* To unmute all members who muted by me.
 Note: /forcesub is an alias of /forcesubscribe
 
 """
-__mod_name__ = "F-Sub"
+__mod_name__ = "ForceSub"
