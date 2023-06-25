@@ -154,6 +154,54 @@ async def _(event):
     await event.reply(required_string.format(p))
 
 
+
+
+@register(pattern="^/deleteall$")
+async def delete_all_messages(event):
+    chat = await event.get_chat()
+    admin = chat.admin_rights.delete_messages
+    creator = chat.creator
+
+    if event.is_private:
+        return await event.respond(
+            "__This command can be used in groups and channels only!__"
+        )
+
+    is_admin = False
+    try:
+        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        is_admin = False
+    else:
+        if isinstance(
+            cutiepii.participant,
+            (
+                ChannelParticipantAdmin,
+                ChannelParticipantCreator,
+            ),
+        ):
+            is_admin = True
+    if not is_admin:
+        return await event.respond("__Only admins can delete all messages!__")
+
+    if not admin and not creator:
+        await event.reply("`I don't have enough permissions!`")
+        return
+
+    done = await event.reply("Deleting all messages...")
+    async for message in telethn.iter_messages(event.chat_id):
+        try:
+            await telethn(functions.channels.DeleteMessagesRequest(event.chat_id, i, rights))
+        except FloodWaitError as ex:
+            LOGGER.warn(f"Sleeping for {ex.seconds} seconds")
+            sleep(ex.seconds)
+        except Exception as ex:
+            await event.reply(str(ex))
+
+    await done.edit("All messages have been deleted.")
+
+
+
 @register(pattern="^/users$")
 async def get_users(show):
     if not show.is_group:
