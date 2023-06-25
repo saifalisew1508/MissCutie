@@ -27,6 +27,11 @@ from telethon import TelegramClient
 from telegram import __bot_api_version__, __version__ as ptb_version
 from dotenv import load_dotenv
 
+#database version import 
+from sqlalchemy import __version__ as sql_version
+from pymongo import __version as mongo_version
+
+
 
 try:
     from MissCutie.config import Development as Config
@@ -69,6 +74,8 @@ PYRO_VERSION = pyrover
 TELETHON_VERSION = tlhver
 BOT_API_VERSION = __bot_api_version__
 PYTHON_VERSION = platform.python_version()
+SQL_VERSION = sql_version
+MONGO_VERSION = mongo_version
 
 if ENV:
     TOKEN = os.environ.get("TOKEN", None)
