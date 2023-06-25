@@ -40,7 +40,9 @@ async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     file = reply_msg.video.get_file()
                     file_name = reply_msg.video.file_name
 
-                downloaded_file = await file.download_to_drive(TEMP_DOWNLOAD_LOC + "/" + file_name)
+                file_path = os.path.join(TEMP_DOWNLOAD_LOC, file_name)
+                await file.download(file_path)
+                downloaded_file = open(file_path, 'rb')
                 await msg.edit_text("<code>Downloaded image/video</code>", parse_mode="html")
 
                 try:
