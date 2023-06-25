@@ -259,12 +259,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Get Help in PM ⚙️",
-                            url="t.me/{}?start=help".format(context.bot.username),
-                        ),
-                        InlineKeyboardButton(
-                            text=str("Developer 🧑‍💻"),
+                            text="Developer 🧑‍💻",
                             url="tg://user?id={}".format(OWNER_ID),
+                            ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="Get Help in PM 🔐",
+                            url="t.me/{}?start=help".format(context.bot.username),
                         ),
                     ],
                 ],
@@ -410,19 +412,19 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                 [
                     [
                         InlineKeyboardButton(
-                            text="Support", callback_data="saif_support"
+                            text="Support 🌍", callback_data="saif_support"
                         ),
                         InlineKeyboardButton(
-                            text="Commands", callback_data="help_back"
+                            text="Help ⚙️", callback_data="help_back"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", url=f"tg://user?id={OWNER_ID}"
+                            text="Developer 🧑‍💻", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
                             text="Source",
-                            url="tg://emoji?id=5368324170671202286",
+                            url="https://github.com/saifalisew1508/MissCutieRobot",
                         ),
                     ],
                     [
@@ -440,18 +442,18 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                 [
                     [
                         InlineKeyboardButton(
-                            text="Support", url=f"https://t.me/{SUPPORT_CHAT}"
+                            text="Support 🤷", url=f"https://t.me/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="Updates", url=f"https://t.me/BotXNews"
+                            text="Updates 📢", url=f"https://t.me/BotXNews"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Developer", url=f"tg://user?id={OWNER_ID}"
+                            text="Developer 🧑‍💻", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
-                            text="Github", url="https://github.com/saifalisew1508"
+                            text="Sponsor Me ❤", url="https://github.com/sponsors/saifalisew1508"
                         ),
                     ],
                     [
@@ -485,16 +487,16 @@ async def Music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                 [
                     [
                         InlineKeyboardButton(
-                            text="Admin 🤴", callback_data="Music_admin"
+                            text="🤴 Admin 🤴", callback_data="Music_admin"
                         ),
                         InlineKeyboardButton(
-                            text="Play 🎶", callback_data="Music_play"
+                            text="🎶 Play 🎶", callback_data="Music_play"
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="Bot 🤖", callback_data="Music_bot"),
+                        InlineKeyboardButton(text="🤖 Bot 🤖", callback_data="Music_bot"),
                         InlineKeyboardButton(
-                            text="Extra 🔧",
+                            text="🛡 Extra 🛡",
                             callback_data="Music_extra",
                         ),
                     ],
