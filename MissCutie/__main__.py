@@ -21,6 +21,8 @@ from MissCutie import (
     BOT_API_VERSION,
     PYRO_VERSION,
     TELETHON_VERSION,
+    SQL_VERSION,
+    MONGO_VERSION,
     BOT_NAME,
     BOT_USERNAME,
     BOT_ID,
@@ -95,16 +97,16 @@ Use the /donate command to donate our devlopers
 
 buttons = [
     [
-        InlineKeyboardButton(text="Commands", callback_data="help_back"),
-        InlineKeyboardButton(text="Music", callback_data="Music_"),
+        InlineKeyboardButton(text="Help ⚙️", callback_data="help_back"),
+        InlineKeyboardButton(text="Music 🎵", callback_data="Music_"),
     ],
     [
-        InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="Updates", url="t.me/BotXNews"),
+        InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
+        InlineKeyboardButton(text="Updates 📢", url="t.me/BotXNews"),
     ],
     [
         InlineKeyboardButton(
-            text="Add Your Group",
+            text="Add Your Group ➕️",
             url=f"https://t.me/{application.bot.username}?startgroup=true",
         ),
     ],
@@ -249,15 +251,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
     else:
         await update.effective_message.reply_text(
-            "Hello I'm Still running successfully on v{}\n<b>Haven't slept since:</b> <code>{}</code>\n<b>Python:</b> <code>v{}</code>\n<b>Telethon:</b> <code>v{}</code>\n<b>Pyrogram:</b> <code>v{}</code>\n<b>Python Telegram Bot:</b> <code>v{}</code>\n<b>Telegram Bot API:</b> <code>v{}</code>".format(
-                BOT_VERSION,uptime,PYTHON_VERSION,TELETHON_VERSION,PYRO_VERSION,PTB_VERSION,BOT_API_VERSION,
+            "Hello I'm Still Running On {} v{}\n\n<b>Uptime:</b> <code>{}</code>\n<b>Python:</b> <code>v{}</code>\n<b>Telethon:</b> <code>v{}</code>\n<b>Pyrogram:</b> <code>v{}</code>\n<b>Python Telegram Bot:</b> <code>v{}</code>\n<b>Telegram Bot API:</b> <code>v{}</code>".format(
+                BOT_NAME,BOT_VERSION,uptime,PYTHON_VERSION,TELETHON_VERSION,PYRO_VERSION,PTB_VERSION,BOT_API_VERSION,
             ),
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="Get Help ⚙️",
+                            text="Get Help in PM ⚙️",
                             url="t.me/{}?start=help".format(context.bot.username),
                         ),
                         InlineKeyboardButton(
@@ -383,11 +385,13 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
             "\n*Written in Python with SQLalchemy and MongoDB as database.*"
             "\n\nAbout bot Library, Databse Users and Chats"
-            f"\n*➥ Python :* v{PYTHON_VERSION}"
+            f"\n\n*➥ Python :* v{PYTHON_VERSION}"
             f"\n*➥ Pyrogram :* v{PYRO_VERSION}"
             f"\n*➥ Telethon :* v{TELETHON_VERSION}"
             f"\n*➥ Python Telegram Bot :* v{PTB_VERSION}"
             f"\n*➥ Telegram Bot API :* v{BOT_API_VERSION}"
+            f"\n*➥ MongoDB :* v{MONGO_VERSION}"
+            f"\n*➥ SQLAlchemy :* v{SQL_VERSION}"
             f"\n*➥ {BOT_NAME} :* v{BOT_VERSION}"
             f"\n*➥ Uptime :* {uptime}"
             f"\n*➥ Total Users :* {sql.num_users()}"
