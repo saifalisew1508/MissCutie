@@ -1,16 +1,12 @@
 import os
 from datetime import datetime
-
 from PIL import Image
-from telegraph.aio import Telegraph
-
+from telegraph import Telegraph
 from MissCutie import TEMP_DOWNLOAD_LOC, application
 from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler
 
-
 async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
     telegrph = Telegraph()
 
     r = await telegrph.create_account(short_name="MissCutie")
@@ -22,16 +18,14 @@ async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     bot = context.bot
 
-
     if not args:
         await message.reply_text("Sorry invalid option \n Ex: /telegraph m - for media \n /telegraph t - for text")
-        return 
+        return
 
-    msg = await message.reply_text("<code>Started telegraph module...</code>", parse_mode="html")        
+    msg = await message.reply_text("<code>Started telegraph module...</code>", parse_mode="html")
 
     if not os.path.isdir(TEMP_DOWNLOAD_LOC):
         os.mkdir(TEMP_DOWNLOAD_LOC)
-
 
     if len(args) >= 1:
         if message.reply_to_message and not message.reply_to_message.forum_topic_created:
@@ -67,19 +61,15 @@ async def telegraph(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text = reply_msg.text
                 text = text.replace("\n", "<br>")
 
-                response = await telegrph.create_page(
-                    page_title, html_content=text
-                )
+                response = await telegrph.create_page(page_title, html_content=text)
 
                 await msg.edit_text(
                     f"Successfully uploaded the Text to [telegra.ph](https://telegra.ph/{response['path']})",
                     parse_mode="markdown"
                 )
-                
 
         elif not message.reply_to_message:
             await msg.edit_text("Haha! I know this trick so tag any image/video/text")
-
 
 TELEGRAPH_HANDLER = CommandHandler("telegraph", telegraph, block=False)
 
