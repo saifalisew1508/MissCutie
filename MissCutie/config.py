@@ -34,7 +34,7 @@ class Config(object):
     ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
     OPENAI_API_KEY = "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"
     LOAD = []
-    NO_LOAD = ["rss", "cleaner", "connection", "math"]
+    NO_LOAD = None
     WEBHOOK = False
     INFOPIC = True
     URL = None
