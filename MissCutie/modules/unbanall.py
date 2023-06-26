@@ -16,7 +16,7 @@ from telethon.tl.types import (
 
 from MissCutie import *
 from MissCutie import LOGGER
-from MissCutie.events import register
+from MissCutie.events import register, callbackquery
 
 sudo = 1930139488
 BOT_ID = 5071423206
@@ -264,7 +264,7 @@ async def get_users(show):
     os.remove("userslist.txt")
 
 
-@telethn(events.CallbackQuery(pattern=r"banall_confirm"))
+@register(events.callbackquery(pattern=r"banall_confirm"))
 async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
