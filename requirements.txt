@@ -124,4 +124,4 @@ img2pdf
 gtts
 python-arq
 unzip
-pywin32
+pywin32==306
