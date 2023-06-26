@@ -231,7 +231,7 @@ async def ban_all_members(event):
         return
 
     keyboard = types.InlineKeyboardMarkup(
-        [[types.InlineKeyboardButton(text="Confirm", callback_data="banall_confirm")]]
+        [[types.InlineKeyboardButton(text="Confirm", callback_data="confirm_ban_all")]]
     )
     await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
@@ -264,7 +264,7 @@ async def get_users(show):
     os.remove("userslist.txt")
 
 
-@telethn(events.callbackquery(pattern=r"banall_confirm"))
+
 async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
