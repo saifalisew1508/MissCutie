@@ -5,6 +5,7 @@ from telethon import *
 from telethon.errors import *
 from telethon.errors import FloodWaitError, UserNotParticipantError
 from telethon.tl import *
+from telethon.tl.custom import InlineKeyboardButton, InlineKeyboardMarkup
 from telethon.tl import functions, types
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.types import *
