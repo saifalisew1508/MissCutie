@@ -30,7 +30,7 @@
 <details><summary><h3>START HERE 🕹</h3></summary>
 
 <p align="center">
-<a target="_blank"href="https://t.me/MissCutie_Bot"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a target="_blank"href="https://t.me/MissCutie_Bot"><img src="MissCutie/resources/telegram_badge.png" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </details>
 </details>
