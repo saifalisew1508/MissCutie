@@ -1,3 +1,4 @@
+"""
 from imdb import IMDb
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -75,7 +76,7 @@ Title:</b> <code>{movie['title']}</code>\n\
         f"<b>Plot:</b> <code>{movie['plot outline'] if 'plot outline' in movie else 'Not available'}</code>"
     )
 
-
+"""
 
 
 __help__ = """
