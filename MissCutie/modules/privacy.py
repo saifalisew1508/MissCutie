@@ -1,3 +1,4 @@
+"""
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Bot
 from telegram.constants import ParseMode
 from telegram.error import BadRequest, Forbidden
