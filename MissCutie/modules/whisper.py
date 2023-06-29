@@ -1,79 +1,66 @@
-from telethon import events, TelegramClient, Button
-import logging
-from telethon.tl.functions.users import GetFullUserRequest as us
-import os
-from MissCutie import telethn as bot
 
 
-db = {}
+from MissCutie import pbot as app
+from pyrogram import emoji
+from pyrogram.types import (
+    InlineQuery,
+    InlineQueryResultArticle,
+    InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton,
+)
 
+lengths = 200
 
-@bot.on(events.InlineQuery())
-async def die(event):
-    if len(event.text) != 0:
-        return
-    me = (await bot.get_me()).username
+IMG = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
+
+@app.on_inline_query()
+async def wishper_ai(_, The: InlineQuery):
+    query = The.query
+    split = query.split(' ', 1)
+    if query == '' or len(query) > lengths \
+            or (query.startswith('@') and len(split) == 1):
+        title = f"🔐 Write a whisper message"
+        content = ("**Send whisper messages through inline mode**\n\n"
+                   "Usage: `@MissCutieRobot [@username] text`")
+        description = "Usage: @MissCutieRobot [@username] text"
+        button = InlineKeyboardButton(
+            "More-Help",
+            url="https://t.me/MissCutieRobot?start=help"
+        )
+
+    elif not query.startswith('@'):
+        title = f"{emoji.EYE} Whisper once to the first one who open it"
+        content = (
+            f"{emoji.EYE} The first one who open the whisper can read it"
+        )
+        description = f"{emoji.SHUSHING_FACE} {query}"
+        button = InlineKeyboardButton(
+            f"🎯 show message",
+            callback_data="show_whisper"
+        )
+
+    else:
+        u_target = 'anyone' if (x := split[0]) == '@' else x
+        title = f"🔒 A whisper message to {u_target}, Only he/she can open it."
+        content = f"🔒 A whisper message to {u_target}, Only he/she can open it."
+        description = f"{emoji.SHUSHING_FACE} {split[1]}"
+        button = InlineKeyboardButton(
+            f"{emoji.LOCKED_WITH_KEY} show message",
+            callback_data="show_whisper"
+        )
+
+    switch_pm_text = f"{emoji.INFORMATION} Learn how to send whispers"
+    switch_pm_parameter = "learn"
     
-@bot.on(events.InlineQuery(pattern="wspr"))
-async def inline(event):
-    me = (await bot.get_me()).username
-    try:
-        inp = event.text.split(None, 1)[1]
-        user, msg = inp.split("|")
-    except IndexError:
-        await event.answer(
-                [], 
-                switch_pm=f"@{me} [UserID]|[Message]",
-                switch_pm_param="start"
-                )
-    except ValueError:
-        await event.answer(
-                [],
-                switch_pm=f"Give a message too!",
-                switch_pm_param="start"
-                )
-    try:
-        ui = await bot(us(user))
-    except BaseException:
-        await event.answer(
-                [],
-                switch_pm="Invalid User ID/Username",
-                switch_pm_param="start"
-                )
-        return
-    db.update({"user_id": ui.user.id, "msg": msg, "self": event.sender.id})
-    text = f"""
-A Whisper Has Been Sent
-To [{ui.user.first_name}](tg://user?id={ui.user.id})!
-Click The Below Button To See The Message!\n
-**Note:** __Only {ui.user.first_name} can open this!__
-    """
-    dn = event.builder.article(
-            title="Its a secret message!",
-            description="It's a secret message!",
-            text=text,
-            buttons=[
-                [Button.inline(" Show Message! ", data="wspr")]
-                ]
+    await The.answer(
+        results=[
+            InlineQueryResultArticle(
+                title=title,
+                input_message_content=InputTextMessageContent(content),
+                description=description,
+                thumb_url=IMG,
+                reply_markup=InlineKeyboardMarkup([[button]])
             )
-    await event.answer(
-            [dn],
-            switch_pm="It's a secret message!",
-            switch_pm_param="start"
-            )
-
-
-@bot.on(events.CallbackQuery(data="wspr"))
-async def ws(event):
-    user = int(db["user_id"])
-    lol = [int(db["self"])]
-    lol.append(user)
-    if event.sender.id not in lol:
-        await event.answer("🔐 This message is not for you!", alert=True)
-        return
-    msg = db["msg"]
-    if msg == []:
-        await event.anwswer(
-                "Oops!\nIt's looks like message got deleted from my server!", alert=True)
-        return
-    await event.answer(msg, alert=True)
+        ],
+        switch_pm_text=switch_pm_text,
+        switch_pm_parameter=switch_pm_parameter
+    )
