@@ -74,3 +74,12 @@ Title:</b> <code>{movie['title']}</code>\n\
     return await m.reply_text(
         f"<b>Plot:</b> <code>{movie['plot outline'] if 'plot outline' in movie else 'Not available'}</code>"
     )
+
+
+
+
+__help__ = """
+ ➥ /imdb <Movie name>*:* Get full info about a movie from [imdb.com](https://m.imdb.com)
+"""
+
+__mod_name__ = "IMDB"
