@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Bot
 from telegram.constants import ParseMode
 from telegram.error import BadRequest, Forbidden
-from telegram.ext import CommandHandler, CallbackQueryHandler
+from telegram.ext import CommandHandler, CallbackQueryHandler, ContextTypes
 
 from MissCutie import application
 
@@ -16,7 +16,7 @@ PRIVACY_STRING = """Select one of the below options for more information about h
 CANCEL_STRING = """Privacy deletion request cancelled."""
 
 
-async def privacy(update, context):
+async def privacy(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_message.from_user
     chat = update.effective_chat  # type: Optional[Chat]
     bot = context.bot
@@ -56,7 +56,7 @@ async def privacy(update, context):
             )
 
 
-  async def greyson_policy_callback(update, context):
+  async def greyson_policy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     if query.data == "policy_":
         await query.message.edit_text(
@@ -264,7 +264,7 @@ This action **CANNOT** be undone.""",
 
 
 @run_async
-def greyson_cancel_callback(update, context):
+def greyson_cancel_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     if query.data == "cancel_": 
         await query.message.edit_text(
