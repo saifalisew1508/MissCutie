@@ -8,27 +8,28 @@ from MissCutie import pbot as client
 
 
 
+L = instaloader.Instaloader()
+L.login("im_broken2023", "Saif@1508")
+
+
+
 async def download_instagram_post(post_code, target_folder):
-    downloader = instaloader.Instaloader()
-    post = instaloader.Post.from_shortcode(downloader.context, post_code)
-    await downloader.download_post(post, target=target_folder)
+    post = instaloader.Post.from_shortcode(L.context, post_code)
+    await L.download_post(post, target=target_folder)
 
 async def download_instagram_story(username, target_folder):
-    downloader = instaloader.Instaloader()
-    profile = instaloader.Profile.from_username(downloader.context, username)
+    profile = instaloader.Profile.from_username(L.context, username)
     stories = profile.get_stories()
     for story in stories:
-        await downloader.download_storyitem(story, target=target_folder)
+        await L.download_storyitem(story, target=target_folder)
 
 async def download_instagram_igtv(igtv_code, target_folder):
-    downloader = instaloader.Instaloader()
-    igtv = instaloader.IGTV.from_shortcode(downloader.context, igtv_code)
-    await downloader.download_igtv([igtv], target=target_folder)
+    igtv = instaloader.IGTV.from_shortcode(L.context, igtv_code)
+    await L.download_igtv([igtv], target=target_folder)
 
 async def download_instagram_reel(reel_code, target_folder):
-    downloader = instaloader.Instaloader()
-    reel = instaloader.Post.from_shortcode(downloader.context, reel_code)
-    await downloader.download_reels([reel], target=target_folder)
+    reel = instaloader.Post.from_shortcode(L.context, reel_code)
+    await L.download_reels([reel], target=target_folder)
 
 @app.on_message(filters.command("ig", prefixes="/"))
 async def save_instagram_content(client, message):
@@ -84,4 +85,3 @@ async def save_instagram_content(client, message):
 
     except Exception as e:
         await client.send_message(message.chat.id, f"An error occurred while processing the content: {str(e)}")
-
