@@ -1,8 +1,7 @@
 import threading
 
-from sqlalchemy import Boolean, BigInteger
+from sqlalchemy import Boolean, BigInteger, Column
 from sqlalchemy.sql.sqltypes import String
-from sqlalchemy import Column
 
 from MissCutie.modules.sql import BASE, SESSION
 
@@ -24,6 +23,7 @@ class JoinRequestSettings(BASE):
 JoinRequestSettings.__table__.create(checkfirst=True)
 JOINREQUEST_SETTING_LOCK = threading.RLock()
 DISABLED_CHATS = set()
+AUTO_APPROVE_CHATS = set()
 
 
 def enable_join_req(chat_id: int):
@@ -57,6 +57,25 @@ def join_req_status(chat_id: int) -> bool:
     return chat_id not in DISABLED_CHATS
 
 
+def set_auto_approve(chat_id: int, auto_approve: bool):
+    with JOINREQUEST_SETTING_LOCK:
+        chat = SESSION.query(JoinRequestSettings).get(chat_id)
+        if not chat:
+            chat = JoinRequestSettings(chat_id, False)
+
+        chat.auto_approve = auto_approve
+        if auto_approve:
+            AUTO_APPROVE_CHATS.add(chat_id)
+        else:
+            AUTO_APPROVE_CHATS.remove(chat_id)
+        SESSION.add(chat)
+        SESSION.commit()
+
+
+def auto_approve_status(chat_id: int) -> bool:
+    return chat_id in AUTO_APPROVE_CHATS
+
+
 def migrate_chat(old_chat_id, new_chat_id):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(old_chat_id)
@@ -72,6 +91,7 @@ def __load_disabled_join_req():
     try:
         all_chats = SESSION.query(JoinRequestSettings).all()
         DISABLED_CHATS = {chat.chat_id for chat in all_chats if chat.setting is False}
+        AUTO_APPROVE_CHATS = {chat.chat_id for chat in all_chats if chat.auto_approve}
     finally:
         SESSION.close()
 
