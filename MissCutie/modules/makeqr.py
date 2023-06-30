@@ -4,7 +4,6 @@ from requests import get, post
 from telethon.tl import functions
 from MissCutie import telethn
 from MissCutie.events import register
-from MissCutie.modules.mongo.nsfw_mongo import approved_users
 from MissCutie.utils.permissions import is_register_admin
 
 
