@@ -60,23 +60,34 @@ def join_req_status(chat_id: int) -> bool:
     return chat_id not in DISABLED_CHATS
 
 
-def set_auto_approve(chat_id: int, auto_approve: bool):
+def set_auto_approve_true(chat_id: int, auto_approve: bool):
+    with JOINREQUEST_SETTING_LOCK:
+        chat = SESSION.query(JoinRequestSettings).get(chat_id)
+        if not chat:
+            chat = JoinRequestSettings(chat_id, True)
+
+        chat.auto_approve = True
+        try:
+            DISABLED_CHATS.remove(chat_id)
+        except KeyError:
+            pass
+        SESSION.add(chat)
+        SESSION.commit()
+
+def set_auto_approve_false(chat_id: int, auto_approve: bool):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
             chat = JoinRequestSettings(chat_id, False)
 
-        chat.auto_approve = auto_approve
-        if auto_approve:
-            AUTO_APPROVE_CHATS.add(chat_id)
-        else:
-            AUTO_APPROVE_CHATS.remove(chat_id)
+        chat.auto_approve = False
+        DISABLED_CHATS.add(chat_id)
         SESSION.add(chat)
         SESSION.commit()
 
 
 def auto_approve_status(chat_id: int) -> bool:
-    return chat_id in AUTO_APPROVE_CHATS
+    return chat_id not in DISABLED_CHATS
 
 
 def migrate_chat(old_chat_id, new_chat_id):
