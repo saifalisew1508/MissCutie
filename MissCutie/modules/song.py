@@ -1,5 +1,4 @@
 import os
-
 import requests
 import wget
 import yt_dlp
@@ -9,17 +8,19 @@ from yt_dlp import YoutubeDL
 
 from MissCutie import pbot as bot
 
+# Constants
+YDL_OPTS = {
+    "format": "best",
+    "keepvideo": True,
+    "prefer_ffmpeg": False,
+    "geo_bypass": True,
+    "outtmpl": "%(title)s.%(ext)s",
+    "quite": True,
+}
+
 
 @bot.on_message(filters.command("video"))
 async def vsong(client, message):
-    ydl_opts = {
-        "format": "best",
-        "keepvideo": True,
-        "prefer_ffmpeg": False,
-        "geo_bypass": True,
-        "outtmpl": "%(title)s.%(ext)s",
-        "quite": True,
-    }
     query = " ".join(message.command[1:])
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -29,21 +30,21 @@ async def vsong(client, message):
         thumb_name = f"{title}.jpg"
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, "wb").write(thumb.content)
-        results[0]["duration"]
-        results[0]["url_suffix"]
-        results[0]["views"]
         message.from_user.mention
     except Exception as e:
         print(e)
+        return
+
     try:
-        msg = await message.reply("Video on Process 💫")
-        with YoutubeDL(ydl_opts) as ytdl:
+        msg = await message.reply("Video in progress 💫")
+        with YoutubeDL(YDL_OPTS) as ytdl:
             ytdl_data = ytdl.extract_info(link, download=True)
             file_name = ytdl.prepare_filename(ytdl_data)
     except Exception as e:
         return await msg.edit(f"🚫 Error: {e}")
+
     preview = wget.download(thumbnail)
-    await msg.edit("Process Complete..\n Now Uploading...")
+    await msg.edit("Process complete...\nNow uploading...")
     title = ytdl_data["title"]
     await message.reply_video(
         file_name,
@@ -57,20 +58,6 @@ async def vsong(client, message):
         os.remove(file_name)
     except Exception as e:
         print(e)
-
-
-flex = {}
-chat_watcher_group = 3
-
-
-ydl_opts = {
-    "format": "best",
-    "keepvideo": True,
-    "prefer_ffmpeg": False,
-    "geo_bypass": True,
-    "outtmpl": "%(title)s.%(ext)s",
-    "quite": True,
-}
 
 
 @bot.on_message(filters.command("song"))
@@ -95,6 +82,7 @@ def download_song(_, message):
         )
         print(str(e))
         return
+
     m.edit("📥 Downloading...")
     try:
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
@@ -116,7 +104,7 @@ def download_song(_, message):
         )
         m.delete()
     except Exception as e:
-        m.edit(" - An error !!")
+        m.edit(" - An error occurred!")
         print(e)
 
     try:
@@ -127,9 +115,8 @@ def download_song(_, message):
 
 
 __help__ = """
-/song {name}, bot send You asked Song in That chat!
-/video {name}, bot send You asked Yt video In That chat!
+/song {name} - Bot sends you the requested song in that chat!
+/video {name} - Bot sends you the requested YouTube video in that chat!
 """
-
 
 __mod_name__ = "YouTube"
