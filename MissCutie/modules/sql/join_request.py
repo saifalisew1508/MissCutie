@@ -11,10 +11,12 @@ class JoinRequestSettings(BASE):
 
     chat_id = Column(BigInteger, primary_key=True)
     setting = Column(Boolean, default=False, nullable=False)
+    auto_approve = Column(Boolean, default=False, nullable=False)
 
-    def __init__(self, chat_id: int, setting: bool):
+    def __init__(self, chat_id: int, setting: bool, auto_approve: bool):
         self.chat_id = chat_id
         self.setting = setting
+        self.auto_approve = auto_approve
 
     def __repr__(self):
         return "<JoinRequest setting {} ({})>".format(self.chat_id, self.setting)
@@ -24,6 +26,7 @@ JoinRequestSettings.__table__.create(checkfirst=True)
 JOINREQUEST_SETTING_LOCK = threading.RLock()
 DISABLED_CHATS = set()
 AUTO_APPROVE_CHATS = set()
+
 
 
 def enable_join_req(chat_id: int):
