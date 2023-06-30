@@ -16,7 +16,7 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql.join_request import enable_join_req, disable_join_req, join_req_status, set_auto_approve, migrate_chat
+from MissCutie.modules.sql.join_request import enable_join_req, disable_join_req, join_req_status, set_auto_approve_true, set_auto_approve_false, migrate_chat
 
 
 @check_admin(permission="can_invite_users", is_both=True)
@@ -77,7 +77,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            await set_auto_approve(chat.id, True)
+            set_auto_approve_true(chat.id)
             await message.reply_html(
                 "Enabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
@@ -88,7 +88,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            await set_auto_approve(chat.id, False)
+            set_auto_approve_false(chat.id)
             await message.reply_html(
                 "Disabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
