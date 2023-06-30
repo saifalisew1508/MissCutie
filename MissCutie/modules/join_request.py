@@ -31,7 +31,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            enable_join_req(chat.id)
+            await enable_join_req(chat.id)
             await message.reply_html(
                 "Enabled join request menu in {}\nI will send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
@@ -43,7 +43,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            disable_join_req(chat.id)
+            await disable_join_req(chat.id)
             await message.reply_html(
                 "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
@@ -77,7 +77,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            set_auto_approve(chat.id, True)
+            await set_auto_approve(chat.id, True)
             await message.reply_html(
                 "Enabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
@@ -88,7 +88,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            set_auto_approve(chat.id, False)
+            await set_auto_approve(chat.id, False)
             await message.reply_html(
                 "Disabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
