@@ -84,46 +84,40 @@ async def markdown_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 __help__ = """
 *Available commands:*
+
+*Carbon*
+/carbon *:* Make Carbon To Given or Replied Text
+
+*Couples*
+➥ /couples *:* Choose 2 users and send their name as couples in your chat.
+
+*Echo*
+➥ /echo *:* reply to a text
+
 *Markdown:*
  ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
-*Paste:*
- ➥ /paste*:* Saves replied content to `nekobin.com` and replies with a url
-*React:*
- ➥ /react*:* Reacts with a random reaction
- *Zip*
- ➥ /zip*:* reply to a telegram file to compress it in .zip format
- ➥ /unzip*:* reply to a telegram file to decompress it from the .zip format
-*Urban Dictonary:*
- ➥ /ud <word>*:* Type the word or expression you want to search use
-*Wikipedia:*
- ➥ /wiki <query>*:* wikipedia your query
-*Wallpapers:*
- ➥ /wall <query>*:* get a wallpaper from wall.alphacoders.com
-*QR Code Tools*
- ➥ /getqr: get the qr code content from the replied qr code
- ➥ /makeqr <content>: make a qr code from the given message (text, link, etc...)
-*Encryption & Decryption*
- ➥ /encrypt*:* Encrypts The Given Text
- ➥ /decrypt*:* Decrypts Previously Ecrypted Text
-*Country*
- ➥ /country <country name>*:* Gathering info about given country
-*English Tools*
- ➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
- ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
- ➥ /synonyms <word>*:* Find the synonyms of a word
- ➥ /antonyms <word>*:* Find the antonyms of a word
-*Currency converter:*
- ➥ /cash*:* currency converter
-Example:
- /cash 1 USD INR
-      _OR_
- /cash 1 usd inr
-Output: 1.0 USD = 75.505 INR
-*Timezones:*
- ➥ /time <query>*:* Gives information about a timezone.
+ 
+*Mamefy*
+➥ /mmf <TEXT>*:* Add Text to Replied Sticker
 
-*Available queries:* Country Code/Country Name/Timezone Name
-• 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+*Prank*
+➥ /horny *:* check your current hornyess
+➥ /gay *:* check your current guyness
+➥ /lezbian *:* check ur current lazbian
+➥ /boob *:* check your current boobs size
+➥ /cute *:* check your current cuteness
+
+*React:*
+➥ /react*:* Reacts with a random reaction
+
+*Tag/Mention All*
+➥ /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
+
+*QuoteLy*
+➥ /q - To quote a message.
+➥ /q [INTEGER] - To quote more than 1 messages.
+➥ /q r - to quote a message with it's reply
+➥ /q r [INTEGER] To quote more than 1 reply messages
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=filters.ChatType.GROUPS, block=False)
