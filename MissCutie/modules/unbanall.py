@@ -247,14 +247,14 @@ async def confirm_ban_all(event):
         await event.answer("I don't have enough permissions!", alert=True)
         return
 
-    if creator and event.sender_id != creator.user_id:
+    if admin and event.sender_id != admin.user_id:
         await event.answer("Only the group creator can confirm!", alert=True)
         return
 
     done = await event.edit("Banning all members...")
     p = 0
     async for member in telethn.iter_participants(event.chat_id):
-        if not isinstance(member.participant, (ChannelParticipantAdmin, ChannelParticipantCreator)):
+        if not isinstance(member.participant, (ChannelParticipantCreator)):
             try:
                 await telethn.kick_participant(event.chat_id, member.id)
             except FloodWaitError as ex:
