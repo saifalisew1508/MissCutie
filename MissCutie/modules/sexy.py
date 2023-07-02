@@ -72,17 +72,3 @@ async def cute(e):
     CUTE = f"**🍑** {mention} {mm}**% cute**"
     await e.reply(CUTE, buttons=BUTTON, file=CUTIE)
 
-
-__help__ = """
-➻ /horny - check your current hornyess
-
-➻ /gay - check your current guyness
-
-➻ /lezbian - check ur current lazbian
-
-➻ /boob - check your current boobs size
-
-➻ /cute - check your current cuteness
-"""
-
-__mod_name__ = "Prank"
