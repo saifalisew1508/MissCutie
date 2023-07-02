@@ -919,24 +919,25 @@ __help__ = """
 ➥ /admins*:* list of admins in the chat
 
 *Admins only:*
-➥ `/pin`*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
-➥ `/unpin`*:* unpins the currently pinned message
-➥ `/unpinall`*:* unpins all the pinned message, works in topics too (only OWNER can do.)
-➥ `/del`*:* deletes the message you replied to
-➥ `/purge`*:* deletes all messages between this and the replied to message.
-➥ `/purge <integer X>`*:* deletes the replied message, and X messages following it if replied to a message.
-➥ `/invitelink`*:* gets invitelink
-➥ `/promote`*:* promotes the user replied to
-➥ `/demote`*:* demotes the user replied to
-➥ `/title <title here>`*:* sets a custom title for an admin that the bot promoted
-➥ `/admincache`*:* force refresh the admins list
-➥ `/zombies`*:* Starts searching for deleted accounts in the group.
-➥ `/zombies clean`*:* Removes the deleted accounts from the group.
-➥ `approveall` approve all pending join request (only for Groups)
-➥ `joinrequest <yes|on|true/no|off|false>` To activate join request acceptabe button
-➥ `/unbanall`*:* Unban all banned members in Group 
-➥ `/unmuteall`*:* Unmute all banned members in Group
-➥ `/users`*:* get group users list
+➥ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
+➥ /unpin*:* unpins the currently pinned message
+➥ /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
+➥ /del*:* deletes the message you replied to
+➥ /purge*:* deletes all messages between this and the replied to message.
+➥ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
+➥ /invitelink*:* gets invitelink
+➥ /promote*:* promotes the user replied to
+➥ /demote*:* demotes the user replied to
+➥ /title <title here> *:* sets a custom title for an admin that the bot promoted
+➥ /admincache*:* force refresh the admins list
+➥ /zombies*:* Starts searching for deleted accounts in the group.
+➥ /zombies clean*:* Removes the deleted accounts from the group.
+➥ /approveall approve all pending join request *(NO MORE)*
+➥ /joinrequest `<yes|on|true/no|off|false>` To activate join request acceptabe button
+➥ /autoapprove `<yes|on|true/no|off|false>` To activate join request auto accept by bot
+➥ /unbanall*:* Unban all banned members in Group 
+➥ /unmuteall*:* Unmute all banned members in Group
+➥ /users*:* get group users list
 """
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist, block=False)
