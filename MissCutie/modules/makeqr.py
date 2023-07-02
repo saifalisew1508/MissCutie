@@ -76,13 +76,5 @@ async def makeqr(event):
     duration = (datetime.now() - start).seconds
     await event.reply(f"Created QRCode in {duration} seconds")
 
-
-__help__ = """
-- /getqr - Get QR Code content from a replied photo.
-- /makeqr <text> - Make a QR Code containing the given text.
-"""
-
-__mod_name__ = "QR Code"
-
 __command_list__ = ["getqr", "makeqr"]
 __handlers__ = [register]
