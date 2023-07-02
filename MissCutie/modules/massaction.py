@@ -211,10 +211,23 @@ async def ban_all_members(event):
             "__This command can be used in groups and channels!__"
         )
 
-    if not creator:
+    is_creator = False
+    try:
+        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        is_creator = False
+    else:
+        if isinstance(
+            cutiepii.participant,
+            (
+                ChannelParticipantCreator,
+            ),
+        ):
+            is_creator = True
+    if not is_creator:
         return await event.respond("__Only the group creator can use this command!__")
 
-    if not admin:
+    if not admin and not creator:
         await event.reply("`I don't have enough permissions!`")
         return
 
@@ -228,12 +241,12 @@ async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
     creator = chat.creator
-    if not creator:
+    if not is_creator:
         await event.answer("Only the group creator can confirm!", alert=True)
         return
 
 
-    if not admin:
+    if not admin and not creator:
         await event.answer("I don't have enough permissions!", alert=True)
         return
 
