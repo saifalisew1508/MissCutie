@@ -200,6 +200,7 @@ async def delete_all_messages(event):
     await done.edit("All messages have been deleted.")
 
 
+
 @register(pattern="^/banall$")
 async def ban_all_members(event):
     chat = await event.get_chat()
@@ -210,51 +211,34 @@ async def ban_all_members(event):
             "__This command can be used in groups and channels!__"
         )
 
-    is_admin = False
-    try:
-        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
-    except UserNotParticipantError:
-        is_admin = False
-    else:
-        if isinstance(
-            cutiepii.participant,
-            (
-                ChannelParticipantAdmin,
-                ChannelParticipantCreator,
-            ),
-        ):
-            is_admin = True
-    if not is_admin:
-        return await event.respond("__Only admins can ban all members!__")
+    if not creator or event.sender_id != creator.user_id:
+        return await event.respond("__Only the group creator can use this command!__")
 
-    if not admin and not creator:
+    if not admin:
         await event.reply("`I don't have enough permissions!`")
         return
 
-    if creator and event.sender_id != creator.user_id:
-        return await event.respond("__Only the group creator can use this command!__")
-
-    keyboard = Button.inline('Confirm (Owner Only}', b'banall_confirm')
+    keyboard = Button.inline('Confirm (Owner Only)', b'banall_confirm')
     await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
 
 @callbackquery(pattern=r"banall_confirm")
 async def confirm_ban_all(event):
     chat = await event.get_chat()
-    admin = chat.admin_rights.ban_users
     creator = chat.creator
-    if not admin and not creator:
-        await event.answer("I don't have enough permissions!", alert=True)
+    if not creator or event.sender_id != creator.user_id:
+        await event.answer("Only the group creator can confirm!", alert=True)
         return
 
-    if admin and event.sender_id != admin.user_id:
-        await event.answer("Only the group creator can confirm!", alert=True)
+    admin = chat.admin_rights.ban_users
+    if not admin:
+        await event.answer("I don't have enough permissions!", alert=True)
         return
 
     done = await event.edit("Banning all members...")
     p = 0
     async for member in telethn.iter_participants(event.chat_id):
-        if not isinstance(member.participant, (ChannelParticipantCreator)):
+        if not isinstance(member.participant, (ChannelParticipantAdmin, ChannelParticipantCreator)):
             try:
                 await telethn.kick_participant(event.chat_id, member.id)
             except FloodWaitError as ex:
@@ -270,6 +254,7 @@ async def confirm_ban_all(event):
         return
     required_string = "Successfully banned **{}** members."
     await event.reply(required_string.format(p))
+
 
 
 @register(pattern="^/users$")
