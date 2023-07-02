@@ -241,6 +241,20 @@ async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
     creator = chat.creator
+    
+    is_creator = False
+    try:
+        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        is_creator = False
+    else:
+        if isinstance(
+            cutiepii.participant,
+            (
+                ChannelParticipantCreator,
+            ),
+        ):
+            is_creator = True
     if not is_creator:
         await event.answer("Only the group creator can confirm!", alert=True)
         return
