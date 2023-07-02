@@ -70,12 +70,3 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
     except Exception as e:
         print(e)
         await message.reply_text(e)
-
-
-__help__ = """
-Choose couples in your chat
-
- ➥ /couples *:* Choose 2 users and send their name as couples in your chat.
-"""
-
-__mod_name__ = "Couples"
