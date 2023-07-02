@@ -54,13 +54,3 @@ sucessfully written text 💘
                 [[InlineKeyboardButton("Telegraph", url=f"{req}")]]
             ),
         )
-
-
-__mod_name__ = "WriteTool"
-
-__help__ = """
-
- Writes the given text on white page with a pen 🖊
-
-➥ /write <text> *:* Writes the given text.
- """
