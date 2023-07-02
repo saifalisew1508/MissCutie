@@ -1022,7 +1022,7 @@ def main():
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
     else:
-        await telethn.run_until_disconnected()
+        telethn.run_until_disconnected()
 
 
 
