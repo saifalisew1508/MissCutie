@@ -28,13 +28,3 @@ async def carbon_func(_, message):
      ) 
      await m.delete() 
      carbon.close()
-
-
-__mod_name__ = "Carbon"
-
-__help__ = """
-
-make a carbon to given text and sending to you.
-
-➥ /carbon *:* Reply any text
- """
