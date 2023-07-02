@@ -264,7 +264,7 @@ async def get_users(show):
     os.remove("userslist.txt")
 
 
-@callbackquery(events.callbackquery(pattern=r"banall_confirm"))
+@callbackquery(pattern=r"banall_confirm")
 async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
