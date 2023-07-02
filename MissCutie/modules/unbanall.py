@@ -234,7 +234,7 @@ async def ban_all_members(event):
     if creator and event.sender_id != creator.user_id:
         return await event.respond("__Only the group creator can use this command!__")
 
-    keyboard = Button.inline('Confirm', b'banall_confirm')
+    keyboard = Button.inline('Confirm (Owner Only}', b'banall_confirm')
     await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
 
