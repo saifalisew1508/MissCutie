@@ -64,7 +64,7 @@ def set_auto_approve_true(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
-            chat = JoinRequestSettings(chat_id, True)
+            chat = JoinRequestSettings(chat_id, True, True)
 
         chat.auto_approve = True
         try:
@@ -79,12 +79,13 @@ def set_auto_approve_false(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
-            chat = JoinRequestSettings(chat_id, False)
+            chat = JoinRequestSettings(chat_id, False, False)  # Set auto_approve to False
 
         chat.auto_approve = False
         DISABLED_CHATS.add(chat_id)
         SESSION.add(chat)
         SESSION.commit()
+
 
 
 
