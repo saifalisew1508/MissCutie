@@ -60,7 +60,7 @@ def join_req_status(chat_id: int) -> bool:
     return chat_id not in DISABLED_CHATS
 
 
-def set_auto_approve_true(chat_id: int, auto_approve: bool):
+def set_auto_approve_true(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
@@ -74,7 +74,8 @@ def set_auto_approve_true(chat_id: int, auto_approve: bool):
         SESSION.add(chat)
         SESSION.commit()
 
-def set_auto_approve_false(chat_id: int, auto_approve: bool):
+
+def set_auto_approve_false(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
@@ -84,6 +85,7 @@ def set_auto_approve_false(chat_id: int, auto_approve: bool):
         DISABLED_CHATS.add(chat_id)
         SESSION.add(chat)
         SESSION.commit()
+
 
 
 def auto_approve_status(chat_id: int) -> bool:
