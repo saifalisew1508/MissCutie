@@ -211,7 +211,7 @@ async def ban_all_members(event):
             "__This command can be used in groups and channels!__"
         )
 
-    if not creator or event.sender_id != admin.user_id:
+    if not creator:
         return await event.respond("__Only the group creator can use this command!__")
 
     if not admin:
@@ -222,15 +222,17 @@ async def ban_all_members(event):
     await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
 
+
 @callbackquery(pattern=r"banall_confirm")
 async def confirm_ban_all(event):
     chat = await event.get_chat()
+    admin = chat.admin_rights.ban_users
     creator = chat.creator
-    if not creator or event.sender_id != creator.user_id:
+    if not creator:
         await event.answer("Only the group creator can confirm!", alert=True)
         return
 
-    admin = chat.admin_rights.ban_users
+
     if not admin:
         await event.answer("I don't have enough permissions!", alert=True)
         return
