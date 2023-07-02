@@ -231,9 +231,7 @@ async def ban_all_members(event):
         await event.reply("`I don't have enough permissions!`")
         return
 
-    keyboard = types.InlineKeyboardMarkup(
-        [[types.InlineKeyboardButton(text="Confirm", callback_data="banall_confirm")]]
-    )
+    keyboard = Button.inline('Confirm', b'banall_confirm')
     await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
 
