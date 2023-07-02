@@ -211,7 +211,7 @@ async def ban_all_members(event):
             "__This command can be used in groups and channels!__"
         )
 
-    if not creator or event.sender_id != creator.user_id:
+    if not creator or event.sender_id != admin.user_id:
         return await event.respond("__Only the group creator can use this command!__")
 
     if not admin:
