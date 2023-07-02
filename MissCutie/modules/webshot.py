@@ -77,10 +77,3 @@ async def take_ss(_, message: Message):
         await m.delete()
     except Exception as e:
         await m.edit(str(e))
-
-
-__help__ = """
-➥ /webss *:* Sends the screenshot of the given url.
-"""
-__mod_name__ = "Webshot"
-
