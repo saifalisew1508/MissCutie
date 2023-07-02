@@ -1,9 +1,21 @@
 __help__ = """
-*Carbon*
-/carbon *:* Make Carbon To Given or Replied Text
+*Available commands:*
 
-*Couples*
-➥ /couples *:* Choose 2 users and send their name as couples in your chat.
+*Country*
+➥ /country <country name>*:* Gathering info about given country
+
+*Currency converter:*
+➥ /cash*:* currency converter
+*Example:*
+➥ /cash 1 USD INR
+➥ /cash 1 usd inr
+*Output:* 1.0 USD = 75.505 INR
+
+*English Tools*
+➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+➥ /spell*:* while replying to a message, will reply with a grammar corrected version
+➥ /synonyms <word>*:* Find the synonyms of a word
+➥ /antonyms <word>*:* Find the antonyms of a word
 
 *Encryption & Decryption*
 ➥ /encrypt *:* Encrypts The Given Text
@@ -15,16 +27,6 @@ __help__ = """
 *GPS & Location*
 ➥ /gps <location>*:* Get gps location.
 
-*Mamefy*
-➥ /mmf <TEXT>*:* Add Text to Replied Sticker
-
-*Prank*
-➥ /horny *:* check your current hornyess
-➥ /gay *:* check your current guyness
-➥ /lezbian *:* check ur current lazbian
-➥ /boob *:* check your current boobs size
-➥ /cute *:* check your current cuteness
-
 *Paste*
 ➥ /paste *:* Saves replied content to nekobin.com and replies with a url
  
@@ -34,6 +36,15 @@ __help__ = """
 *QR Code*
 ➥ /getqr *:* Get QR Code content from a replied photo.
 ➥ /makeqr <text> *:* Make a QR Code containing the given text.
+
+➥ /time <query>*:* Gives information about a timezone.
+*Available queries:* Country Code/Country Name/Timezone Name 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+*Urban Dictonary:*
+➥ /ud <word>*:* Type the word or expression you want to search use
+ 
+*Wikipedia:*
+➥ /wiki <query>*:* wikipedia your query
 
 *WallPaper*
 ➥ /wall <query>*:* get a wallpaper from wall.alphacoders.com
