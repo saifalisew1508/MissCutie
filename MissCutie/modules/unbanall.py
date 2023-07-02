@@ -16,7 +16,7 @@ from telethon.tl.types import (
 
 from MissCutie import *
 from MissCutie import LOGGER
-from MissCutie.events import register
+from MissCutie.events import register, callbackquery
 
 sudo = 1930139488
 BOT_ID = 5071423206
@@ -39,13 +39,13 @@ async def is_register_admin(chat, user):
 
 
 @register(pattern="^/unbanall$")
-async def _(event):
+async def unban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
     creator = chat.creator
     if event.is_private:
         return await event.respond(
-            "__This command can be use in groups and channels!__"
+            "__This command can be used in groups and channels!__"
         )
 
     is_admin = False
@@ -63,13 +63,13 @@ async def _(event):
         ):
             is_admin = True
     if not is_admin:
-        return await event.respond("__Only admins can Unmuteall!__")
+        return await event.respond("__Only admins can unban all members!__")
 
     if not admin and not creator:
         await event.reply("`I don't have enough permissions!`")
         return
 
-    done = await event.reply("Searching Participant Lists.")
+    done = await event.reply("Searching for banned participants...")
     p = 0
     async for i in telethn.iter_participants(
         event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
@@ -80,7 +80,7 @@ async def _(event):
                 functions.channels.EditBannedRequest(event.chat_id, i, rights)
             )
         except FloodWaitError as ex:
-            LOGGER.warn(f"sleeping for {ex.seconds} seconds")
+            LOGGER.warn(f"Sleeping for {ex.seconds} seconds")
             sleep(ex.seconds)
         except Exception as ex:
             await event.reply(str(ex))
@@ -88,17 +88,17 @@ async def _(event):
             p += 1
 
     if p == 0:
-        await done.edit("No one is banned in this chat")
+        await done.edit("No one is banned in this chat.")
         return
-    required_string = "Successfully unbanned **{}** users"
+    required_string = "Successfully unbanned **{}** users."
     await event.reply(required_string.format(p))
 
 
 @register(pattern="^/unmuteall$")
-async def _(event):
+async def unmute_all(event):
     if event.is_private:
         return await event.respond(
-            "__This command can be use in groups and channels!__"
+            "__This command can be used in groups and channels!__"
         )
 
     is_admin = False
@@ -116,17 +116,17 @@ async def _(event):
         ):
             is_admin = True
     if not is_admin:
-        return await event.respond("__Only admins can Unmuteall!__")
+        return await event.respond("__Only admins can unmute all members!__")
+
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
     creator = chat.creator
 
-    # Well
     if not admin and not creator:
         await event.reply("`I don't have enough permissions!`")
         return
 
-    done = await event.reply("Working ...")
+    done = await event.reply("Working...")
     p = 0
     async for i in telethn.iter_participants(
         event.chat_id, filter=ChannelParticipantsBanned, aggressive=True
@@ -140,7 +140,7 @@ async def _(event):
                 functions.channels.EditBannedRequest(event.chat_id, i, rights)
             )
         except FloodWaitError as ex:
-            LOGGER.warn(f"sleeping for {ex.seconds} seconds")
+            LOGGER.warn(f"Sleeping for {ex.seconds} seconds")
             sleep(ex.seconds)
         except Exception as ex:
             await event.reply(str(ex))
@@ -148,10 +148,92 @@ async def _(event):
             p += 1
 
     if p == 0:
-        await done.edit("No one is muted in this chat")
+        await done.edit("No one is muted in this chat.")
         return
-    required_string = "Successfully unmuted **{}** users"
+    required_string = "Successfully unmuted **{}** users."
     await event.reply(required_string.format(p))
+
+
+@register(pattern="^/deleteall$")
+async def delete_all_messages(event):
+    chat = await event.get_chat()
+    admin = chat.admin_rights.delete_messages
+    creator = chat.creator
+
+    if event.is_private:
+        return await event.respond(
+            "__This command can be used in groups and channels only!__"
+        )
+
+    is_admin = False
+    try:
+        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        is_admin = False
+    else:
+        if isinstance(
+            cutiepii.participant,
+            (
+                ChannelParticipantAdmin,
+                ChannelParticipantCreator,
+            ),
+        ):
+            is_admin = True
+    if not is_admin:
+        return await event.respond("__Only admins can delete all messages!__")
+
+    if not admin and not creator:
+        await event.reply("`I don't have enough permissions!`")
+        return
+
+    done = await event.reply("Deleting all messages...")
+    async for message in telethn.iter_messages(event.chat_id):
+        try:
+            await telethn(functions.channels.DeleteMessagesRequest(event.chat_id, [message.id]))
+        except FloodWaitError as ex:
+            LOGGER.warn(f"Sleeping for {ex.seconds} seconds")
+            sleep(ex.seconds)
+        except Exception as ex:
+            await event.reply(str(ex))
+
+    await done.edit("All messages have been deleted.")
+
+
+@register(pattern="^/banall$")
+async def ban_all_members(event):
+    chat = await event.get_chat()
+    admin = chat.admin_rights.ban_users
+    creator = chat.creator
+    if event.is_private:
+        return await event.respond(
+            "__This command can be used in groups and channels!__"
+        )
+
+    is_admin = False
+    try:
+        cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        is_admin = False
+    else:
+        if isinstance(
+            cutiepii.participant,
+            (
+                ChannelParticipantAdmin,
+                ChannelParticipantCreator,
+            ),
+        ):
+            is_admin = True
+    if not is_admin:
+        return await event.respond("__Only admins can ban all members!__")
+
+    if not admin and not creator:
+        await event.reply("`I don't have enough permissions!`")
+        return
+
+    keyboard = types.InlineKeyboardMarkup(
+        [[types.InlineKeyboardButton(text="Confirm", callback_data="banall_confirm")]]
+    )
+    await event.reply("Are you sure you want to ban all members?", buttons=keyboard)
 
 
 @register(pattern="^/users$")
@@ -180,3 +262,33 @@ async def get_users(show):
     )
 
     os.remove("userslist.txt")
+
+
+@callbackquery(events.CallbackQuery(pattern=r"banall_confirm"))
+async def confirm_ban_all(event):
+    chat = await event.get_chat()
+    admin = chat.admin_rights.ban_users
+    creator = chat.creator
+    if not admin and not creator:
+        await event.answer("I don't have enough permissions!", alert=True)
+        return
+
+    done = await event.edit("Banning all members...")
+    p = 0
+    async for member in telethn.iter_participants(event.chat_id):
+        if not isinstance(member.participant, (ChannelParticipantAdmin, ChannelParticipantCreator)):
+            try:
+                await telethn.kick_participant(event.chat_id, member.id)
+            except FloodWaitError as ex:
+                LOGGER.warn(f"Sleeping for {ex.seconds} seconds")
+                sleep(ex.seconds)
+            except Exception as ex:
+                await event.reply(str(ex))
+            else:
+                p += 1
+
+    if p == 0:
+        await done.edit("No members were banned.")
+        return
+    required_string = "Successfully banned **{}** members."
+    await event.reply(required_string.format(p))
