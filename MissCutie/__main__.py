@@ -396,8 +396,8 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             f"\n*➥ SQLAlchemy :* v{SQL_VERSION}"
             f"\n*➥ {BOT_NAME} :* v{BOT_VERSION}"
             f"\n*➥ Uptime :* {uptime}"
-            f"\n*➥ Total Users :* |{sql.num_users()}|"
-            f"\n*➥ Total Chats :* |{sql.num_chats()}|"
+            f"\n*➥ Total Users :* {sql.num_users()}"
+            f"\n*➥ Total Chats :* {sql.num_chats()}"
             "\n\n*Bot Admins.*"
             "\n• @LostedPerson, bot creator and main developer."
             "\n\n__⚠️ The bot staff cannot assist you in situations involving groups using this bot.__"
@@ -1022,7 +1022,7 @@ def main():
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
     else:
-        telethn.run_until_disconnected()
+        await telethn.run_until_disconnected()
 
 
 
