@@ -43,12 +43,3 @@ async def github(_, message):
             except:
                 print(str(e))
     await message.reply_photo(photo=avatar_url, caption=caption)
-
-
-__mod_name__ = "Github"
-
-__help__ = """
-i will give information about github profile 
-
- ➥ /github <username>*:* get information about a github user.
-"""
