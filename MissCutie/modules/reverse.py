@@ -79,13 +79,3 @@ async def reverse(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 REVERSE_HANDLER = DisableAbleCommandHandler("reverse", reverse, block=False)
 application.add_handler(REVERSE_HANDLER)
-
-__help__ = """
-Reverse search any image using google image search.
-
-Usage:
-    - sending /reverse by replying to any image
-    - /reverse https://sample.com/sample.jpg
-"""
-
-__mod_name__ = "Reverse"
