@@ -1,5 +1,5 @@
 from MissCutie import pbot as app
-from pyrogram import *
+from pyrogram import filters
 from pyrogram import emoji
 from pyrogram.types import (
     InlineQuery,
@@ -65,9 +65,7 @@ async def wishper_ai(_, query: InlineQuery):
         switch_pm_parameter=switch_pm_parameter
     )
 
-@app.on_callback_query(
-    filter.regex("show_whisper")
-)
+@app_on_callback_query(filters.regex("show_whisper"))
 async def show_whisper(_,query):
         inline_message_id = query.inline_message_id
         whisper = whispers[inline_message_id]
