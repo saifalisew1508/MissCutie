@@ -930,13 +930,18 @@ __help__ = """
 ➥ /demote*:* demotes the user replied to
 ➥ /title <title here> *:* sets a custom title for an admin that the bot promoted
 ➥ /admincache*:* force refresh the admins list
-➥ /zombies*:* Starts searching for deleted accounts in the group.
-➥ /zombies clean*:* Removes the deleted accounts from the group.
+
+*Group Join Request*
 ➥ /approveall approve all pending join request *(NO MORE)*
 ➥ /joinrequest `<yes|on|true/no|off|false>` To activate join request acceptabe button
 ➥ /autoapprove `<yes|on|true/no|off|false>` To activate join request auto accept by bot
+
+*Mass Action Tool*
 ➥ /unbanall*:* Unban all banned members in Group 
 ➥ /unmuteall*:* Unmute all banned members in Group
+➥ /banall*:* Ban all members in Group *(Only Group Owner Use This Command)*
+➥ /zombies*:* Starts searching for deleted accounts in the group.
+➥ /zombies clean*:* Removes the deleted accounts from the group.
 ➥ /users*:* get group users list
 """
 
