@@ -66,7 +66,7 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     except:
         return
 
-    if user_member.status == ChatMemberStatus.ADMINISTRATOR or user_member.status == ChatMemberStatus.OWNER:
+    if user_member.status in (ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER):
         await message.reply_text("How am I meant to promote someone that's already an admin?")
         return
 
@@ -318,7 +318,7 @@ async def pin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     chat = update.effective_chat
     message = update.effective_message
 
-    is_group = chat.type != "private" and chat.type != "channel"
+    is_group = chat.type not in ("private", "channel")
     prev_message = update.effective_message.reply_to_message
 
     is_silent = True
@@ -614,7 +614,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except:
             return
 
-        if user_member.status == ChatMemberStatus.ADMINISTRATOR or user_member.status == ChatMemberStatus.OWNER:
+        if user_member.status in (ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER):
             await message.edit_text("How am I meant to promote someone that's already an admin?")
             return
 
@@ -825,7 +825,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         is_silent = bool(splitter[3])
-        is_group = chat.type != "private" and chat.type != "channel"
+        is_group = chat.type not in ("private", "channel")
 
         if is_group:
             try:

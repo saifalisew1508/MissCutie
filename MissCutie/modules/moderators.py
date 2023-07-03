@@ -38,7 +38,7 @@ async def mod(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     except:
         return
 
-    if user_member.status == ChatMemberStatus.ADMINISTRATOR or user_member.status == ChatMemberStatus.OWNER:
+    if user_member.status in (ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER):
         await message.reply_text("No need to Modertor an Admin!")
         return ""
     if sql.is_modd(message.chat_id, user_id):
@@ -81,7 +81,7 @@ async def dismod(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     except:
         return
 
-    if user_member.status == ChatMemberStatus.ADMINISTRATOR or user_member.status == ChatMemberStatus.OWNER:
+    if user_member.status in (ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER):
         await update.effective_message.reply_text("This Is User Admin")
         return ""
     if not sql.is_modd(message.chat_id, user_id):

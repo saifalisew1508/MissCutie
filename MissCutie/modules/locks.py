@@ -121,7 +121,7 @@ async def restr_members(
     for mem in members:
         if mem.user in DRAGONS:
             pass
-        elif mem.user == 777000 or mem.user == 1087968824:
+        elif mem.user in (777000, 1087968824):
             pass
         try:
             await bot.restrict_chat_member(
