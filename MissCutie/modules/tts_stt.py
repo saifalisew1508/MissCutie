@@ -68,11 +68,11 @@ async def _(event):
     except gTTSError:
         await event.reply("Error in Google Text-to-Speech API request !")
         return
-    with open("Neko.mp3", "r"):
+    with open("@MissCutieRobot.mp3", "r"):
         await tbot.send_file(
             event.chat_id, "Neko.mp3", voice_note=True, reply_to=reply_to_id
         )
-        os.remove("Neko.mp3")
+        os.remove("@MissCutieRobot.mp3")
 
 
 # ------ MODULE IS UNDER TESTING ------#
@@ -143,7 +143,7 @@ async def _(event):
         await event.reply("Reply to a voice message, to get the text out of it.")
 
 
-_mod_name_ = "Text to Speech"
+_mod_name_ = "Text2Speech"
 
 _help_ = """
  - /tts: Reply to any message to get text to speech output
