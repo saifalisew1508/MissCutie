@@ -25,7 +25,7 @@ async def wishper_ai(_, query: InlineQuery):
         description = "Usage: @MissCutieRobot [@username] text"
         button = InlineKeyboardButton(
             "More-Help",
-            url="https://t.me/MissCutieRobot?start=help"
+            url="https://t.me/MissCutieRobot?start=learn"
         )
     elif not query_text.startswith('@'):
         title = f"{emoji.EYE} Whisper once to the first one who opens it"
