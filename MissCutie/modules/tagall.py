@@ -40,7 +40,7 @@ async def mentionall(event):
     elif event.is_reply:
         mode = "text_on_reply"
         msg = await event.get_reply_message()
-        if msg == None:
+        if msg is None:
             return await event.respond(
                 "__I can't mention members for older messages! (messages which are sent before I'm added to group)__"
             )
