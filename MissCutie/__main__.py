@@ -984,13 +984,6 @@ Presented By @BotXNews
         except BadRequest as e:
             LOGGER.warning(e.message)
 
-async def telethn_client():
-    if len(argv) not in (1, 3, 4):
-        await telethn.disconnect()
-    else:
-        await telethn.run_until_disconnected()
-
-
 def main():
     
     application.job_queue.run_repeating(send_alive, interval=3600, first=10)
@@ -1023,6 +1016,12 @@ def main():
 
     LOGGER.info("Using long polling.")
     application.run_polling(timeout=15, drop_pending_updates=False)
+
+    if len(argv) not in (1, 3, 4):
+        telethn.disconnect()
+    else:
+        telethn.run_until_disconnected()
+
 
 
 if __name__ == "__main__":
