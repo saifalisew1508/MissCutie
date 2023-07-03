@@ -984,7 +984,7 @@ Presented By @BotXNews
         except BadRequest as e:
             LOGGER.warning(e.message)
 
-async def telethn_client
+async def telethn_client():
     if len(argv) not in (1, 3, 4):
         await telethn.disconnect()
     else:
