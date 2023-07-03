@@ -64,7 +64,21 @@ async def wishper_ai(_, query: InlineQuery):
         switch_pm_parameter=switch_pm_parameter
     )
 
-@app.on_callback_query()
-async def show_whisper(_, query):
-    whisper_text = query.message.reply_to_message.text
-    await query.message.edit_text(whisper_text)
+@app.on_callback_query(
+    filters.regex("show_whisper")
+)
+async def show_whisper(_,query):
+        inline_message_id = query.inline_message_id
+        whisper = whispers[inline_message_id]
+        sender_uid = whisper['sender_uid']
+        receiver_uname: Optional[str] = whisper['receiver_uname']
+        whisper_text = whisper['text']
+        from_user: User = query.from_user
+        if receiver_uname and from_user.username \
+            and from_user.username.lower() == receiver_uname.lower():
+            return await query.answer(whisper_text, show_alert=True)
+        if from_user.id == sender_uid or receiver_uname == '@':
+            return await query.answer(whisper_text, show_alert=True) 
+        if not receiver_uname:
+            return await query.answer(whisper_text, show_alert=True)
+        await query.answer("😶 This message is not for you", show_alert=True)
