@@ -65,7 +65,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     LOGGER.error(
         "You MUST have a python version of at least 3.9! Multiple features depend on this. Bot quitting.",
     )
-    quit(1)
+    sys.exit(1)
 
 ENV = bool(os.environ.get("ENV", False))
 BOT_VERSION = "2.8"
