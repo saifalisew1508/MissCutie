@@ -33,7 +33,7 @@ async def locks_dfunc(_, message):
       return await lol.edit("Expected on or off 👀")
    parameter = message.text.strip().split(None, 1)[1].lower()
   
-   if parameter == "on" or parameter=="ON":
+   if parameter in ("on", "ON"):
      if not message.from_user:
        return
      if not message.from_user.username:
@@ -46,7 +46,7 @@ async def locks_dfunc(_, message):
           return await lol.edit(f"Tag alerts enabled.\nWhen someone tags you as @{uname} you will be notified")
      else:
           return await lol.edit("Tag alerts already enabled for you")
-   if parameter == "off" or parameter=="OFF":
+   if parameter in ("off", "OFF"):
      if not message.from_user:
        return
      if not message.from_user.username:

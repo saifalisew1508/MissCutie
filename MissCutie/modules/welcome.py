@@ -595,7 +595,7 @@ async def left_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
 
             # if media goodbye, use appropriate function for it
-            if goodbye_type != sql.Types.TEXT and goodbye_type != sql.Types.BUTTON_TEXT:
+            if goodbye_type not in (sql.Types.TEXT, sql.Types.BUTTON_TEXT):
                 topic_chat = get_action_topic(chat.id)
                 await ENUM_FUNC_MAP[goodbye_type](chat.id, cust_goodbye)
                 return
@@ -665,7 +665,7 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode=ParseMode.MARKDOWN,
         )
 
-        if welcome_type == sql.Types.BUTTON_TEXT or welcome_type == sql.Types.TEXT:
+        if welcome_type in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
             buttons = sql.get_welc_buttons(chat.id)
             if noformat:
                 welcome_m += revert_buttons(buttons)
