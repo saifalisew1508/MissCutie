@@ -1,3 +1,4 @@
+import ast
 import os
 import re
 import time
@@ -267,7 +268,7 @@ def json_parser(data, indent=None, ascii=False):
             if indent:
                 parsed = json.dumps(data, indent=indent, ensure_ascii=ascii)
     except JSONDecodeError:
-        parsed = eval(data)
+        parsed = ast.literal_eval(data)
     return parsed
 
 
