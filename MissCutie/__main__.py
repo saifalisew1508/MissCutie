@@ -1018,10 +1018,11 @@ def main():
     LOGGER.info("Using long polling.")
     application.run_polling(timeout=15, drop_pending_updates=False)
 
+async def telethon_client
     if len(argv) not in (1, 3, 4):
-        telethn.disconnect()
+        await telethn.disconnect()
     else:
-        telethn.run_until_disconnected()
+        await telethn.run_until_disconnected()
 
 
 
