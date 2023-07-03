@@ -65,7 +65,7 @@ async def wishper_ai(_, query: InlineQuery):
         switch_pm_parameter=switch_pm_parameter
     )
 
-@app_on_callback_query(filters.regex("show_whisper"))
+@app.on_callback_query(filters.regex("show_whisper"))
 async def show_whisper(_,query):
         inline_message_id = query.inline_message_id
         whisper = whispers[inline_message_id]
