@@ -11,6 +11,8 @@ from pyrogram.types import (
 lengths = 200
 IMG = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
 
+
+
 @app.on_inline_query()
 async def wishper_ai(_, query: InlineQuery):
     query_text = query.query
@@ -61,3 +63,8 @@ async def wishper_ai(_, query: InlineQuery):
         switch_pm_text=switch_pm_text,
         switch_pm_parameter=switch_pm_parameter
     )
+
+@app.on_callback_query()
+async def show_whisper(_, query):
+    whisper_text = query.message.reply_to_message.text
+    await query.message.edit_text(whisper_text)
