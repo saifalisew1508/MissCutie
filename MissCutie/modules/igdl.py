@@ -21,7 +21,7 @@ async def igdl(bot, message):
           try:
               reel = out["data"]["data"]["url"]
           except:
-              return await ig.edit("API didn't responded, please report it at @HagadmansaChat or try again later.")
+              return await ig.edit("API didn't responded, please report it at @PublicSource_Chat or try again later.")
           await message.reply_video(video=reel, caption="Here is your reel.")
           return await ig.delete()
       elif tk[4] == "p":
