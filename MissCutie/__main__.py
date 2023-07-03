@@ -97,12 +97,11 @@ Use the /donate command to donate our devlopers
 
 buttons = [
     [
-        InlineKeyboardButton(text="Help ⚙️", callback_data="help_back"),
-        InlineKeyboardButton(text="Music 🎵", callback_data="Music_"),
+        InlineKeyboardButton(text="Helpable Commands ⚙️", callback_data="help_back"),
     ],
     [
         InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
-        InlineKeyboardButton(text="Updates 📢", url="t.me/BotXNews"),
+        InlineKeyboardButton(text="Music 🎵", callback_data="Music_"),
     ],
     [
         InlineKeyboardButton(
