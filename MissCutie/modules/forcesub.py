@@ -48,7 +48,7 @@ def _onUnMuteRequest(client: Client, cb):
                 show_alert=True,
             )
 
-@pbot.on_edited_message(filters.text & ~filters.private, group=1)
+@pbot.on_message(filters.text & ~filters.private, group=1)
 def _check_member(client: Client, message: Message):
     chat_id = message.chat.id
     if chat_db := sql.fs_settings(chat_id):
