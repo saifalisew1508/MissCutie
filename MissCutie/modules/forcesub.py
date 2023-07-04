@@ -1,26 +1,13 @@
 import logging
-
 from pyrogram import filters, Client
-from pyrogram.types import Message
-from pyrogram.errors import RPCError
-from pyrogram.errors.exceptions import (
-    ChannelPrivate,
-    ChatAdminRequired,
-    PeerIdInvalid,
-    UsernameNotOccupied,
-    UserNotParticipant,
-)
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
-from MissCutie import BOT_ID, DEV_USERS, pbot
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import RPCError, ChannelPrivate, ChatAdminRequired, UserNotParticipant
 from MissCutie.modules.sql import forceSubscribe_sql as sql
+from MissCutie import BOT_ID, DEV_USERS, pbot
 
 logging.basicConfig(level=logging.INFO)
 
-static_data_filter = filters.create(
-    lambda _, __, query: query.data == "onUnMuteRequest"
-)
-
+static_data_filter = filters.create(lambda _, __, query: query.data == "onUnMuteRequest")
 
 @pbot.on_callback_query(static_data_filter)
 def _onUnMuteRequest(client: Client, cb):
@@ -35,41 +22,31 @@ def _onUnMuteRequest(client: Client, cb):
             chat_member = client.get_chat_member(chat_id, user_id)
         except RPCError:
             return
-        if chat_member.restricted_by:
-            if chat_member.restricted_by.id == BOT_ID:
-                try:
-                    client.get_chat_member(channel, user_id)
-                    client.unban_chat_member(chat_id, user_id)
-                    cb.message.delete()
-                except UserNotParticipant:
-                    client.answer_callback_query(
-                        cb.id,
-                        text=f"❗ Join our @{channel} channel and press 'UnMute Me' button.",
-                        show_alert=True,
-                    )
-                except ChannelPrivate:
-                    client.unban_chat_member(chat_id, user_id)
-                    cb.message.delete()
-
-            else:
+        if chat_member.restricted_by and chat_member.restricted_by.id == BOT_ID:
+            try:
+                client.get_chat_member(channel, user_id)
+                client.unban_chat_member(chat_id, user_id)
+                cb.message.delete()
+            except UserNotParticipant:
                 client.answer_callback_query(
                     cb.id,
-                    text="❗ You have been muted by admins due to some other reason.",
+                    text=f"❗ Join our @{channel} channel and press 'UnMute Me' button.",
                     show_alert=True,
                 )
+            except ChannelPrivate:
+                client.unban_chat_member(chat_id, user_id)
+                cb.message.delete()
         elif client.get_chat_member(chat_id, BOT_ID).status != "administrator":
             client.send_message(
                 chat_id,
                 f"❗ **{cb.from_user.mention} is trying to UnMute himself but I can't unmute him because I am not an admin in this chat. Add me as admin again.**\n__#Leaving this chat...__",
             )
-
         else:
             client.answer_callback_query(
                 cb.id,
                 text="❗ Warning! Don't press the button when you can talk.",
                 show_alert=True,
             )
-
 
 @pbot.on_edited_message(filters.text & ~filters.private, group=1)
 def _check_member(client: Client, message: Message):
@@ -80,7 +57,8 @@ def _check_member(client: Client, message: Message):
         except AttributeError:
             return
         try:
-            if client.get_chat_member(chat_id, user_id).status not in ("administrator", "creator"):
+            chat_member = client.get_chat_member(chat_id, user_id)
+            if chat_member.status not in ("administrator", "creator"):
                 channel = chat_db.channel
                 try:
                     client.get_chat_member(channel, user_id)
@@ -90,21 +68,10 @@ def _check_member(client: Client, message: Message):
                             f"Welcome {message.from_user.mention} 🙏 \n **You haven't joined our @{channel} Channel yet** 😭 \n \nPlease Join [Our Channel](https://telegram.dog/{channel}) and hit the **UNMUTE ME** Button. \n \n ",
                             disable_web_page_preview=True,
                             reply_markup=InlineKeyboardMarkup([
-                                [
-                                    InlineKeyboardButton(
-                                        "Join Channel",
-                                        url=f"https://telegram.dog/{channel}",
-                                    )
-                                ],
-                                [
-                                    InlineKeyboardButton(
-                                        "UnMute Me",
-                                        callback_data="onUnMuteRequest",
-                                    )
-                                ],
+                                [InlineKeyboardButton("Join Channel", url=f"https://telegram.dog/{channel}")],
+                                [InlineKeyboardButton("UnMute Me", callback_data="onUnMuteRequest")],
                             ]),
                         )
-
                         client.restrict_chat_member(
                             chat_id, user_id, ChatPermissions(can_send_messages=False)
                         )
@@ -114,7 +81,6 @@ def _check_member(client: Client, message: Message):
                         )
                     except RPCError:
                         return
-
                 except ChatAdminRequired:
                     client.send_message(
                         chat_id,
@@ -124,7 +90,6 @@ def _check_member(client: Client, message: Message):
                     return
         except AttributeError:
             return
-
 
 @pbot.on_message(filters.command(["forcesubscribe", "forcesub", "forcesub@MissCutieRobot", "forcesubscribe@MissCutieRobot"]) & ~filters.private)
 def config(client: Client, message):
@@ -140,10 +105,9 @@ def config(client: Client, message):
                 "**Unmuting all members who are muted by me...**"
             )
             try:
-                for chat_member in client.get_chat_members(message.chat.id, filter="restricted"):
+                for chat_member in client.get_chat_members(chat_id, filter="restricted"):
                     if chat_member.restricted_by.id == BOT_ID:
                         client.unban_chat_member(chat_id, chat_member.user.id)
-                        time.sleep(1)
                 sent_message.edit("✅ **Unmuted all members who are muted by me.**")
             except ChatAdminRequired:
                 sent_message.edit(
@@ -173,6 +137,7 @@ def config(client: Client, message):
         )
     else:
         message.reply_text("❌ **Force Subscribe is disabled in this chat.**")
+
 
 
 __help__ = """
