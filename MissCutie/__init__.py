@@ -68,7 +68,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     sys.exit(1)
 
 ENV = bool(os.environ.get("ENV", False))
-BOT_VERSION = "2.8"
+BOT_VERSION = "3.0-Beta"
 PTB_VERSION = ptb_version
 PYRO_VERSION = pyrover
 TELETHON_VERSION = tlhver
