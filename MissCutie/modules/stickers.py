@@ -219,12 +219,12 @@ async def math_eval(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid)
-CB_STICKER_HANDLER = DisableAbleCommandHandler("cbsticker", cb_sticker)
-GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker)
-KANG_HANDLER = DisableAbleCommandHandler("kang", kang)
-KANG_VIDEO_HANDLER = DisableAbleCommandHandler("kangvideo", kang_video)
-MATH_EVAL_HANDLER = DisableAbleCommandHandler("matheval", math_eval)
+STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid, block=False)
+CB_STICKER_HANDLER = DisableAbleCommandHandler("cbsticker", cb_sticker, block=False)
+GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker, block=False)
+KANG_HANDLER = DisableAbleCommandHandler("kang", kang, block=False)
+KANG_VIDEO_HANDLER = DisableAbleCommandHandler("kangvideo", kang_video, block=False)
+MATH_EVAL_HANDLER = DisableAbleCommandHandler("matheval", math_eval, block=False)
 
 application.add_handler(STICKERID_HANDLER)
 application.add_handler(CB_STICKER_HANDLER)
