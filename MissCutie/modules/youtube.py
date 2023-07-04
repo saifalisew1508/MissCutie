@@ -113,10 +113,3 @@ def download_song(_, message):
     except Exception as e:
         print(e)
 
-
-__help__ = """
-/song {name} - Bot sends you the requested song in that chat!
-/video {name} - Bot sends you the requested YouTube video in that chat!
-"""
-
-__mod_name__ = "YouTube"
