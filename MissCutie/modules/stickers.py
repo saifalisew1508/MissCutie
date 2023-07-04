@@ -577,11 +577,11 @@ async def makepack_internal(
 
 
 __help__ = """
- ➥ `/stickerid`*:* reply to a sticker to me to tell you its file ID.
- ➥ `/getsticker`*:* reply to a sticker to me to upload its raw PNG file.
- ➥ `/delstcker`*:* reply to a sticker to delete it from the pack, I can delete what I made only.
- ➥ `/kang`*:* reply to sticker (animated/static/video) or image or gif to kang into your own pack.
- ➥ `/stickers`*:* Find stickers for given term on combot sticker catalogue
+ ➥ /stickerid*:* reply to a sticker to me to tell you its file ID.
+ ➥ /getsticker*:* reply to a sticker to me to upload its raw PNG file.
+ ➥ /delstcker*:* reply to a sticker to delete it from the pack, I can delete what I made only.
+ ➥ /kang*:* reply to sticker (animated/static/video) or image or gif to kang into your own pack.
+ ➥ /stickers*:* Find stickers for given term on combot sticker catalogue
 """
 
 __mod_name__ = "Stickers"
