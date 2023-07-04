@@ -223,7 +223,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="◁", callback_data="help_back")]],
+                        [[InlineKeyboardButton(text="🔙", callback_data="help_back")]],
                     ),
                 )
 
@@ -264,7 +264,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Get Help in PM 🔐",
+                            text="Click here for help!",
                             url="t.me/{}?start=help".format(context.bot.username),
                         ),
                     ],
@@ -334,7 +334,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="◁", callback_data="help_back")]],
+                    [[InlineKeyboardButton(text="🔙", callback_data="help_back")]],
                 ),
             )
 
@@ -369,7 +369,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # ensure no spinny white circle
         await context.bot.answer_callback_query(query.id)
-        # await query.message.delete()
+        await query.message.delete()
 
     except BadRequest:
         pass
@@ -411,10 +411,10 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                 [
                     [
                         InlineKeyboardButton(
-                            text="Support 🌍", callback_data="saif_support"
+                            text="Support Here🌍", callback_data="saif_support"
                         ),
                         InlineKeyboardButton(
-                            text="Help ⚙️", callback_data="help_back"
+                            text="Help Commands⚙️", callback_data="help_back"
                         ),
                     ],
                     [
@@ -500,7 +500,7 @@ async def Music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="◁", callback_data="saif_back"),
+                        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
                     ],
                 ]
             ),
@@ -543,7 +543,7 @@ Auth Users can use admin commands without admin rights in your chat.
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="Back", callback_data="Music_"),
+                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
                     ]
                 ]
             ),
@@ -577,7 +577,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="Back", callback_data="Music_"),
+                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
                     ]
                 ]
             ),
@@ -605,7 +605,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="Back", callback_data="Music_"),
+                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
                     ]
                 ]
             ),
@@ -650,7 +650,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="Back", callback_data="Music_"),
+                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
                     ]
                 ]
             ),
@@ -697,13 +697,13 @@ async def get_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Open in private",
+                            text="👤 Open in Private Chat",
                             url="t.me/{}?start=help".format(context.bot.username),
                             ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Open here",
+                            text="👥️️ Open here",
                             callback_data="help_back",
                         ),
                     ],
@@ -724,7 +724,7 @@ async def get_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="◁", callback_data="help_back")]],
+                [[InlineKeyboardButton(text="🔙", callback_data="help_back")]],
             ),
         )
 
@@ -803,7 +803,7 @@ async def settings_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     [
                         [
                             InlineKeyboardButton(
-                                text="◁",
+                                text="🔙",
                                 callback_data="stngs_back({})".format(chat_id),
                             ),
                         ],
@@ -879,7 +879,7 @@ async def get_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     [
                         [
                             InlineKeyboardButton(
-                                text="settings",
+                                text="👤 Get Settings in Private",
                                 url="t.me/{}?start=stngs_{}".format(
                                     context.bot.username, chat.id,
                                 ),
