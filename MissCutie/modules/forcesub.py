@@ -10,7 +10,7 @@ from MissCutie import OWNER_ID
 from MissCutie import telethn
 from MissCutie.events import callbackquery
 from MissCutie.events import register
-from MissCutie.modules.no_sql import fsub_db as db
+from MissCutie.modules.sql import fsub_db as db
 
 async def is_admin(chat_id, user_id):
     try:
