@@ -280,4 +280,8 @@ __help__ = """
 *Example:*
 ➥ `/tr en`*:* translates something to english
 ➥ `/tr hi-en`*:* translates hindi to english
+
+*Google YouTube*
+➥ /song <Song Tittle> *:* Bot sends you the requested song in that chat!
+➥ /video <Video Tittle> *:* Bot sends you the requested YouTube video in that chat!
 """
