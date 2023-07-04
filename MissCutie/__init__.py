@@ -192,20 +192,14 @@ telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
 
-PyroGram = TOKEN.split(":")[0]
-pbot = Client(
-    name=PyroGram,
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=TOKEN,
-    workers=min(32, os.cpu_count() + 4),
-    parse_mode=ParseMode.DEFAULT,
-    sleep_threshold=60,
-    in_memory=True,
-)
+pbot = Client("MissCutie", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
+
+LOGGER.info("Starting pyrogram bot client")
+pbot.start()
 
 
 aiohttpsession = ClientSession()
+
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
 application = Application.builder().token(TOKEN).concurrent_updates(True).build()
@@ -215,7 +209,7 @@ DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 
 # Bot Info
-
+LOGGER.info("Getting Bot Info")
 BOT_ID = application.bot.id
 BOT_NAME = application.bot.first_name
 BOT_USERNAME = application.bot.username
