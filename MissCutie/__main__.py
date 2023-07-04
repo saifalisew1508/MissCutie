@@ -369,7 +369,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # ensure no spinny white circle
         await context.bot.answer_callback_query(query.id)
-        await query.message.delete()
+        # await query.message.delete()
 
     except BadRequest:
         pass
