@@ -1026,6 +1026,6 @@ def main():
 
 if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
+    LOGGER.info("Sending Alive Message To Support Group")
     telethn.start(bot_token=TOKEN)
-    pbot.start()
     main()
