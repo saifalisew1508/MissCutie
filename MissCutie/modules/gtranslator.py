@@ -89,17 +89,10 @@ async def totranslate(update: Update, context: ContextTypes.DEFAULT_TYPE):
        return
 
 
-__help__ = """
- ➥ `/tr` or `/tl` (language code) as reply to a long message
-*Example:*
- ➥ `/tr en`*:* translates something to english
- ➥ `/tr hi-en`*:* translates hindi to english
-"""
-
 TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], totranslate, block=False)
 
 application.add_handler(TRANSLATE_HANDLER)
 
-__mod_name__ = "Translator"
+
 __command_list__ = ["tr", "tl"]
 __handlers__ = [TRANSLATE_HANDLER]
