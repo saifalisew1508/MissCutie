@@ -5,7 +5,7 @@ from typing import Dict, List, Union
 from pyrogram import filters
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, Message, Voice
 from youtube_search import YoutubeSearch
-from MissCutie import BOT_USERNAME, DURATION_LIMIT, DURATION_LIMIT_MIN, MUSIC_BOT_NAME, app, db_mem
+from MissCutie import BOT_USERNAME, pbot as app
 from youtubesearchpython import VideosSearch
 
 loop = asyncio.get_event_loop()
