@@ -192,7 +192,7 @@ telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
 
-pbot = Client("MissCutie", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
+pbot = Client("MissCutie", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
 
 LOGGER.info("Starting pyrogram bot client")
 pbot.start()
