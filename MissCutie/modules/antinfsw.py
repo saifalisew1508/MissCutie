@@ -47,7 +47,7 @@ async def detect_nsfw(_, message):
         if not results.ok:
             return
         results = results.result
-        os.path.remove(file_path)
+        os.remove(file_path)
         nsfw = results.is_nsfw
         if message.from_user.id in DEV_USERS:
             return
@@ -96,7 +96,7 @@ async def nsfw_scan_command(_, message):
         file_info = await pbot.get_file(file_id)
         file_path = await pbot.download_media(file_info.file_path)
         results = await arq.nsfw_scan(file=file_path)
-        os.path.remove(file_path)
+        os.remove(file_path)
         if not results.ok:
             return await m.edit(results.result)
         results = results.result
@@ -133,11 +133,3 @@ async def nsfw_enable_disable(_, message):
         await message.reply_text("Disabled AntiNSFW System.")
     else:
         await message.reply_text("Unknown Suffix, Use /antinsfw [on/off]")
-        
-        
-__help__ = """
-ᐉ /nsfwscan - NSFW Scan
-ᐉ /antinsfw - NSFW On/Off
-"""
-
-__mod_name__ = "Anti-NSFW"
