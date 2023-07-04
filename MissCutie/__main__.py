@@ -97,11 +97,11 @@ Use the /donate command to donate our devlopers
 
 buttons = [
     [
-        InlineKeyboardButton(text="Helpable Commands ⚙️", callback_data="help_back"),
+        InlineKeyboardButton(text="HELPABLE COMMANDS ⚙️", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
-        InlineKeyboardButton(text="Music 🎵", callback_data="Music_"),
+        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="saif_"),
+        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="Music_"),
     ],
     [
         InlineKeyboardButton(
@@ -170,8 +170,6 @@ for module_name in ALL_MODULES:
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
 
-#   	if hasattr(imported_module, "__button__") and imported_module.__button__:
-#         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
 
     # Chats to migrate on chat_migrated events
     if hasattr(imported_module, "__migrate__"):
@@ -986,19 +984,15 @@ Presented By @BotXNews
 
 def main():
     
-    application.job_queue.run_repeating(send_alive, interval=3600, first=10)
+    application.job_queue.run_repeating(send_alive, interval=7200, first=10)
 
     start_handler = CommandHandler("start", start, block=False)
-
     help_handler = CommandHandler("help", get_help, block=False)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*", block=False)
-
     settings_handler = CommandHandler("settings", get_settings, block=False)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", block=False)
-
     about_callback_handler = CallbackQueryHandler(saif_about_callback, pattern=r"saif_", block=False)
     Music_callback_handler = CallbackQueryHandler(Music_about_callback, pattern=r"Music_", block=False)
-
     donate_handler = CommandHandler("donate", donate, block=False)
     migrate_handler = MessageHandler(filters.StatusUpdate.MIGRATE, migrate_chats, block=False)
 
@@ -1011,7 +1005,6 @@ def main():
     application.add_handler(settings_callback_handler)
     application.add_handler(migrate_handler)
     application.add_handler(donate_handler)
-
     application.add_error_handler(error_callback)
 
     LOGGER.info("Using long polling.")
@@ -1023,9 +1016,7 @@ def main():
         telethn.run_until_disconnected()
 
 
-
 if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
-    LOGGER.info("Sending Alive Message To Support Group")
     telethn.start(bot_token=TOKEN)
     main()
