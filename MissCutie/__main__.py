@@ -427,7 +427,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="◁", callback_data="saif_back"),
+                        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
                     ],
                 ]
             ),
@@ -456,7 +456,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="◁", callback_data="saif_"),
+                        InlineKeyboardButton(text="🔙", callback_data="saif_"),
                     ],
                 ]
             ),
