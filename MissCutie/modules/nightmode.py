@@ -12,30 +12,6 @@ from MissCutie.modules.sql.night_mode_sql import (
     rmnightmode,
 )
 
-
-async def is_register_admin(chat, user):
-    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
-
-        return isinstance(
-            (
-                await tbot(functions.channels.GetParticipantRequest(chat, user))
-            ).participant,
-            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
-        )
-    elif isinstance(chat, types.InputPeerChat):
-
-        ui = await tbot.get_peer_id(user)
-        ps = (
-            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
-        ).full_chat.participants.participants
-        return isinstance(
-            next((p for p in ps if p.user_id == ui), None),
-            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
-        )
-    else:
-        return None
-
-
 hehes = ChatBannedRights(
     until_date=None,
     send_messages=True,
@@ -49,6 +25,7 @@ hehes = ChatBannedRights(
     pin_messages=True,
     change_info=True,
 )
+
 openhehe = ChatBannedRights(
     until_date=None,
     send_messages=False,
@@ -64,41 +41,62 @@ openhehe = ChatBannedRights(
 )
 
 
+async def is_register_admin(chat, user):
+    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+        participant = await tbot(functions.channels.GetParticipantRequest(chat, user))
+        return isinstance(
+            participant.participant,
+            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
+        )
+    elif isinstance(chat, types.InputPeerChat):
+        ui = await tbot.get_peer_id(user)
+        full_chat = await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ps = full_chat.full_chat.participants.participants
+        return isinstance(
+            next((p for p in ps if p.user_id == ui), None),
+            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
+        )
+    else:
+        return None
+
+
 @register(pattern="^/nightmode")
 async def close_ws(event):
     if event.is_group:
-        if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-            await event.reply("🤦🏻‍♂️You are not admin so you can't use this command...")
+        if not await is_register_admin(event.input_chat, event.message.sender_id):
+            await event.reply("🤦🏻‍♂️ You are not an admin, so you can't use this command...")
             return
+    else:
+        await event.reply("You can only enable Night Mode in groups.")
+        return
 
-    if not event.is_group:
-        await event.reply("You Can Only Enable Night Mode in Groups.")
-        return
     if is_nightmode_indb(str(event.chat_id)):
-        await event.reply("This Chat is Has Already Enabled Night Mode.")
+        await event.reply("This chat has already enabled Night Mode.")
         return
+
     add_nightmode(str(event.chat_id))
     await event.reply(
-        f"Added Chat {event.chat.title} With Id {event.chat_id} To Database. **This Group Will Be Closed On 12Am(IST) And Will Opened On 06Am(IST)**"
+        f"Added chat {event.chat.title} with ID {event.chat_id} to the database. **This group will be closed from 12 AM (IST) and will be opened at 6 AM (IST)**"
     )
 
 
 @register(pattern="^/rmnight")
 async def disable_ws(event):
     if event.is_group:
-        if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-            await event.reply("🤦🏻‍♂️You are not admin so you can't use this command...")
+        if not await is_register_admin(event.input_chat, event.message.sender_id):
+            await event.reply("🤦🏻‍♂️ You are not an admin, so you can't use this command...")
             return
+    else:
+        await event.reply("You can only disable Night Mode in groups.")
+        return
 
-    if not event.is_group:
-        await event.reply("You Can Only Disable Night Mode in Groups.")
-        return
     if not is_nightmode_indb(str(event.chat_id)):
-        await event.reply("This Chat is Has Not Enabled Night Mode.")
+        await event.reply("This chat has not enabled Night Mode.")
         return
+
     rmnightmode(str(event.chat_id))
     await event.reply(
-        f"Removed Chat {event.chat.title} With Id {event.chat_id} From Database."
+        f"Removed chat {event.chat.title} with ID {event.chat_id} from the database."
     )
 
 
@@ -110,7 +108,7 @@ async def job_close():
         try:
             await tbot.send_message(
                 int(warner.chat_id),
-                "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started ! \n**Powered By {BOT_NAME}**",
+                "12:00 AM, the group is closing till 6 AM. Night Mode started! \n**Powered By {BOT_NAME}**",
             )
             await tbot(
                 functions.messages.EditChatDefaultBannedRightsRequest(
@@ -118,13 +116,13 @@ async def job_close():
                 )
             )
         except Exception as e:
-            logger.info(f"Unable To Close Group {warner} - {e}")
+            logger.info(f"Unable to close group {warner} - {e}")
 
 
-# Run everyday at 12am
-scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
-scheduler.start()
+# Run every day at 12 AM
+scheduler_close = AsyncIOScheduler(timezone="Asia/Kolkata")
+scheduler_close.add_job(job_close, trigger="cron", hour=23, minute=59)
+scheduler_close.start()
 
 
 async def job_open():
@@ -135,7 +133,7 @@ async def job_open():
         try:
             await tbot.send_message(
                 int(warner.chat_id),
-                "06:00 Am, Group Is Opening.\n**Powered By {BOT_NAME}**",
+                "6:00 AM, the group is opening.\n**Powered By {BOT_NAME}**",
             )
             await tbot(
                 functions.messages.EditChatDefaultBannedRightsRequest(
@@ -143,21 +141,21 @@ async def job_open():
                 )
             )
         except Exception as e:
-            logger.info(f"Unable To Open Group {warner.chat_id} - {e}")
+            logger.info(f"Unable to open group {warner.chat_id} - {e}")
 
 
-# Run everyday at 06
-scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_open, trigger="cron", hour=6, minute=1)
-scheduler.start()
+# Run every day at 6 AM
+scheduler_open = AsyncIOScheduler(timezone="Asia/Kolkata")
+scheduler_open.add_job(job_open, trigger="cron", hour=6, minute=1)
+scheduler_open.start()
 
 __help__ = """
 *Admins Only*
 
- ➥ /nightmode*:* Adds Group to NightMode Chats
- ➥ /rmnight*:* Removes Group From NightMode Chats
+ ➥ /nightmode: Adds the group to Night Mode chats.
+ ➥ /rmnight: Removes the group from Night Mode chats.
 
-*Note:* Night Mode chats get Automatically closed at 12 am(IST) and Automatically openned at 6 am(IST) to Prevent Night Spams.
+*Note:* Night Mode chats are automatically closed at 12 AM (IST) and automatically opened at 6 AM (IST) to prevent night spams.
 """
 
 __mod_name__ = "Night-Mode"
