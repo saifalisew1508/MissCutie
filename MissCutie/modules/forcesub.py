@@ -1,6 +1,6 @@
 import logging
 
-from pyrogram import Client
+from pyrogram import filters, Client
 from pyrogram.types import Message
 from pyrogram.errors import RPCError
 from pyrogram.errors.exceptions import (
