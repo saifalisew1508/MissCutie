@@ -1,4 +1,5 @@
 import os
+import sys
 import re
 
 import yt_dlp
@@ -15,8 +16,18 @@ from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI
 
 
-SONG_DOWNLOAD_DURATION = 180
-SONG_DOWNLOAD_DURATION_LIMIT = 180
+SONG_DOWNLOAD_DURATION = 360
+
+def time_to_seconds(time):
+    stringt = str(time)
+    return sum(
+        int(x) * 60**i
+        for i, x in enumerate(reversed(stringt.split(":")))
+    )
+  
+SONG_DOWNLOAD_DURATION_LIMIT = int(
+    time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00")
+)
 
 YouTube = YouTubeAPI()
 
