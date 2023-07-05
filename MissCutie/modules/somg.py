@@ -78,7 +78,7 @@ async def song_commad_private(client, message: Message):
                     SONG_DOWNLOAD_DURATION, duration_min
                 )
             )
-        buttons = song_markup(vidid)
+        buttons = song_markup(None, vidid)
         await mystic.delete()
         return await message.reply_photo(
             thumbnail,
@@ -106,7 +106,7 @@ async def song_commad_private(client, message: Message):
         return await mystic.edit_text(
             "**Duration Limit Exceeded**\n\n**Allowed Duration: **{0} minute(s)\n**Received Duration:** {1} hour(s)".format(SONG_DOWNLOAD_DURATION, duration_min)
         )
-    buttons = song_markup(vidid)
+    buttons = song_markup(None, vidid)
     await mystic.delete()
     return await message.reply_photo(
         thumbnail,
