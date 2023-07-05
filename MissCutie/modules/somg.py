@@ -10,7 +10,7 @@ from pyrogram.types import (InlineKeyboardButton,
                             InputMediaVideo, Message)
 
 
-from MissCutie import pbot as app
+from MissCutie import pbot as app, BOT_USERNAME
 from MissCutie.utils.formatters import convert_bytes
 from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI
@@ -41,7 +41,7 @@ async def song_commad_group(client, message: Message):
             [
                 InlineKeyboardButton(
                     text="↗️ Open Private Chat",
-                    url=f"https://t.me/{app.username}?start=song",
+                    url=f"https://t.me/{BOT_USERNAME}?start=song",
                 ),
             ]
         ]
