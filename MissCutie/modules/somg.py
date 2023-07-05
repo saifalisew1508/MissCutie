@@ -10,7 +10,7 @@ from pyrogram.types import (InlineKeyboardButton,
                             InlineKeyboardMarkup,
                             InputMediaAudio,
                             InputMediaVideo,
-                            Message)
+                            Message,)
 
 from MissCutie import pbot as app, BOT_USERNAME
 from MissCutie.utils.formatters import convert_bytes
