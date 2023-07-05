@@ -343,7 +343,7 @@ class YouTubeAPI:
             fpath = f"downloads/{title}.mp3"
             return fpath
         elif video:
-            if await is_on_off(YTDOWNLOADER):
+            if await is_on_off("YTDOWNLOADER"):
                 direct = True
                 downloaded_file = await loop.run_in_executor(
                     None, video_dl
