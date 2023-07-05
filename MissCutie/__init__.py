@@ -215,6 +215,10 @@ BOT_NAME = application.bot.first_name
 BOT_USERNAME = application.bot.username
 BOT_PIC = application.bot.get_user_profile_photos
 
+
+
+# Don't edit below this line
+YTDOWNLOADER = 1
  
 
 
