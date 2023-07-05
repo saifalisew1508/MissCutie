@@ -25,8 +25,31 @@ msg_buttons=InlineKeyboardMarkup(
 
 
 
+@app.on_message(
+    filters.command("tempmail")
+    & filters.group
+)
+async def song_commad_group(client, message: Message):
+    upl = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    text="↗️ Open Private Chat",
+                    url=f"https://t.me/{BOT_USERNAME}?start=tempmail",
+                ),
+            ]
+        ]
+    )
+    await message.reply_text("This Command only work in PM.", reply_markup=upl)
+
+
+
+
 email=''
-@app.on_message(filters.command('tempmail'))
+@app.on_message(
+    filters.command("tempmail")
+    & filters.private
+)
 async def start_msg(client,message):
     await message.reply("**Hey "+message.from_user.first_name+" !!**\n @MissCutieRobot is a free service that allows to generates and receive emails at a temporary address that self-destructed after a certain time elapses.\n\n**__ How It Safe's You??**__\n- Using the temporary mail allows you to completely protect your real mailbox against the loss of personal information. Your temporary e-mail address is completely anonymous. Your details: information about your person and users with whom you communicate, IP-address, e-mail address are protected and completely confidential.\n\nFurther Queris @BotXNews🌚\n\n**Generate a Email Now❕**",
                         reply_markup=buttons)
