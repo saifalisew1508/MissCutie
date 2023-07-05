@@ -9,18 +9,19 @@ from pyrogram.types import (InlineKeyboardButton,
                             InputMediaVideo, Message)
 
 
-from MissCutie import YouTube, pbot as app
+from MissCutie import pbot as app
 from MissCutie.utils.formatters import convert_bytes
 from MissCutie.utils.inline.song import song_markup
+from MissCutie.utils.platforms.Youtube import *
 
 
 SONG_DOWNLOAD_DURATION = 
 SONG_DOWNLOAD_DURATION_LIMIT = 
 
-
+YouTube = YouTubeAPI()
 
 @app.on_message(
-    filters.command(song)
+    filters.command(yt)
     & filters.group
     & ~filters.edited
 )
@@ -42,7 +43,7 @@ async def song_commad_group(client, message: Message):
 
 
 @app.on_message(
-    filters.command(song)
+    filters.command(yt)
     & filters.private
     & ~filters.edited
 )
