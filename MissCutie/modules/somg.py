@@ -6,9 +6,11 @@ import yt_dlp
 from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import (InlineKeyboardButton,
-                            InlineKeyboardMarkup, InputMediaAudio,
-                            InputMediaVideo, Message)
-
+                            InlineKeyboardMarkup,
+                            InputMediaAudio,
+                            ChatAction,
+                            InputMediaVideo,
+                            Message)
 
 from MissCutie import pbot as app, BOT_USERNAME
 from MissCutie.utils.formatters import convert_bytes
@@ -208,9 +210,11 @@ async def song_helper_cb(client, CallbackQuery):
 # Downloading Songs Here
 
 
-@app.on_callback_query(
-    filters.regex(pattern=r"song_download")
-)
+
+
+# ...
+
+@app.on_callback_query(filters.regex(pattern=r"song_download"))
 async def song_download_cb(client, CallbackQuery):
     try:
         await CallbackQuery.answer("Downloading")
@@ -253,13 +257,13 @@ async def song_download_cb(client, CallbackQuery):
         await mystic.edit_text("Uploading Started\n\nUploading speed could be slow. Please hold on..")
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
-            action="upload_video",
+            action=ChatAction.UPLOAD_VIDEO,
         )
         try:
             await CallbackQuery.edit_message_media(media=med)
         except Exception as e:
             print(e)
-            return await mystic.edit_text("Failed to upload on telegram from servers.")
+            return await mystic.edit_text("Failed to upload on Telegram from servers.")
         os.remove(file_path)
     elif stype == "audio":
         try:
@@ -282,11 +286,12 @@ async def song_download_cb(client, CallbackQuery):
         await mystic.edit_text("Uploading Started\n\nUploading speed could be slow. Please hold on..")
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
-            action="upload_audio",
+            action=ChatAction.UPLOAD_AUDIO,
         )
         try:
             await CallbackQuery.edit_message_media(media=med)
         except Exception as e:
             print(e)
-            return await mystic.edit_text("Failed to upload on telegram from servers.")
+            return await mystic.edit_text("Failed to upload on Telegram from servers.")
         os.remove(filename)
+    os.remove(thumb_image_path)
