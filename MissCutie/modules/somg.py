@@ -28,7 +28,6 @@ YouTube = YouTubeAPI()
 @app.on_message(
     filters.command("yt")
     & filters.group
-    & ~filters.edited
 )
 async def song_command_group(client, message: Message):
     upl = InlineKeyboardMarkup(
@@ -47,7 +46,6 @@ async def song_command_group(client, message: Message):
 @app.on_message(
     filters.command("yt")
     & filters.private
-    & ~filters.edited
 )
 async def song_command_private(client, message: Message):
     await message.delete()
