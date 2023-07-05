@@ -78,7 +78,7 @@ async def song_commad_private(client, message: Message, _):
                     SONG_DOWNLOAD_DURATION, duration_min
                 )
             )
-        buttons = song_markup
+        buttons = song_markup(vidid)
         await mystic.delete()
         return await message.reply_photo(
             thumbnail,
@@ -106,7 +106,7 @@ async def song_commad_private(client, message: Message, _):
         return await mystic.edit_text(
             "**Duration Limit Exceeded**\n\n**Allowed Duration: **{0} minute(s)\n**Received Duration:** {1} hour(s)".format(SONG_DOWNLOAD_DURATION, duration_min)
         )
-    buttons = song_markup
+    buttons = song_markup(vidid)
     await mystic.delete()
     return await message.reply_photo(
         thumbnail,
@@ -122,7 +122,7 @@ async def songs_back_helper(client, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
     stype, vidid = callback_request.split("|")
-    buttons = song_markup
+    buttons = song_markup(vidid)
     return await CallbackQuery.edit_message_reply_markup(
         reply_markup=InlineKeyboardMarkup(buttons)
     )
