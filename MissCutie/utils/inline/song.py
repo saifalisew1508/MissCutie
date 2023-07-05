@@ -1,7 +1,7 @@
 from pyrogram.types import InlineKeyboardButton
 
 
-def song_markup
+def song_markup(_, vidid):
     return [
         [
             InlineKeyboardButton(
