@@ -116,7 +116,7 @@ if ENV:
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
-    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
