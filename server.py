@@ -9,7 +9,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
         self.end_headers()
-        msg = 'MissCuti is running successfully! You requested %s' % (self.path)
+        msg = 'MissCutie is running successfully! You requested %s' % (self.path)
         self.wfile.write(msg.encode())
 
 
