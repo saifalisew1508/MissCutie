@@ -15,8 +15,8 @@ from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI
 
 
-SONG_DOWNLOAD_DURATION = "180"
-SONG_DOWNLOAD_DURATION_LIMIT = "180"
+SONG_DOWNLOAD_DURATION = 180
+SONG_DOWNLOAD_DURATION_LIMIT = 180
 
 YouTube = YouTubeAPI()
 
@@ -29,7 +29,7 @@ async def song_commad_group(client, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    text=_["↗️ Open Private Chat"],
+                    text="↗️ Open Private Chat",
                     url=f"https://t.me/{app.username}?start=song",
                 ),
             ]
