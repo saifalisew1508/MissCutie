@@ -8,7 +8,7 @@ import yt_dlp
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
-import MissCutie import YTDOWNLOADER
+from MissCutie import YTDOWNLOADER
 from MissCutie.modules.mongo_song_mongo import is_on_off
 from MissCutie.utils.formatters import time_to_seconds
 
