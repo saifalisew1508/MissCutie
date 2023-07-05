@@ -56,7 +56,7 @@ async def song_commad_group(client, message: Message):
     filters.command("yt")
     & filters.private
 )
-async def song_commad_private(client, message: Message, _):
+async def song_commad_private(client, message: Message):
     await message.delete()
     url = await YouTube.url(message)
     if url:
