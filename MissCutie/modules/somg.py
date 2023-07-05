@@ -15,8 +15,8 @@ from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI
 
 
-SONG_DOWNLOAD_DURATION = 
-SONG_DOWNLOAD_DURATION_LIMIT = 
+SONG_DOWNLOAD_DURATION = "180"
+SONG_DOWNLOAD_DURATION_LIMIT = "180"
 
 YouTube = YouTubeAPI()
 
