@@ -1,57 +1,56 @@
 import os
 import re
-from pyrogram import Client, filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    InputMediaAudio,
-    InputMediaVideo,
-    Message,
-)
-from pyrogram.errors import MessageNotModified
-import youtube_dl
+
+import yt_dlp
+from pykeyboard import InlineKeyboard
+from pyrogram import filters
+from pyrogram.types import (InlineKeyboardButton,
+                            InlineKeyboardMarkup, InputMediaAudio,
+                            InputMediaVideo, Message)
+
+
+from MissCutie import pbot as app
 from MissCutie.utils.formatters import convert_bytes
 from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI
-from MissCutie import pbot as app
 
-SONG_DOWNLOAD_DURATION = "180"  # Set your desired value
-SONG_DOWNLOAD_DURATION_LIMIT = "180"  # Set your desired value
+
+SONG_DOWNLOAD_DURATION = 
+SONG_DOWNLOAD_DURATION_LIMIT = 
 
 YouTube = YouTubeAPI()
-
 
 @app.on_message(
     filters.command("yt")
     & filters.group
 )
-async def song_command_group(client, message: Message):
+async def song_commad_group(client, message: Message):
     upl = InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
-                    text="↗️ Open Private Chat",
+                    text=_["↗️ Open Private Chat"],
                     url=f"https://t.me/{app.username}?start=song",
                 ),
             ]
         ]
     )
-    await message.reply_text(
-        "You can download Music or Video from YouTube only in private chat. Please start me in private chat.",
-        reply_markup=upl,
-    )
+    await message.reply_text("You can download Music or Video from YouTube only in private chat. Please start me in private chat.", reply_markup=upl)
+
+
+# Song Module
 
 
 @app.on_message(
     filters.command("yt")
     & filters.private
 )
-async def song_command_private(client, message: Message):
+async def song_commad_private(client, message: Message):
     await message.delete()
     url = await YouTube.url(message)
     if url:
         if not await YouTube.exists(url):
-            return await message.reply_text("Not a valid YouTube Link")
+            return await message.reply_text("Not a valid Youtube Link")
         mystic = await message.reply_text("🔄 Processing Query... Please Wait!")
         (
             title,
@@ -61,10 +60,8 @@ async def song_command_private(client, message: Message):
             vidid,
         ) = await YouTube.details(url)
         if str(duration_min) == "None":
-            return await mystic.edit_text(
-                "Live Link Detected. I am not able to download live YouTube videos. "
-            )
-        if int(duration_sec) > int(SONG_DOWNLOAD_DURATION_LIMIT):
+            return await mystic.edit_text("Live Link Detected. I am not able to download live youtube videos. ")
+        if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
             return await mystic.edit_text(
                 "**Duration Limit Exceeded**\n\n**Allowed Duration: **{0} minute(s)\n**Received Duration:** {1} hour(s)".format(
                     SONG_DOWNLOAD_DURATION, duration_min
@@ -74,138 +71,211 @@ async def song_command_private(client, message: Message):
         await mystic.delete()
         return await message.reply_photo(
             thumbnail,
-            caption="**🔗Title:**- {0}\n\nSelect the type in which you want to download.".format(
-                title
-            ),
+            caption="**🔗Title:**- {0}\n\nSelect the type in which you want to download.".format(title),
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     else:
         if len(message.command) < 2:
-            return await message.reply_text(
-                "**Usage:**\n\n/yt [Music Name] or [YouTube Link]"
-            )
-        mystic = await message.reply_text("🔄 Processing Query... Please Wait!")
-        query = message.text.split(None, 1)[1]
-        try:
-            (
-                title,
-                duration_min,
-                duration_sec,
-                thumbnail,
-                vidid,
-            ) = await YouTube.details(query)
-        except:
-            return await mystic.edit_text("Failed to Process Query!")
-        if str(duration_min) == "None":
-            return await mystic.edit_text(
-                "Live Link Detected. I am not able to download live YouTube videos. "
-            )
-        if int(duration_sec) > int(SONG_DOWNLOAD_DURATION_LIMIT):
-            return await mystic.edit_text(
-                "**Duration Limit Exceeded**\n\n**Allowed Duration: **{0} minute(s)\n**Received Duration:** {1} hour(s)".format(
-                    SONG_DOWNLOAD_DURATION, duration_min
-                )
-            )
-        buttons = song_markup(vidid)
-        await mystic.delete()
-        await message.reply_photo(
+            return await message.reply_text("**Usage:**\n\n/song [Music Name] or [Youtube Link]")
+    mystic = await message.reply_text("🔄 Processing Query... Please Wait!")
+    query = message.text.split(None, 1)[1]
+    try:
+        (
+            title,
+            duration_min,
+            duration_sec,
             thumbnail,
-            caption="**🔗Title:**- {0}\n\nSelect the type in which you want to download.".format(
-                title
-            ),
-            reply_markup=InlineKeyboardMarkup(buttons),
+            vidid,
+        ) = await YouTube.details(query)
+    except:
+        return await mystic.edit_text("Failed to Process Query!")
+    if str(duration_min) == "None":
+        return await mystic.edit_text("Live Link Detected. I am not able to download live youtube videos. ")
+    if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
+        return await mystic.edit_text(
+            "**Duration Limit Exceeded**\n\n**Allowed Duration: **{0} minute(s)\n**Received Duration:** {1} hour(s)".format(SONG_DOWNLOAD_DURATION, duration_min)
         )
-
-
-@app.on_callback_query(
-    filters.regex(pattern=r"(audio|video)_([a-zA-Z0-9_-]+)_([^\n]+)")
-)
-async def song_type_selection(client, callback_query):
-    await callback_query.answer()
-    song_type = callback_query.matches[0].group(1)
-    video_id = callback_query.matches[0].group(2)
-    title = callback_query.matches[0].group(3)
-    (
-        duration_min,
-        duration_sec,
-    ) = await YouTube.get_duration(video_id)
-    if song_type == "audio":
-        ytdl_format_options = {
-            "format": "bestaudio/best",
-            "postprocessors": [
-                {
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
-                    "preferredquality": "192",
-                }
-            ],
-            "outtmpl": "%(id)s.mp3",
-            "quiet": True,
-            "logtostderr": False,
-        }
-        try:
-            with youtube_dl.YoutubeDL(ytdl_format_options) as ydl:
-                ydl.download(["https://www.youtube.com/watch?v=" + video_id])
-        except Exception as e:
-            return await callback_query.edit_message_text(str(e))
-        f = open(video_id + ".mp3", "rb")
-        await callback_query.edit_message_text("**Uploading...**")
-        try:
-            await callback_query.edit_message_media(
-                media=InputMediaAudio(
-                    media=f,
-                    duration=int(duration_sec),
-                    title=title,
-                    performer=title,
-                )
-            )
-        except MessageNotModified:
-            return
-        await callback_query.edit_message_caption(
-            caption=f"**Title:** {title}\n**Duration:** {duration_min}:{duration_sec}\n**Size:** {convert_bytes(os.path.getsize(video_id + '.mp3'))}"
-        )
-        os.remove(video_id + ".mp3")
-    else:
-        await callback_query.edit_message_text("**Downloading Video...**")
-        ytdl_format_options = {
-            "format": "best",
-            "outtmpl": "%(id)s.%(ext)s",
-            "quiet": True,
-            "logtostderr": False,
-        }
-        try:
-            with youtube_dl.YoutubeDL(ytdl_format_options) as ydl:
-                ydl.download(["https://www.youtube.com/watch?v=" + video_id])
-        except Exception as e:
-            return await callback_query.edit_message_text(str(e))
-        f = video_id + ".mp4"
-        await callback_query.edit_message_text("**Uploading Video...**")
-        try:
-            await callback_query.edit_message_media(
-                media=InputMediaVideo(
-                    media=f,
-                    duration=int(duration_sec),
-                    width=1280,
-                    height=720,
-                    supports_streaming=True,
-                )
-            )
-        except MessageNotModified:
-            return
-        await callback_query.edit_message_caption(
-            caption=f"**Title:** {title}\n**Duration:** {duration_min}:{duration_sec}\n**Size:** {convert_bytes(os.path.getsize(f))}"
-        )
-        os.remove(f)
+    buttons = song_markup(vidid)
+    await mystic.delete()
+    return await message.reply_photo(
+        thumbnail,
+        caption="**🔗Title:**- {0}\n\nSelect the type in which you want to download.".format(title),
+        reply_markup=InlineKeyboardMarkup(buttons),
+    )
 
 
 @app.on_callback_query(
     filters.regex(pattern=r"song_back")
 )
-async def songs_back_helper(client, callback_query):
-    await callback_query.answer()
-    await callback_query.edit_message_text("**Processing Request... Please Wait!**")
-    buttons = song_markup()
-    await callback_query.edit_message_text(
-        "**Select the type in which you want to download.**",
-        reply_markup=InlineKeyboardMarkup(buttons),
+async def songs_back_helper(client, CallbackQuery):
+    callback_data = CallbackQuery.data.strip()
+    callback_request = callback_data.split(None, 1)[1]
+    stype, vidid = callback_request.split("|")
+    buttons = song_markup(_, vidid)
+    return await CallbackQuery.edit_message_reply_markup(
+        reply_markup=InlineKeyboardMarkup(buttons)
     )
+
+
+@app.on_callback_query(
+    filters.regex(pattern=r"song_helper")
+)
+async def song_helper_cb(client, CallbackQuery):
+    callback_data = CallbackQuery.data.strip()
+    callback_request = callback_data.split(None, 1)[1]
+    stype, vidid = callback_request.split("|")
+    try:
+        await CallbackQuery.answer("Getting Formats.. \n\nPlease Wait..", show_alert=True)
+    except:
+        pass
+    if stype == "audio":
+        try:
+            formats_available, link = await YouTube.formats(
+                vidid, True
+            )
+        except:
+            return await CallbackQuery.edit_message_text("Failed to get available formats for the video. Please try any other track.")
+        keyboard = InlineKeyboard()
+        done = []
+        for x in formats_available:
+            check = x["format"]
+            if "audio" in check:
+                if x["filesize"] is None:
+                    continue
+                form = x["format_note"].title()
+                if form not in done:
+                    done.append(form)
+                else:
+                    continue
+                sz = convert_bytes(x["filesize"])
+                fom = x["format_id"]
+                keyboard.row(
+                    InlineKeyboardButton(
+                        text=f"{form} Quality Audio = {sz}",
+                        callback_data=f"song_download {stype}|{fom}|{vidid}",
+                    ),
+                )
+    else:
+        try:
+            formats_available, link = await YouTube.formats(
+                vidid, True
+            )
+        except Exception as e:
+            print(e)
+            return await CallbackQuery.edit_message_text("Failed to get available formats for the video. Please try any other track.")
+        keyboard = InlineKeyboard()
+        # AVC Formats Only [ YUKKI MUSIC BOT ]
+        done = [160, 133, 134, 135, 136, 137, 298, 299, 264, 304, 266]
+        for x in formats_available:
+            check = x["format"]
+            if x["filesize"] is None:
+                continue
+            if int(x["format_id"]) not in done:
+                continue
+            sz = convert_bytes(x["filesize"])
+            ap = check.split("-")[1]
+            to = f"{ap} = {sz}"
+            keyboard.row(
+                InlineKeyboardButton(
+                    text=to,
+                    callback_data=f"song_download {stype}|{x['format_id']}|{vidid}",
+                )
+            )
+
+    keyboard.row(
+        InlineKeyboardButton(
+            text="⬅ Back",
+            callback_data=f"song_back {stype}|{vidid}",
+        ),
+        InlineKeyboardButton(text="🗑 Close", callback_data="close"),
+    )
+    return await CallbackQuery.edit_message_reply_markup(
+        reply_markup=keyboard
+    )
+
+
+# Downloading Songs Here
+
+
+@app.on_callback_query(
+    filters.regex(pattern=r"song_download")
+)
+async def song_download_cb(client, CallbackQuery):
+    try:
+        await CallbackQuery.answer("Downloading")
+    except:
+        pass
+    callback_data = CallbackQuery.data.strip()
+    callback_request = callback_data.split(None, 1)[1]
+    stype, format_id, vidid = callback_request.split("|")
+    mystic = await CallbackQuery.edit_message_text("Download Started\n\nDownloading speed could be slow. Please hold on..")
+    yturl = f"https://www.youtube.com/watch?v={vidid}"
+    with yt_dlp.YoutubeDL({"quiet": True}) as ytdl:
+        x = ytdl.extract_info(yturl, download=False)
+    title = (x["title"]).title()
+    title = re.sub("\W+", " ", title)
+    thumb_image_path = await CallbackQuery.message.download()
+    if stype == "video":
+        thumb_image_path = await CallbackQuery.message.download()
+        width = CallbackQuery.message.photo.width
+        height = CallbackQuery.message.photo.height
+        try:
+            file_path = await YouTube.download(
+                yturl,
+                mystic,
+                songvideo=True,
+                format_id=format_id,
+                title=title,
+            )
+        except Exception as e:
+            return await mystic.edit_text("Failed to download song from Youtube-DL\n\n**Reason:** {0}".format(e))
+        duration = x["duration"]
+        med = InputMediaVideo(
+            media=file_path,
+            duration=duration,
+            width=width,
+            height=height,
+            thumb=thumb_image_path,
+            caption=title,
+            supports_streaming=True,
+        )
+        await mystic.edit_text("Uploading Started\n\nUploading speed could be slow. Please hold on..")
+        await app.send_chat_action(
+            chat_id=CallbackQuery.message.chat.id,
+            action="upload_video",
+        )
+        try:
+            await CallbackQuery.edit_message_media(media=med)
+        except Exception as e:
+            print(e)
+            return await mystic.edit_text("Failed to upload on telegram from servers.")
+        os.remove(file_path)
+    elif stype == "audio":
+        try:
+            filename = await YouTube.download(
+                yturl,
+                mystic,
+                songaudio=True,
+                format_id=format_id,
+                title=title,
+            )
+        except Exception as e:
+            return await mystic.edit_text("Failed to download song from Youtube-DL\n\n**Reason:** {0}".format(e))
+        med = InputMediaAudio(
+            media=filename,
+            caption=title,
+            thumb=thumb_image_path,
+            title=title,
+            performer=x["uploader"],
+        )
+        await mystic.edit_text("Uploading Started\n\nUploading speed could be slow. Please hold on..")
+        await app.send_chat_action(
+            chat_id=CallbackQuery.message.chat.id,
+            action="upload_audio",
+        )
+        try:
+            await CallbackQuery.edit_message_media(media=med)
+        except Exception as e:
+            print(e)
+            return await mystic.edit_text("Failed to upload on telegram from servers.")
+        os.remove(filename)
