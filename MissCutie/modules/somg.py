@@ -14,7 +14,7 @@ import youtube_dl
 
 from MissCutie.utils.formatters import convert_bytes
 from MissCutie.utils.inline.song import song_markup
-from MissCutie.utils.platforms.Youtube import YouTubeAPI
+from MissCutie.utils.platforms.youtube import YouTubeAPI
 from MissCutie import pbot as app
 
 
