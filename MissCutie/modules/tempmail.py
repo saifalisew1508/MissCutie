@@ -1,6 +1,6 @@
 from pyrogram import *
 import requests as re
-from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 import wget
 import os
 
@@ -29,7 +29,7 @@ msg_buttons=InlineKeyboardMarkup(
     filters.command("tempmail")
     & filters.group
 )
-async def song_commad_group(client, message: Message):
+async def group_tempmail(client, message: Message):
     upl = InlineKeyboardMarkup(
         [
             [
