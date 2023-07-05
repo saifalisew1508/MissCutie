@@ -15,13 +15,18 @@ from MissCutie.events import register
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+
         return isinstance(
-            (await telethn(functions.channels.GetParticipantRequest(chat, user))).participant,
+            (await
+             telethn(functions.channels.GetParticipantRequest(chat, user)
+                     )).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
+
         ui = await telethn.get_peer_id(user)
-        ps = (await telethn(functions.messages.GetFullChatRequest(chat.chat_id))).full_chat.participants.participants
+        ps = (await telethn(functions.messages.GetFullChatRequest(chat.chat_id)
+                            )).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -37,10 +42,12 @@ async def _(event):
     if not event.is_reply:
         await event.reply("Reply to a file to compress it.")
         return
-    if (event.is_group and not (await is_register_admin(event.input_chat, event.message.sender_id))):
-        await event.reply("Hey, You are not admin. You can't use this command, But you can use it in my pm 🙂")
+    if (event.is_group and not (await is_register_admin(
+            event.input_chat, event.message.sender_id))):
+        await event.reply(
+            "Hey, You are not admin. You can't use this command, But you can use in my pm 🙂"
+        )
         return
-
     mone = await event.reply("⏳️ Please wait...")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
@@ -48,13 +55,13 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             time.time()
-            downloaded_file_name = await event.telethn.download_media(reply_message, TEMP_DOWNLOAD_DIRECTORY)
+            downloaded_file_name = await event.telethn.download_media(
+                reply_message, TEMP_DOWNLOAD_DIRECTORY)
             directory_name = downloaded_file_name
-        except Exception as e:
+        except Exception as e:  # pylint:disable=C0103,W0703
             await mone.reply(str(e))
-            return
-
-    zipfile.ZipFile(f"{directory_name}.zip", "w", zipfile.ZIP_DEFLATED).write(directory_name)
+    zipfile.ZipFile(f"{directory_name}.zip", "w",
+                    zipfile.ZIP_DEFLATED).write(directory_name)
 
     await event.telethn.send_file(
         event.chat_id,
@@ -83,13 +90,18 @@ if not os.path.isdir(extracted):
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+
         return isinstance(
-            (await telethn(functions.channels.GetParticipantRequest(chat, user))).participant,
+            (await
+             telethn(functions.channels.GetParticipantRequest(chat, user)
+                     )).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
+
         ui = await telethn.get_peer_id(user)
-        ps = (await telethn(functions.messages.GetFullChatRequest(chat.chat_id))).full_chat.participants.participants
+        ps = (await telethn(functions.messages.GetFullChatRequest(chat.chat_id)
+                            )).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -105,8 +117,11 @@ async def _(event):
     if not event.is_reply:
         await event.reply("Reply to a zip file.")
         return
-    if (event.is_group and not (await is_register_admin(event.input_chat, event.message.sender_id))):
-        await event.reply("Hey, You are not admin. You can't use this command, But you can use it in my pm 🙂")
+    if (event.is_group and not (await is_register_admin(
+            event.input_chat, event.message.sender_id))):
+        await event.reply(
+            "Hey, You are not admin. You can't use this command, But you can use in my pm 🙂"
+        )
         return
 
     mone = await event.reply("Processing...")
@@ -117,11 +132,10 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             time.time()
-            downloaded_file_name = await telethn.download_media(reply_message, TEMP_DOWNLOAD_DIRECTORY)
-            directory_name = downloaded_file_name
+            downloaded_file_name = await telethn.download_media(
+                reply_message, TEMP_DOWNLOAD_DIRECTORY)
         except Exception as e:
             await mone.reply(str(e))
-            return
         else:
             end = datetime.now()
             (end - start).seconds
@@ -140,9 +154,11 @@ async def _(event):
                     metadata = extractMetadata(createParser(single_file))
                     width = 0
                     height = 0
-                    duration = metadata.get("duration").seconds if metadata.has("duration") else 0
+                    duration = metadata.get(
+                        "duration").seconds if metadata.has("duration") else 0
                     if os.path.exists(thumb_image_path):
-                        metadata = extractMetadata(createParser(thumb_image_path))
+                        metadata = extractMetadata(
+                            createParser(thumb_image_path))
                         if metadata.has("width"):
                             width = metadata.get("width")
                         if metadata.has("height"):
