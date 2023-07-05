@@ -7,7 +7,6 @@ from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.enums import ChatAction, ChatType
 from pyrogram.types import (InlineKeyboardButton,
-from pyrogram.types import (InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaAudio,
                             InputMediaVideo, Message)
 
