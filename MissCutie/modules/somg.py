@@ -122,7 +122,7 @@ async def songs_back_helper(client, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
     stype, vidid = callback_request.split("|")
-    buttons = song_markup(_, vidid)
+    buttons = song_markup
     return await CallbackQuery.edit_message_reply_markup(
         reply_markup=InlineKeyboardMarkup(buttons)
     )
