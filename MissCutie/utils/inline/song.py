@@ -1,21 +1,21 @@
 from pyrogram.types import InlineKeyboardButton
 
 
-def song_markup(_, vidid):
+def song_markup(vidid):
     return [
         [
             InlineKeyboardButton(
-                text=_["🔊 Audio"],
+                text="🔊 Audio",
                 callback_data=f"song_helper audio|{vidid}",
             ),
             InlineKeyboardButton(
-                text=_["🎥 Video"],
+                text="🎥 Video",
                 callback_data=f"song_helper video|{vidid}",
             ),
         ],
         [
             InlineKeyboardButton(
-                text=_["🗑 Close"], callback_data="close"
+                text="🗑 Close", callback_data="close"
             ),
         ],
     ]
