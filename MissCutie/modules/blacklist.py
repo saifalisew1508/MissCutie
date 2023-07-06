@@ -512,3 +512,11 @@ __handlers__ = [
     BLACKLISTMODE_HANDLER,
     (BLACKLIST_DEL_HANDLER, BLACKLIST_GROUP),
 ]
+
+
+__mod_name__ = "Blacklists"
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "blacklist_help")
