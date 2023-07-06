@@ -161,14 +161,26 @@ for module_name in ALL_MODULES:
     imported_module = importlib.import_module("MissCutie.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
-
-    if imported_module.__mod_name__.lower() not in IMPORTED:
+    if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
         raise Exception("Can't have two modules with the same name! Please change one")
-
     if hasattr(imported_module, "__help__") and imported_module.__help__:
-        HELPABLE[imported_module.__mod_name__.lower()] = imported_module
+        HELPABLE[imported_module.__mod_name__.lower()] = imported_module   
+#new
+        plugin_name = imported_module.__mod_name__.lower()
+        plugin_dict_name = f"plugins.{plugin_name}.main"
+    HELP_COMMANDS[plugin_dict_name] = {
+        "buttons": [],
+        "__mod_name__": [],
+        "plug_cmds": [],
+        "__help__": f"modules.{plugin_name}.help",
+    }      
+    if hasattr(imported_module, "__buttons__"):
+       HELP_COMMANDS[plugin_dict_name]["buttons"] = imported_module.__buttons__    
+    if hasattr(imported_module, "__plug_name__"):
+        HELP_COMMANDS[plugin_dict_name]["plug_cmds"] = imported_module.__alt_name__
+
 
 
     # Chats to migrate on chat_migrated events
