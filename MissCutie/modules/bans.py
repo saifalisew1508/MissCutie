@@ -657,19 +657,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         return log
       
-__help__ = """
- ➥ `/kickme`*:* kicks the user who issued the command
 
-*Admins only:*
- ➥ `/ban <userhandle>`*:* bans a user/channel. (via handle, or reply)
- ➥ `/sban <userhandle>`*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
- ➥ `/tban <userhandle> x(m/h/d)`*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
- ➥ `/unban <userhandle>`*:* unbans a user/channel. (via handle, or reply)
- ➥ `/kick <userhandle>`*:* kicks a user out of the group, (via handle, or reply)
-
- NOTE:
-    Banning or UnBanning channels only work if you reply to their message, so don't use their username to ban/unban.
-"""
 
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban, block=False)
 TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, block=False)
@@ -687,7 +675,7 @@ application.add_handler(ROAR_HANDLER)
 application.add_handler(KICKME_HANDLER)
 application.add_handler(BAN_CALLBACK_HANDLER)
 
-__mod_name__ = "Bans"
+
 __handlers__ = [
     BAN_HANDLER,
     TEMPBAN_HANDLER,
@@ -697,3 +685,14 @@ __handlers__ = [
     KICKME_HANDLER,
     BAN_CALLBACK_HANDLER
 ]
+
+
+
+from MissCutie.modules.language import gs
+
+
+def get_help(chat):
+    return gs(chat, "bans_help")
+
+
+__mod_name__ = "Bans"
