@@ -25,9 +25,10 @@ def paginate(
         yield page
 
 
-def gs(chat_id: Union[int, str], string: str) -> str:
+def gs(chat_id: Union[int, str], string: str, reply_markup: InlineKeyboardMarkup) -> str:
     lang = sql.get_chat_lang(chat_id)
     return get_string(lang, string)
+
 
 
 @check_admin(is_user=True)
