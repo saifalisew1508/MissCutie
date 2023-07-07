@@ -34,8 +34,7 @@ def gs(chat_id: Union[int, str], string: str) -> str:
 async def set_lang(update: Update, _) -> None:
     chat = update.effective_chat
     msg = update.effective_message
-
-    await msg_text == gs(chat.id, "curr_chat_lang").format(
+    msg_text = gs(chat.id, "curr_chat_lang").format(
         get_language(sql.get_chat_lang(chat.id))[:-3]
     )
 
@@ -52,7 +51,7 @@ async def set_lang(update: Update, _) -> None:
             )
         ]
     )
-    msg.reply_text(msg_text, reply_markup=InlineKeyboardMarkup(keyb))
+    await msg.reply_text(msg_text, reply_markup=InlineKeyboardMarkup(keyb))
 
 
 @check_admin(no_reply=True)
