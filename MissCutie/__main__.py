@@ -312,26 +312,38 @@ async def error_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
-
+    chat = update.effective_chat
+    # print(query.message.chat.id)
 
     try:
         if mod_match:
             module = mod_match.group(1)
+            module = module.replace("_", " ")
+            help_list = HELPABLE[module].get_help(update.effective_chat.id)
+            if isinstance(help_list, list):
+                help_text = help_list[0]
+                help_buttons = help_list[1:]
+            elif isinstance(help_list, str):
+                help_text = help_list
+                help_buttons = []
             text = (
-                "*Available Commands for* *{}* :\n".format(
-                    HELPABLE[module].__mod_name__,
-                )
-                + HELPABLE[module].__help__
+                    "Here is the help for the *{}* module:\n".format(
+                        HELPABLE[module].__mod_name__
+                    )
+                    + help_text
+            )
+            help_buttons.append(
+                [InlineKeyboardButton(text="🔙", callback_data="help_back")]
             )
             await query.message.edit_text(
                 text=text,
                 parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton(text="🔙", callback_data="help_back")]],
                 ),
@@ -366,9 +378,9 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ),
             )
 
-        # ensure no spinny white circle
+        
         await context.bot.answer_callback_query(query.id)
-        # await query.message.delete()
+        
 
     except BadRequest:
         pass
