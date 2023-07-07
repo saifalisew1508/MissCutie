@@ -71,6 +71,7 @@ pyrate-limiter==2.10.0
 pyfiglet==0.8.post1
 Pyrogram==2.0.106
 PySocks==1.7.1
+pyYAML>=5.1.2
 python-dotenv==0.19.2
 python-telegram-bot==20.3
 python-whatanime==0.1.2
