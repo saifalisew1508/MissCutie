@@ -59,7 +59,7 @@ async def lang_button(update: Update, _) -> None:
     query = update.callback_query
     chat = update.effective_chat
 
-    query.answer()
+    await query.answer()
     lang = query.data.split("_")[1]
     sql.set_lang(chat.id, lang)
 
