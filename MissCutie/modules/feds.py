@@ -25,6 +25,7 @@ from MissCutie.modules.helper_funcs.extraction import (
     extract_user_fban,
 )
 from MissCutie.modules.helper_funcs.string_handling import markdown_parser
+from MissCutie.modules.language import gs
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -2358,13 +2359,6 @@ def get_chat(chat_id, chat_data):
         return {"status": False, "value": False}
 
 
-
-
-
-__mod_name__ = "Federations"
-
-from MissCutie.modules.language import gs
-
 async def fed_owner_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         gs(update.effective_chat.id, "FED_OWNER_HELP"),
@@ -2379,13 +2373,11 @@ async def fed_admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-
 async def fed_user_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         gs(update.effective_chat.id, "FED_USER_HELP"),
         parse_mode=ParseMode.MARKDOWN,
     )
-
 
 
 async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -2407,18 +2399,6 @@ async def fed_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ),
     )
     bot.answer_callback_query(query.id)
-
-
-def get_help(chat):
-    return [gs(chat, "feds_help"),
-    [
-        InlineKeyboardButton(text="Fedadmins", callback_data="fed_help_admin"),
-        InlineKeyboardButton(text="Fedowners", callback_data="fed_help_owner")
-    ],
-    [
-        InlineKeyboardButton(text="Users", callback_data="fed_help_user")
-    ],
-]
 
 
 
@@ -2484,3 +2464,19 @@ application.add_handler(DELETEBTN_FED_HANDLER)
 application.add_handler(FED_OWNER_HELP_HANDLER)
 application.add_handler(FED_ADMIN_HELP_HANDLER)
 application.add_handler(FED_USER_HELP_HANDLER)
+application.add_handler(FED_HELP_BUTTON)
+
+
+
+__mod_name__ = "Federations"
+
+def get_help(chat):
+    return [gs(chat, "feds_help"),
+    [
+        InlineKeyboardButton(text="Fedadmins", callback_data="fed_help_admin"),
+        InlineKeyboardButton(text="Fedowners", callback_data="fed_help_owner")
+    ],
+    [
+        InlineKeyboardButton(text="Users", callback_data="fed_help_user")
+    ],
+	   ]
