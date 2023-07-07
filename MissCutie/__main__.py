@@ -997,7 +997,7 @@ Presented By @BotXNews
 
 def main():
     
-    application.job_queue.run_repeating(send_alive, interval=7200, first=10)
+    application.job_queue.run_repeating(send_alive, interval=21600, first=10)
 
     start_handler = CommandHandler("start", start, block=False)
     help_handler = CommandHandler("help", get_help, block=False)
