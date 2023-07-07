@@ -35,7 +35,7 @@ async def set_lang(update: Update, _) -> None:
     chat = update.effective_chat
     msg = update.effective_message
 
-    await msg_text = gs(chat.id, "curr_chat_lang").format(
+    await msg_text == gs(chat.id, "curr_chat_lang").format(
         get_language(sql.get_chat_lang(chat.id))[:-3]
     )
 
