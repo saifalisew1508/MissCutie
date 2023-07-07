@@ -2470,13 +2470,17 @@ application.add_handler(FED_HELP_BUTTON)
 
 __mod_name__ = "Federations"
 
+
 def get_help(chat):
-    return [gs(chat, "feds_help"),
-    [
-        InlineKeyboardButton(text="Fed Owner", callback_data="fed_owner_help"),
-        InlineKeyboardButton(text="Fed Admins", callback_data="fed_admin_help")
-    ],
-    [
-        InlineKeyboardButton(text="Users", callback_data="fed_user_help")
-    ],
-]
+    keyboard = [
+        [
+            InlineKeyboardButton(text="Fed Owner", callback_data="fed_owner_help"),
+            InlineKeyboardButton(text="Fed Admins", callback_data="fed_admin_help")
+        ],
+        [
+            InlineKeyboardButton(text="Users", callback_data="fed_user_help")
+        ],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    return [gs(chat, "feds_help", reply_markup)]
