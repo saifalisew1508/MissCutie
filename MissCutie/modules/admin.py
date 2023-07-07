@@ -944,7 +944,7 @@ application.add_handler(ADMIN_CALLBACK_HANDLER)
 
 __mod_name__ = "Admin"
 
-from tg_bot.modules.language import gs
+from MissCutie.modules.language import gs
 def get_help(chat):
     return gs(chat, "admin_help")
 
