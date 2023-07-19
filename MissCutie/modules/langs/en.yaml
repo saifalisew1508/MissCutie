@@ -564,7 +564,7 @@ greetings_help: |
        ➥ /welcomemutehelp*:* gives information about welcome mutes.
        ➥ /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
        *Example:*
-      user joined chat, user left chat.
+       user joined chat, user left chat.
 
        *Welcome markdown:*
        ➥ `/welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
