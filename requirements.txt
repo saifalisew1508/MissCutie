@@ -72,7 +72,7 @@ pyfiglet==0.8.post1
 Pyrogram==2.0.106
 PySocks==1.7.1
 python-dotenv==0.19.2
-python-telegram-bot==20.3
+python-telegram-bot==20.4
 python-whatanime==0.1.2
 pytz==2021.3
 pytz-deprecation-shim==0.1.0.post0
