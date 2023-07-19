@@ -382,7 +382,7 @@ locks_help: |
 
       • `/locktypes`*:* Lists all possible locktypes
 
-     *Admins only:*
+      *Admins only:*
       • `/lock <type>`*:* Lock items of a certain type (not available in private)
       • `/unlock <type>`*:* Unlock items of a certain type (not available in private)
       • `/locks`*:* The current list of locks in this chat.
@@ -463,7 +463,7 @@ misc_help: |
       • /antichannelpin <on/off>: Makes Cutie automatically unpin linked channel posts from chatroom
 
 muting_help: |
-      *Admins only:*
+       *Admins only:*
        • `/mute <userhandle>`*:* silences a user. Can also be used as a reply, muting the replied to user.
        • `/tmute <userhandle> x(m/h/d)`*:* mutes a user for x time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
        • `/unmute <userhandle>`*:* unmutes a user. Can also be used as a reply, muting the replied to user.
@@ -475,7 +475,7 @@ moderators_help: |
        Maybe not enough to make them admin, but you might be ok with ban, mute, and warn not.
        That's what modcheck are for - mod of trustworthy users to allow to manage your group.
 
-      *Commands*
+       *Commands*
        ➥ /addmod *:* moderator of a user. 
        ➥ /rmmod *:* Unmoderator of a user.
        ➥ /modcheck *:* moderation cheak of a user.
