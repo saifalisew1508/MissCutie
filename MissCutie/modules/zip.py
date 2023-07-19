@@ -209,3 +209,12 @@ def get_lst_of_files(input_directory, output_lst):
             return get_lst_of_files(current_file_name, output_lst)
         output_lst.append(current_file_name)
     return output_lst
+
+
+__mod_name__ = "Tools"
+
+from MissCutie.modules.language import gs
+
+
+def get_help(chat):
+    return gs(chat, "tools_help")
