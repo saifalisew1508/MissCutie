@@ -3,7 +3,7 @@ aiosignal==1.2.0
 alphabet-detector==0.0.7
 anyio==3.7.0
 APScheduler==3.9.1
-async-lru==1.0.2
+async-lru==1.0.3
 async-timeout==4.0.2
 attrs==21.2.0
 beautifulsoup4==4.10.0
