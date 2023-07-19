@@ -8,6 +8,8 @@ import uuid
 from io import BytesIO
 
 import MissCutie.modules.sql.feds_sql as sql
+from MissCutie.modules.language import gs
+
 from MissCutie import (
     EVENT_LOGS,
     LOGGER,
@@ -2472,15 +2474,12 @@ __mod_name__ = "Federations"
 
 
 def get_help(chat):
-    keyboard = [
-        [
-            InlineKeyboardButton(text="Fed Owner", callback_data="fed_owner_help"),
-            InlineKeyboardButton(text="Fed Admins", callback_data="fed_admin_help")
-        ],
-        [
-            InlineKeyboardButton(text="Users", callback_data="fed_user_help")
-        ],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    return [gs(chat, "feds_help", reply_markup)]
+    return [gs(chat, "feds_help"),
+    [
+        InlineKeyboardButton(text="Fedadmins", callback_data="fed_help_admin"),
+        InlineKeyboardButton(text="Fedowners", callback_data="fed_help_owner")
+    ],
+    [
+        InlineKeyboardButton(text="Users", callback_data="fed_help_user")
+    ],
+]
