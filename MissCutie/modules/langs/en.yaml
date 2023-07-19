@@ -210,7 +210,7 @@ extra_help: |
      *warning:* you would be in trouble if you input any other value than mentioned.
 
     *Markdown:*
- ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
+    ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
  
     *Mamefy*
     ➥ /mmf <TEXT>*:* Add Text to Replied Sticker
