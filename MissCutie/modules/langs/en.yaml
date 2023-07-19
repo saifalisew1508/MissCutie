@@ -49,7 +49,7 @@ admin_help: |
    *Any User*
    ➥ /admins*:* list of admins in the chat
 
-   *Admins only:*
+   *Admins only*
    ➥ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
    ➥ /unpin*:* unpins the currently pinned message
    ➥ /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
@@ -475,7 +475,7 @@ moderators_help: |
        Maybe not enough to make them admin, but you might be ok with ban, mute, and warn not.
        That's what modcheck are for - mod of trustworthy users to allow to manage your group.
 
-      *Commands*:
+      *Commands*
        ➥ /addmod *:* moderator of a user. 
        ➥ /rmmod *:* Unmoderator of a user.
        ➥ /modcheck *:* moderation cheak of a user.
