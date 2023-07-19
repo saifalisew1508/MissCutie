@@ -198,6 +198,12 @@ async def open_topic(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 __mod_name__ = "Topics"
 
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "topics_help")
+
+
 
 SET_TOPIC_HANDLER = CommandHandler("setactiontopic", set_topic_action, block=False)
 DEL_TOPIC_HANDLER = CommandHandler("delactiontopic", del_topic_action, block=False)
