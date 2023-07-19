@@ -46,15 +46,34 @@ updates_channel_link_btn: "Updates"
 src_btn: "Source code"
 
 admin_help: |
-   • `/admins`*:* list of admins in the chat
+   *Any User*
+   ➥ /admins*:* list of admins in the chat
 
    *Admins only:*
-   • `/pin`*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users.
-   • `/unpin`*:* unpins the currently pinned message
-   • `/invitelink`*:* gets invitelink
-   • `/promote`*:* promotes the user replied to
-   • `/demote`*:* demotes the user replied to
-   • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
+   ➥ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
+   ➥ /unpin*:* unpins the currently pinned message
+   ➥ /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
+   ➥ /del*:* deletes the message you replied to
+   ➥ /purge*:* deletes all messages between this and the replied to message.
+   ➥ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
+   ➥ /invitelink*:* gets invitelink
+   ➥ /promote*:* promotes the user replied to
+   ➥ /demote*:* demotes the user replied to
+   ➥ /title <title here> *:* sets a custom title for an admin that the bot promoted
+   ➥ /admincache*:* force refresh the admins list
+
+   *Group Join Request*
+   ➥ /approveall approve all pending join request *(NO MORE)*
+   ➥ /joinrequest `<yes|on|true/no|off|false>` To activate join request acceptabe button
+   ➥ /autoapprove `<yes|on|true/no|off|false>` To activate join request auto accept by bot
+
+   *Mass Action Tool*
+   ➥ /unbanall*:* Unban all banned members in Group 
+   ➥ /unmuteall*:* Unmute all banned members in Group
+   ➥ /banall*:* Ban all members in Group *(Only Group Owner Use This Command)*
+   ➥ /zombies*:* Starts searching for deleted accounts in the group.
+   ➥ /zombies clean*:* Removes the deleted accounts from the group.
+   ➥ /users*:* get group users list
 
 afk_help: |
    - /afk <reason>: mark yourself as AFK(away from keyboard).
@@ -70,15 +89,15 @@ anilist_help: |
      - /manga <manga>: returns information about the manga.
 
 antiflood_help: |
-    Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood
-    will result in restricting that user.
+     Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood \
+     will result in restricting that user.
      This will mute users if they send more than 10 messages in a row, bots are ignored.
-     • `/flood`*:* Get the current flood control setting
-    • *Admins only:*
-     • `/setflood <int/'no'/'off'>`*:* enables or disables flood control
+      ➥ `/flood`*:* Get the current flood control setting
+     • *Admins only:*
+     ➥ `/setflood <int/'no'/'off'>`*:* enables or disables flood control
      *Example:* `/setflood 10`
-     • `/setfloodmode <ban/kick/mute/tban/tmute> <value>`*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
-    • *Note:*
+     ➥ `/setfloodmode <ban/kick/mute/tban/tmute> <value>`*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
+     • *Note:*
      • Value must be filled for tban and tmute!!
      It can be:
      `5m` = 5 minutes
@@ -86,55 +105,57 @@ antiflood_help: |
      `3d` = 3 days
      `1w` = 1 week
 
+
 approve_help: |
      Sometimes, you might trust a user not to send unwanted content.
      Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
      That's what approvals are for - approve of trustworthy users to allow them to send
      *Admin commands:*
-     • `/approval`*:* Check a user's approval status in current chat.
-     • `/approve`*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-     • `/unapprove`*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
-     • `/approved`*:* List all approved users.
-     • `/unapproveall`*:* Unapprove *ALL* users in a chat. This cannot be undone.
+     ➥ /approval*:* Check a user's approval status in current chat.
+     ➥ /approve*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
+     ➥ /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
+     ➥ /approved*:* List all approved users.
+     ➥ /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
 
 backup_help: |
     *Admin only:*
-     - /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
+     ➥ /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
        that files/photos can't be imported due to telegram restrictions.
-     - /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons)
+     ➥ /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons)
 
 bans_help: |
-    - /kickme: kicks the user who issued the command
+   *Any User*
+    ➥ /kickme: kicks the user who issued the command
 
-     *Admin only:*
-    - /ban <userhandle>: bans a user. (via handle, or reply)
-    - /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-    - /unban <userhandle>: unbans a user. (via handle, or reply)
-    - /kick <userhandle>: kick a user out of the group, (via handle, or reply)
+   *Admin only:*
+    ➥ /ban <userhandle>: bans a user. (via handle, or reply)
+    ➥ /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+    ➥ /unban <userhandle>: unbans a user. (via handle, or reply)
+    ➥ /kick <userhandle>: kick a user out of the group, (via handle, or reply)
 
 blacklist_help: |
     Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
 
     *NOTE*: Blacklists do not affect group admins.
 
-     • `/blacklist`*:* View the current blacklisted words.
+     ➥ /blacklist*:* View the current blacklisted words.
 
     Admin only:
-     • `/addblacklist <triggers>`*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
-     • `/unblacklist <triggers>`*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
-     • `/blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>`*:* Action to perform when someone sends blacklisted words.
+     ➥ /addblacklist <triggers>*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
+     ➥ /unblacklist <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
+     ➥ /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Action to perform when someone sends blacklisted words.
 
 cleaner_help: |
-    - /cleanbluetext <on/off/yes/no> - clean commands after sending
-    - /ignorecleanbluetext <word> - prevent auto cleaning of the command
-    - /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
-    - /listcleanbluetext - list currently whitelisted commands
+    ➥ /cleanbluetext <on/off/yes/no> - clean commands after sending
+    ➥ /ignorecleanbluetext <word> - prevent auto cleaning of the command
+    ➥ /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
+    ➥ /listcleanbluetext - list currently whitelisted commands
 
 connections_help: |
-    - /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
-    - /connection: list connected chats
-    - /disconnect: disconnect from a chat
-    - /helpconnect: list available commands that can be done remotely
+    ➥ /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
+    ➥ /connection: list connected chats
+    ➥ /disconnect: disconnect from a chat
+    ➥ /helpconnect: list available commands that can be done remotely
 
      *Admin only:*
     - /allowconnect <yes/no>: allow a user to connect to a chat
@@ -168,6 +189,50 @@ disable_help: |
      • /enable <cmd name>: Enable that command
      • /disable <cmd name>: Disable that command
      • /listcmds: List all possible disablable commands
+
+
+extra_help: |
+    *Carbon*
+    /carbon *:* Make Carbon To Given or Replied Text
+
+    *Couples*
+    ➥ /couples *:* Choose 2 users and send their name as couples in your chat.
+
+    *Echo*
+    ➥ /echo *:* reply to a text
+
+    *Emoji Game*
+    *Play Game With Emojis:*
+    ➥ /dice or /dice 1 to 6 any value
+    ➥ /ball or /ball 1 to 5 any value
+    ➥ /dart or /dart 1 to 6 any value
+     *Usage:* hahaha just a magic.
+     *warning:* you would be in trouble if you input any other value than mentioned.
+
+    *Markdown:*
+ ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
+ 
+    *Mamefy*
+    ➥ /mmf <TEXT>*:* Add Text to Replied Sticker
+
+    *Prank*
+    ➥ /horny *:* check your current hornyess
+    ➥ /gay *:* check your current guyness
+    ➥ /lezbian *:* check ur current lazbian
+    ➥ /boob *:* check your current boobs size
+    ➥ /cute *:* check your current cuteness
+
+    *React:*
+    ➥ /react*:* Reacts with a random reaction
+
+    *Tag/Mention All*
+    ➥ /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
+
+    *QuoteLy*
+    ➥ /q - To quote a message.
+    ➥ /q [INTEGER] - To quote more than 1 messages.
+    ➥ /q r - to quote a message with it's reply
+    ➥ /q r [INTEGER] To quote more than 1 reply messages
 
 feds_help: |
     Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
@@ -212,6 +277,42 @@ FED_USER_HELP: |
 
 formt_help_bse: |
     Cutie supports a large number of formatting options to make your messages more expressive. Take a look!
+
+
+
+force_subscribe: |
+    - @MissCutieRobot can mute members who are not subscribed to your channel until they subscribe.
+    - When enabled, I will mute unsubscribed members and show them an unmute button. When they press the button, I will unmute them.
+
+    *Setup*
+    1) First of all, add me in the group as an admin with ban users permission and add me as an admin in the channel as well.
+    Note: Only the creator of the group can set me up, and I will not allow force subscribe again if not done so.
+
+    *Commands*
+    ➥ /forcesubscribe: Get the current settings.
+    ➥ /forcesubscribe <no/off/disable>: Turn off ForceSubscribe.
+    ➥ /forcesubscribe <channel username>: Turn on and set up the channel.
+    ➥ /forcesubscribe clear: Unmute all members who are muted by me.
+
+    Note /forcesub is an alias of /forcesubscribe.
+
+
+google_search: |
+    *Google Search*
+    ➥ /google <text>*:* Perform a google search
+    ➥ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
+    ➥ /app <appname>*:* Searches for an app in Play Store and returns its details.
+    ➥ /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
+
+    *Google Translate*
+    ➥ `/tr` or `/tl` (language code) as reply to a long message
+    *Example:*
+    ➥ `/tr en`*:* translates something to english
+    ➥ `/tr hi-en`*:* translates hindi to english
+
+
+    
+    
 
 md_help: |
     <b>Markdown Formatting</b>
@@ -271,16 +372,6 @@ antispam_help: |
      Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
      *Note:* Users can appeal spamwatch bans at @SpamwatchSupport
 
-gtranslate_help: |
-     Use this module to translate stuff... duh!
-
-     *Commands:*
-     • `/tl` (or `/tr`): as a reply to a message, translates it to English.
-     • `/tl <lang>`: translates to <lang>
-       eg: `/tl ja`: translates to Japanese.
-     • `/tl <source>//<dest>`: translates from <source> to <lang>.
-       eg: `/tl ja//en`: translates from Japanese to English.
-     • `/langs`: get a list of supported languages for translation.
 
 
 locks_help: |
@@ -376,6 +467,28 @@ muting_help: |
        • `/mute <userhandle>`*:* silences a user. Can also be used as a reply, muting the replied to user.
        • `/tmute <userhandle> x(m/h/d)`*:* mutes a user for x time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
        • `/unmute <userhandle>`*:* unmutes a user. Can also be used as a reply, muting the replied to user.
+
+
+
+moderators_help: |
+       Sometimes, you don't trust but want to make user manager of your group then you can make him/her moderator.
+       Maybe not enough to make them admin, but you might be ok with ban, mute, and warn not.
+       That's what modcheck are for - mod of trustworthy users to allow to manage your group.
+
+      *Commands*:
+       ➥ /addmod *:* moderator of a user. 
+       ➥ /rmmod *:* Unmoderator of a user.
+       ➥ /modcheck *:* moderation cheak of a user.
+       ➥ /modlist *:* moderation user list.
+
+
+nightmode_help: |
+       *Admins Only*
+       ➥ /nightmode: Adds the group to Night Mode chats.
+       ➥ /rmnight: Removes the group from Night Mode chats.
+
+       *Note:* Night Mode chats are automatically closed at 12 AM (IST) and automatically opened at 6 AM (IST) to prevent night spams.
+
 
 notes_help: |
        • `/get <notename>`*:* get the note with this notename
@@ -491,3 +604,68 @@ raid_help: |
 
   • /raidactiontime `(time optional)` : view or set the default duration that the raid mode will tempban
   Default is 1 hour
+
+
+
+tools_help: |
+  *Country*
+  ➥ /country <country name>*:* Gathering info about given country
+
+  *Currency converter:*
+  ➥ /cash*:* currency converter
+  *Example:*
+  ➥ /cash 1 USD INR
+  ➥ /cash 1 usd inr
+  *Output:* 1.0 USD = 75.505 INR
+
+  *English Tools*
+  ➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+  ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
+  ➥ /synonyms <word>*:* Find the synonyms of a word
+  ➥ /antonyms <word>*:* Find the antonyms of a word
+
+  *Encryption & Decryption*
+  ➥ /encrypt *:* Encrypts The Given Text
+  ➥ /decrypt *:* Decrypts Previously Ecrypted Text
+ 
+  *GitHub*
+  ➥ /github <username>*:* get information about a github user.
+
+  *GPS & Location*
+  ➥ /gps <location>*:* Get gps location.
+
+  *Paste*
+  ➥ /paste *:* Saves replied content to nekobin.com and replies with a url
+ 
+  *PDF Tool*
+  /pdf *:* Make PDF of Replied Image
+
+  *QR Code*
+  ➥ /getqr *:* Get QR Code content from a replied photo.
+  ➥ /makeqr <text> *:* Make a QR Code containing the given text.
+
+  ➥ /time <query>*:* Gives information about a timezone.
+  *Available queries:* Country Code/Country Name/Timezone Name 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+  *Urban Dictonary:*
+  ➥ /ud <word>*:* Type the word or expression you want to search use
+ 
+  *Wikipedia:*
+  ➥ /wiki <query>*:* wikipedia your query
+
+  *WallPaper*
+  ➥ /wall <query>*:* get a wallpaper from wall.alphacoders.com
+  
+  *Weather*
+  ➥ /weather <city>*:* Advanced weather module, usage same as /weather
+  ➥ /weather moon*:* Get the current status of moon
+  
+  *Website Screenshot*
+  ➥ /webss <URL Link>*;* Sends the screenshot of the given url.
+  
+  *Write Tool*
+  ➥ /write <text>*:* Writes the given text.
+  
+  *Zip*
+  ➥ /zip *:* reply to a telegram file to compress it in .zip format
+  ➥ /unzip *:* reply to a telegram file to decompress it from the .zip format
