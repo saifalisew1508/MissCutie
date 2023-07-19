@@ -47,8 +47,3 @@ if 1 == 1:
             else:
                 await event.edit("<code>No photo found with that id</code>")
                 return
-
-
-
-
-__mod_name__ = "Tools"
