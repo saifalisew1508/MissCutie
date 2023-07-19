@@ -139,22 +139,8 @@ def config(client: Client, message):
         message.reply_text("❌ **Force Subscribe is disabled in this chat.**")
 
 
-
-__help__ = """
-*Force Subscribe*:
-- @MissCutieRobot can mute members who are not subscribed to your channel until they subscribe.
-- When enabled, I will mute unsubscribed members and show them an unmute button. When they press the button, I will unmute them.
-
-*Setup*:
-1) First of all, add me in the group as an admin with ban users permission and add me as an admin in the channel as well.
-   Note: Only the creator of the group can set me up, and I will not allow force subscribe again if not done so.
-
-*Commands*:
-➥ /forcesubscribe: Get the current settings.
-➥ /forcesubscribe <no/off/disable>: Turn off ForceSubscribe.
-➥ /forcesubscribe <channel username>: Turn on and set up the channel.
-➥ /forcesubscribe clear: Unmute all members who are muted by me.
-
-Note: /forcesub is an alias of /forcesubscribe.
-"""
 __mod_name__ = "ForceSub"
+
+from MissCutie.modules.language import gs
+def get_help(chat):
+    return gs(chat, "force_subscribe")
