@@ -320,6 +320,7 @@ if is_module_loaded(FILENAME):
 
     def __chat_settings__(chat_id, user_id):
         return build_curr_disabled(chat_id)
+    
 
     DISABLE_HANDLER = CommandHandler("disable", disable, block=False)
     DISABLE_MODULE_HANDLER = CommandHandler("disablemodule", disable_module, block=False)
@@ -340,3 +341,12 @@ if is_module_loaded(FILENAME):
 else:
     DisableAbleCommandHandler = CommandHandler
     DisableAbleMessageHandler = MessageHandler
+
+
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "disable_help")
+
+__mod_name__ = "Disablling"
