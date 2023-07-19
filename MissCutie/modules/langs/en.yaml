@@ -183,12 +183,14 @@ disable_help: |
     This allows you to disable some commonly used commands, so noone can use them.
     It'll also allow you to autodelete them, stopping people from bluetexting.
 
-     • /cmds: Check the current status of disabled commands
+     ➥ /cmds: Check the current status of disabled commands
 
      *Admin only:*
-     • /enable <cmd name>: Enable that command
-     • /disable <cmd name>: Disable that command
-     • /listcmds: List all possible disablable commands
+     ➥ /enable <cmd name>: Enable that command
+     ➥ /disable <cmd name>: Disable that command
+     ➥ /enablemodule <module name>*:* enable all commands in that module
+     ➥ /disablemodule <module name>*:* disable all commands in that module
+     ➥ /listcmds: List all possible disablable commands
 
 
 extra_help: |
@@ -399,10 +401,10 @@ locks_help: |
 
 log_help: |
       *Admins only:*
-      • `/logchannel`*:* get log channel info
-      • `/setlog`*:* set the log channel.
-      • `/unsetlog`*:* unset the log channel.
-      • `/announce`*:* toggle setting to announce admin actions in chatroom.
+      ➥ /logchannel*:* get log channel info
+      ➥ /setlog*:* set the log channel.
+      ➥ /unsetlog*:* unset the log channel.
+      ➥ /announce*:* toggle setting to announce admin actions in chatroom.
 
       Setting the log channel is done by:
       • adding the bot to the desired channel (as an admin!)
@@ -524,10 +526,10 @@ reports_help: |
           • If in group, toggles that groups's status.
 
 rules_help: |
-      • `/rules`*:* get the rules for this chat.
+      ➥ /rules*:* get the rules for this chat.
        *Admins only:*
-      • `/setrules <your rules here>`*:* set the rules for this chat.
-      • `/clearrules`*:* clear the rules for this chat.
+      ➥ /setrules <your rules here>*:* set the rules for this chat.
+      ➥ /clearrules*:* clear the rules for this chat.
 
 userinfo_help: |
       - /setbio <text>: while replying, will save another user's bio
@@ -536,36 +538,36 @@ userinfo_help: |
       - /me: will get your or another user's info
 
 warns_help: |
-      • `/warns <userhandle>`*:* get a user's number, and reason, of warns.
-      • `/warnlist`*:* list of all current warning filters
+      ➥ /warns <userhandle>*:* get a user's number, and reason, of warns.
+      ➥ /warnlist*:* list of all current warning filters
 
       *Admins only:*
-      • `/warn <userhandle>`*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
-      • `/resetwarn <userhandle>`*:* reset the warns for a user. Can also be used as a reply.
-      • `/addwarn <keyword> <reply message>`*:* set a warning filter on a certain keyword. If you want your keyword to
+      ➥ /warn <userhandle>*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
+      ➥ /resetwarn <userhandle>*:* reset the warns for a user. Can also be used as a reply.
+      ➥ /addwarn <keyword> <reply message>*:* set a warning filter on a certain keyword. If you want your keyword to
       be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
-      • `/nowarn <keyword>`*:* stop a warning filter
-      • `/warnlimit <num>`*:* set the warning limit
-      • `/strongwarn <on/yes/off/no>`*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
+      ➥ /nowarn <keyword>*:* stop a warning filter
+      ➥ /warnlimit <num>*:* set the warning limit
+      ➥ /strongwarn <on/yes/off/no>*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
 
 greetings_help: |
-      *Admins only:*
-       • `/welcome <on/off>`*:* enable/disable welcome messages.
-       • `/welcome`*:* shows current welcome settings.
-       • `/welcome noformat`*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
-       • `/goodbye`*:* same usage and args as `/welcome`.
-       • `/setwelcome <sometext>`*:* set a custom welcome message. If used replying to media, uses that media.
-       • `/setgoodbye <sometext>`*:* set a custom goodbye message. If used replying to media, uses that media.
-       • `/resetwelcome`*:* reset to the default welcome message.
-       • `/resetgoodbye`*:* reset to the default goodbye message.
-       • `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
-       • `/welcomemutehelp`*:* gives information about welcome mutes.
-       • `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages.
+       *Admins only:*
+       ➥ /welcome <on/off>*:* enable/disable welcome messages.
+       ➥ /welcome*:* shows current welcome settings.
+       ➥ /welcome noformat*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
+       ➥ /goodbye*:* same usage and args as `/welcome`.
+       ➥ /setwelcome <sometext>*:* set a custom welcome message. If used replying to media, uses that media.
+       ➥ /setgoodbye <sometext>*:* set a custom goodbye message. If used replying to media, uses that media.
+       ➥ /resetwelcome*:* reset to the default welcome message.
+       ➥ /resetgoodbye*:* reset to the default goodbye message.
+       ➥ /cleanwelcome <on/off>*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
+       ➥ /welcomemutehelp*:* gives information about welcome mutes.
+       ➥ /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
        *Example:*
       user joined chat, user left chat.
 
-      *Welcome markdown:*
-       • `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
+       *Welcome markdown:*
+       ➥ `/welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
 
 nation_help: |
       - /eagle - Lists all Eagle Union members.
@@ -579,12 +581,20 @@ nation_help: |
 
 sticker_blacklist_help: |
        **Only admin:**
-         • `/addblsticker <sticker link>**`:** Add the sticker trigger to the black list. Can be added via reply sticker
-         • `/unblsticker <sticker link>**`:** Remove triggers from blacklist. The same newline logic applies here, so you can delete multiple triggers at once
-         • `/rmblsticker <sticker link>**`:** Same as above
-         • `/blstickermode <delete/ban/tban/mute/tmute>**`:** sets up a default action on what to do if users use blacklisted stickers
+         ➥ /addblsticker <sticker link>**:** Add the sticker trigger to the black list. Can be added via reply sticker
+         ➥ /unblsticker <sticker link>**:** Remove triggers from blacklist. The same newline logic applies here, so you can delete multiple triggers at once
+         ➥ /rmblsticker <sticker link>**:** Same as above
+         ➥ /blstickermode <delete/ban/tban/mute/tmute>**:** sets up a default action on what to do if users use blacklisted stickers
        Note:
-         • `<sticker link>` can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
+         ➥ `<sticker link>` can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
+
+
+stickers_help: |
+         ➥ /stickerid*:* reply to a sticker to me to tell you its file ID.
+         ➥ /getsticker*:* reply to a sticker to me to upload its raw PNG file.
+         ➥ /delstcker*:* reply to a sticker to delete it from the pack, I can delete what I made only.
+         ➥ /kang*:* reply to sticker (animated/static/video) or image or gif to kang into your own pack.
+         ➥ /stickers*:* Find stickers for given term on combot sticker catalogue
 
 
 raid_help: |
@@ -604,6 +614,20 @@ raid_help: |
 
   • /raidactiontime `(time optional)` : view or set the default duration that the raid mode will tempban
   Default is 1 hour
+
+
+
+topics_help: |
+  Telegram introuduced new way of managing your chat called Forums(Topics)
+
+  As a group management bot I have some useful commands to help you
+  create, delete, close and reopen topics in your chat.
+  ➥ /topicnew*:* Create new topic, requires topic name to create.
+  ➥ /topicdel*:* Delete an existing topic, requires topic ID to delete.  
+  ➥ /topicclose*:* Close an existing topic, requires topic ID to close.
+  ➥ /topicopen*:* Open an already closed topic, requires topic ID to open.
+  ➥ /setactiontopic*:* Set issuing topic for action messages such as welcome, goodbye, warns, bans,..etc
+  ➥ /delactiontopic*:* Delete default topic for actions messages.
 
 
 
