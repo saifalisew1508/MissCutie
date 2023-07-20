@@ -38,6 +38,7 @@ from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
 from MissCutie.modules.helper_funcs.misc import paginate_modules
 from MissCutie.modules.connection import connected
+from MissCutie.modules.language import gs
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Chat, User
 from telegram.error import (
     BadRequest,
@@ -87,13 +88,6 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-PM_START_TEXT = """
-*Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
-
-Join my [updates channel](http://t.me/BotXNews) to get information on all the latest updates.
-
-Use the /donate command to donate our devlopers
-"""
 
 buttons = [
     [
@@ -242,8 +236,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             first_name = update.effective_user.first_name
 
             await update.effective_message.reply_text(
-                PM_START_TEXT.format(escape_markdown(first_name),
-                                     escape_markdown(context.bot.first_name)),
+                text=gs(chat.id, "pm_start_text").format(
+                    escape_markdown(first_name),
+                    escape_markdown(context.bot.first_name)),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
             )
