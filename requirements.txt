@@ -18,7 +18,7 @@ click==8.0.3
 coffeehouse==2.2.6
 colorama==0.4.4
 countryinfo==0.1.2
-cryptography==41.0.2
+cryptography==41.0.0
 CurrencyConverter==0.17.8
 decorator==5.1.1
 dateparser==1.1.7
@@ -73,7 +73,7 @@ Pyrogram==2.0.106
 PySocks==1.7.1
 pyYAML>=5.1.2
 python-dotenv==0.19.2
-python-telegram-bot==20.4
+python-telegram-bot==20.3
 python-whatanime==0.1.2
 pytz==2021.3
 pytz-deprecation-shim==0.1.0.post0
