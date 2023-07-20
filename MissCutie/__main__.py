@@ -38,6 +38,7 @@ from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
 from MissCutie.modules.helper_funcs.misc import paginate_modules
 from MissCutie.modules.connection import connected
+from MissCutie.modules.language import gs, lang_button
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Chat, User
 from telegram.error import (
     BadRequest,
@@ -434,7 +435,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                         ),
                         InlineKeyboardButton(
                             text="Source",
-                            url="https://github.com/saifalisew1508/MissCutieRobot",
+                            callback_data="lang_button",
                         ),
                     ],
                     [
