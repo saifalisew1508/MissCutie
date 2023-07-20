@@ -363,6 +363,7 @@ def put_chat(chat_id, value, chat_data):
     status = value is not False
     chat_data[chat_id] = {"backups": {"status": status, "value": value}}
 
+from MissCutie.modules.language import gs
 
 def get_chat(chat_id, chat_data):
     # print(chat_data)
@@ -372,17 +373,10 @@ def get_chat(chat_id, chat_data):
         return {"status": False, "value": False}
 
 
-__mod_name__ = "Backups"
+def get_help(chat):
+    return gs(chat, "backup_help")
 
-__help__ = """
-*Only for group owner:*
-
- ➥ /import: Reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy! \
- Note that files / photos cannot be imported due to telegram restrictions.
-
- ➥ /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons) \
-
-"""
+__mod_name__ = "Backup"
 
 IMPORT_HANDLER = CommandHandler("import", import_data, block=False)
 EXPORT_HANDLER = CommandHandler("export", export_data, block=False)

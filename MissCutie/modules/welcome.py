@@ -1115,27 +1115,6 @@ def __chat_settings__(chat_id, user_id):
         "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
     )
 
-
-__help__ = """
-*Admins only:*
- ➥ `/welcome <on/off>`*:* enable/disable welcome messages.
- ➥ `/welcome`*:* shows current welcome settings.
- ➥ `/welcome noformat`*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
- ➥ `/goodbye`*:* same usage and args as `/welcome`.
- ➥ `/setwelcome <sometext>`*:* set a custom welcome message. If used replying to media, uses that media.
- ➥ `/setgoodbye <sometext>`*:* set a custom goodbye message. If used replying to media, uses that media.
- ➥ `/resetwelcome`*:* reset to the default welcome message.
- ➥ `/resetgoodbye`*:* reset to the default goodbye message.
- ➥ `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
- ➥ `/welcomemutehelp`*:* gives information about welcome mutes.
- ➥ `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages.
- *Example:*
-user joined chat, user left chat.
-
-*Welcome markdown:*
- ➥ `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
-"""
-
 NEW_MEM_HANDLER = MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member, allow_edit=True, block=False)
 LEFT_MEM_HANDLER = MessageHandler(filters.StatusUpdate.LEFT_CHAT_MEMBER, left_member, allow_edit=True, block=False)
 WELC_PREF_HANDLER = CommandHandler("welcome", welcome, filters=filters.ChatType.GROUPS, block=False)
@@ -1186,3 +1165,9 @@ __handlers__ = [
     BUTTON_VERIFY_HANDLER,
     WELCOME_MUTE_HELP,
 ]
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "greetings_help")
+

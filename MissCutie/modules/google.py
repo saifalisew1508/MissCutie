@@ -268,20 +268,6 @@ async def apk(e):
 
 __mod_name__ = "Google"
 
-__help__ = """
-*Google Search*
-➥ /google <text>*:* Perform a google search
-➥ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
-➥ /app <appname>*:* Searches for an app in Play Store and returns its details.
-➥ /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
-
-*Google Translate*
-➥ `/tr` or `/tl` (language code) as reply to a long message
-*Example:*
-➥ `/tr en`*:* translates something to english
-➥ `/tr hi-en`*:* translates hindi to english
-
-*Google YouTube*
-➥ /song <Song Tittle> *:* Bot sends you the requested song in that chat!
-➥ /video <Video Tittle> *:* Bot sends you the requested YouTube video in that chat!
-"""
+from MissCutie.modules.language import gs
+def get_help(chat):
+    return gs(chat, "google_search")

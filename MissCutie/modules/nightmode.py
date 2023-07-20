@@ -149,13 +149,9 @@ scheduler_open = AsyncIOScheduler(timezone="Asia/Kolkata")
 scheduler_open.add_job(job_open, trigger="cron", hour=6, minute=1)
 scheduler_open.start()
 
-__help__ = """
-*Admins Only*
+from MissCutie.modules.language import gs
 
- ➥ /nightmode: Adds the group to Night Mode chats.
- ➥ /rmnight: Removes the group from Night Mode chats.
 
-*Note:* Night Mode chats are automatically closed at 12 AM (IST) and automatically opened at 6 AM (IST) to prevent night spams.
-"""
-
+def get_help(chat):
+    return gs(chat, "nightmode_help")
 __mod_name__ = "Night-Mode"

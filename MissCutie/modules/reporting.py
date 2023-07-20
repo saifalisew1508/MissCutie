@@ -263,17 +263,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.answer("🛑 Failed to delete message!")
 
 
-__help__ = """
- ➥ `/report <reason>`*:* reply to a message to report it to admins.
- ➥ `@admin`*:* reply to a message to report it to admins.
-*NOTE:* Neither of these will get triggered if used by admins.
-
-*Admins only:*
- ➥ `/reports <on/off>`*:* change report setting, or view current status.
-   • If done in pm, toggles your status.
-   • If in group, toggles that groups's status.
-"""
-
 SETTING_HANDLER = CommandHandler("reports", report_setting, block=False)
 REPORT_HANDLER = CommandHandler("report", report, filters=filters.ChatType.GROUPS, block=False)
 ADMIN_REPORT_HANDLER = MessageHandler(filters.Regex(r"(?i)@admin(s)?"), report, block=False)
@@ -285,9 +274,18 @@ application.add_handler(SETTING_HANDLER)
 application.add_handler(REPORT_HANDLER, REPORT_GROUP)
 application.add_handler(ADMIN_REPORT_HANDLER, REPORT_GROUP)
 
-__mod_name__ = "Reporting"
+
 __handlers__ = [
     (REPORT_HANDLER, REPORT_GROUP),
     (ADMIN_REPORT_HANDLER, REPORT_GROUP),
     (SETTING_HANDLER),
 ]
+
+
+__mod_name__ = "Reports"
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "reports_help")
+

@@ -4,7 +4,7 @@ from functools import wraps
 from telegram.ext import ContextTypes
 from telegram.constants import ChatType
 from MissCutie.modules.helper_funcs.misc import is_module_loaded
-# from MissCutie.modules.sql.topics_sql import get_action_topic
+from MissCutie.modules.sql.topics_sql import get_action_topic
 
 FILENAME = __name__.rsplit(".", 1)[-1]
 
@@ -202,20 +202,7 @@ if is_module_loaded(FILENAME):
             log_channel_info = await application.bot.get_chat(log_channel)
             return f"This group has all it's logs sent to: {escape_markdown(log_channel_info.title)} (`{log_channel}`)"
         return "No log channel is set for this group!"
-
-    __help__ = """
-*Admins only:*
- ➥ `/logchannel`*:* get log channel info
- ➥ `/setlog`*:* set the log channel.
- ➥ `/unsetlog`*:* unset the log channel.
-
-Setting the log channel is done by:
-• adding the bot to the desired channel (as an admin!)
-• sending `/setlog` in the channel
-• forwarding the `/setlog` to the group
-"""
-
-    __mod_name__ = "Log Channels"
+        
 
     LOG_HANDLER = CommandHandler("logchannel", logging, block=False)
     SET_LOG_HANDLER = CommandHandler("setlog", setlog, block=False)
@@ -232,3 +219,12 @@ else:
 
     def gloggable(func):
         return func
+
+
+__mod_name__ = "Log Channels"
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "log_help")
+

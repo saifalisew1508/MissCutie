@@ -191,3 +191,11 @@ __handlers__ = [
     (NO_AFK_HANDLER, AFK_GROUP),
     (AFK_REPLY_HANDLER, AFK_REPLY_GROUP),
 ]
+
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "afk_help")
+
+__mod_name__ = "AFK"

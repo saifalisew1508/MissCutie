@@ -154,17 +154,8 @@ __command_list__ = [
     "modcheck",
 ]
 
-
-__help__ = """
-Sometimes, you don't trust but want to make user manager of your group then you can make him/her moderator.
-Maybe not enough to make them admin, but you might be ok with ban, mute, and warn not.
-That's what modcheck are for - mod of trustworthy users to allow to manage your group.
-
-*Commands*:
-➥ /addmod *:* moderator of a user. 
-➥ /rmmod *:* Unmoderator of a user.
-➥ /modcheck *:* moderation cheak of a user.
-➥ /modlist *:* moderation user list.
-"""
-
 __mod_name__ = "Moderators"
+
+from MissCutie.modules.language import gs
+def get_help(chat):
+    return gs(chat, "moderators_help")

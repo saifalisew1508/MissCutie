@@ -82,51 +82,13 @@ async def markdown_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await markdown_help_sender(update)
 
 
-__help__ = """
-*Available commands:*
+from MissCutie.modules.language import gs
 
-*Carbon*
-/carbon *:* Make Carbon To Given or Replied Text
 
-*Couples*
-➥ /couples *:* Choose 2 users and send their name as couples in your chat.
+def get_help(chat):
+    return gs(chat, "extra_help")
 
-*Echo*
-➥ /echo *:* reply to a text
 
-*Emoji Game*
-*Play Game With Emojis:*
-➥ /dice or /dice 1 to 6 any value
-➥ /ball or /ball 1 to 5 any value
-➥ /dart or /dart 1 to 6 any value
- *Usage:* hahaha just a magic.
- *warning:* you would be in trouble if you input any other value than mentioned.
-
-*Markdown:*
- ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
- 
-*Mamefy*
-➥ /mmf <TEXT>*:* Add Text to Replied Sticker
-
-*Prank*
-➥ /horny *:* check your current hornyess
-➥ /gay *:* check your current guyness
-➥ /lezbian *:* check ur current lazbian
-➥ /boob *:* check your current boobs size
-➥ /cute *:* check your current cuteness
-
-*React:*
-➥ /react*:* Reacts with a random reaction
-
-*Tag/Mention All*
-➥ /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
-
-*QuoteLy*
-➥ /q - To quote a message.
-➥ /q [INTEGER] - To quote more than 1 messages.
-➥ /q r - to quote a message with it's reply
-➥ /q r [INTEGER] To quote more than 1 reply messages
-"""
 
 ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=filters.ChatType.GROUPS, block=False)
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, block=False)

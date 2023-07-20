@@ -1,0 +1,76 @@
+from typing import Union, List, Dict, Callable, Generator, Any
+import itertools
+from collections.abc import Iterable
+from telegram.ext import CommandHandler, CallbackQueryHandler
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+
+from MissCutie import application
+import MissCutie.modules.sql.language_sql as sql
+from MissCutie.modules.helper_funcs.chat_status import check_admin
+from MissCutie.modules.langs import get_string, get_languages, get_language
+
+
+
+def paginate(
+    iterable: Iterable, page_size: int
+) -> Generator[List, None, None]:
+    while True:
+        i1, i2 = itertools.tee(iterable)
+        iterable, page = (
+            itertools.islice(i1, page_size, None),
+            list(itertools.islice(i2, page_size)),
+        )
+        if not page:
+            break
+        yield page
+
+
+def gs(chat_id: Union[int, str], string: str) -> str:
+    lang = sql.get_chat_lang(chat_id)
+    return get_string(lang, string)
+
+
+
+@check_admin(is_user=True)
+async def set_lang(update: Update, _) -> None:
+    chat = update.effective_chat
+    msg = update.effective_message
+    msg_text = gs(chat.id, "curr_chat_lang").format(
+        get_language(sql.get_chat_lang(chat.id))[:-3]
+    )
+
+    keyb = [InlineKeyboardButton(
+                text=name,
+                callback_data=f"setLang_{code}",
+            ) for code, name in get_languages().items()]
+    keyb = list(paginate(keyb, 2))
+    keyb.append(
+        [
+            InlineKeyboardButton(
+                text="Help us in translations",
+                url="https://poeditor.com/join/project?hash=oJISpjNcEx",
+            )
+        ]
+    )
+    await msg.reply_text(msg_text, reply_markup=InlineKeyboardMarkup(keyb))
+
+
+@check_admin(no_reply=True)
+async def lang_button(update: Update, _) -> None:
+    query = update.callback_query
+    chat = update.effective_chat
+
+    await query.answer()
+    lang = query.data.split("_")[1]
+    sql.set_lang(chat.id, lang)
+
+    await query.message.edit_text(
+        gs(chat.id, "set_chat_lang").format(get_language(lang)[:-3])
+    )
+
+
+SETLANG_HANDLER = CommandHandler("language", set_lang)
+SETLANG_BUTTON_HANDLER = CallbackQueryHandler(lang_button, pattern=r"setLang_")
+
+application.add_handler(SETLANG_HANDLER)
+application.add_handler(SETLANG_BUTTON_HANDLER)

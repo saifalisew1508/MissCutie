@@ -205,19 +205,14 @@ async def unapproveall_btn(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.answer("You need to be admin to do this.")
 
 
-__help__ = """
-Sometimes, you might trust a user not to send unwanted content.
-Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
+from MissCutie.modules.language import gs
 
-That's what approvals are for - approve of trustworthy users to allow them to send
 
-*Admin commands:*
-- `/approval`*:* Check a user's approval status in this chat.
-- `/approve`*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-- `/unapprove`*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
-- `/approved`*:* List all approved users.
-- `/unapproveall`*:* Unapprove *ALL* users in a chat. This cannot be undone.
-"""
+def get_help(chat):
+    return gs(chat, "approve_help")
+
+
+__mod_name__ = "Approvals"
 
 APPROVE = DisableAbleCommandHandler("approve", approve, block=False)
 DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, block=False)
@@ -233,6 +228,6 @@ application.add_handler(APPROVAL)
 application.add_handler(UNAPPROVEALL)
 application.add_handler(UNAPPROVEALL_BTN)
 
-__mod_name__ = "Approvals"
+
 __command_list__ = ["approve", "unapprove", "approved", "approval"]
 __handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]

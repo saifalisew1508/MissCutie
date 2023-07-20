@@ -68,7 +68,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     sys.exit(1)
 
 ENV = bool(os.environ.get("ENV", False))
-BOT_VERSION = "3.0-Beta"
+BOT_VERSION = "3.0"
 PTB_VERSION = ptb_version
 PYRO_VERSION = pyrover
 TELETHON_VERSION = tlhver
@@ -194,8 +194,8 @@ telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 pbot = Client("MissCutie", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
 
-LOGGER.info("Starting pyrogram bot client")
-pbot.start()
+# LOGGER.info("Starting pyrogram bot client")
+# pbot.start()
 
 
 aiohttpsession = ClientSession()
