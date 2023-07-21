@@ -1,390 +1,683 @@
 # Language name in their native
 language: "日本語 🇯🇵"
 # name of people(s) who worked on this translation
-authors: "@dank_as_fuck"
+authors: "@saifalisew1508"
 
-# languages
-curr_chat_lang: "ねえ。現在の言語は {} です。下のボタンから、必要な言語を選択してください"
-set_chat_lang: "すばらしい、{} これからです!"
+curr_chat_lang: 「こんにちは。現在の言語は {} です。下のボタンから希望の言語を選択してください :)」
+set_chat_lang: 「わかりました、{} これからです!」
 
 
 pm_start_text: |
-   こんにちは{}、私の名前は{}です！
-   私はアニメをテーマにしたグループ管理ボットで、楽しい機能がいくつかあります;）
+    *ちょっと、そこ！ 私の名前は *{}* - グループの管理をお手伝いします。 私を最大限に活用する方法について詳しくは、「/ヘルプ」を押してください。
 
-   使用可能なコマンドのリストは /help で見つけることができます。
-grp_start_text: 「こんにちは、キギョです。」
+    私の [アップデート チャンネル](http://t.me/BotXNews) に参加して、すべての最新アップデートに関する情報を入手してください。
+
+    /donate コマンドを使用して開発者に寄付してください
+   
+grp_start_text: "こんにちは、キューティーです。"
 
 pm_help_text: |
-   Hello there! My name is *Kigyo*. A part of *Eagle Union*.
-   I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of
-   the things I can help you with.
-   *Main* commands available:
-    • /start: Starts me, can be used to check I'm alive or not.
-    • /help: PM's you this message.
-    • /language: Change bot language.
-    • /settings:
-      - in PM: will send you your settings for all supported modules.
-      - in a group: will redirect you to pm, with all that chat's settings.
-    Click on the buttons below to get documentation about specific modules!
+    こんにちは！ 私の名前は*キューティー*です。 *イーグルユニオン*の一員。
+    私は、いくつかの楽しい追加機能を備えたモジュール式のグループ管理ボットです。 いくつかのアイデアについては、以下をご覧ください。
+    私があなたを助けることができること。
+    使用可能な *主な* コマンド:
+     • /start: 私を開始します。私が生きているかどうかを確認するために使用できます。
+     • /help: PM からこのメッセージが届きます。
+     • / language: ボットの言語を変更します。
+     • /設定：
+       - PM: サポートされているすべてのモジュールの設定が送信されます。
+       - グループ内: すべてのチャット設定を含む午後にリダイレクトされます。
+     特定のモジュールに関するドキュメントを入手するには、下のボタンをクリックしてください。
 
-add_bot_to_group_btn:  "私を追加してください"
-support_chat_link_btn:  "サポート"
-updates_channel_link_btn: "更新"
-src_btn:  "ソース"
+add_bot_to_group_btn: "かわい子ちゃんを追加"
+support_chat_link_btn: "サポート"
+updated_channel_link_btn: "アップデート"
+src_btn: "ソースコード"
 
 admin_help: |
-   • `/admins`*:* list of admins in the chat
+    *任意のユーザー*
+    ➥ /admins*:* チャット内の管理者のリスト
 
-   *Admins only:*
-   • `/pin`*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users.
-   • `/unpin`*:* unpins the currently pinned message
-   • `/invitelink`*:* gets invitelink
-   • `/promote`*:* promotes the user replied to
-   • `/demote`*:* demotes the user replied to
-   • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
+    *管理者のみ*
+    ➥ /pin*:* は返信されたメッセージをサイレントに固定します - ユーザーに通知を与えるために `'loud'` または `'notify'` を追加します
+    ➥ /unpin*:* 現在固定されているメッセージの固定を解除します
+    ➥ /unpinall*:* は、固定されたすべてのメッセージの固定を解除します。トピックでも機能します (OWNER のみが実行できます)。
+    ➥ /del*:* は返信したメッセージを削除します
+    ➥ /purge*:* は、このメッセージと返信されたメッセージの間にあるすべてのメッセージを削除します。
+    ➥ /purge <integer X>*:* は、返信されたメッセージと、メッセージに返信された場合はそれに続く X 個のメッセージを削除します。
+    ➥ /invitelink*:* は招待リンクを取得します
+    ➥ /promote*:* は、返信されたユーザーを昇格させます
+    ➥ /demote*:* は返信したユーザーを降格します
+    ➥ /title <title here> *:* ボットが昇格させた管理者のカスタム タイトルを設定します
+    ➥ /admincache*:* 管理者リストを強制的に更新します
+
+    *グループ参加リクエスト*
+    ➥ /approveall 保留中のすべての参加リクエストを承認します *(これ以上はありません)*
+    ➥ /joinrequest `<yes|on|true/no|off|false>` 参加リクエストの承認ボタンを有効にするには
+    ➥ /autoapprove `<yes|on|true/no|off|false>` ボットによる参加リクエストの自動受け入れを有効にするには
+
+    *集団行動ツール*
+    ➥ /unbanall*:* グループ内の禁止されているすべてのメンバーの禁止を解除します
+    ➥ /unmuteall*:* グループ内の禁止されているすべてのメンバーのミュートを解除します
+    ➥ /banall*:* グループ内のすべてのメンバーを禁止します *(このコマンドはグループ所有者のみが使用します)*
+    ➥ /zombies*:* グループ内の削除されたアカウントの検索を開始します。
+    ➥ /zombies clean*:* 削除されたアカウントをグループから削除します。
+    ➥ /users*:* グループユーザーリストを取得
 
 afk_help: |
-   - /afk <reason>: mark yourself as AFK(away from keyboard).
-   - brb <reason>: same as the afk command - but not a command.
-   When marked as AFK, any mentions will be replied to with a message to say you're not available!
+    - /afk <理由>: 自分自身を AFK (キーボードから離れている) としてマークします。
+    - brb <reason>: afk コマンドと同じですが、コマンドではありません。
+    AFK としてマークされている場合、メンションには応答できないことを示すメッセージが返信されます。
 
 anilist_help: |
-    *AniList*
-    Get information about anime, manga or characters with the help of this module! All data is fetched from [AniList](anilist.co).
-    *Available commands:*
-     - /anime <anime>: returns information about the anime.
-     - /character <character>: returns information about the character.
-     - /manga <manga>: returns information about the manga.
+     *アニリスト*
+     このモジュールを利用して、アニメ、マンガ、キャラクターに関する情報を入手してください! すべてのデータは [AniList](anilist.co) から取得されます。
+     *利用可能なコマンド:*
+      - /anime <anime>: アニメに関する情報を返します。
+      - /character <character>: キャラクターに関する情報を返します。
+      - /manga <manga>: マンガに関する情報を返します。
+
+
 
 antiflood_help: |
-    Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood \
-    will result in restricting that user.
-     This will mute users if they send more than 10 messages in a row, bots are ignored.
-     • `/flood`*:* Get the current flood control setting
-    • *Admins only:*
-     • `/setflood <int/'no'/'off'>`*:* enables or disables flood control
-     *Example:* `/setflood 10`
-     • `/setfloodmode <ban/kick/mute/tban/tmute> <value>`*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
-    • *Note:*
-     • Value must be filled for tban and tmute!!
-     It can be:
-     `5m` = 5 minutes
-     `6h` = 6 hours
-     `3d` = 3 days
-     `1w` = 1 week
+      フラッド対策により、x 個を超えるメッセージを連続して送信するユーザーに対してアクションを実行できます。 設定洪水を超えています\
+      そのユーザーを制限することになります。
+      これにより、ユーザーが 10 を超えるメッセージを連続して送信するとミュートされ、ボットは無視されます。
+       ➥ /flood*:* 現在のフラッド制御設定を取得します
+      • *管理者のみ:*
+      ➥ /setflood <int/'no'/'off'>*:* フラッド制御を有効または無効にします
+      *例:* `/setflood 10`
+      ➥ /setfloodmode <ban/kick/mute/tban/tmute> <value>*:* ユーザーがフラッド制限を超えたときに実行するアクション。 禁止/キック/ミュート/ミュート/tban
+      • *ノート：*
+      • tban と tmute には値を入力する必要があります。
+      かもね：
+      「5m」 = 5分
+      「6h」 = 6時間
+      「3d」 = 3 日
+      「1w」 = 1週間
+
 
 approve_help: |
-     Sometimes, you might trust a user not to send unwanted content.
-     Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
-     That's what approvals are for - approve of trustworthy users to allow them to send
-     *Admin commands:*
-     • `/approval`*:* Check a user's approval status in current chat.
-     • `/approve`*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-     • `/unapprove`*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
-     • `/approved`*:* List all approved users.
-     • `/unapproveall`*:* Unapprove *ALL* users in a chat. This cannot be undone.
+      場合によっては、ユーザーが不要なコンテンツを送信しないことを信頼できる場合があります。
+      管理者にするほどではないかもしれませんが、ロック、ブラックリスト、およびフラッド対策が適用されなくても大丈夫かもしれません。
+      それが承認の目的です。信頼できるユーザーに送信を許可することを承認します。
+      *管理コマンド:*
+      ➥ /approval*:* 現在のチャットでのユーザーの承認ステータスを確認します。
+      ➥ /approve*:* ユーザーの承認。 ロック、ブラックリスト、および洪水対策は適用されなくなります。
+      ➥ /unapprove*:* ユーザーの承認を取り消します。 今後、彼らは再びロック、ブラックリスト、および洪水対策の対象となるでしょう。
+      ➥ /approved*:* 承認されたユーザーをすべてリストします。
+      ➥ /unapproveall*:* チャット内の *すべて* ユーザーの承認を取り消します。 これは、元に戻すことはできません。
 
 backup_help: |
-    *Admin only:*
-     - /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
-       that files/photos can't be imported due to telegram restrictions.
-     - /export: !!! This isn't a command yet, but should be coming soon!
+     *管理者のみ:*
+      ➥ /import: グループ バトラー バックアップ ファイルに返信して、可能な限りインポートすることで、転送が非常に簡単になります。 ノート \
+        電報の制限によりファイル/写真をインポートできないこと。
+      ➥ /export: エクスポートされるグループ データ: ルール、メモ (ドキュメント、画像、音楽、ビデオ、オーディオ、音声、テキスト、テキスト ボタン)
 
 bans_help: |
-    - /kickme: kicks the user who issued the command
+    *任意のユーザー*
+     ➥ /kickme: コマンドを発行したユーザーをキックします
 
-     *Admin only:*
-    - /ban <userhandle>: bans a user. (via handle, or reply)
-    - /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-    - /unban <userhandle>: unbans a user. (via handle, or reply)
-    - /kick <userhandle>: kick a user out of the group, (via handle, or reply)
+    *管理者のみ:*
+     ➥ /ban <userhandle>: ユーザーを禁止します。 (ハンドルまたは返信経由)
+     ➥ /tban <userhandle> x(m/h/d): ユーザーを x 時間禁止します。 (ハンドルまたは返信経由)。 m = 分、h = 時間、d = 日。
+     ➥ /unban <userhandle>: ユーザーの禁止を解除します。 (ハンドルまたは返信経由)
+     ➥ /kick <userhandle>: ユーザーをグループから追い出します (ハンドルまたは応答経由)。
 
 blacklist_help: |
-    Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
+     ブラックリストは、グループ内で特定のトリガーが発言されるのを防ぐために使用されます。 トリガーが言及されると、メッセージはすぐに削除されます。 場合によっては、これを警告フィルターと組み合わせるのが良い組み合わせです。
 
-    *NOTE*: Blacklists do not affect group admins.
+     *注意*: ブラックリストはグループ管理者には影響しません。
 
-     • `/blacklist`*:* View the current blacklisted words.
+      ➥ /blacklist*:* 現在ブラックリストに登録されている単語を表示します。
 
-    Admin only:
-     • `/addblacklist <triggers>`*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
-     • `/unblacklist <triggers>`*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
-     • `/blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>`*:* Action to perform when someone sends blacklisted words.
+     管理者のみ:
+      ➥ /addblacklist <triggers>*:* ブラックリストにトリガーを追加します。 各行は 1 つのトリガーとみなされ、異なる行を使用すると複数のトリガーを追加できます。
+      ➥ /unblacklist <triggers>*:* ブラックリストからトリガーを削除します。 ここでも同じ改行ロジックが適用されるため、複数のトリガーを一度に削除できます。
+      ➥ /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* 誰かがブラックリストに登録された単語を送信したときに実行するアクション。
 
 cleaner_help: |
-    - /cleanbluetext <on/off/yes/no> - clean commands after sending
-    - /ignorecleanbluetext <word> - prevent auto cleaning of the command
-    - /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
-    - /listcleanbluetext - list currently whitelisted commands
+     ➥ /cleanbluetext <on/off/yes/no> - 送信後にコマンドをクリーンアップします
+     ➥ /ignorecleanbluetext <word> - コマンドの自動クリーニングを防止します
+     ➥ /unignorecleanbluetext <word> - コマンドの自動クリーニングを防止するための削除
+     ➥ /listcleanbluetext - 現在ホワイトリストに登録されているコマンドをリストします。
 
 connections_help: |
-    - /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
-    - /connection: list connected chats
-    - /disconnect: disconnect from a chat
-    - /helpconnect: list available commands that can be done remotely
+     ➥ /connect: チャットに接続します (PM の /connect または /connect <チャット ID> によってグループで実行できます)
+     ➥ /connection: 接続されているチャットをリストします。
+     ➥ /disconnect: チャットから切断します
+     ➥ /helpconnect: リモートで実行できる利用可能なコマンドをリストします。
 
-     *Admin only:*
-    - /allowconnect <yes/no>: allow a user to connect to a chat
+      *管理者のみ:*
+     ➥ /allowconnect <yes/no>: ユーザーがチャットに接続できるようにします
 
 cust_filters_help: |
-    • `/filters`*:* List all active filters saved in the chat.
+     ➥ /filters*:* チャットに保存されているすべてのアクティブなフィルターをリストします。
 
-     *Admin only:*
-    • `/filter <keyword> <reply message>`*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'
-      is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter
-      keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you
-      doin?
-    • `/stop <filter keyword>`*:* Stop that filter.
+      *管理者のみ:*
+     ➥ /filter <キーワード> <返信メッセージ>*:* このチャットにフィルターを追加します。 ボットは「キーワード」が入力されるたびにそのメッセージに返信するようになります。
+       と記載されています。 キーワードを含むスタンプに返信すると、ボットはそのスタンプを返信します。 注: すべてのフィルター
+       キーワードは小文字です。 キーワードを文にしたい場合は、引用符を使用します。 例: /filter "こんにちは"
+       やってる？
+     ➥ /stop <フィルター キーワード>*:* そのフィルターを停止します。
 
-     *Chat creator only:*
-    • `/removeallfilters`*:* Remove all chat filters at once.
+      *チャット作成者のみ:*
+     ➥ /removeallfilters*:* すべてのチャット フィルターを一度に削除します。
 
-      *Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
-        Check `/markdownhelp` to know more!
+       *注意*: フィルターは、{first}、{last} などのマークダウン フォーマッタやボタンもサポートします。
+         詳細については、/markdownhelp をチェックしてください。
+
 
 disable_help: |
-    Not everyone wants every feature that the bot offers. Some commands are best
-    left unused; to avoid spam and abuse.
+     誰もがボットが提供するすべての機能を望んでいるわけではありません。 いくつかのコマンドが最適です
+     未使用のまま放置。 スパムや悪用を避けるため。
 
-    This allows you to disable some commonly used commands, so noone can use them.
-    It'll also allow you to autodelete them, stopping people from bluetexting.
+     これにより、一般的に使用されるいくつかのコマンドを無効にして、誰も使用できないようにすることができます。
+     また、それらを自動削除して、ブルーテキスト送信を阻止することもできます。
 
-     • /cmds: Check the current status of disabled commands
+      ➥ /cmds: 無効化されたコマンドの現在のステータスを確認します。
 
-     *Admin only:*
-     • /enable <cmd name>: Enable that command
-     • /disable <cmd name>: Disable that command
-     • /listcmds: List all possible disablable commands
+      *管理者のみ:*
+      ➥ /enable <cmd name>: そのコマンドを有効にします
+      ➥ /disable <cmd name>: そのコマンドを無効にします
+      ➥ /enablemodule <モジュール名>*:* そのモジュール内のすべてのコマンドを有効にします
+      ➥ /disablemodule <モジュール名>*:* そのモジュール内のすべてのコマンドを無効にします
+      ➥ /listcmds: 可能なすべての無効化可能なコマンドをリストします。
+
+
+extra_help: |
+     *炭素*
+     /carbon *:* 指定されたテキストまたは返信されたテキストに Carbon を作成します
+
+     *カップル*
+     ➥ /カップル *:* 2 人のユーザーを選択し、チャットにカップルとして名前を送信します。
+
+     *エコー*
+     ➥ /echo *:* テキストに返信
+
+     *絵文字ゲーム*
+     *絵文字を使ってゲームをプレイ:*
+     ➥ /dice または /dice 1 ～ 6 任意の値
+     ➥ /ball または /ball 1 ～ 5 の任意の値
+     ➥ /dart または /dart 1 ～ 6 任意の値
+      *使用法:* ははは、ただの魔法です。
+      *警告:* 上記以外の値を入力すると問題が発生します。
+
+     *マークダウン:*
+     ➥ /markdownhelp*:* テレグラムでマークダウンがどのように機能するかについての簡単な概要 - プライベート チャットでのみ呼び出すことができます
+ 
+     *マメフィ*
+     ➥ /mmf <TEXT>*:* 返信されたステッカーにテキストを追加します
+
+     *いたずら*
+     ➥ /角質 *:* 現在の角質度をチェックしてください
+     ➥ /gay *:* 現在の男らしさをチェックしてください
+     ➥ /lezbian *:* 現在のラズビアンを確認してください
+     ➥ /boob *:* 現在の胸のサイズを確認してください
+     ➥ /cute *:* 現在の可愛さをチェック
+
+     *反応:*
+     ➥ /react*:* ランダムな反応で反応します
+
+     *すべてにタグ付け/メンション*
+     ➥ /tagall または @all ' (メッセージに返信するか、別のメッセージを追加します) 例外なく、グループ内のすべてのメンバーにメンションします。
+
+     *引用*
+     ➥ /q - メッセージを引用します。
+     ➥ /q [INTEGER] - 複数のメッセージを引用します。
+     ➥ /q r - メッセージを返信とともに引用します
+     ➥ /q r [整数] 複数の返信メッセージを引用する場合
 
 feds_help: |
-    Ah, group management. Everything is fun, until the spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
-    But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?
+     スパマーがあなたのグループに入り始めて、それをブロックしなければならないまでは、すべてが楽しいです。 そうなると、ますます禁止を開始する必要があり、それは苦痛です。
+     しかし、多くのグループがあり、このスパム送信者をグループの 1 つに入れたくない場合、どう対処すればよいでしょうか? すべてのグループで手動でブロックする必要がありますか?
+     *もうできません!* フェデレーションを使用すると、1 つのチャットを他のすべてのチャットと重複して禁止することができます。
+     フェデレーション管理者を指定することもできるので、信頼できる管理者は、保護したいすべてのスパマーをチャットから禁止できます。
+    
+     *コマンド:*
+     わかりやすいように、Fed は 3 つのセクションに分かれています。
+     ➥ /fedownerhelp*:* フェデレーション作成および所有者専用コマンドのヘルプを提供します
+     ➥ /fedadminhelp*:* フェデレーション管理コマンドのヘルプを提供します
+     ➥ /feduserhelp*:* 誰でも使用できるコマンドのヘルプを提供します
 
-    No longer! With Federation, you can make a ban in one chat overlap with all other chats.
-    You can even designate admin federations, so your trusted admin can ban all the chats you want to protect.
+FED_OWNER_HELP: |
+     *FRB オーナーのみ:*
+     ➥ /newfed <fed_name>*:* フェデレーションを作成します。ユーザーごとに 1 つが許可されます
+     ➥ /renamefed <fed_id> <new_fed_name>*:* フィード ID の名前を新しい名前に変更します
+     ➥ /delfed <fed_id>*:* フェデレーションおよびそれに関連する情報を削除します。 ブロックされたユーザーはキャンセルされません
+     ➥ /fpromote <user>*:* ユーザーをフェデレーション管理者として割り当てます。 「Fed Admins」の下でユーザーのすべてのコマンドを有効にします。
+     ➥ /fdemote <user>*:* ユーザーを管理フェデレーションから通常のユーザーにドロップします
+     ➥ /subfed <fed_id>*:* 指定されたフィード ID を購読します。その購読したフィードからの禁止は、あなたのフィードでも発生します。
+     ➥ /unsubfed <fed_id>*:* 指定されたフィード ID の購読を解除します
+     ➥ /setfedlog <fed_id>*:* グループをフェデレーションのフィード ログ レポート ベースとして設定します
+     ➥ /unsetfedlog <fed_id>*:* フェデレーションのフィード ログ レポート ベースとしてグループを削除しました
+     ➥ /fbroadcast <message>*:* フィードに参加しているすべてのグループにメッセージをブロードキャストします。
+     ➥ /fedsubs*:* あなたのグループが購読しているフィードを表示します `(broken rn)`
 
-    *Commands Available*:
+FED_ADMIN_HELP: |
+     *FRB管理者:*
+     ➥ /fban <user> <reason>*:* FRB がユーザーを禁止
+     ➥ /unfban <user> <reason>*:* フェデレーション禁止からユーザーを削除します
+     ➥ /fedinfo <fed_id>*:* 指定されたフェデレーションに関する情報
+     ➥ /joinfed <fed_id>*:* フェデレーションへの現在のチャットに参加します。 これを実行できるのはチャットの所有者だけです。 すべてのチャットは 1 つのフェデレーション内にのみ存在できます
+     ➥ /leafed <fed_id>*:* フェデレーションを指定したままにします。 チャット所有者のみがこれを行うことができます
+     ➥ /setfrules <rules>*:* フェデレーション ルールを調整します
+     ➥ /fedadmins*:* フェデレーション管理者を表示
+     ➥ /fbanlist*:* 現時点でフェデレーションで被害を受けているすべてのユーザーを表示します
+     ➥ /fedchats*:* フェデレーション内で接続されているすべてのチャットを取得します
+     ➥ /chatfed *:* 現在のチャットでフェデレーションを表示します
 
-     • /newfed <fedname>: Create a new Federation with the name given. Users are only allowed to have one Federation. This method can also be used to rename the Federation. (max. 64 characters)
-     • /delfed: Delete your Federation, and any information related to it. Will not cancel blocked users.
-     • /fedinfo <FedID>: Information about the specified Federation.
-     • /joinfed <FedID>: Join the current chat to the Federation. Only chat owners can do this. Every chat can only be in one Federation.
-     • /leavefed <FedID>: Leave the Federation given. Only chat owners can do this.
-     • /fpromote <user>: Promote Users to give fed admin. Fed owner only.
-     • /fdemote <user>: Drops the User from the admin Federation to a normal User. Fed owner only.
-     • /fban <user>: Prohibits users from all federations where this chat takes place, and executors have control over.
-     • /unfban <user>: Cancel User from all federations where this chat takes place, and that the executor has control over.
-     • /setfrules: Arrange Federation rules.
-     • /frules: See Federation regulations.
-     • /chatfed: See the Federation in the current chat.
-     • /fedadmins: Show Federation admin.
-     • /fbanlist: Displays all users who are victimized at the Federation at this time.
-     • /fednotif <on / off>: Federation settings not in PM when there are users who are fban / unfban.
-     • /fedchats: Get all the chats that are connected in the Federation.
-     • /importfbans: Reply to the Federation backup message file to import the banned list to the Federation now. (disabled for now.)
+FED_USER_HELP: |
+     *任意のユーザー:*
+     ➥ /fbanstat*:* あなた/あなたが返信しているユーザー、またはそのユーザー名がどこかで禁止されているかどうかを示します。
+     ➥ /fednotif <on/off>*:* fban された/fban 解除されたユーザーがいる場合、フェデレーション設定は PM に含まれません
+     ➥ /frules*:* 連盟の規定を参照
+
+
+
+formt_help_bse: |
+     Cutie は、メッセージをより表現力豊かにするための多数の書式設定オプションをサポートしています。 見てください！
+
+
+
+force_subscribe: |
+     - @MissCutieRobot は、チャンネルに登録していないメンバーを登録するまでミュートできます。
+     - 有効にすると、登録を解除したメンバーをミュートし、ミュート解除ボタンを表示します。 彼らがボタンを押したら、私は彼らのミュートを解除します。
+
+     *設定*
+     1) まず、禁止ユーザー権限を持つ管理者としてグループに私を追加し、チャネルにも管理者として追加します。
+     注: グループの作成者のみが私を設定できます。そうしないと、強制購読を再度許可しません。
+
+     *コマンド*
+     ➥ /forcesubscribe: 現在の設定を取得します。
+     ➥ /forcesubscribe <no/off/disable>: ForceSubscribe をオフにします。
+     ➥ /forcesubscribe <チャンネル ユーザー名>: チャンネルをオンにして設定します。
+     ➥ /forcesubscribe clear: 私によってミュートされているすべてのメンバーのミュートを解除します。
+
+     注: /forcesub は /forcesubscribe のエイリアスです。
+
+
+google_search: |
+     *Google検索*
+     ➥ /google <text>*:* Google 検索を実行します
+     ➥ /img <text>*:* Google で画像を検索し、それらを返します\nさらに大きい値については、 結果の中で lim を指定します。例: `/img hello lim=10`
+     ➥ /app <アプリ名>*:* Play ストアでアプリを検索し、その詳細を返します。
+     ➥ /reverse |pp |grs: 応答されたメディアの逆方向画像検索を実行します。
+
+     *グーグル翻訳*
+     ➥ 長いメッセージに対する返信としての `/tr` または `/tl` (言語コード)
+     *例：*
+     ➥ `/tr en`*:* は何かを英語に翻訳します
+     ➥ `/tr hi-en`*:* ヒンディー語を英語に翻訳します
+
+
+    
+    
+
+md_help: |
+     <b>マークダウン形式</b>
+       *太字*、_斜体_、-下線-などを使用してメッセージの書式を設定できます。 さあ、実験してみましょう！
+       <b>サポートされているマークダウン</b>:
+       - <code>`コードワード`</code>: バックティックは等幅フォントに使用されます。 <code>コードワード</code>として表示されます。
+       - <code>_italic Words_</code>: 斜体フォントにはアンダースコアが使用されます。 <i>斜体の単語</i>として表示されます。
+       - <code>*太字*</code>: アスタリスクは太字フォントに使用されます。 <b>太字</b>として表示されます。
+       - <code>~strikethrough~</code>: チルダは取り消し線に使用されます。 <strike>取り消し線</strike>として表示されます。
+       - <code>[hyperlink](example.com)</code>: これはハイパーリンクに使用される書式設定です。 <a href="https://example.com/">ハイパーリンク</a>として表示されます。
+       - <code>[My Button](buttonurl://example.com)</code>: これはボタンの作成に使用される書式設定です。 この例では、クリックすると <code>example.com</code> を開く「My button」という名前のボタンを作成します。
+       同じ行にボタンを送信する場合は、<code>:same</code> 形式を使用します。
+       <b>例:</b>
+       <code>[ボタン 1](buttonurl://example.com)</code>
+       <code>[ボタン 2](buttonurl://example.com:same)</code>
+       <コード>[ボタン 3](buttonurl://example.com)</code>
+       これにより、ボタン 1 と 2 が同じ行に表示され、その下にボタン 3 が表示されます。
+
+
+       
+filling_help: |
+       <b>詰め物</b>
+       コンテキスト データを使用してメッセージの内容をカスタマイズすることもできます。 たとえば、ウェルカム メッセージでユーザーの名前をメンションしたり、フィルターでユーザーをメンションしたりできます。
+       これらを使用して、メモでユーザーにメンションすることもできます。
+       <b>サポートされている詰め物:</b>
+       - <code>{first}</code>: ユーザーの名。
+       - <code>{last}</code>: ユーザーの姓。
+       - <code>{fullname}</code>: ユーザーのフルネーム。
+       - <code>{username}</code>: ユーザーのユーザー名。 ユーザーが持っていない場合は、代わりにユーザーに言及します。
+       - <code>{mention}</code>: ユーザーを名でメンションします。
+       - <code>{id}</code>: ユーザーの ID。
+       - <code>{chatname}</code>: チャットの名前。
 
 fun_help: |
-     • /runs: reply a random string from an array of replies.
-     • /pat: pat a person, cool thing to have for cute ones :3
-     • /slap: slap a user, or get slapped if not a reply.
-     • /shrug : get shrug XD.
-     • /table : get flip/unflip :v.
-     • /decide : Randomly answers yes/no/maybe
-     • /toss : Tosses A coin
-     • /roll : Roll a dice.
-     • /rlg : Join ears,nose,mouth and create an emo ;-;
-     • /shout <keyword>: write anything you want to give loud shout.
-     • /stickerid: reply to a sticker to get its ID.
-     • /getsticker: reply to a sticker to get the raw PNG image.
-     • /steal: reply to a sticker or image to add it to your pack.
-     • /stickers: search stickers in combot sticker finder.
+      • /runs: 応答の配列からランダムな文字列を応答します。
+      • /pat: 人を撫でる、かわいい人にはクールなものを用意する :3
+      • /slap: ユーザーを平手打ちするか、返信がない場合は平手打ちを受けます。
+      • /shrug : 肩をすくめる XD を取得します。
+      • /table : 反転/反転解除を取得します:v。
+      • /決定 : はい/いいえ/多分とランダムに答えます
+      • /toss : コインを投げます
+      • /roll : サイコロを振ります。
+      • /rlg : 耳、鼻、口を結合してエモを作成します ;-;
+      • /shout <キーワード>: 大声で叫びたいことを何でも書きます。
+      • /stickerid: ステッカーに返信して ID を取得します。
+      • /getsticker: ステッカーに返信して生の PNG 画像を取得します。
+      • /steal: ステッカーまたは画像に返信してパックに追加します。
+
+
+
 
 antispam_help: |
-     *Admins only:*
-      • `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
+      *管理者のみ:*
+       • `/antispam <on/off/yes/no>`*:* スパム対策技術を切り替えるか、現在の設定を返します。
 
-     Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect
-     you and your groups by removing spam flooders as quickly as possible.
-     *Note:* Users can appeal gbans or report spammers at @YorkTownEagleUnion
+      アンチスパム。ボット開発者がすべてのグループでスパマーを禁止するために使用します。 これは保護に役立ちます
+      あなたとあなたのグループは、できるだけ早くスパムフラッドを削除してください。
+      *注意:* ユーザーは @YorkTownEagleUnion で gban に異議を申し立てたり、スパマーを報告したりできます。
 
-     Kigyo also integrates @Spamwatch API to remove Spammers as much as possible from your chatroom!
-     *What is SpamWatch?*
-     SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters[.](https://telegra.ph/file/c1051d264a5b4146bd71e.jpg)
-     Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
-     *Note:* Users can appeal spamwatch bans at @SpamwatchSupport
+      また、Cutie は @Spamwatch API を統合して、チャットルームからスパマーを可能な限り排除します。
+      *スパムウォッチとは何ですか?*
+      SpamWatch は、スパムボット、トロール、ビットコイン スパム送信者、不快な人物の大量の禁止リストを常に更新して管理しています。
+      スパム送信者をグループから自動的に排除するよう常に支援します。そのため、スパム送信者がグループに押し寄せる心配をする必要はありません。
+      *注意:* ユーザーは @SpamwatchSupport でスパムウォッチの禁止を申し立てることができます。
 
-gtranslate_help: |
-     Use this module to translate stuff... duh!
-     *Commands:*
-     • `/tl` (or `/tr`): as a reply to a message, translates it to English.
-     • `/tl <lang>`: translates to <lang>
-     eg: `/tl ja`: translates to Japanese.
-     • `/tl <source>//<dest>`: translates from <source> to <lang>.
-     eg: `/tl ja//en`: translates from Japanese to English.
-     • `/langs`: get a list of supported languages for translation.
+
 
 locks_help: |
-     Do stickers annoy you? or want to avoid people sharing links? or pictures?
-     You're in the right place!
-     The locks module allows you to lock away some common items in the
-     telegram world; the bot will automatically delete them!
+      ステッカーは迷惑ですか？ それともリンクを共有する人を避けたいですか? それとも写真？
+      あなたは正しい場所にいます！
+      ロックモジュールを使用すると、いくつかの一般的なアイテムをロックすることができます。
+      電報の世界。 ボットはそれらを自動的に削除します。
 
-      • `/locktypes`*:* Lists all possible locktypes
+       • `/locktypes`*:* 可能なロックタイプをすべてリストします。
 
-     *Admins only:*
-      • `/lock <type>`*:* Lock items of a certain type (not available in private)
-      • `/unlock <type>`*:* Unlock items of a certain type (not available in private)
-      • `/locks`*:* The current list of locks in this chat.
+       *管理者のみ:*
+       • `/lock <type>`*:* 特定のタイプの項目をロックします (プライベートでは使用できません)
+       • `/unlock <type>`*:* 特定のタイプのアイテムのロックを解除します (プライベートでは使用できません)
+       • `/locks`*:* このチャット内のロックの現在のリスト。
 
-     Locks can be used to restrict a group's users.
-     eg:
-     Locking urls will auto-delete all messages with urls, locking stickers will restrict all
-     non-admin users from sending stickers, etc.
-     Locking bots will stop non-admins from adding bots to the chat.
+      ロックを使用して、グループのユーザーを制限できます。
+      例えば：
+      URL をロックすると URL を含むすべてのメッセージが自動削除され、ステッカーをロックするとすべてのメッセージが制限されます。
+      管理者以外のユーザーがステッカーなどを送信できないようにします。
+      ボットをロックすると、管理者以外がチャットにボットを追加できなくなります。
 
-     *Note:*
-      • Unlocking permission *info* will allow members (non-admins) to change the group information, such as the description or the group name
-      • Unlocking permission *pin* will allow members (non-admins) to pinned a message in a group
+      *ノート：*
+       • 権限 *info* のロックを解除すると、メンバー (管理者以外) が説明やグループ名などのグループ情報を変更できるようになります。
+       • 権限 *pin* のロックを解除すると、メンバー (管理者以外) がグループ内のメッセージを固定できるようになります。
+
+
 
 log_help: |
-      *Admins only:*
-      • `/logchannel`*:* get log channel info
-      • `/setlog`*:* set the log channel.
-      • `/unsetlog`*:* unset the log channel.
+       *管理者のみ:*
+       ➥ /logchannel*:* ログチャネル情報を取得します
+       ➥ /setlog*:* ログチャネルを設定します。
+       ➥ /unsetlog*:* ログチャネルの設定を解除します。
+       ➥ /announce*:* チャットルームで管理者のアクションをアナウンスする設定を切り替えます。
 
-      Setting the log channel is done by:
-      • adding the bot to the desired channel (as an admin!)
-      • sending `/setlog` in the channel
-      • forwarding the `/setlog` to the group
+       ログ チャネルの設定は次のようにして行われます。
+       • ボットを目的のチャネルに追加します (管理者として)。
+       • チャネルで `/setlog` を送信する
+       • `/setlog` をグループに転送する
+
+
 
 markdown_help_text: |
-      Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that
-      saved messages are correctly parsed, and to allow you to create buttons.
+       Markdown は、Telegram でサポートされている非常に強力な書式設定ツールです。 Cutie にはいくつかの機能強化が施されています。
+       保存されたメッセージは正しく解析され、ボタンを作成できるようになります。
 
-      - <code>_italic_</code>: wrapping text with '_' will produce italic text
-      - <code>*bold*</code>: wrapping text with '*' will produce bold text
-      - <code>`code`</code>: wrapping text with '`' will produce monospaced text, also known as 'code'
-      - <code>[sometext](someURL)</code>: this will create a link - the message will just show <code>sometext</code>,
-      and tapping on it will open the page at <code>someURL</code>.
-      EG: <code>[test](example.com)</code>
+       - <code>_italic_</code>: テキストを「_」で囲むと斜体テキストが生成されます。
+       - <code>*bold*</code>: テキストを「*」で囲むと太字になります。
+       - <code>`code`</code>: テキストを「`」で囲むと、「コード」とも呼ばれる等幅テキストが生成されます。
+       - <code>[sometext](someURL)</code>: これによりリンクが作成されます。メッセージには <code>sometext</code> が表示されるだけです。
+       それをタップすると、<code>someURL</code> のページが開きます。
+       例: <コード>[テスト](example.com)</code>
 
-      - <code>[buttontext](buttonurl:someURL)</code>: this is a special enhancement to allow users to have telegram
-      buttons in their markdown. <code>buttontext</code> will be what is displayed on the button, and <code>someurl</code>
-      will be the url which is opened.
-      EG: <code>[This is a button](buttonurl:example.com)</code>
+       - <code>[buttontext](buttonurl:someURL)</code>: これは、ユーザーが電報を利用できるようにするための特別な拡張機能です。
+       マークダウン内のボタン。 <code>buttontext</code> はボタンに表示される内容、<code>someurl</code> はボタンに表示される内容になります。
+       開いたURLになります。
+       例: <code>[これはボタンです](buttonurl:example.com)</code>
 
-      If you want multiple buttons on the same line, use :same, as such:
-      <code>[one](buttonurl://example.com)
-      [two](buttonurl://google.com:same)</code>
-      This will create two buttons on a single line, instead of one button per line.
+       同じ行に複数のボタンが必要な場合は、次のように :same を使用します。
+       <コード>[1](buttonurl://example.com)
+       [2](buttonurl://google.com:同じ)</code>
+       これにより、1 行に 1 つのボタンではなく、1 行に 2 つのボタンが作成されます。
 
-      Keep in mind that your message <b>MUST</b> contain some text other than just a button!
+       メッセージにはボタン以外のテキストが<b>含まれなければならない</b>ことに注意してください。
 
-misc_help: |
-      • /id: get the current group id. If used by replying to a message, gets that user's id.
-      • /gifid: reply to a gif to me to tell you its file ID.
-      • /info: get information about a user.
-      • /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
-      • /ud <word>: Type the word or expression you want to search use.
-      • /urban <word>: Same as /ud
-      • /paste - Do a paste at `nekobin.com`
-      • /react: Reacts with a random reaction
-      • /weebify <text>: returns a weebified text
-      • /tr (language code) as reply to a long message.
-      • /time <query> : Gives information about a timezone.
-      • /cash : currency converter
-        example syntax: /cash 1 USD INR
-      • /cinfo : get info about a user or a chat (uses @Pyrogram methods)
-      • /getid : get IDs of chat, user and chat message.
-      ───────────────────────────────
-      *Last.FM*
-      Share what you're what listening to with the help of this module!
-      *Available commands:*
-      • /setuser <username>: sets your last.fm username.
-      • /clearuser: removes your last.fm username from the bot's database.
-      • /lastfm: returns what you're scrobbling on last.fm.
 
 muting_help: |
-      *Admins only:*
-       • `/mute <userhandle>`*:* silences a user. Can also be used as a reply, muting the replied to user.
-       • `/tmute <userhandle> x(m/h/d)`*:* mutes a user for x time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
-       • `/unmute <userhandle>`*:* unmutes a user. Can also be used as a reply, muting the replied to user.
+        *管理者のみ:*
+        • `/mute <userhandle>`*:* はユーザーを沈黙させます。 返信したユーザーをミュートして、返信としても使用できます。
+        • `/tmute <userhandle> x(m/h/d)`*:* はユーザーを x 時間ミュートします。 (ハンドルまたは返信経由)。 `m` = `分`、`h` = `時間`、`d` = `日`。
+        • `/unmute <userhandle>`*:* はユーザーのミュートを解除します。 返信したユーザーをミュートして、返信としても使用できます。
+
+
+
+moderators_help: |
+        信頼できないが、ユーザーをグループのマネージャーにしたい場合は、そのユーザーをモデレーターにすることができます。
+        管理者にするほどではないかもしれませんが、禁止、ミュート、警告はしなくても大丈夫かもしれません。
+        それが modcheck の目的です - グループの管理を許可する信頼できるユーザーの mod。
+
+        *コマンド*
+        ➥ /addmod *:* ユーザーのモデレータ。
+        ➥ /rmmod *:* ユーザーのモデレーター解除。
+        ➥ /modcheck *:* ユーザーのモデレーションチェック。
+        ➥ /modlist *:* モデレーション ユーザー リスト。
+
+
+nightmode_help: |
+        *管理者のみ*
+        ➥ /nightmode: グループをナイトモードチャットに追加します。
+        ➥ /rmnight: ナイト モード チャットからグループを削除します。
+
+        *注意:* 夜間のスパムを防ぐため、ナイト モード チャットは午前 12 時 (IST) に自動的に終了し、午前 6 時 (IST) に自動的に開きます。
+
 
 notes_help: |
-       • `/get <notename>`*:* get the note with this notename
-       • `#<notename>`*:* same as /get
-       • `/notes` or `/saved`*:* list all saved notes in this chat
-       • `/number` *:* Will pull the note of that number in the list.
-        If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can
-        be useful when updating a current note.
+        • `/get <notename>`*:* この音名を持つ音符を取得します
+        • `#<notename>`*:* /get と同じ
+        • `/notes` または `/saved`*:* このチャットに保存されているすべてのメモをリストします
+        • `/number` *:* リスト内のその番号のメモを取得します。
+         書式設定を行わずにメモの内容を取得したい場合は、`/get <notename> noformat` を使用します。 これはできる
+         現在のメモを更新するときに役立ちます。
 
-        *Admins only:*
-       • `/save <notename> <notedata>`*:* saves notedata as a note with name notename
-        A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a
-         `buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check `/markdownhelp` for more info.
-       • `/save <notename>`*:* save the replied message as a note with name notename
-       • `/clear <notename>`*:* clear note with this name
-       • `/removeallnotes`*:* removes all notes from the group
-       *Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
+         *管理者のみ:*
+        • `/save <notename> <notedata>`*:* は、notedata を notename という名前のノートとして保存します
+         標準のマークダウン リンク構文を使用してボタンをノートに追加できます。リンクの先頭に
+          `buttonurl:` セクション、たとえば `[somelink](buttonurl:example.com)`。 詳細については、「/markdownhelp」を確認してください。
+        • `/save <notename>`*:* 返信されたメッセージを notename という名前のメモとして保存します
+        • `/clear <notename>`*:* この名前のノートをクリアします
+        • `/removeallnotes`*:* はグループからすべてのノートを削除します
+        *注意:* ノート名は大文字と小文字が区別されず、保存される前に自動的に小文字に変換されます。
+
+
 
 purge_help: |
-       *Admin only:*
-        • /del: deletes the message you replied to
-        • /purge: deletes all messages between this and the replied to message.
-        • /purge <integer X>: deletes the replied message, and X messages following it if replied to a message.
+        *管理者のみ:*
+         • /del: 返信したメッセージを削除します。
+         • /purge: このメッセージと返信されたメッセージの間にあるすべてのメッセージを削除します。
+         • /purge <整数 X>: 返信されたメッセージと、メッセージに返信された場合はそれに続く X 個のメッセージを削除します。
 
 reports_help: |
-        • `/report <reason>`*:* reply to a message to report it to admins.
-        • `@admin`*:* reply to a message to report it to admins.
-         *NOTE:* Neither of these will get triggered if used by admins.
+         • `/report <reason>`*:* メッセージに返信して管理者に報告します。
+         • `@admin`*:* メッセージに返信して管理者に報告します。
+          *注意:* 管理者が使用した場合、これらはどちらもトリガーされません。
 
-         *Admins only:*
-          • `/reports <on/off>`*:* change report setting, or view current status.
-          • If done in pm, toggles your status.
-          • If in group, toggles that groups's status.
+          *管理者のみ:*
+           • `/reports <on/off>`*:* レポート設定を変更するか、現在のステータスを表示します。
+           • 午後に完了すると、ステータスが切り替わります。
+           • グループ内の場合は、そのグループのステータスを切り替えます。
+
+
 
 rules_help: |
-      • `/rules`*:* get the rules for this chat.
-       *Admins only:*
-      • `/setrules <your rules here>`*:* set the rules for this chat.
-      • `/clearrules`*:* clear the rules for this chat.
+       ➥ /rules*:* このチャットのルールを取得します。
+        *管理者のみ:*
+       ➥ /setrules <ここにルール>*:* このチャットのルールを設定します。
+       ➥ /clearrules*:* このチャットのルールをクリアします。
+
+
 
 userinfo_help: |
-      - /setbio <text>: while replying, will save another user's bio
-      - /bio: will get your or another user's bio. This cannot be set by yourself.
-      - /setme <text>: will set your info
-      - /me: will get your or another user's info
+       - /setbio <text>: 返信中に、別のユーザーのプロフィールを保存します
+       - /bio: あなたまたは他のユーザーのプロフィールを取得します。 これは自分で設定することはできません。
+       - /setme <テキスト>: 情報を設定します
+       - /me: あなたまたは他のユーザーの情報を取得します
 
 warns_help: |
-      • `/warns <userhandle>`*:* get a user's number, and reason, of warns.
-      • `/warnlist`*:* list of all current warning filters
+       ➥ /warns <userhandle>*:* 警告のユーザー番号と理由を取得します。
+       ➥ /warnlist*:* 現在のすべての警告フィルターのリスト
 
-      *Admins only:*
-      • `/warn <userhandle>`*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
-      • `/resetwarn <userhandle>`*:* reset the warns for a user. Can also be used as a reply.
-      • `/addwarn <keyword> <reply message>`*:* set a warning filter on a certain keyword. If you want your keyword to \
-      be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
-      • `/nowarn <keyword>`*:* stop a warning filter
-      • `/warnlimit <num>`*:* set the warning limit
-      • `/strongwarn <on/yes/off/no>`*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
+       *管理者のみ:*
+       ➥ /warn <ユーザーハンドル>*:* ユーザーに警告します。 警告が 3 回続くと、ユーザーはグループから追放されます。 返信としても使えます。
+       ➥ /resetwarn <userhandle>*:* ユーザーに対する警告をリセットします。 返信としても使えます。
+       ➥ /addwarn <キーワード> <返信メッセージ>*:* 特定のキーワードに警告フィルターを設定します。 キーワードを設定したい場合は、
+       `/addwarn "非常に怒っています" これは怒っているユーザーです` のように文にして、引用符で囲みます。
+       ➥ /nowarn <キーワード>*:* 警告フィルターを停止します
+       ➥ /warnlimit <num>*:* 警告制限を設定します
+       ➥ /strongwarn <on/yes/off/no>*:* on に設定すると、警告制限を超えると禁止されます。 それ以外の場合は、ただキックします。
 
 greetings_help: |
-      *Admins only:*
-       • `/welcome <on/off>`*:* enable/disable welcome messages.
-       • `/welcome`*:* shows current welcome settings.
-       • `/welcome noformat`*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
-       • `/goodbye`*:* same usage and args as `/welcome`.
-       • `/setwelcome <sometext>`*:* set a custom welcome message. If used replying to media, uses that media.
-       • `/setgoodbye <sometext>`*:* set a custom goodbye message. If used replying to media, uses that media.
-       • `/resetwelcome`*:* reset to the default welcome message.
-       • `/resetgoodbye`*:* reset to the default goodbye message.
-       • `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
-       • `/welcomemutehelp`*:* gives information about welcome mutes.
-       • `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages.
-       *Example:*
-      user joined chat, user left chat.
+        *管理者のみ:*
+        ➥ /welcome <on/off>*:* ウェルカム メッセージを有効/無効にします。
+        ➥ /welcome*:* は、現在のウェルカム設定を表示します。
+        ➥ /welcome noformat*:* は、書式設定なしで現在のウェルカム設定を表示します。ウェルカム メッセージを再利用するのに役立ちます。
+        ➥ /goodbye*:* 使用法と引数は `/welcome` と同じです。
+        ➥ /setwelcome <sometext>*:* カスタムのウェルカム メッセージを設定します。 メディアへの返信に使用される場合は、そのメディアが使用されます。
+        ➥ /setgoodbye <sometext>*:* カスタムの別れのメッセージを設定します。 メディアへの返信に使用される場合は、そのメディアが使用されます。
+        ➥ /resetwelcome*:* デフォルトのウェルカム メッセージにリセットします。
+        ➥ /resetgoodbye*:* デフォルトの別れのメッセージにリセットします。
+        ➥ /cleanwelcome <on/off>*:* 新しいメンバーの場合は、チャットへのスパム送信を避けるために、以前のウェルカム メッセージを削除してみてください。
+        ➥ /welcomemutehelp*:* は、ウェルカムミュートに関する情報を提供します。
+        ➥ /cleanservice <on/off*:* 電報のウェルカム/レフトサービスメッセージを削除します。
+        *例：*
+        ユーザーがチャットに参加し、ユーザーがチャットを退出した。
 
-      *Welcome markdown:*
-       • `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
+        *ウェルカムマークダウン:*
+        ➥ `/welcomehelp*:* カスタムのウェルカム/さようならメッセージの書式設定情報をさらに表示します。
 
+
+
+nation_help: |
+       - /eagle - すべての Eagle Union メンバーをリストします。
+       - /royals - すべての王立国家をリストします。
+       - /sakuras - すべてのサクラ ネイションをリストします。
+       - /sardegnas - すべてのサルデーニャ諸国をリストします。
+       - /neptunians - すべての Neptunia 国家をリストします。
+       注: これらのコマンドは、特別なボット権限を持つユーザーをリストし、そのユーザーのみが使用できます。
+       これらについて詳しく問い合わせるには、@PublicSource_Chat にアクセスしてください。
+
+
+
+sticker_blacklist_help: |
+        **管理者のみ:**
+          ➥ /addblsticker <ステッカー リンク>**:** ステッカー トリガーをブラック リストに追加します。 リプライスタンプで追加可能
+          ➥ /unblsticker <ステッカー リンク>**:** ブラックリストからトリガーを削除します。 同じ改行ロジックがここにも適用されるため、複数のトリガーを一度に削除できます
+          ➥ /rmblsticker <ステッカーリンク>**:** 同上
+          ➥ /blstickermode <delete/ban/tban/mute/tmute>**:** ユーザーがブラックリストに登録されたステッカーを使用した場合のデフォルトのアクションを設定します
+        ノート：
+          ➥ `<ステッカー リンク>` は、`https://t.me/addstickers/<ステッカー>` または単に `<ステッカー>` にするか、ステッカー メッセージに返信することができます
+
+
+stickers_help: |
+          ➥ /stickerid*:* ステッカーに返信してファイル ID を教えてください。
+          ➥ /getsticker*:* ステッカーに返信して、生の PNG ファイルをアップロードしてください。
+          ➥ /delstcker*:* スタンプに返信してパックから削除します。削除できるのは自分が作成したものだけです。
+          ➥ /kang*:* ステッカー (アニメーション/静的/ビデオ) または画像または gif に返信して、独自のパックに追加します。
+          ➥ /stickers*:* コンボット ステッカー カタログで指定された用語のステッカーを検索します
+
+
+raid_help: |
+   あなたのグループがスパマーやボットによって襲撃されたことがありますか?
+   このモジュールを使用すると、レイダーを素早く止めることができます
+   *raid モード* を有効にすると、参加しようとするすべてのユーザーが自動的にキックされます。
+   レイドが完了したら、ロックグループを元に戻すと、すべてが通常の状態に戻ります。
+  
+    *管理者のみ!*
+
+   • /raid `(off/timeOptional)` : RAID モード (オン/オフ) を切り替えます。
+   時間が指定されていない場合は、デフォルトで 2 時間になり、自動的にオフになります。
+   *raid モード* を有効にすることで、グループに参加するすべてのユーザーをキックします。
+
+   • /raidtime `(時間はオプション)` : RAID モードのデフォルトの継続時間を表示または設定します。その時間が経過すると、RAID モードが自動的にオフになります。
+   デフォルトは6時間です
+
+   • /raidactiontime `(時間はオプション)` : RAID モードが一時禁止するデフォルトの期間を表示または設定します。
+   デフォルトは1時間です
+
+
+
+topics_help: |
+   Telegram は、フォーラム (トピック) と呼ばれるチャットを管理する新しい方法を導入しました
+
+   グループ管理ボットとして、役立つコマンドがいくつかあります。
+   チャット内のトピックを作成、削除、閉じ、再度開くことができます。
+   ➥ /topicnew*:* 新しいトピックを作成します。作成するにはトピック名が必要です。
+   ➥ /topicdel*:* 既存のトピックを削除します。削除するにはトピック ID が必要です。
+   ➥ /topicclose*:* 既存のトピックを閉じます。閉じるにはトピック ID が必要です。
+   ➥ /topicopen*:* すでに閉じられたトピックを開きます。開くにはトピック ID が必要です。
+   ➥ /setactiontopic*:* ようこそ、さよなら、警告、禁止などのアクション メッセージの発行トピックを設定します。
+   ➥ /delactiontopic*:* アクション メッセージのデフォルトのトピックを削除します。
+
+
+
+tools_help: |
+   *国*
+   ➥ /country <国名>*:* 指定された国に関する情報を収集します
+
+   *通貨換算：*
+   ➥ /cash*:* 通貨コンバータ
+   *例：*
+   ➥ /現金 1 USD INR
+   ➥ /現金 1 米ドル INR
+   *出力:* 1.0 USD = 75.505 INR
+
+   *英語ツール*
+   ➥ /define <text>*:* 検索する単語または表現を入力します\n例: /define kill
+   ➥ /spell*:* メッセージに返信するときに、文法を修正したバージョンで返信します
+   ➥ /synonyms <単語>*:* 単語の同義語を検索します
+   ➥ /antonyms <単語>*:* 単語の反意語を検索します
+
+   *暗号化と復号化*
+   ➥ /encrypt *:* 指定されたテキストを暗号化します
+   ➥ /decrypt *:* 以前に暗号化されたテキストを復号化します
+ 
+   *GitHub*
+   ➥ /github <username>*:* github ユーザーに関する情報を取得します。
+
+   *GPS と位置情報*
+   ➥ /gps <位置>*:* GPS 位置を取得します。
+
+   *ペースト*
+   ➥ /paste *:* 返信された内容を nekobin.com に保存し、URL を返信します
+ 
+   *PDF ツール*
+   /pdf *:* 返信された画像を PDF 化する
+
+   *QRコード*
+   ➥ /getqr *:* 返信された写真から QR コードのコンテンツを取得します。
+   ➥ /makeqr <text> *:* 指定されたテキストを含む QR コードを作成します。
+
+   ➥ /time <クエリ>*:* タイムゾーンに関する情報を提供します。
+   *利用可能なクエリ:* 国コード/国名/タイムゾーン名 🕐 [タイムゾーンリスト](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+   *都市辞書:*
+   ➥ /ud <単語>*:* 検索したい単語または表現を入力します。
+ 
+   *ウィキペディア:*
+   ➥ /wiki <クエリ>*:* wikipedia のクエリ
+
+   *壁紙*
+   ➥ /wall <クエリ>*:*wall.alphacoders.com から壁紙を取得します
+  
+   *天気*
+   ➥ /weather <city>*:* 高度な天気モジュール、使用法は /weather と同じ
+   ➥ /weather Moon*:* 現在の月の状態を取得します
+  
+   *ウェブサイトのスクリーンショット*
+   ➥ /webss <URL リンク>*;* 指定された URL のスクリーンショットを送信します。
+  
+   *書き込みツール*
+   ➥ /write <text>*:* 指定されたテキストを書き込みます。
+  
+   *ジップ*
+   ➥ /zip *:* 電報ファイルに返信して .zip 形式に圧縮します
+   ➥ /unzip *:* 電報ファイルに返信して、.zip 形式から解凍します
