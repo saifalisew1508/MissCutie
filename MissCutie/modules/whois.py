@@ -9,7 +9,7 @@ from MissCutie.utils.last_online_help import last_online
 from MissCutie import pbot
 
 
-@pbot.on_message(filters.command(["whois", "info"])
+@pbot.on_message(filters.command(["whois", "info"]))
 async def who_is(client, message):
     status_message = await message.reply_text("Wait Bro, Let Me Check 🙂")
     
