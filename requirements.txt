@@ -83,6 +83,7 @@ requests==2.31.0
 rfc==0.1.0
 rfc3986==1.5.0
 rsa==4.7.2
+selenium>=3.141.0
 sgmllib3k==1.0.0
 simplejson==3.17.5
 search_engine_parser==0.6.8
