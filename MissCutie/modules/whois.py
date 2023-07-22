@@ -3,7 +3,6 @@ import time
 from datetime import datetime
 from pyrogram import Client, filters, enums
 from pyrogram.errors import UserNotParticipant
-from info import COMMAND_HAND_LER
 from MissCutie.utils.extract_user import extract_user
 from MissCutie.utils.last_online_help import last_online
 from MissCutie import pbot
