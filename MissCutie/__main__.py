@@ -91,6 +91,8 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 *Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
+- /language: change your default language by using this command
+
 Join my [updates channel](http://t.me/BotXNews) to get information on all the latest updates.
 
 Use the /donate command to donate our devlopers
@@ -121,6 +123,7 @@ the things I can help you with.
  - /help: PM's you this message.
  - /help <module name>: PM's you info about that module.
  - /donate: information about how to donate!
+ - /language: change your default language
  - /settings:
    - in PM: will send you your settings for all supported modules.
    - in a group: will redirect you to pm, with all that chat's settings.
