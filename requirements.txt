@@ -128,3 +128,8 @@ img2pdf
 gtts
 python-arq
 unzip
+google-play-scraper
+play_scraper
+
+
+
