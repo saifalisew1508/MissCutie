@@ -48,7 +48,7 @@ async def set_lang(update: Update, _) -> None:
         [
             InlineKeyboardButton(
                 text="Help us in translations",
-                url="https://poeditor.com/join/project?hash=oJISpjNcEx",
+                url="https://github.com/saifalisew1508/MissCutieLanguage",
             )
         ]
     )
