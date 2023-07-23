@@ -1002,7 +1002,7 @@ def main():
     settings_handler = CommandHandler("settings", get_settings, block=False)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", block=False)
     about_callback_handler = CallbackQueryHandler(saif_about_callback, pattern=r"saif_", block=False)
-    Music_callback_handler = CallbackQueryHandler(music_about_callback, pattern=r"Music_", block=False)
+    music_callback_handler = CallbackQueryHandler(music_about_callback, pattern=r"Music_", block=False)
     donate_handler = CommandHandler("donate", donate, block=False)
     migrate_handler = MessageHandler(filters.StatusUpdate.MIGRATE, migrate_chats, block=False)
 
