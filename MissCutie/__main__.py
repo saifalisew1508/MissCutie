@@ -114,6 +114,24 @@ buttons = [
     ],
 ]
 
+
+
+music_buttons = [
+    [
+        InlineKeyboardButton(text="🤴 Admin 🤴", callback_data="Music_admin"),
+        InlineKeyboardButton(text="🎶 Play 🎶", callback_data="Music_play"),
+    ],
+    [
+        InlineKeyboardButton(text="🤖 Bot 🤖", callback_data="Music_bot"),
+        InlineKeyboardButton(text="🛡 Extra 🛡", callback_data="Music_extra"),
+    ],
+    [
+        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
+    ],
+]
+
+
+
 HELP_STRINGS = """
 Hey there! My name is *{}*.
 I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
@@ -488,7 +506,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 
 
-async def Music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     first_name = update.effective_user.first_name 
     if query.data == "Music_":
@@ -555,13 +573,7 @@ Auth Users can use admin commands without admin rights in your chat.
 """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
-                    ]
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_play":
         await query.message.edit_text(
@@ -589,13 +601,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
 """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
-                    ]
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_bot":
         await query.message.edit_text(
@@ -617,13 +623,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
 """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
-                    ]
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_extra":
         await query.message.edit_text(
@@ -662,13 +662,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
 """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="Music_"),
-                    ]
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_back":
         first_name = update.effective_user.first_name
@@ -1001,22 +995,21 @@ Presented By @BotXNews
 
 def main():
     
-    application.job_queue.run_repeating(send_alive, interval=21600, first=10)
-
+    application.job_queue.run_repeating(send_alive, interval=86400, first=10)
     start_handler = CommandHandler("start", start, block=False)
     help_handler = CommandHandler("help", get_help, block=False)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*", block=False)
     settings_handler = CommandHandler("settings", get_settings, block=False)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", block=False)
     about_callback_handler = CallbackQueryHandler(saif_about_callback, pattern=r"saif_", block=False)
-    Music_callback_handler = CallbackQueryHandler(Music_about_callback, pattern=r"Music_", block=False)
+    Music_callback_handler = CallbackQueryHandler(music_about_callback, pattern=r"Music_", block=False)
     donate_handler = CommandHandler("donate", donate, block=False)
     migrate_handler = MessageHandler(filters.StatusUpdate.MIGRATE, migrate_chats, block=False)
 
     application.add_handler(start_handler)
     application.add_handler(help_handler)
     application.add_handler(about_callback_handler)
-    application.add_handler(Music_callback_handler)
+    application.add_handler(music_callback_handler)
     application.add_handler(settings_handler)
     application.add_handler(help_callback_handler)
     application.add_handler(settings_callback_handler)
