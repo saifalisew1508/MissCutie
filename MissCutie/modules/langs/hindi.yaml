@@ -606,6 +606,18 @@ topics_help: |
    ➥ /delactiontopic*:* कार्रवाई संदेशों के लिए डिफ़ॉल्ट विषय हटाएं।
 
 
+tagalert_help: |
+  Too many mentions.. Cant you manage them all alone..
+  Here is the solution
+  If you are tagged/mentioned in a group where TotalSecurity is present
+  TotalSecurity will notify it to you via private message after enabling tag alerts
+  **Commands**
+  - /tagalert `on` : Turn tag alerts on
+  - /tagalert `off` : Turn tag alert off
+  **Example:**
+  If you are mentioned in a group TotalSecurity will tell you who mentioned you, 
+  message that you are tagged in and which group is that.
+
 
 tools_help: |
    *देश*
