@@ -1,7 +1,7 @@
 # Language name in their native
 language: "English 🇺🇲"
 # name of people(s) who worked on this translation
-authors: "@dank_as_fuck"
+authors: "@saifalisew1508"
 
 # languages
 curr_chat_lang: "Hey. Your current language is {}, select the one you want from the buttons below :)"
@@ -579,6 +579,20 @@ raid_help: |
 
   • /raidactiontime `(time optional)` : view or set the default duration that the raid mode will tempban
   Default is 1 hour
+
+
+tagalert_help: |
+  Too many mentions.. Cant you manage them all alone..
+  Here is the solution
+  If you are tagged/mentioned in a group where TotalSecurity is present
+  TotalSecurity will notify it to you via private message after enabling tag alerts
+  **Commands**
+  - /tagalert `on` : Turn tag alerts on
+  - /tagalert `off` : Turn tag alert off
+  **Example:**
+  If you are mentioned in a group TotalSecurity will tell you who mentioned you, 
+  message that you are tagged in and which group is that.
+
 
 
 
