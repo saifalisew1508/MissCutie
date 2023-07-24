@@ -604,7 +604,6 @@ raid_help: |
    デフォルトは1時間です
 
 
-
 topics_help: |
    Telegram は、フォーラム (トピック) と呼ばれるチャットを管理する新しい方法を導入しました
 
@@ -616,6 +615,18 @@ topics_help: |
    ➥ /topicopen*:* すでに閉じられたトピックを開きます。開くにはトピック ID が必要です。
    ➥ /setactiontopic*:* ようこそ、さよなら、警告、禁止などのアクション メッセージの発行トピックを設定します。
    ➥ /delactiontopic*:* アクション メッセージのデフォルトのトピックを削除します。
+
+tagalert_help: |
+   Too many mentions.. Cant you manage them all alone..
+   Here is the solution
+   If you are tagged/mentioned in a group where TotalSecurity is present
+   TotalSecurity will notify it to you via private message after enabling tag alerts
+   **Commands**
+   - /tagalert `on` : Turn tag alerts on
+   - /tagalert `off` : Turn tag alert off
+   **Example:**
+   If you are mentioned in a group TotalSecurity will tell you who mentioned you, 
+   message that you are tagged in and which group is that.
 
 
 
