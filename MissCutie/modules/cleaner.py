@@ -46,7 +46,7 @@ async def clean_blue_text_must_click(update: Update, context: ContextTypes.DEFAU
     chat = update.effective_chat
     message = update.effective_message
     member = await chat.get_member(bot.id)
-    
+
     if isinstance(member, ChatMemberAdministrator):
         if (
             (member.can_delete_messages if isinstance(member, ChatMemberAdministrator) else None)

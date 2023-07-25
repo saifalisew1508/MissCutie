@@ -416,9 +416,9 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ),
             )
 
-        
+
         await context.bot.answer_callback_query(query.id)
-        
+
 
     except BadRequest:
         pass
@@ -506,7 +506,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
-        
+
     elif query.data == "Music_admin":
         await query.message.edit_text(
             text=f"*Admin Commands*"
@@ -736,7 +736,7 @@ async def send_settings(chat: Chat | (int | str), user: User, update: Update, co
                 chat = await context.bot.get_chat(chat)
 
             conn = await connected(context.bot, update, chat, user.id, need_admin=True)
-            
+
             chat_obj = await application.bot.getChat(conn)
             chat_name = chat_obj.title
             await application.bot.send_message(
@@ -933,8 +933,8 @@ async def migrate_chats(update: Update, _: ContextTypes.DEFAULT_TYPE):
 
     LOGGER.info("Successfully migrated!")
     raise ApplicationHandlerStop
-    
-    
+
+
 async def send_alive(context: ContextTypes.DEFAULT_TYPE):
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
@@ -963,7 +963,7 @@ Presented By @BotXNews
             LOGGER.warning(e.message)
 
 def main():
-    
+
     application.job_queue.run_repeating(send_alive, interval=86400, first=10)
     start_handler = CommandHandler("start", start, block=False)
     help_handler = CommandHandler("help", get_help, block=False)

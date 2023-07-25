@@ -42,7 +42,7 @@ if is_module_loaded(FILENAME):
 
                 if chat.is_forum and chat.username:
                     result += f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_thread_id}/{message.message_id}">click here</a>'
-            
+
                 if message.chat.type == chat.SUPERGROUP and message.chat.username:
                     result += f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">click here</a>'
                 log_chat = sql.get_chat_log_channel(chat.id)
@@ -112,7 +112,7 @@ if is_module_loaded(FILENAME):
                     + "\n\nFormatting has been disabled due to an unexpected error.",
                 )
 
-    
+
     @check_admin(is_user=True)
     async def logging(update: Update, context: ContextTypes.DEFAULT_TYPE):
         bot = context.bot
@@ -173,7 +173,7 @@ if is_module_loaded(FILENAME):
                 " - forward the /setlog to the group\n",
             )
 
-    
+
     @check_admin(is_user=True)
     async def unsetlog(update: Update, context: ContextTypes.DEFAULT_TYPE):
         bot = context.bot
@@ -202,7 +202,7 @@ if is_module_loaded(FILENAME):
             log_channel_info = await application.bot.get_chat(log_channel)
             return f"This group has all it's logs sent to: {escape_markdown(log_channel_info.title)} (`{log_channel}`)"
         return "No log channel is set for this group!"
-        
+
 
     LOG_HANDLER = CommandHandler("logchannel", logging, block=False)
     SET_LOG_HANDLER = CommandHandler("setlog", setlog, block=False)

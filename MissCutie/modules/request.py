@@ -102,7 +102,7 @@ async def request(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
                         if should_forward:
                             await message.forward(admin.user.id)
-                    
+
                     if chat.username and chat.type == chat.SUPERGROUP:
 
                         await bot.send_message(
@@ -116,7 +116,7 @@ async def request(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     pass
                 except BadRequest as excp:
                     LOGGER.exception("Exception while requesting content!")
-                
+
         await message.reply_text(
             f"{mention_html(user.id, user.first_name)} I've submitted your request to the admins.",
             parse_mode=ParseMode.HTML,

@@ -39,7 +39,7 @@ async def shell(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 chat_id=message.chat_id,
                 message_thread_id=message.message_thread_id if chat.is_forum else None
             )
-        
+
         if os.path.isfile("shell_ouput.txt"):
             os.remove("shell_output.txt")
     else:

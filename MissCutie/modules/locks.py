@@ -241,7 +241,7 @@ async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                     LOCK_CHAT_RESTRICTION[ltype.lower()],
                 ),
             )
-            
+
             await context.bot.restrict_chat_member(chat.id, int(777000), permissions=ChatPermissions(
                 can_send_messages=True,
                 can_send_media_messages=True,
@@ -342,14 +342,14 @@ async def unlock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 chat_id = update.effective_chat.id
                 chat_name = update.effective_message.chat.title
                 text = "Unlocked {} for everyone!".format(ltype)
-            
+
             member = await chat.get_member(context.bot.id)
 
             if isinstance(member, ChatMemberAdministrator):
                 can_change_info = member.can_change_info
             else:
                 can_change_info = True
-            
+
             if not can_change_info:
                 await send_message(
                     update.effective_message,

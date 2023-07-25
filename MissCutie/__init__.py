@@ -123,7 +123,7 @@ if ENV:
 
     if DB_URI.startswith("postgres://"):
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
-    
+
     TEMP_DOWNLOAD_LOC = os.environ.get("TEMP_DOWNLOAD_LOC", "./Downloads")
 
 
@@ -183,7 +183,7 @@ else:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])
     except ValueError:
         raise Exception("Your blacklisted chats list does not contain valid integers.")
-        
+
 DEV_USERS.add(OWNER_ID)
 
 # Telethon Client
@@ -219,7 +219,7 @@ BOT_PIC = application.bot.get_user_profile_photos
 
 # Don't edit below this line
 YTDOWNLOADER = 1
- 
+
 
 
 

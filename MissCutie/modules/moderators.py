@@ -134,7 +134,7 @@ async def modr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await message.reply_text(
             f"{member.user.first_name} is not a moderator user.")
 
-        
+
 
 ADD_MOD_HANDLER = DisableAbleCommandHandler("addmod", mod, block=False)
 REMOVE_MOD_HANDLER = DisableAbleCommandHandler("remmod", dismod, block=False)

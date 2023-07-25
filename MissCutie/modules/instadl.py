@@ -207,7 +207,7 @@ async def idgl(c, m):
                                files.append(InputMediaVideo(x, caption=rdata["caption"] if ind == 0 else ""))
                             else:
                                files.append(InputMediaPhoto(x, caption=rdata["caption"] if ind == 0 else ""))
-      
+
                     await c.send_media_group(m.chat.id, files)
                     await msg.delete()
         except:

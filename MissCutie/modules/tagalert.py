@@ -32,7 +32,7 @@ async def locks_dfunc(_, message):
    if len(message.command) != 2:
       return await lol.edit("Expected on or off 👀")
    parameter = message.text.strip().split(None, 1)[1].lower()
-  
+
    if parameter in ("on", "ON"):
      if not message.from_user:
        return
@@ -61,13 +61,13 @@ async def locks_dfunc(_, message):
           return await lol.edit("Tag alerts already disabled for you") 
    else:
      await lol.edit("Expected on or off 👀")
-     
 
 
 
 
 
-     
+
+
 @pbot.on_message(filters.incoming)
 async def mentioned_alert(client, message):
     try:
@@ -80,7 +80,7 @@ async def mentioned_alert(client, message):
         input_str = message.text
         input_str = input_str.lower()
         if "@" in input_str:
-            
+
             input_str = input_str.replace("@", "  |")
             inuka = input_str.split("|")[1]
             text = inuka.split()[0]
@@ -103,7 +103,7 @@ async def mentioned_alert(client, message):
                try:
                  alarms.delete_one({"chat": chat, "user": user, "time": time, "zone": zone, "reason": reason})
                  await client.send_message(chat, f"**🚨 REMINDER 🚨**\n\n__This is a reminder set by__ {user}\n__Reason__: {reason} \n\n`Reminded at: {ttime}`")
-                 
+
                  message.continue_propagation()
                except:
                  alarms.delete_one({"chat": chat, "user": user, "time": time, "zone": zone, "reason": reason})
@@ -137,7 +137,7 @@ async def mentioned_alert(client, message):
                return message.continue_propagation()
               continue              
             chats = nightmod.find({})
-            
+
             for c in chats:
               # print(c)
               id = c["id"]
@@ -249,20 +249,20 @@ async def mentioned_alert(client, message):
         except:
             return message.continue_propagation()
         user_ = message.from_user.mention or f"@{message.from_user.username}"
-        
+
         final_tagged_msg = f"**🔔 You Have Been** [Tagged]({tagged_msg_link}) **in** {chat_name} **By** {user_}"
         button_s = InlineKeyboardMarkup([[InlineKeyboardButton("🔔 View Message 🔔", url=tagged_msg_link)]])
         #print(final_tagged_msg)
         try:
             await client.send_message(chat_id=f"{text}", text=final_tagged_msg,reply_markup=button_s,disable_web_page_preview=True)
-            
+
         except:
             return message.continue_propagation()
         message.continue_propagation()
     except:
         return message.continue_propagation()
-    
-    
+
+
 __mod_name__ = "Tag-Alert"
 
 def get_help(chat):

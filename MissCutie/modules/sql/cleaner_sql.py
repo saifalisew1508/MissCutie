@@ -54,7 +54,7 @@ def set_cleanbt(chat_id, is_enable):
             SESSION.delete(curr)
 
         newcurr = CleanerBlueTextChatSettings(str(chat_id), is_enable)
-        
+
         SESSION.add(newcurr)
         SESSION.commit()
 
@@ -156,7 +156,7 @@ def is_enabled(chat_id):
         return False #default
     finally:
         SESSION.close()
-        
+
 
 def get_all_ignored(chat_id):
     if str(chat_id) in CLEANER_CHATS:

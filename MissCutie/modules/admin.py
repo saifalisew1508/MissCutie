@@ -38,7 +38,7 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
 
 
     if message.from_user.id == ChatID.ANONYMOUS_ADMIN:
-        
+
         await message.reply_text(
             text="You are an anonymous admin.",
             reply_markup=InlineKeyboardMarkup(
@@ -134,7 +134,7 @@ async def demote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     demoter = await chat.get_member(user.id)
 
     if message.from_user.id == ChatID.ANONYMOUS_ADMIN:
-    
+
         await message.reply_text(
             text="You are an anonymous admin.",
             reply_markup=InlineKeyboardMarkup(
@@ -238,7 +238,7 @@ async def set_title(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id, title = await extract_user_and_text(message, context, args)
 
     if message.from_user.id == 1087968824:
-    
+
         await message.reply_text(
             text="You are an anonymous admin.",
             reply_markup=InlineKeyboardMarkup(
@@ -332,7 +332,7 @@ async def pin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     if not prev_message:
         await message.reply_text("Please reply to message which you want to pin.")
         return
-    
+
     if message.from_user.id == 1087968824:
 
         await message.reply_text(
@@ -543,7 +543,7 @@ async def adminlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
                 if custom_title:
                     text += f"<code> ┗━ {html.escape(custom_title)}</code>\n"
-            
+
             if status == ChatMemberStatus.ADMINISTRATOR:
                 if custom_title:
                     try:
@@ -608,7 +608,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await message.edit_text("You don't seem to be referring to a user or the ID specified is incorrect...")
             return
 
-        
+
         try:
             user_member = await chat.get_member(user_id)
         except:
@@ -619,7 +619,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         bot_member = await chat.get_member(bot.id)
-        
+
         if isinstance(bot_member, ChatMemberAdministrator):
             try:
                 await bot.promoteChatMember(
@@ -678,8 +678,8 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await message.edit_text("You dont't seem to be referring to a user or the ID specified is incorrect..")
             return
 
-        
-        
+
+
         try:
             user_member = await chat.get_member(user_id)
         except:
@@ -733,7 +733,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 " user, so I can't act upon them!",
             )
             return
-            
+
     elif splitter[1] == "title":
         title = splitter[3]
 
@@ -757,7 +757,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "You don't seem to be referring to a user or the ID specified is incorrect..",
             )
             return
-            
+
 
         try:
             user_member = await chat.get_member(user_id)
@@ -802,7 +802,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"to <code>{html.escape(title[:16])}</code>!",
             parse_mode=ParseMode.HTML,
         )
-            
+
     elif splitter[1] == "pin":
 
         admin_member = await chat.get_member(admin_user.id)
@@ -837,7 +837,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     pass
                 else:
                     raise
-            
+
             await message.edit_text("Done Pinned.")
 
             log_message = (
@@ -873,7 +873,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
             else:
                 raise
-        
+
 
         log_message = (
             f"<b>{html.escape(chat.title)}:</b>\n"
@@ -903,7 +903,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 pass
             else:
                 raise
-        
+
         await message.edit_text("Done UnPinned All messages.")
         log_message = (
             f"<b>{html.escape(chat.title)}:</b>\n"
