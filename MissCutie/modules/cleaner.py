@@ -47,26 +47,28 @@ async def clean_blue_text_must_click(update: Update, context: ContextTypes.DEFAU
     message = update.effective_message
     member = await chat.get_member(bot.id)
 
-    if isinstance(member, ChatMemberAdministrator):
-        if (
-            (member.can_delete_messages if isinstance(member, ChatMemberAdministrator) else None)
-            and sql.is_enabled(chat.id)
+    if (
+        isinstance(member, ChatMemberAdministrator)
+        and (
+        (member.can_delete_messages if isinstance(member, ChatMemberAdministrator) else None)
+        and sql.is_enabled(chat.id)
+    )
+    ):
+        fst_word = message.text.strip().split(None, 1)[0]
+
+        if len(fst_word) > 1 and any(
+            fst_word.startswith(start) for start in CMD_STARTERS
         ):
-            fst_word = message.text.strip().split(None, 1)[0]
 
-            if len(fst_word) > 1 and any(
-                fst_word.startswith(start) for start in CMD_STARTERS
-            ):
+            command = fst_word[1:].split("@")
+            chat = update.effective_chat
 
-                command = fst_word[1:].split("@")
-                chat = update.effective_chat
+            ignored = sql.is_command_ignored(chat.id, command[0])
+            if ignored:
+                return
 
-                ignored = sql.is_command_ignored(chat.id, command[0])
-                if ignored:
-                    return
-
-                if command[0] not in command_list:
-                    await message.delete()
+            if command[0] not in command_list:
+                await message.delete()
 
 
 

@@ -191,15 +191,14 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             head += f"<b>\n\nBio:</b> {chat_obj.bio}"
 
         if chat.type != ChatType.PRIVATE:
-            if chat_obj.id != bot.id:
-                if is_afk(chat_obj.id):
-                    afk_st = check_afk_status(chat_obj.id)
-                    time = humanize.naturaldate(datetime.now() - afk_st.time)
+            if chat_obj.id != bot.id and is_afk(chat_obj.id):
+                afk_st = check_afk_status(chat_obj.id)
+                time = humanize.naturaldate(datetime.now() - afk_st.time)
 
-                    if not afk_st.reason:
-                        head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}"
-                    else:
-                        head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}, \nReason: {afk_st.reason}"
+                if not afk_st.reason:
+                    head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}"
+                else:
+                    head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}, \nReason: {afk_st.reason}"
 
             chat_member = await chat.get_member(chat_obj.id)
             if isinstance(chat_member, ChatMemberAdministrator):

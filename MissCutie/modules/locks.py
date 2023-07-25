@@ -427,69 +427,75 @@ async def del_lockables(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         break
             continue
         if lockable == "button":
-            if sql.is_locked(chat.id, lockable):
-                if message.reply_markup and message.reply_markup.inline_keyboard:
-                    try:
-                        await message.delete()
-                    except BadRequest as excp:
-                        if excp.message == "Message to delete not found":
-                            pass
-                        else:
-                            LOGGER.exception("ERROR in lockables - button")
-                    break
+            if (
+                sql.is_locked(chat.id, lockable)
+                and message.reply_markup
+                and message.reply_markup.inline_keyboard
+            ):
+                try:
+                    await message.delete()
+                except BadRequest as excp:
+                    if excp.message == "Message to delete not found":
+                        pass
+                    else:
+                        LOGGER.exception("ERROR in lockables - button")
+                break
             continue
         if lockable == "inline":
-            if sql.is_locked(chat.id, lockable):
-                if message and message.via_bot:
-                    try:
-                        await message.delete()
-                    except BadRequest as excp:
-                        if excp.message == "Message to delete not found":
-                            pass
-                        else:
-                            LOGGER.exception("ERROR in lockables - inline")
-                    break
+            if (
+                sql.is_locked(chat.id, lockable)
+                and message
+                and message.via_bot
+            ):
+                try:
+                    await message.delete()
+                except BadRequest as excp:
+                    if excp.message == "Message to delete not found":
+                        pass
+                    else:
+                        LOGGER.exception("ERROR in lockables - inline")
+                break
             continue
         if lockable == "forwardchannel":
             if sql.is_locked(chat.id, lockable):
-                if message.forward_from_chat:
-                    if message.forward_from_chat.type == "channel":
-                        try:
-                            await message.delete()
-                        except BadRequest as excp:
-                            if excp.message == "Message to delete not found":
-                                pass
-                            else:
-                                LOGGER.exception("ERROR in lockables - forwardchannel")
-                        break
+                if (
+                    message.forward_from_chat
+                    and message.forward_from_chat.type == "channel"
+                ):
+                    try:
+                        await message.delete()
+                    except BadRequest as excp:
+                        if excp.message == "Message to delete not found":
+                            pass
+                        else:
+                            LOGGER.exception("ERROR in lockables - forwardchannel")
+                    break
                 continue
             continue
         if lockable == "forwardbot":
             if sql.is_locked(chat.id, lockable):
-                if message.forward_from:
-                    if message.forward_from.is_bot:
-                        try:
-                            await message.delete()
-                        except BadRequest as excp:
-                            if excp.message == "Message to delete not found":
-                                pass
-                            else:
-                                LOGGER.exception("ERROR in lockables - forwardchannel")
-                        break
+                if message.forward_from and message.forward_from.is_bot:
+                    try:
+                        await message.delete()
+                    except BadRequest as excp:
+                        if excp.message == "Message to delete not found":
+                            pass
+                        else:
+                            LOGGER.exception("ERROR in lockables - forwardchannel")
+                    break
                 continue
             continue
         if lockable == "anonchannel":
             if sql.is_locked(chat.id, lockable):
-                if message.from_user:
-                    if message.from_user.id == 136817688:
-                        try:
-                            await message.delete()
-                        except BadRequest as excp:
-                            if excp.message == "Message to delete not found":
-                                pass
-                            else:
-                                LOGGER.exception("ERROR in lockables - anonchannel")
-                        break
+                if message.from_user and message.from_user.id == 136817688:
+                    try:
+                        await message.delete()
+                    except BadRequest as excp:
+                        if excp.message == "Message to delete not found":
+                            pass
+                        else:
+                            LOGGER.exception("ERROR in lockables - anonchannel")
+                    break
                 continue
             continue
         if (

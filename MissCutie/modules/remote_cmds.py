@@ -483,16 +483,18 @@ async def runmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             raise
 
-    if await is_user_in_chat(chat, user_id):
-        if ((
-            member.can_send_messages
-            and member.can_send_media_messages
-            and member.can_send_other_messages
-            and member.can_add_web_page_previews
-        ) if isinstance(member, ChatMemberRestricted) else None
-        ):
-            await message.reply_text("This user already has the right to speak in that chat.")
-            return
+    if (
+        await is_user_in_chat(chat, user_id)
+        and ((
+        member.can_send_messages
+        and member.can_send_media_messages
+        and member.can_send_other_messages
+        and member.can_add_web_page_previews
+    ) if isinstance(member, ChatMemberRestricted) else None
+    )
+    ):
+        await message.reply_text("This user already has the right to speak in that chat.")
+        return
 
     if user_id == bot.id:
         await message.reply_text("I'm not gonna UNMUTE myself, I'm an admin there!")

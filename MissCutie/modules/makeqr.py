@@ -18,9 +18,11 @@ async def parseqr(event):
     if event.fwd_from:
         return
 
-    if event.is_group:
-        if not await is_register_admin(event.input_chat, event.message.sender_id):
-            return
+    if (
+        event.is_group
+        and not await is_register_admin(event.input_chat, event.message.sender_id)
+    ):
+        return
 
     start = datetime.now()
     downloaded_file_name = await telethn.download_media(event.reply_to_msg_id, progress_callback=progress)
@@ -41,9 +43,11 @@ async def makeqr(event):
     if event.fwd_from:
         return
 
-    if event.is_group:
-        if not await is_register_admin(event.input_chat, event.message.sender_id):
-            return
+    if (
+        event.is_group
+        and not await is_register_admin(event.input_chat, event.message.sender_id)
+    ):
+        return
 
     start = datetime.now()
     input_str = event.pattern_match.group(1)

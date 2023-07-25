@@ -155,9 +155,11 @@ async def chat_checker(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     try:
         bot_admin = await update.effective_message.chat.get_member(bot.id)
-        if isinstance(bot_admin, ChatMemberAdministrator):
-            if bot_admin.can_post_messages is False:
-                await bot.leaveChat(update.effective_message.chat.id)
+        if (
+            isinstance(bot_admin, ChatMemberAdministrator)
+            and bot_admin.can_post_messages is False
+        ):
+            await bot.leaveChat(update.effective_message.chat.id)
     except Forbidden:
         pass
 
