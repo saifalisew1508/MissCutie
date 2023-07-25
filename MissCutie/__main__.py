@@ -118,12 +118,12 @@ buttons = [
 
 about_buttons = [
     [
-        InlineKeyboardButton(text="Support 🌍", callback_data="support"),
-        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="sponsor"),
+        InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
+        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="sponsor_me"),
     ],
     [
         InlineKeyboardButton(text="Developer ", url=f"tg://user?id={OWNER_ID}"),
-        InlineKeyboardButton(text="Source 🤖", callback_data="source"),
+        InlineKeyboardButton(text="Source 🤖", callback_data="source_code"),
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
@@ -463,21 +463,21 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "support":
+    elif query.data == "saif_support":
         await query.message.edit_text(
             text="*HERE IS THE SUPPORT CONTACT OF MISSCUTIE*"
             f"\n\nSUPPORT CHAT -> @PUBLICSOURCE_CHAT \nSUPPORT CHANNEL -> @BOTXNEWS \nCONTACT OWNER -> @LOSTEDPERSON",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "sponsor":
+    elif query.data == "sponsor_me":
         await query.message.edit_text(
             text="*Heyaa, Nice So You Want To Sponsor @MissCutieRobot ?*"
             f"\n\nSPONSOR ON GITHUB -> [CLICK HERE](https://github.com/sponsors/saifalisew1508) \nSPONSOR VIA UPI -> 9708973259@UPI \nIF YOU WANT TO SPONSOR VIA CRYPTO, PLEASE CONTACT -> @SAIFFFF2004",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "source":
+    elif query.data == "source_code":
         await query.message.edit_text(
             text="*SORRY TO SAY YOU THAT BUT @MISSCUTIEROBOT ISN'T LONGER OPEN SOURCE PROJECT*"
             f"\n\nBUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT"
