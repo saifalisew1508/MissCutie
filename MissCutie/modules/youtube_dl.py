@@ -55,7 +55,7 @@ async def song_commad_group(client, message: Message):
 
 
 @app.on_message(
-    filters.command("yt")
+    filters.command(["yt", "song", "video"])
     & filters.private
 )
 async def song_commad_private(client, message: Message):
