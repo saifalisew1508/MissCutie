@@ -103,14 +103,30 @@ buttons = [
         InlineKeyboardButton(text="HELPABLE COMMANDS ⚙️", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="saif_"),
-        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="Music_"),
+        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="about"),
+        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="music_help"),
     ],
     [
         InlineKeyboardButton(
             text="Add Your Group ➕️",
             url=f"https://t.me/{application.bot.username}?startgroup=true",
         ),
+    ],
+]
+
+
+
+about_buttons = [
+    [
+        InlineKeyboardButton(text="Support 🌍", callback_data="support"),
+        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="sponsor"),
+    ],
+    [
+        InlineKeyboardButton(text="Developer ", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="Source 🤖", callback_data="source"),
+    ],
+    [
+        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
     ],
 ]
 
@@ -411,7 +427,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    if query.data == "saif_":
+    if query.data == "about":
         uptime = get_readable_time((time.time() - StartTime))
         first_name = update.effective_user.first_name
         await query.message.edit_text(
@@ -440,60 +456,36 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             f"\n\nClick on the *Commands* buttons given below for getting basic help and info about {context.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="Support Here🌍", callback_data="saif_support"
-                        ),
-                        InlineKeyboardButton(
-                            text="Help Commands⚙️", callback_data="help_back"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text="Developer 🧑‍💻", url=f"tg://user?id={OWNER_ID}"
-                        ),
-                        InlineKeyboardButton(
-                            text="Language",
-                            callback_data="lang_button",
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-                    ],
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "saif_support":
+    elif query.data == "support":
         await query.message.edit_text(
-            text="*Click on the buttons given below to get help and more information about me.*"
-            f"\n\nIf you found any bug in {context.bot.first_name} or if you wanna give feedback about the {context.bot.first_name}, please report it at support chat.",
+            text="*HERE IS THE SUPPORT CONTACT OF MISSCUTIE*"
+            f"\n\nSUPPORT CHAT -> @PUBLICSOURCE_CHAT \nSUPPORT CHANNEL -> @BOTXNEWS \nCONTACT OWNER -> @LOSTEDPERSON",
             parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="Support 🤷", url=f"https://t.me/{SUPPORT_CHAT}"
-                        ),
-                        InlineKeyboardButton(
-                            text="Updates 📢", url=f"https://t.me/BotXNews"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text="Developer 🧑‍💻", url=f"tg://user?id={OWNER_ID}"
-                        ),
-                        InlineKeyboardButton(
-                            text="Sponsor Me ❤", url="https://github.com/sponsors/saifalisew1508"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="saif_"),
-                    ],
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(about_buttons),
         )
+
+
+        elif query.data == "sponsor":
+        await query.message.edit_text(
+            text="*Heyaa, Nice So You Want To Sponsor @MissCutieRobot ?*"
+            f"\n\nSPONSOR ON GITHUB -> [CLICK HERE](https://github.com/sponsors/saifalisew1508) \nSPONSOR VIA UPI -> 9708973259@UPI \nIF YOU WANT TO SPONSOR VIA CRYPTO, PLEASE CONTACT -> @SAIFFFF2004",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(about_buttons),
+        )
+
+
+        elif query.data == "source":
+        await query.message.edit_text(
+            text="*SORRY TO SAY YOU THAT BUT @MISSCUTIEROBOT IS'NT LONGER OPEN SOURCE PROJECT*"
+            f"\n\nBUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT",
+            f"\n\nMarie (BASE CODE) -> [CLICK HERE](https://github.com/PaulSonOfLars/tgbot) \nMissCutie OLD -> [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot) \nKigyo Robot -> [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(about_buttons),
+        )
+
+                
     elif query.data == "saif_back":
         first_name = update.effective_user.first_name 
         await query.message.edit_text(
@@ -509,35 +501,15 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     first_name = update.effective_user.first_name 
-    if query.data == "Music_":
+    if query.data == "music_help":
         await query.message.edit_text(
             text=MUSIC_TEXT.format(escape_markdown(first_name), 
                                    escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="🤴 Admin 🤴", callback_data="Music_admin"
-                        ),
-                        InlineKeyboardButton(
-                            text="🎶 Play 🎶", callback_data="Music_play"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="🤖 Bot 🤖", callback_data="Music_bot"),
-                        InlineKeyboardButton(
-                            text="🛡 Extra 🛡",
-                            callback_data="Music_extra",
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-                    ],
-                ]
-            ),
+            reply_markup=InlineKeyboardMarkup(music_buttons),
         )
+        
     elif query.data == "Music_admin":
         await query.message.edit_text(
             text=f"*Admin Commands*"
