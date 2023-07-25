@@ -40,9 +40,9 @@ async def locks_dfunc(_, message):
        return await lol.edit("Only users with usernames are eligible for tag alert service")
      uname=str(message.from_user.username)
      uname = uname.lower()
-     isittrue = tagdb.find_one({f"teg": uname})
+     isittrue = tagdb.find_one({"teg": uname})
      if not isittrue:
-          tagdb.insert_one({f"teg": uname})
+          tagdb.insert_one({"teg": uname})
           return await lol.edit(f"Tag alerts enabled.\nWhen someone tags you as @{uname} you will be notified")
      else:
           return await lol.edit("Tag alerts already enabled for you")
@@ -53,9 +53,9 @@ async def locks_dfunc(_, message):
        return await lol.edit("Only users with usernames are eligible for tag alert service")
      uname = message.from_user.username
      uname = uname.lower()
-     isittrue = tagdb.find_one({f"teg": uname})
+     isittrue = tagdb.find_one({"teg": uname})
      if isittrue:
-          tagdb.delete_one({f"teg": uname})
+          tagdb.delete_one({"teg": uname})
           return await lol.edit("Tag alerts removed")
      else:
           return await lol.edit("Tag alerts already disabled for you") 
@@ -93,7 +93,7 @@ async def mentioned_alert(client, message):
               time = c["time"]
               zone = c["zone"]
               reason = c["reason"]
-              present = dateparser.parse(f'now', settings={'TIMEZONE': f'{zone}', 'DATE_ORDER': 'YMD'}) 
+              present = dateparser.parse('now', settings={'TIMEZONE': f'{zone}', 'DATE_ORDER': 'YMD'}) 
               ttime = dateparser.parse(f'{time}', settings={'TIMEZONE': f'{zone}'}) 
               #print(ttime)
               #print(present)
@@ -119,7 +119,7 @@ async def mentioned_alert(client, message):
               time = c["time"]
               zone = c["zone"]
               reason = c["reason"]
-              present = dateparser.parse(f'now', settings={'TIMEZONE': f'{zone}', 'DATE_ORDER': 'YMD'}) 
+              present = dateparser.parse('now', settings={'TIMEZONE': f'{zone}', 'DATE_ORDER': 'YMD'}) 
               ttime = dateparser.parse(f'{time}', settings={'TIMEZONE': f'{zone}'}) 
               #print(ttime)alarms
               #print(present)
@@ -237,7 +237,7 @@ async def mentioned_alert(client, message):
               continue            
             return message.continue_propagation()
         #print(text)
-        if tagdb.find_one({f"teg": text}):
+        if tagdb.find_one({"teg": text}):
             pass
         else:
             return message.continue_propagation()

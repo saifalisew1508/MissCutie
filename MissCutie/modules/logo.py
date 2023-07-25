@@ -12,10 +12,10 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 repmark = InlineKeyboardMarkup(
       [
         [
-        InlineKeyboardButton(text="➕Add me to your group ➕", url=f"http://t.me/MissCutieRobot?startgroup=botstart") 
+        InlineKeyboardButton(text="➕Add me to your group ➕", url="http://t.me/MissCutieRobot?startgroup=botstart") 
         ],
         [
-         InlineKeyboardButton(text="🗣️Join my updates", url=f"https://t.me/BotXNews") 
+         InlineKeyboardButton(text="🗣️Join my updates", url="https://t.me/BotXNews") 
         ]
       ]      
     )

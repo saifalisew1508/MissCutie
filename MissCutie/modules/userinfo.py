@@ -170,13 +170,13 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if chat_obj.type == ChatType.PRIVATE:
         if not chat_obj.username:
-            head = f"╒═══「<b> User Information:</b> 」\n"
+            head = "╒═══「<b> User Information:</b> 」\n"
             await reply.edit_text("Found User, getting information...")
         elif chat_obj.username and chat_obj.username.endswith("bot"):
-            head = f"╒═══「<b> Bot Information:</b> 」\n"
+            head = "╒═══「<b> Bot Information:</b> 」\n"
             await reply.edit_text("Found Bot, getting information...")
         else:
-            head = f"╒═══「<b> User Information:</b> 」\n"
+            head = "╒═══「<b> User Information:</b> 」\n"
             await reply.edit_text("Found User, getting information...")
         head += f"<b>\nID:</b> <code>{chat_obj.id}</code>"
         head += f"<b>\nFirst Name:</b> {chat_obj.first_name}"
@@ -210,7 +210,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 head += f"<b>\nPresence:</b> {chat_member.status}"
 
             if is_approved(chat.id, chat_obj.id):
-                head += f"<b>\nApproved:</b> This user is approved in this chat."
+                head += "<b>\nApproved:</b> This user is approved in this chat."
 
         disaster_level_present = False
 
@@ -237,7 +237,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             head += "\n\n" + mod_info if mod_info else ""
 
     if chat_obj.type == ChatType.SENDER:
-        head = f"╒═══「<b>Sender Chat Information:</b> 」\n"
+        head = "╒═══「<b>Sender Chat Information:</b> 」\n"
         await reply.edit_text("Found Sender Chat, getting information...")
         head += f"<b>\nID:</b> <code>{chat_obj.id}</code>"
         if chat_obj.title:
@@ -249,7 +249,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             head += f"<b>\n\nDescription:</b> {chat_obj.description}"
 
     elif chat_obj.type == ChatType.CHANNEL:
-        head = f"╒═══「<b> Channel Information:</b> 」\n"
+        head = "╒═══「<b> Channel Information:</b> 」\n"
         await reply.edit_text("Found Channel, getting information...")
         head += f"<b>\nID:</b> <code>{chat_obj.id}</code>"
         if chat_obj.title:
@@ -263,7 +263,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             head += f"<b>\nLinked Chat ID:</b> <code>{chat_obj.linked_chat_id}</code>"
 
     elif chat_obj.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
-        head = f"╒═══「<b> Group Information:</b> 」\n"
+        head = "╒═══「<b> Group Information:</b> 」\n"
         await reply.edit_text("Found Group, getting information...")
         head += f"<b>\nID:</b> <code>{chat_obj.id}</code>"
         if chat_obj.title:
