@@ -162,7 +162,7 @@ async def devlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await m.edit_text(reply, parse_mode=ParseMode.HTML)
 
 
-__help__ = f"""
+__help__ = """
 *⚠️ Notice:*
 Commands listed here only work for users with special access and are mainly used for troubleshooting, debugging purposes.
 Group admins/group owners do not need these commands.

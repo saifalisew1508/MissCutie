@@ -133,7 +133,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     )
 
     reply = (
-            f"<code>❕</code><b>Ban Event</b>\n"
+            "<code>❕</code><b>Ban Event</b>\n"
         )
 
     if CHAT_SENDER:
@@ -556,7 +556,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
         reply = (
-                f"<code>❕</code><b>Ban Event</b>\n"
+                "<code>❕</code><b>Ban Event</b>\n"
             )
 
         if CHAT_SENDER:
@@ -582,7 +582,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if reason:
                 reply += f"\n<code> </code><b>•  Reason:</b> \n{html.escape(reason)}"
             await bot.sendMessage(chat.id, reply, parse_mode=ParseMode.HTML,message_thread_id=message.message_thread_id if chat.is_forum else None)
-            await query.answer(f"Done Banned User.")
+            await query.answer("Done Banned User.")
             return log
 
         except BadRequest as excp:

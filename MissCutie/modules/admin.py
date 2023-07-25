@@ -387,7 +387,7 @@ async def unpin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                     [
                         InlineKeyboardButton(
                             text="Click to prove Admin.",
-                            callback_data=f"admin_=unpin",
+                            callback_data="admin_=unpin",
                         ),
                     ],
                 ],
@@ -434,7 +434,7 @@ async def unpinall(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                     [
                         InlineKeyboardButton(
                             text="Click to prove Admin.",
-                            callback_data=f"admin_=unpinall",
+                            callback_data="admin_=unpinall",
                         ),
                     ],
                 ],

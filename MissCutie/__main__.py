@@ -509,7 +509,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
 
     elif query.data == "Music_admin":
         await query.message.edit_text(
-            text=f"*Admin Commands*"
+            text="*Admin Commands*"
             f"""
 **c** stands for channel play.
 
@@ -546,7 +546,7 @@ Auth Users can use admin commands without admin rights in your chat.
         )
     elif query.data == "Music_play":
         await query.message.edit_text(
-            text=f"*Play Commands*"
+            text="*Play Commands*"
             f"""
 Available Commands = play , vplay , cplay
 
@@ -574,7 +574,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
         )
     elif query.data == "Music_bot":
         await query.message.edit_text(
-            text=f"*Bot Commands*"
+            text="*Bot Commands*"
             f"""
 /stats - Get Top 10 Tracks Global Stats, Top 10 Users of bot, Top 10 Chats on bot, Top 10 Played in a chat etc etc.
 
@@ -596,7 +596,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
         )
     elif query.data == "Music_extra":
         await query.message.edit_text(
-            text=f"*Extra Commands *"
+            text="*Extra Commands *"
             f"""
 /start - Start the Music Bot.
 /help  - Get Commands Helper Menu with detailed explanations of commands.

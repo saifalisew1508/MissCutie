@@ -114,7 +114,7 @@ async def list_errors(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_document(
             update.effective_chat.id,
             open("errors_msg.txt", "rb"),
-            caption=f"Too many errors have occured..",
+            caption="Too many errors have occured..",
             parse_mode="html",
             message_thread_id=update.effective_message.message_thread_id if update.effective_chat.is_forum else None
         )
