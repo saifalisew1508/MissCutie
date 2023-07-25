@@ -30,7 +30,7 @@ async def proboyx(event):
     )
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
+@bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
 async def callback_query_handler(event):
     try:
         boy = event.sender_id
