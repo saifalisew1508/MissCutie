@@ -103,8 +103,8 @@ buttons = [
         InlineKeyboardButton(text="HELPABLE COMMANDS ⚙️", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="about_"),
-        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="music_"),
+        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="saif_"),
+        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="Music_"),
     ],
     [
         InlineKeyboardButton(
@@ -427,7 +427,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    if query.data == "about_":
+    if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         first_name = update.effective_user.first_name
         await query.message.edit_text(
@@ -435,13 +435,18 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
             "\n*Written in Python with SQLalchemy and MongoDB as database.*"
             "\n\nAbout bot Library, Databse Users and Chats"
-            f"\n\n*➥ Python :* v{PYTHON_VERSION}"
-            f"\n*➥ Pyrogram :* v{PYRO_VERSION}"
-            f"\n*➥ Telethon :* v{TELETHON_VERSION}"
-            f"\n*➥ Python Telegram Bot :* v{PTB_VERSION}"
-            f"\n*➥ Telegram Bot API :* v{BOT_API_VERSION}"
-            f"\n*➥ MongoDB :* v{MONGO_VERSION}"
-            f"\n*➥ SQLAlchemy :* v{SQL_VERSION}"
+            "\n\nAbout Bot Version N Its Uptime"
+            f"\n*➥ {BOT_NAME} Version :* v{BOT_VERSION}"
+            f"\n*➥ Uptime :* {uptime}"
+            "\n\nAbout bot Library & Working Framework Versions"
+            f"\n\n*➥ Python Version :* v{PYTHON_VERSION}"
+            f"\n*➥ Pyrogram Version :* v{PYRO_VERSION}"
+            f"\n*➥ Telethon Version :* v{TELETHON_VERSION}"
+            f"\n*➥ PTB Library Version :* v{PTB_VERSION}"
+            f"\n*➥ Telegram Bot API Version :* v{BOT_API_VERSION}"
+            "\n\nAbout Bot DataBase and its Version"
+            f"\n*➥ MongoDB Version :* v{MONGO_VERSION}"
+            f"\n*➥ SQLAlchemy Version :* v{SQL_VERSION}"
             f"\n*➥ {BOT_NAME} :* v{BOT_VERSION}"
             f"\n*➥ Uptime :* {uptime}"
             f"\n*➥ Total Users :* {sql.num_users()}"
@@ -493,7 +498,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     first_name = update.effective_user.first_name 
-    if query.data == "music_":
+    if query.data == "Music_":
         await query.message.edit_text(
             text=MUSIC_TEXT.format(escape_markdown(first_name), 
                                    escape_markdown(context.bot.first_name)),
