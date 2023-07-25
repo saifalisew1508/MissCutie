@@ -200,7 +200,7 @@ async def runban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
         return
-    
+
     bot_member = await chat.get_member(bot.id)
 
     if isinstance(bot_member, ChatMemberAdministrator):

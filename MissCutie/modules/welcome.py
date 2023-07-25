@@ -228,7 +228,7 @@ async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         if should_welc:
-            
+
             reply = update.message.message_id
             cleanserv = sql.clean_service(chat.id)
             # Clean service welcome
@@ -288,16 +288,16 @@ async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     reply = f"""#NEWGROUP \
                         \nID:   `{chat.id}` \
                     """
-                                             
+
                     if chat.title:
                         reply += f"\nGroup Name:   **{escape_markdown(chat.title)}**"
-                    
-                        
+
+
                     if chat.username:
                         reply += f"\nUsername: @{escape_markdown(chat.username)}"
-                    
+
                     reply += f"\nCreator ID:   `{creator.id}`"
-                    
+
                     if creator.username:
                         reply += f"\nCreator Username: @{creator.username}"                        
 

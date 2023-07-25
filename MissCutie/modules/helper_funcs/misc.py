@@ -87,7 +87,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
             )
         ]
 
-        
+
 #        pairs = pairs[modulo_page * 10 : 10 * (modulo_page + 1)] + [
 #            (
 #                EqInlineKeyboardButton(

@@ -51,7 +51,7 @@ if is_module_loaded(FILENAME):
             for comm in commands:
                 if not re.match(r"^[\da-z_]{1,32}$", comm):
                     raise ValueError(f"Command `{comm}` is not a valid bot command")
-                    
+
             self.commands = commands
             self.filters = filters if filters is not None else filters_module.UpdateType.MESSAGES
 
@@ -128,7 +128,7 @@ if is_module_loaded(FILENAME):
                 else:
                     return args, filter_result
 
-    
+
     @connection_status
     @check_admin(is_user=True)
     async def disable(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -151,7 +151,7 @@ if is_module_loaded(FILENAME):
         else:
             await update.effective_message.reply_text("What should I disable?")
 
-    
+
     @connection_status
     @check_admin(is_user=True)
     async def disable_module(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -204,7 +204,7 @@ if is_module_loaded(FILENAME):
         else:
             await update.effective_message.reply_text("What should I disable?")
 
-    
+
     @connection_status
     @check_admin(is_user=True)
     async def enable(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -225,7 +225,7 @@ if is_module_loaded(FILENAME):
         else:
             await update.effective_message.reply_text("What should I enable?")
 
-    
+
     @connection_status
     @check_admin(is_user=True)
     async def enable_module(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -278,7 +278,7 @@ if is_module_loaded(FILENAME):
         else:
             await update.effective_message.reply_text("What should I enable?")
 
-    
+
     @connection_status
     @check_admin(is_user=True)
     async def list_cmds(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -304,7 +304,7 @@ if is_module_loaded(FILENAME):
             result += " - `{}`\n".format(escape_markdown(cmd))
         return "The following commands are currently restricted:\n{}".format(result)
 
-    
+
     @connection_status
     async def commands(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat = update.effective_chat
@@ -320,7 +320,7 @@ if is_module_loaded(FILENAME):
 
     def __chat_settings__(chat_id, user_id):
         return build_curr_disabled(chat_id)
-    
+
 
     DISABLE_HANDLER = CommandHandler("disable", disable, block=False)
     DISABLE_MODULE_HANDLER = CommandHandler("disablemodule", disable_module, block=False)

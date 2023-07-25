@@ -312,7 +312,7 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except TelegramError as e:
                     if e.message == "Stickerset_invalid":
                         packname_found = 1
-                    
+
             try:
                 await context.bot.add_sticker_to_set(
                     user_id=user.id,

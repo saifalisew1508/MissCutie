@@ -18,7 +18,7 @@ async def set_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     chat = update.effective_chat
     user = update.effective_user
-  
+
     if chat.is_forum:
         topic_id = message.message_thread_id
         topic_chat = get_action_topic(chat.id)
@@ -76,7 +76,7 @@ async def create_topic(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     user = update.effective_user
     args = context.args
-    
+
     if chat.is_forum:
         if len(args) < 1:
             await message.reply_text("You must give a name for the topic to create.")

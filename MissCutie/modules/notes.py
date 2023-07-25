@@ -264,7 +264,7 @@ async def save(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1 :
         await msg.reply_text("You should give the note a name.")
         return
-    
+
 
     note_name, text, data_type, content, buttons = get_note_type(msg)
     note_name = note_name.lower()

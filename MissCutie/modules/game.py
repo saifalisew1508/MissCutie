@@ -11,7 +11,7 @@ async def _(event):
     input_int = int(input_str)
     if input_int > 6:
         await event.reply("hey nigga use number 1 to 6 only")
-    
+
     else:
         try:
             required_number = input_int
@@ -31,7 +31,7 @@ async def _(event):
     input_int = int(input_str)
     if input_int > 6:
         await event.reply("hey nigga use number 1 to 6 only")
-    
+
     else:
         try:
             required_number = input_int
@@ -51,7 +51,7 @@ async def _(event):
     input_int = int(input_str)
     if input_int > 5:
         await event.reply("hey nigga use number 1 to 6 only")
-    
+
     else:
         try:
             required_number = input_int

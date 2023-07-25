@@ -40,7 +40,7 @@ async def get_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
     else:
         pass
-            
+
     if message.reply_to_message and message.reply_to_message.forward_from:
 
         user1 = message.reply_to_message.from_user
@@ -167,7 +167,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except (BadRequest, UnboundLocalError):
         await reply.edit_text("I can't get information about this user/channel/group.")
         return
-    
+
     if chat_obj.type == ChatType.PRIVATE:
         if not chat_obj.username:
             head = f"╒═══「<b> User Information:</b> 」\n"
@@ -189,7 +189,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             head += f"<b>\nPremium User:</b> {premium}"
         if chat_obj.bio:
             head += f"<b>\n\nBio:</b> {chat_obj.bio}"
-        
+
         if chat.type != ChatType.PRIVATE:
             if chat_obj.id != bot.id:
                 if is_afk(chat_obj.id):
@@ -200,7 +200,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}"
                     else:
                         head += f"<b>\n\nAFK:</b> This user is away from keyboard since {time}, \nReason: {afk_st.reason}"
-            
+
             chat_member = await chat.get_member(chat_obj.id)
             if isinstance(chat_member, ChatMemberAdministrator):
                 head += f"<b>\nPresence:</b> {chat_member.status}"
@@ -211,7 +211,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             if is_approved(chat.id, chat_obj.id):
                 head += f"<b>\nApproved:</b> This user is approved in this chat."
-        
+
         disaster_level_present = False
 
         if chat_obj.id == OWNER_ID:
@@ -235,7 +235,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 mod_info = mod.__user_info__(chat_obj.id, chat.id).strip()
 
             head += "\n\n" + mod_info if mod_info else ""
-            
+
     if chat_obj.type == ChatType.SENDER:
         head = f"╒═══「<b>Sender Chat Information:</b> 」\n"
         await reply.edit_text("Found Sender Chat, getting information...")
@@ -273,7 +273,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
         head += f"\nPermalink: {mention_html(chat_obj.id, 'link')}"
         if chat_obj.description:
             head += f"<b>\n\nDescription:</b> {chat_obj.description}"
-    
+
     if INFOPIC:
         try:
             if chat_obj.photo:
@@ -293,12 +293,12 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 escape(head), parse_mode=ParseMode.HTML, disable_web_page_preview=True,
             )
 
-            
+
         except:
             await reply.edit_text(
                 escape(head), parse_mode=ParseMode.HTML, disable_web_page_preview=True,
             )
-    
+
 
 
 

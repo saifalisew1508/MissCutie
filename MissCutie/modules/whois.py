@@ -11,7 +11,7 @@ from MissCutie import pbot
 @pbot.on_message(filters.command(["whois", "info"]))
 async def who_is(client, message):
     status_message = await message.reply_text("Wait Bro, Let Me Check 🙂")
-    
+
     from_user = None
     from_user_id, _ = extract_user(message)
     try:
@@ -19,15 +19,15 @@ async def who_is(client, message):
     except Exception as error:
         await status_message.edit(str(error))
         return
-    
+
     if from_user is None:
         await status_message.edit("No valid user_id / message specified")
         return
-    
+
     first_name = from_user.first_name or ""
     last_name = from_user.last_name or ""
     username = from_user.username or ""
-    
+
     message_out_str = (
         "<b>᚛› 𝙽𝙰𝙼𝙴 :</b> "
         f"<a href='tg://user?id={from_user.id}'>{first_name}</a>\n"
@@ -40,7 +40,7 @@ async def who_is(client, message):
         f"<b>᚛› 𝙸𝚂 𝚂𝙲𝙰𝙼 :</b> True" if from_user.is_scam else ""
         f"<b>᚛› 𝙻𝙰𝚂𝚃 𝚂𝙴𝙴𝙽 :</b> <code>{last_online(from_user)}</code>\n\n"
     )
-    
+
     if message.chat.type in [enums.ChatType.SUPERGROUP, enums.ChatType.CHANNEL]:
         try:
             chat_member_p = await message.chat.get_member(from_user.id)
@@ -48,7 +48,7 @@ async def who_is(client, message):
             message_out_str += "<b>Joined on:</b> <code>" f"{joined_date}" "</code>\n"
         except UserNotParticipant:
             pass
-    
+
     chat_photo = from_user.photo
     if chat_photo:
         local_user_photo = await client.download_media(message=chat_photo.big_file_id)
@@ -65,5 +65,5 @@ async def who_is(client, message):
             quote=True,
             disable_notification=True
         )
-    
+
     await status_message.delete()

@@ -44,7 +44,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     user_id, reason = await extract_user_and_text(message, context, args)
 
 
-    
+
     member = await chat.get_member(user.id)    
     SILENT = bool(True if message.text.startswith("/s") else False)
 
@@ -105,7 +105,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 await message.reply_text("I Doubt that's a user.")
             await message.reply_text("Can't find this person here.")
             return log_message
-    
+
         if await is_user_ban_protected(chat, user_id, member) and user not in DEV_USERS:
             if user_id == OWNER_ID:
                 await message.reply_text("Trying to put me against a God level disaster huh?")
@@ -162,7 +162,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             return log
 
         await bot.send_sticker(chat.id, BAN_STICKER, message_thread_id=message.message_thread_id if chat.is_forum else None)  # banhammer marie sticker
-        
+
         if reason:
             reply += f"\n<code> </code><b>•  Reason:</b> \n{html.escape(reason)}"
         await bot.sendMessage(chat.id, reply, parse_mode=ParseMode.HTML, message_thread_id=message.message_thread_id if chat.is_forum else None)
@@ -399,11 +399,11 @@ async def unban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         CHAT_SENDER = False
         try:
             member = await chat.get_member(user_id)
-            
+
             if isinstance(member, ChatMemberAdministrator):
                 await message.reply_text("This person is an admin here, Are you drunk???")
                 return log_message
-            
+
         except BadRequest as excp:
             raise
             if excp.message != "User not found":
@@ -501,7 +501,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             user_id = splitter[2]
         reason = splitter[3]
         chat_name = splitter[4]
-        
+
         if not (
             (member.can_restrict_members if isinstance(member, ChatMemberAdministrator) else None) 
             or member.status == "creator"
@@ -533,9 +533,9 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif excp == "Invalid user_id specified":
                     await message.edit_text("I Doubt that's a user.")
                 await message.edit_text("Can't find this person here.")
-                
+
                 return log_message
-        
+
             if await is_user_ban_protected(chat, user_id, member) and admin_user not in DEV_USERS:
                 if user_id == OWNER_ID:
                     await message.edit_text("Trying to put me against a God level disaster huh?")
@@ -548,7 +548,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 else:
                     await message.edit_text("This user has immunity and cannot be banned.")
                 return log_message
-        
+
         log = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#BANNED\n"
@@ -613,7 +613,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if isinstance(user_id, str):
             await message.edit_text("I doubt that's a user.")
             return log_message
-        
+
         if user_id == bot.id:
             await message.edit_text("How would i unban myself if i wasn't here...?")
             return log_message
@@ -656,7 +656,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             log += f"\n<b>Reason:</b> {reason}"
 
         return log
-      
+
 
 
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban, block=False)

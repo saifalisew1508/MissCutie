@@ -66,16 +66,16 @@ def check_admin(
                         "Hey little kid"
                         "\nWho the hell are you to say me what to execute on my server?",
                     )
-                    
+
             if only_sudo:
                 if user.id in DRAGONS:
                     return await func(update, context, *args, **kwargs)
                 else:
                     return await update.effective_message.reply_text("Who the hell are you to say me what to do?",)
-            
+
             if message.from_user.id == 1087968824:
                 return await func(update, context, *args, **kwargs)
-              
+
             if permission:
                 no_permission = permission.replace("_", " ").replace("can", "")
                 if is_bot:
@@ -135,7 +135,7 @@ def check_admin(
                         pass
                     else:
                         return await message.reply_text("I'm not admin here.")
-                        
+
                     if user_member.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
                         pass
                     elif user.id in DRAGONS:

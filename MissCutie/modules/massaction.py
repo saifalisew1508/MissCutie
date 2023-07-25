@@ -241,7 +241,7 @@ async def confirm_ban_all(event):
     chat = await event.get_chat()
     admin = chat.admin_rights.ban_users
     creator = chat.creator
-    
+
     is_creator = False
     try:
         cutiepii = await telethn(GetParticipantRequest(event.chat_id, event.sender_id))

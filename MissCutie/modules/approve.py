@@ -101,7 +101,7 @@ async def approved(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     msg = "The following users are approved.\n"
     approved_users = sql.list_approved(message.chat_id)
-    
+
     if not approved_users:
         await message.reply_text(f"No users are approved in {chat_title}.")
         return ""
@@ -110,7 +110,7 @@ async def approved(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for i in approved_users:
             member = await chat.get_member(int(i.user_id))
             msg += f"- `{i.user_id}`: {member.user['first_name']}\n"
-        
+
         await message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
@@ -121,7 +121,7 @@ async def approval(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     user_id = await extract_user(message, context, args)
 
-    
+
     if not user_id:
         await message.reply_text(
             "I don't know who you're talking about, you're going to need to specify a user!",
