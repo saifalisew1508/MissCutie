@@ -11,7 +11,7 @@ bing_image_downloader==1.1.2
 bleach==6.0.0
 cachetools==5.2.0
 certifi==2022.12.7
-cffi==1.15.0
+cffi==1.15.1
 chardet==3.0.4
 charset-normalizer==2.0.7
 click==8.0.3
