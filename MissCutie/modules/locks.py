@@ -210,7 +210,7 @@ async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 )
             )
 
-        elif ltype in LOCK_CHAT_RESTRICTION:
+        if ltype in LOCK_CHAT_RESTRICTION:
             # Connection check
             conn = await connected(context.bot, update, chat, user.id, need_admin=True)
             if conn:
@@ -267,12 +267,10 @@ async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                     ltype,
                 )
             )
-
-        else:
-            await send_message(
-                update.effective_message,
-                "What are you trying to lock...? Try /locktypes for the list of lockables",
-            )
+        await send_message(
+            update.effective_message,
+            "What are you trying to lock...? Try /locktypes for the list of lockables",
+        )
     else:
         await send_message(update.effective_message, "What are you trying to lock...?")
 
@@ -323,7 +321,7 @@ async def unlock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 )
             )
 
-        elif ltype in UNLOCK_CHAT_RESTRICTION:
+        if ltype in UNLOCK_CHAT_RESTRICTION:
             # Connection check
             conn = await connected(context.bot, update, chat, user.id, need_admin=True)
             if conn:
@@ -380,11 +378,10 @@ async def unlock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                     ltype,
                 )
             )
-        else:
-            await send_message(
-                update.effective_message,
-                "What are you trying to unlock...? Try /locktypes for the list of lockables.",
-            )
+        await send_message(
+            update.effective_message,
+            "What are you trying to unlock...? Try /locktypes for the list of lockables.",
+        )
 
     else:
         await send_message(update.effective_message, "What are you trying to unlock...?")

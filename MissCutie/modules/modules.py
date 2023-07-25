@@ -117,7 +117,7 @@ async def unload(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if isinstance(handler, bool):
                 await unload_messasge.edit_text("This module can't be unloaded!")
                 return
-            elif not isinstance(handler, tuple):
+            if not isinstance(handler, tuple):
                 application.remove_handler(handler)
             else:
                 if isinstance(handler[0], collections.Callable):

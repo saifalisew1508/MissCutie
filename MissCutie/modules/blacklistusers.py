@@ -50,8 +50,7 @@ async def bl_user(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user.")
             return ""
-        else:
-            raise
+        raise
 
     sql.blacklist_user(user_id, reason)
     await message.reply_text("I shall ignore the existence of this user!")
@@ -89,8 +88,7 @@ async def unbl_user(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user.")
             return ""
-        else:
-            raise
+        raise
 
     if sql.is_user_blacklisted(user_id):
 
@@ -103,10 +101,8 @@ async def unbl_user(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         )
 
         return log_message
-
-    else:
-        await message.reply_text("I am not ignoring them at all though!")
-        return ""
+    await message.reply_text("I am not ignoring them at all though!")
+    return ""
 
 
 

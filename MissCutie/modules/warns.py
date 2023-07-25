@@ -161,10 +161,9 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
             )
-        else:
-            await update.effective_message.edit_text(
-                "User already has no warns.", parse_mode=ParseMode.HTML,
-            )
+        await update.effective_message.edit_text(
+            "User already has no warns.", parse_mode=ParseMode.HTML,
+        )
 
     return ""
 
@@ -192,9 +191,8 @@ async def warn_user(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 message.reply_to_message,
                 warner,
             )
-        else:
-            member = await chat.get_member(user_id)
-            return await warn(member.user, chat, reason, message, warner)
+        member = await chat.get_member(user_id)
+        return await warn(member.user, chat, reason, message, warner)
     else:
         await message.reply_text("That looks like an invalid User ID to me.")
     return ""
@@ -220,8 +218,7 @@ async def reset_warns(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
             f"<b>User:</b> {mention_html(warned.id, warned.first_name)}"
         )
-    else:
-        await message.reply_text("No user has been designated!")
+    await message.reply_text("No user has been designated!")
     return ""
 
 
@@ -420,7 +417,7 @@ async def set_warn_strength(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"Has enabled strong warns. Users will be seriously Kicked.(banned)"
             )
 
-        elif args[0].lower() in ("off", "no"):
+        if args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
             await msg.reply_text(
                 "Too many warns will now result in a normal Kick! Users will be able to join again after.",
@@ -430,9 +427,7 @@ async def set_warn_strength(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"Has disabled strong Kicks. I will use normal kick on users."
             )
-
-        else:
-            await msg.reply_text("I only understand on/yes/no/off!")
+        await msg.reply_text("I only understand on/yes/no/off!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
         if soft_warn:

@@ -49,6 +49,5 @@ def del_action_topic(chat_id: int) -> bool:
             SESSION.delete(action_topic)
             SESSION.commit()
             return True
-        else:
-            SESSION.close()
-            return False
+        SESSION.close()
+        return False

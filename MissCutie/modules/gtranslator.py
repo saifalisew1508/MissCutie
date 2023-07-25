@@ -67,12 +67,11 @@ async def totranslate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                f"Translated from `{detection[0]}` to `{dest_lang}`:\n`{trans_str}`",
                parse_mode=ParseMode.MARKDOWN,
           )
-       else:
-           trans_str = trl.translate(text, lang_tgt=dest_lang, lang_src=source_lang)
-           await message.reply_text(
-               f"Translated from `{source_lang}` to `{dest_lang}`:\n`{trans_str}`",
-               parse_mode=ParseMode.MARKDOWN,
-           )
+       trans_str = trl.translate(text, lang_tgt=dest_lang, lang_src=source_lang)
+       await message.reply_text(
+           f"Translated from `{source_lang}` to `{dest_lang}`:\n`{trans_str}`",
+           parse_mode=ParseMode.MARKDOWN,
+       )
 
    except IndexError:
        await update.effective_message.reply_text(

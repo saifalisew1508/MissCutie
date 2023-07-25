@@ -40,19 +40,17 @@ class google_new_transError(Exception):
             # if tts.tld != 'com':
             #     host = _translate_url(tld=tts.tld)
             #     cause = "Host '{}' is not reachable".format(host)
+        status = rsp.status_code
+        reason = rsp.reason
 
-        else:
-            status = rsp.status_code
-            reason = rsp.reason
+        premise = "{:d} ({}) from TTS API".format(status, reason)
 
-            premise = "{:d} ({}) from TTS API".format(status, reason)
-
-            if status == 403:
-                cause = "Bad token or upstream API changes"
-            elif status == 200 and not tts.lang_check:
-                cause = "No audio stream in response. Unsupported language '%s'" % self.tts.lang
-            elif status >= 500:
-                cause = "Uptream API error. Try again later."
+        if status == 403:
+            cause = "Bad token or upstream API changes"
+        elif status == 200 and not tts.lang_check:
+            cause = "No audio stream in response. Unsupported language '%s'" % self.tts.lang
+        elif status >= 500:
+            cause = "Uptream API error. Try again later."
 
         return "{}. Probable cause: {}".format(premise, cause)
 
@@ -161,7 +159,7 @@ class google_translator:
                                 sentences = response[0][0]
                                 if pronounce is False:
                                     return sentences
-                                elif pronounce is True:
+                                if pronounce is True:
                                     return [sentences,None,None]
                             translate_text = ""
                             for sentence in sentences:
@@ -170,7 +168,7 @@ class google_translator:
                             translate_text = translate_text
                             if pronounce is False:
                                 return translate_text
-                            elif pronounce is True:
+                            if pronounce is True:
                                 pronounce_src = (response_[0][0])
                                 pronounce_tgt = (response_[1][0][0][1])
                                 return [translate_text, pronounce_src, pronounce_tgt]
@@ -180,7 +178,7 @@ class google_translator:
                                 sentences.append(i[0])
                             if pronounce is False:
                                 return sentences
-                            elif pronounce is True:
+                            if pronounce is True:
                                 pronounce_src = (response_[0][0])
                                 pronounce_tgt = (response_[1][0][0][1])
                                 return [sentences, pronounce_src, pronounce_tgt]

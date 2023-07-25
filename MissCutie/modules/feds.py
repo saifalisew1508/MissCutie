@@ -643,7 +643,7 @@ async def fed_ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not str(user_id).isdigit():
             await send_message(update.effective_message, excp.message)
             return
-        elif len(str(user_id)) != 9:
+        if len(str(user_id)) != 9:
             await send_message(update.effective_message, "That's so not a user!")
             return
         isvalid = False
@@ -1024,7 +1024,7 @@ async def unfban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not str(user_id).isdigit():
             await send_message(update.effective_message, excp.message)
             return
-        elif len(str(user_id)) != 9:
+        if len(str(user_id)) != 9:
             await send_message(update.effective_message, "That's so not a user!")
             return
         isvalid = False
@@ -1428,7 +1428,7 @@ async def fed_ban_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ),
                 )
             return
-        elif args[0] == "csv":
+        if args[0] == "csv":
             jam = time.time()
             new_jam = jam + 1800
             cek = get_chat(chat.id, chat_data)
@@ -1444,9 +1444,8 @@ async def fed_ban_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         parse_mode=ParseMode.MARKDOWN,
                     )
                     return
-                else:
-                    if user.id not in DRAGONS:
-                        put_chat(chat.id, new_jam, chat_data)
+                if user.id not in DRAGONS:
+                    put_chat(chat.id, new_jam, chat_data)
             else:
                 if user.id not in DRAGONS:
                     put_chat(chat.id, new_jam, chat_data)
@@ -1509,9 +1508,8 @@ async def fed_ban_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode=ParseMode.MARKDOWN,
                 )
                 return
-            else:
-                if user.id not in DRAGONS:
-                    put_chat(chat.id, new_jam, chat_data)
+            if user.id not in DRAGONS:
+                put_chat(chat.id, new_jam, chat_data)
         else:
             if user.id not in DRAGONS:
                 put_chat(chat.id, new_jam, chat_data)
@@ -1672,9 +1670,8 @@ async def fed_import_bans(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode=ParseMode.MARKDOWN,
                 )
                 return
-            else:
-                if user.id not in DRAGONS:
-                    put_chat(chat.id, new_jam, chat_data)
+            if user.id not in DRAGONS:
+                put_chat(chat.id, new_jam, chat_data)
         else:
             if user.id not in DRAGONS:
                 put_chat(chat.id, new_jam, chat_data)
@@ -1936,12 +1933,11 @@ async def fed_stat_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "{} is not banned in any federation!".format(user_name),
             )
             return
-        else:
-            teks = "{} has been banned in this federation:\n".format(user_name)
-            for x in fbanlist:
-                teks += "- `{}`: {}\n".format(x[0], x[1][:20])
-            teks += "\nIf you want to find out more about the reasons for Fedban specifically, use /fbanstat <FedID>"
-            await send_message(update.effective_message, teks, parse_mode="markdown")
+        teks = "{} has been banned in this federation:\n".format(user_name)
+        for x in fbanlist:
+            teks += "- `{}`: {}\n".format(x[0], x[1][:20])
+        teks += "\nIf you want to find out more about the reasons for Fedban specifically, use /fbanstat <FedID>"
+        await send_message(update.effective_message, teks, parse_mode="markdown")
 
     elif not msg.reply_to_message and not args:
         user_id = msg.from_user.id
@@ -2241,16 +2237,15 @@ async def get_myfedsubs(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="markdown",
         )
         return
-    else:
-        listfed = "Federation `{}` is subscribing federation:\n".format(
-            fedinfo["fname"],
-        )
-        for x in getmy:
-            listfed += "- `{}`\n".format(x)
-        listfed += (
-            "\nTo get fed info `/fedinfo <fedid>`. To unsubscribe `/unsubfed <fedid>`."
-        )
-        await send_message(update.effective_message, listfed, parse_mode="markdown")
+    listfed = "Federation `{}` is subscribing federation:\n".format(
+        fedinfo["fname"],
+    )
+    for x in getmy:
+        listfed += "- `{}`\n".format(x)
+    listfed += (
+        "\nTo get fed info `/fedinfo <fedid>`. To unsubscribe `/unsubfed <fedid>`."
+    )
+    await send_message(update.effective_message, listfed, parse_mode="markdown")
 
 
 
@@ -2275,8 +2270,7 @@ def is_user_fed_admin(fed_id, user_id):
         return False
     if int(user_id) in fed_admins or int(user_id) == OWNER_ID:
         return True
-    else:
-        return False
+    return False
 
 
 def is_user_fed_owner(fed_id, user_id):
@@ -2289,8 +2283,7 @@ def is_user_fed_owner(fed_id, user_id):
     getfedowner = getfedowner["owner"]
     if str(user_id) == getfedowner or int(user_id) == OWNER_ID:
         return True
-    else:
-        return False
+    return False
 
 
 # There's no handler for this yet, but updating for v12 in case its used
@@ -2307,8 +2300,7 @@ async def welcome_fed(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         await bot.ban_chat_member(chat.id, user.id)
         return True
-    else:
-        return False
+    return False
 
 
 def __stats__():

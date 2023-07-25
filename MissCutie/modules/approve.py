@@ -105,13 +105,11 @@ async def approved(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not approved_users:
         await message.reply_text(f"No users are approved in {chat_title}.")
         return ""
+    for i in approved_users:
+        member = await chat.get_member(int(i.user_id))
+        msg += f"- `{i.user_id}`: {member.user['first_name']}\n"
 
-    else:
-        for i in approved_users:
-            member = await chat.get_member(int(i.user_id))
-            msg += f"- `{i.user_id}`: {member.user['first_name']}\n"
-
-        await message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+    await message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
 @check_admin(is_user=True)

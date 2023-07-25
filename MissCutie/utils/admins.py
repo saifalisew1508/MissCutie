@@ -22,10 +22,9 @@ def can_change_info(func: Callable) -> Callable:
         ).privileges
         if admin.can_change_info:
             return await func(_, message)
-        else:
-            return await message.reply_text(
-                "`You don't have permissions to change group info."
-            )
+        return await message.reply_text(
+            "`You don't have permissions to change group info."
+        )
 
     return non_admin
 
@@ -46,9 +45,8 @@ def can_restrict(func: Callable) -> Callable:
         ).privileges
         if admin.can_restrict_members:
             return await func(_, message)
-        else:
-            return await message.reply_text(
-                "`You don't have permissions to restrict users in this chat."
-            )
+        return await message.reply_text(
+            "`You don't have permissions to restrict users in this chat."
+        )
 
     return non_admin

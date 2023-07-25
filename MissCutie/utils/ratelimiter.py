@@ -29,7 +29,7 @@ def ratelimiter(func: Callable) -> Callable:
                 warned_users[userid] = 1
                 return
 
-            elif isinstance(update, CallbackQuery):
+            if isinstance(update, CallbackQuery):
                 try:
                     await update.answer(warning_message, show_alert=True)
                 except QueryIdInvalid:

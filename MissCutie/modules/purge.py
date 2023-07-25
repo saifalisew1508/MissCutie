@@ -77,7 +77,7 @@ async def delete_messages(event):
             return await event.reply(
                 "I'm not an admin, do you mind promoting me first?"
                 )
-        elif not event.chat.admin_rights.delete_messages:
+        if not event.chat.admin_rights.delete_messages:
             return await event.reply(
                 "I don't have the permission to delete messages!"
                 )

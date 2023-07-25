@@ -110,8 +110,7 @@ async def gban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user.")
             return ""
-        else:
-            return
+        return
 
     if user_chat.type != "private":
         await message.reply_text("That's not a user!")

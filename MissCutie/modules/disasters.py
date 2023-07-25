@@ -120,10 +120,8 @@ async def removesudo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             log_message = "<b>{}:</b>\n".format(html.escape(chat.title)) + log_message
 
         return log_message
-
-    else:
-        await message.reply_text("This user is not a Dragon Disaster!")
-        return ""
+    await message.reply_text("This user is not a Dragon Disaster!")
+    return ""
 
 @whitelist_plus
 async def sudolist(update: Update, context: ContextTypes.DEFAULT_TYPE):

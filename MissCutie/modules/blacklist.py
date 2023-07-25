@@ -88,8 +88,7 @@ async def add_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id = update.effective_chat.id
         if chat.type == "private":
             return
-        else:
-            chat_name = chat.title
+        chat_name = chat.title
 
     if len(words) > 1:
         text = words[1]
@@ -142,8 +141,7 @@ async def unblacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id = update.effective_chat.id
         if chat.type == "private":
             return
-        else:
-            chat_name = chat.title
+        chat_name = chat.title
 
     if len(words) > 1:
         text = words[1]
@@ -300,31 +298,30 @@ Examples of time value: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks.
                 settypeblacklist,
             )
         )
+    getmode, getvalue = sql.get_blacklist_setting(chat.id)
+    if getmode == 0:
+        settypeblacklist = "do nothing"
+    elif getmode == 1:
+        settypeblacklist = "delete"
+    elif getmode == 2:
+        settypeblacklist = "warn"
+    elif getmode == 3:
+        settypeblacklist = "mute"
+    elif getmode == 4:
+        settypeblacklist = "kick"
+    elif getmode == 5:
+        settypeblacklist = "ban"
+    elif getmode == 6:
+        settypeblacklist = "temporarily ban for {}".format(getvalue)
+    elif getmode == 7:
+        settypeblacklist = "temporarily mute for {}".format(getvalue)
+    if conn:
+        text = "Current blacklistmode: *{}* in *{}*.".format(
+            settypeblacklist, chat_name,
+        )
     else:
-        getmode, getvalue = sql.get_blacklist_setting(chat.id)
-        if getmode == 0:
-            settypeblacklist = "do nothing"
-        elif getmode == 1:
-            settypeblacklist = "delete"
-        elif getmode == 2:
-            settypeblacklist = "warn"
-        elif getmode == 3:
-            settypeblacklist = "mute"
-        elif getmode == 4:
-            settypeblacklist = "kick"
-        elif getmode == 5:
-            settypeblacklist = "ban"
-        elif getmode == 6:
-            settypeblacklist = "temporarily ban for {}".format(getvalue)
-        elif getmode == 7:
-            settypeblacklist = "temporarily mute for {}".format(getvalue)
-        if conn:
-            text = "Current blacklistmode: *{}* in *{}*.".format(
-                settypeblacklist, chat_name,
-            )
-        else:
-            text = "Current blacklistmode: *{}*.".format(settypeblacklist)
-        await send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
+        text = "Current blacklistmode: *{}*.".format(settypeblacklist)
+    await send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
     return ""
 
 
@@ -356,7 +353,7 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 if getmode == 0:
                     return
-                elif getmode == 1:
+                if getmode == 1:
                     try:
                         await message.delete()
                     except BadRequest:

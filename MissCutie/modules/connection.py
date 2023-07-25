@@ -304,11 +304,10 @@ async def connected(bot: Bot, update: Update, chat, user_id, need_admin=True):
                     or user.id in DEV_USERS
                 ):
                     return conn_id
-                else:
-                    await send_message(
-                        update.effective_message,
-                        "You must be an admin in the connected group!",
-                    )
+                await send_message(
+                    update.effective_message,
+                    "You must be an admin in the connected group!",
+                )
             else:
                 return conn_id
         else:
@@ -340,8 +339,7 @@ async def help_connect_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
             update.effective_message, "PM me with that command to get help."
         )
         return
-    else:
-        await send_message(update.effective_message, CONN_HELP, parse_mode=ParseMode.MARKDOWN)
+    await send_message(update.effective_message, CONN_HELP, parse_mode=ParseMode.MARKDOWN)
 
 
 async def connect_button(update: Update, context: ContextTypes.DEFAULT_TYPE):

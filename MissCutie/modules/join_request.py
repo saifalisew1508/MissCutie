@@ -42,7 +42,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return log_message
 
-        elif s in ["off", "no", "false"]:
+        if s in ["off", "no", "false"]:
             await disable_join_req(chat.id)
             await message.reply_html(
                 "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
@@ -53,10 +53,8 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
             return log_message
-
-        else:
-            await message.reply_text("Unrecognized arguments {}".format(s))
-            return
+        await message.reply_text("Unrecognized arguments {}".format(s))
+        return
 
     await message.reply_html(
         "Join requests setting is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
@@ -87,7 +85,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return log_message
 
-        elif s in ["off", "no", "false"]:
+        if s in ["off", "no", "false"]:
             set_auto_approve_false(chat.id)
             await message.reply_html(
                 "Disabled auto-approve for join requests in {}".format(html.escape(chat.title)))
@@ -97,10 +95,8 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
             return log_message
-
-        else:
-            await message.reply_text("Unrecognized arguments {}".format(s))
-            return
+        await message.reply_text("Unrecognized arguments {}".format(s))
+        return
 
     await message.reply_html(
         "Auto-approve for join requests is currently <b><i>{}</i></b> in <code>{}</code>\n\n"

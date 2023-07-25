@@ -74,7 +74,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             )
 
             return log_message
-    elif (
+    if (
         not (
             (member.can_restrict_members if isinstance(member, ChatMemberAdministrator) else None) 
             or 
@@ -175,16 +175,15 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 return log
             await message.reply_text("Banned!", quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception(
-                "ERROR banning user %s in chat %s (%s) due to %s",
-                user_id,
-                chat.title,
-                chat.id,
-                excp.message,
-            )
-            await message.reply_text("Uhm...that didn't work...")
+        LOGGER.warning(update)
+        LOGGER.exception(
+            "ERROR banning user %s in chat %s (%s) due to %s",
+            user_id,
+            chat.title,
+            chat.id,
+            excp.message,
+        )
+        await message.reply_text("Uhm...that didn't work...")
 
     return log_message
 
@@ -262,16 +261,15 @@ async def temp_ban(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 f"Banned! User will be banned for {time_val}.", quote=False,
             )
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception(
-                "ERROR banning user %s in chat %s (%s) due to %s",
-                user_id,
-                chat.title,
-                chat.id,
-                excp.message,
-            )
-            await message.reply_text("Well damn, I can't ban that user.")
+        LOGGER.warning(update)
+        LOGGER.exception(
+            "ERROR banning user %s in chat %s (%s) due to %s",
+            user_id,
+            chat.title,
+            chat.id,
+            excp.message,
+        )
+        await message.reply_text("Well damn, I can't ban that user.")
 
     return log_message
 
@@ -327,9 +325,7 @@ async def kick(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             log += f"\n<b>Reason:</b> {reason}"
 
         return log
-
-    else:
-        await message.reply_text("Well damn, I can't kick that user.")
+    await message.reply_text("Well damn, I can't kick that user.")
 
     return log_message
 
@@ -462,8 +458,7 @@ async def selfunban(context: ContextTypes.DEFAULT_TYPE, update: Update) -> str:
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user.")
             return
-        else:
-            raise
+        raise
 
     if await is_user_in_chat(chat, user.id):
         await message.reply_text("Aren't you already in the chat??")
@@ -603,7 +598,7 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         return log_message
 
-    elif splitter[1] == "unban":
+    if splitter[1] == "unban":
         try:
             user_id = int(splitter[2])
         except ValueError:

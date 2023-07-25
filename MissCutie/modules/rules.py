@@ -38,8 +38,7 @@ async def send_rules(update, chat_id, from_pm=False):
                 message_thread_id= update.effective_message.message_thread_id if chat.is_forum else None,
             )
             return
-        else:
-            raise
+        raise
 
     rules = sql.get_rules(chat_id)
     text = f"The rules for <b>{escape_markdown(chat.title, 2)}</b> are:\n\n{markdown_to_html(rules)}"

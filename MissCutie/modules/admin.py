@@ -442,7 +442,7 @@ async def unpinall(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         )
 
         return
-    elif (
+    if (
             not admin_member.status == ChatMemberStatus.OWNER
             and user.id not in DRAGONS
         ):
@@ -658,7 +658,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         return log_message
 
-    elif splitter[1] == "demote":
+    if splitter[1] == "demote":
 
         demoter = await chat.get_member(admin_user.id)
 

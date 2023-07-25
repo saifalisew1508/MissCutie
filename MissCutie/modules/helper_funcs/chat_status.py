@@ -56,22 +56,19 @@ def check_admin(
             if only_owner:
                 if isinstance(user_member, ChatMemberOwner) or user.id in DEV_USERS:
                     return await func(update, context, *args, **kwargs)
-                else:
-                    return await message.reply_text("Only chat owner can perform this action.")
+                return await message.reply_text("Only chat owner can perform this action.")
             if only_dev:
                 if user.id in DEV_USERS:
                     return await func(update, context, *args, **kwargs)
-                else:
-                    return await update.effective_message.reply_text(
-                        "Hey little kid"
-                        "\nWho the hell are you to say me what to execute on my server?",
-                    )
+                return await update.effective_message.reply_text(
+                    "Hey little kid"
+                    "\nWho the hell are you to say me what to execute on my server?",
+                )
 
             if only_sudo:
                 if user.id in DRAGONS:
                     return await func(update, context, *args, **kwargs)
-                else:
-                    return await update.effective_message.reply_text("Who the hell are you to say me what to do?",)
+                return await update.effective_message.reply_text("Who the hell are you to say me what to do?",)
 
             if message.from_user.id == 1087968824:
                 return await func(update, context, *args, **kwargs)
@@ -81,22 +78,20 @@ def check_admin(
                 if is_bot:
                     if (getattr(bot_member, permission) if isinstance(bot_member, ChatMemberAdministrator) else False):
                         return await func(update, context, *args, **kwargs)
-                    elif no_reply:
+                    if no_reply:
                         return
-                    else:
-                        return await message.reply_text(f"I don't have permission to {no_permission}.")
+                    return await message.reply_text(f"I don't have permission to {no_permission}.")
                 if is_user:
                     if isinstance(user_member, ChatMemberOwner):
                         return await func(update, context, *args, **kwargs)
-                    elif (
+                    if (
                         getattr(user_member, permission) if isinstance(user_member, ChatMemberAdministrator) else False
                         or user.id in DRAGONS
                         ):
                         return await func(update, context, *args, **kwargs)
-                    elif no_reply:
+                    if no_reply:
                         return
-                    else:
-                        return await message.reply_text(f"You don't have permission to {no_permission}.")
+                    return await message.reply_text(f"You don't have permission to {no_permission}.")
                 if is_both:
                     if (getattr(bot_member, permission) if isinstance(bot_member, ChatMemberAdministrator) else False):
                         pass
@@ -121,15 +116,13 @@ def check_admin(
                 if is_bot:
                     if bot_member.status == ChatMemberStatus.ADMINISTRATOR:
                         return await func(update, context, *args, **kwargs)
-                    else:
-                        return await message.reply_text("I'm not admin here.")
+                    return await message.reply_text("I'm not admin here.")
                 elif is_user:
                     if user_member.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
                         return await func(update, context, *args, **kwargs)
-                    elif user.id in DRAGONS:
+                    if user.id in DRAGONS:
                         return await func(update, context, *args, **kwargs)
-                    else:
-                        return await message.reply_text("You are not admin here.")
+                    return await message.reply_text("You are not admin here.")
                 elif is_both:
                     if bot_member.status == ChatMemberStatus.ADMINISTRATOR:
                         pass
@@ -226,7 +219,7 @@ def support_plus(func):
 
         if user and is_support_plus(chat, user.id):
             return await func(update, context, *args, **kwargs)
-        elif DEL_CMDS and " " not in update.effective_message.text:
+        if DEL_CMDS and " " not in update.effective_message.text:
             try:
                 await update.effective_message.delete()
             except:
@@ -246,10 +239,9 @@ def whitelist_plus(func):
 
         if user and is_whitelist_plus(chat, user.id):
             return await func(update, context, *args, **kwargs)
-        else:
-            await update.effective_message.reply_text(
-                f"You don't have access to use this.\nVisit @{SUPPORT_CHAT}",
-            )
+        await update.effective_message.reply_text(
+            f"You don't have access to use this.\nVisit @{SUPPORT_CHAT}",
+        )
 
     return is_whitelist_plus_func
 
@@ -262,7 +254,7 @@ def user_not_admin(func):
 
         if user and not await is_user_admin(chat, user.id):
             return await func(update, context, *args, **kwargs)
-        elif not user:
+        if not user:
             pass
 
     return is_not_admin

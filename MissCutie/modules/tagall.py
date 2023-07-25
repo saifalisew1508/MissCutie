@@ -34,7 +34,7 @@ async def mentionall(event):
 
     if event.pattern_match.group(1) and event.is_reply:
         return await event.respond("__Give me one argument!__")
-    elif event.pattern_match.group(1):
+    if event.pattern_match.group(1):
         mode = "text_on_cmd"
         msg = event.pattern_match.group(1)
     elif event.is_reply:
@@ -88,10 +88,8 @@ async def cancel_spam(event):
             is_admin = True
     if not is_admin:
         return await event.respond("__Only admins can execute this command!__")
-
-    else:
-        try:
-            spam_chats.remove(event.chat_id)
-        except:
-            pass
-        return await event.respond("__Stopped Mention.__")
+    try:
+        spam_chats.remove(event.chat_id)
+    except:
+        pass
+    return await event.respond("__Stopped Mention.__")

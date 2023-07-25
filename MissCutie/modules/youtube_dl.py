@@ -87,9 +87,8 @@ async def song_commad_private(client, message: Message):
             caption="**🔗Title:**- {0}\n\nSelect the type in which you want to download.".format(title),
             reply_markup=InlineKeyboardMarkup(buttons),
         )
-    else:
-        if len(message.command) < 2:
-            return await message.reply_text("**Usage:**\n\n/song [Music Name] or [Youtube Link]")
+    if len(message.command) < 2:
+        return await message.reply_text("**Usage:**\n\n/song [Music Name] or [Youtube Link]")
     mystic = await message.reply_text("🔄 Processing Query... Please Wait!")
     query = message.text.split(None, 1)[1]
     try:

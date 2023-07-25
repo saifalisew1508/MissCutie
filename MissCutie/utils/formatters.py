@@ -70,11 +70,11 @@ def seconds_to_min(seconds):
         )
         if d > 0:
             return "{:02d}:{:02d}:{:02d}:{:02d}".format(d, h, m, s)
-        elif h > 0:
+        if h > 0:
             return "{:02d}:{:02d}:{:02d}".format(h, m, s)
-        elif m > 0:
+        if m > 0:
             return "{:02d}:{:02d}".format(m, s)
-        elif s > 0:
+        if s > 0:
             return "00:{:02d}".format(s)
     return "-"
 

@@ -217,7 +217,7 @@ async def get(update: Update, context: ContextTypes.DEFAULT_TYPE, notename, show
                     )
                     LOGGER.warning("Message was: %s", str(note.value))
         return
-    elif show_none:
+    if show_none:
         await message.reply_text("This note doesn't exist")
 
 

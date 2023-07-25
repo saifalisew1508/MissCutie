@@ -472,7 +472,7 @@ async def delsticker(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ):
         await update.effective_message.reply_text("Sorry but you have to reply to a sticker to delete.")
         return
-    elif update.effective_message.reply_to_message:
+    if update.effective_message.reply_to_message:
         if update.effective_message.reply_to_message.forum_topic_created:
             await update.effective_message.reply_text("Sorry but you have to reply to a sticker to delete.")
             return
@@ -488,10 +488,8 @@ async def delsticker(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         await update.effective_message.reply_text("Done!")
         return
-
-    else:
-        await update.effective_message.reply_text("I can't delete that sticker since I didn't make that one...")
-        return
+    await update.effective_message.reply_text("I can't delete that sticker since I didn't make that one...")
+    return
 
 
 

@@ -22,8 +22,7 @@ def is_nsfw(chat_id):
         chat = SESSION.query(NSFWChats).get(str(chat_id))
         if chat:
             return True
-        else:
-            return False
+        return False
     finally:
         SESSION.close()
 

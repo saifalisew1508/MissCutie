@@ -587,7 +587,7 @@ async def left_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
 
             # Give the devs a special goodbye
-            elif left_mem.id in DEV_USERS:
+            if left_mem.id in DEV_USERS:
                 await update.effective_message.reply_text(
                     "See you later at the @PublicSource_Chat!",
                     reply_to_message_id=reply,
@@ -861,7 +861,7 @@ async def welcomemute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"Has toggled welcome mute to <b>OFF</b>."
             )
-        elif args[0].lower() in ["soft"]:
+        if args[0].lower() in ["soft"]:
             sql.set_welcome_mutes(chat.id, "soft")
             await msg.reply_text(
                 "I will restrict users' permission to send media for 24 hours.",
@@ -872,7 +872,7 @@ async def welcomemute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"Has toggled welcome mute to <b>SOFT</b>."
             )
-        elif args[0].lower() in ["strong"]:
+        if args[0].lower() in ["strong"]:
             sql.set_welcome_mutes(chat.id, "strong")
             await msg.reply_text(
                 "I will now mute people when they join until they prove they're not a bot.\nThey will have 120seconds before they get kicked.",
@@ -883,12 +883,11 @@ async def welcomemute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"Has toggled welcome mute to <b>STRONG</b>."
             )
-        else:
-            await msg.reply_text(
-                "Please enter <code>off</code>/<code>no</code>/<code>soft</code>/<code>strong</code>!",
-                parse_mode=ParseMode.HTML,
-            )
-            return ""
+        await msg.reply_text(
+            "Please enter <code>off</code>/<code>no</code>/<code>soft</code>/<code>strong</code>!",
+            parse_mode=ParseMode.HTML,
+        )
+        return ""
     else:
         curr_setting = sql.welcome_mutes(chat.id)
         reply = (
@@ -926,7 +925,7 @@ async def clean_welcome(update: Update, context: ContextTypes.DEFAULT_TYPE) -> s
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
             f"Has toggled clean welcomes to <code>ON</code>."
         )
-    elif args[0].lower() in ("off", "no"):
+    if args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
         await update.effective_message.reply_text("I won't delete old welcome messages.")
         return (
@@ -935,9 +934,8 @@ async def clean_welcome(update: Update, context: ContextTypes.DEFAULT_TYPE) -> s
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
             f"Has toggled clean welcomes to <code>OFF</code>."
         )
-    else:
-        await update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
-        return ""
+    await update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+    return ""
 
 @check_admin(is_user=True)
 async def cleanservice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:

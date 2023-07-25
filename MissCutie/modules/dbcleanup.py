@@ -55,11 +55,10 @@ async def get_invalid_chats(update: Update, context: ContextTypes.DEFAULT_TYPE, 
 
     if not remove:
         return kicked_chats
-    else:
-        for muted_chat in chat_list:
-            await asyncio.sleep(0.1)
-            user_sql.rem_chat(muted_chat)
-        return kicked_chats
+    for muted_chat in chat_list:
+        await asyncio.sleep(0.1)
+        user_sql.rem_chat(muted_chat)
+    return kicked_chats
 
 
 async def get_invalid_gban(update: Update, context: ContextTypes.DEFAULT_TYPE, remove: bool = False):
@@ -81,11 +80,10 @@ async def get_invalid_gban(update: Update, context: ContextTypes.DEFAULT_TYPE, r
 
     if not remove:
         return ungbanned_users
-    else:
-        for user_id in ungban_list:
-            await asyncio.sleep(0.1)
-            gban_sql.ungban_user(user_id)
-        return ungbanned_users
+    for user_id in ungban_list:
+        await asyncio.sleep(0.1)
+        gban_sql.ungban_user(user_id)
+    return ungbanned_users
 
 
 

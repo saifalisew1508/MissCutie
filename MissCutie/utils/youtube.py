@@ -26,8 +26,7 @@ async def shell_cmd(cmd):
             in (errorz.decode("utf-8")).lower()
         ):
             return out.decode("utf-8")
-        else:
-            return errorz.decode("utf-8")
+        return errorz.decode("utf-8")
     return out.decode("utf-8")
 
 
@@ -338,11 +337,11 @@ class YouTubeAPI:
             await loop.run_in_executor(None, song_video_dl)
             fpath = f"downloads/{title}.mp4"
             return fpath
-        elif songaudio:
+        if songaudio:
             await loop.run_in_executor(None, song_audio_dl)
             fpath = f"downloads/{title}.mp3"
             return fpath
-        elif video:
+        if video:
             if await is_on_off("YTDOWNLOADER"):
                 direct = True
                 downloaded_file = await loop.run_in_executor(

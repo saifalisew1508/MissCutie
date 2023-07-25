@@ -31,8 +31,7 @@ async def check_user(user_id: int, bot: Bot, chat: Chat) -> Union[str, None]:
         if excp.message == "User not found":
             reply = "I can't seem to find this user"
             return reply
-        else:
-            raise
+        raise
 
     if user_id == bot.id:
         reply = "I'm not gonna MUTE myself, How high are you?"
@@ -84,9 +83,7 @@ async def mute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             message_thread_id=message.message_thread_id if chat.is_forum else None
         )
         return log
-
-    else:
-        await message.reply_text("This user is already muted!")
+    await message.reply_text("This user is already muted!")
 
     return ""
 
@@ -206,24 +203,22 @@ async def temp_mute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 message_thread_id=message.message_thread_id if chat.is_forum else None
             )
             return log
-        else:
-            await message.reply_text("This user is already muted.")
+        await message.reply_text("This user is already muted.")
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
             await message.reply_text(f"Muted for {time_val}!", quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception(
-                "ERROR muting user %s in chat %s (%s) due to %s",
-                user_id,
-                chat.title,
-                chat.id,
-                excp.message,
-            )
-            await message.reply_text("Well damn, I can't mute that user.")
+        LOGGER.warning(update)
+        LOGGER.exception(
+            "ERROR muting user %s in chat %s (%s) due to %s",
+            user_id,
+            chat.title,
+            chat.id,
+            excp.message,
+        )
+        await message.reply_text("Well damn, I can't mute that user.")
 
     return ""
 

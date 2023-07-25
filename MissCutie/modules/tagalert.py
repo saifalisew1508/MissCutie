@@ -44,8 +44,7 @@ async def locks_dfunc(_, message):
      if not isittrue:
           tagdb.insert_one({"teg": uname})
           return await lol.edit(f"Tag alerts enabled.\nWhen someone tags you as @{uname} you will be notified")
-     else:
-          return await lol.edit("Tag alerts already enabled for you")
+     return await lol.edit("Tag alerts already enabled for you")
    if parameter in ("off", "OFF"):
      if not message.from_user:
        return
@@ -57,8 +56,7 @@ async def locks_dfunc(_, message):
      if isittrue:
           tagdb.delete_one({"teg": uname})
           return await lol.edit("Tag alerts removed")
-     else:
-          return await lol.edit("Tag alerts already disabled for you") 
+     return await lol.edit("Tag alerts already disabled for you") 
    else:
      await lol.edit("Expected on or off 👀")
 

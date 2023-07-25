@@ -132,8 +132,7 @@ async def download_from_url(url, dl_loc, message):
             await asyncio.sleep(5)
         if dl.isSuccessful():
             return True, dl.get_dest()
-        else:
-            return False, dl.get_errors()
+        return False, dl.get_errors()
     except HTTPError as error:
         return False, error
     except Exception as error:
@@ -156,7 +155,7 @@ async def url_upload(c, m):
         return await m.reply_text(
           "Reply to an URL link or Give URL link with this command!"
           )
-    elif m.reply_to_message:
+    if m.reply_to_message:
         link = m.reply_to_message.text
     else:
         link = m.text.split(None, 1)[1]

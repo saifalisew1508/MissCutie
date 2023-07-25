@@ -96,7 +96,7 @@ async def rban(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
-    elif not chat_id:
+    if not chat_id:
         await message.reply_text("You don't seem to be referring to a chat.")
         return
 
@@ -108,8 +108,7 @@ async def rban(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Chat not found! Make sure you entered a valid chat ID and I'm part of that chat.",
             )
             return
-        else:
-            raise
+        raise
 
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
@@ -135,8 +134,7 @@ async def rban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user")
             return
-        else:
-            raise
+        raise
 
     if await is_user_ban_protected(chat, user_id, member):
         await message.reply_text("I really wish I could ban admins...")
@@ -182,7 +180,7 @@ async def runban(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
-    elif not chat_id:
+    if not chat_id:
         await message.reply_text("You don't seem to be referring to a chat.")
         return
 
@@ -194,8 +192,7 @@ async def runban(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Chat not found! Make sure you entered a valid chat ID and I'm part of that chat.",
             )
             return
-        else:
-            raise
+        raise
 
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
@@ -221,8 +218,7 @@ async def runban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user there")
             return
-        else:
-            raise
+        raise
 
     if await is_user_in_chat(chat, user_id):
         await message.reply_text(
@@ -269,7 +265,7 @@ async def rkick(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
-    elif not chat_id:
+    if not chat_id:
         await message.reply_text("You don't seem to be referring to a chat.")
         return
 
@@ -281,8 +277,7 @@ async def rkick(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Chat not found! Make sure you entered a valid chat ID and I'm part of that chat.",
             )
             return
-        else:
-            raise
+        raise
 
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
@@ -308,8 +303,7 @@ async def rkick(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user")
             return
-        else:
-            raise
+        raise
 
     if await is_user_ban_protected(chat, user_id, member):
         await message.reply_text("I really wish I could kick admins...")
@@ -354,7 +348,7 @@ async def rmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
-    elif not chat_id:
+    if not chat_id:
         await message.reply_text("You don't seem to be referring to a chat.")
         return
 
@@ -366,8 +360,7 @@ async def rmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Chat not found! Make sure you entered a valid chat ID and I'm part of that chat.",
             )
             return
-        else:
-            raise
+        raise
 
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
@@ -393,8 +386,7 @@ async def rmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user")
             return
-        else:
-            raise
+        raise
 
     if await is_user_ban_protected(chat, user_id, member):
         await message.reply_text("I really wish I could mute admins...")
@@ -441,7 +433,7 @@ async def runmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
-    elif not chat_id:
+    if not chat_id:
         await message.reply_text("You don't seem to be referring to a chat.")
         return
 
@@ -453,8 +445,7 @@ async def runmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Chat not found! Make sure you entered a valid chat ID and I'm part of that chat.",
             )
             return
-        else:
-            raise
+        raise
 
     if chat.type == "private":
         await message.reply_text("I'm sorry, but that's a private chat!")
@@ -480,8 +471,7 @@ async def runmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if excp.message == "User not found":
             await message.reply_text("I can't seem to find this user there")
             return
-        else:
-            raise
+        raise
 
     if await is_user_in_chat(chat, user_id):
         if ((

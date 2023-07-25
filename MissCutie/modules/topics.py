@@ -25,16 +25,15 @@ async def set_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if topic_chat:
             await message.reply_text("Already a topic for actions enabled in this group, you can remove it and add new one.")
             return ""
-        else:
-            set_action_topic(chat.id, topic_id)
-            await message.reply_text("I have successfully set this topic for actions.")
-            log_message = (
-                f"<b>{html.escape(chat.title)}:</b>\n"
-                f"#ACTIONTOPIC\n"
-                f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<b>Topic ID:</b>{message.message_thread_id}"
-            )
-            return log_message
+        set_action_topic(chat.id, topic_id)
+        await message.reply_text("I have successfully set this topic for actions.")
+        log_message = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#ACTIONTOPIC\n"
+            f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<b>Topic ID:</b>{message.message_thread_id}"
+        )
+        return log_message
     else:
         await message.reply_text("Action Topic can be only enabled in Groups with Topic support.")
         return ""
@@ -59,9 +58,8 @@ async def del_topic_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     f"<b>Topic ID:</b>{topic_chat}"
                 )
                 return log_message
-            else:
-                await message.reply_text("I don't know this it didn't work, try again.")
-                return ""
+            await message.reply_text("I don't know this it didn't work, try again.")
+            return ""
         else:
             await message.reply_text("It seems like you haven't set any topic for actions, you can set one by using /setactiontopic in the topic.")
             return ""

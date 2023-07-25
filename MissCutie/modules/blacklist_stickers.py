@@ -87,8 +87,7 @@ async def add_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
         chat_id = update.effective_chat.id
         if chat.type == "private":
             return
-        else:
-            chat_name = chat.title
+        chat_name = chat.title
 
     if len(words) > 1:
         text = words[1].replace("https://t.me/addstickers/", "")
@@ -183,8 +182,7 @@ async def unblackliststicker(update: Update, context: ContextTypes.DEFAULT_TYPE)
         chat_id = update.effective_chat.id
         if chat.type == "private":
             return
-        else:
-            chat_name = chat.title
+        chat_name = chat.title
 
     if len(words) > 1:
         text = words[1].replace("https://t.me/addstickers/", "")
@@ -363,37 +361,36 @@ async def blacklist_mode(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 settypeblacklist,
             )
         )
-    else:
-        getmode, getvalue = sql.get_blacklist_setting(chat.id)
-        if getmode == 0:
-            settypeblacklist = "not active"
-        elif getmode == 1:
-            settypeblacklist = "delete"
-        elif getmode == 2:
-            settypeblacklist = "warn"
-        elif getmode == 3:
-            settypeblacklist = "mute"
-        elif getmode == 4:
-            settypeblacklist = "kick"
-        elif getmode == 5:
-            settypeblacklist = "ban"
-        elif getmode == 6:
-            settypeblacklist = "temporarily banned for {}".format(getvalue)
-        elif getmode == 7:
-            settypeblacklist = "temporarily muted for {}".format(getvalue)
-        if conn:
-            text = "Blacklist sticker mode is currently set to *{}* in *{}*.".format(
-                settypeblacklist, chat_name,
-            )
-        else:
-            text = "Blacklist sticker mode is currently set to *{}*.".format(
-                settypeblacklist,
-            )
-        await send_message(
-            update.effective_message, 
-            text, 
-            parse_mode=ParseMode.MARKDOWN,
+    getmode, getvalue = sql.get_blacklist_setting(chat.id)
+    if getmode == 0:
+        settypeblacklist = "not active"
+    elif getmode == 1:
+        settypeblacklist = "delete"
+    elif getmode == 2:
+        settypeblacklist = "warn"
+    elif getmode == 3:
+        settypeblacklist = "mute"
+    elif getmode == 4:
+        settypeblacklist = "kick"
+    elif getmode == 5:
+        settypeblacklist = "ban"
+    elif getmode == 6:
+        settypeblacklist = "temporarily banned for {}".format(getvalue)
+    elif getmode == 7:
+        settypeblacklist = "temporarily muted for {}".format(getvalue)
+    if conn:
+        text = "Blacklist sticker mode is currently set to *{}* in *{}*.".format(
+            settypeblacklist, chat_name,
         )
+    else:
+        text = "Blacklist sticker mode is currently set to *{}*.".format(
+            settypeblacklist,
+        )
+    await send_message(
+        update.effective_message, 
+        text, 
+        parse_mode=ParseMode.MARKDOWN,
+    )
     return ""
 
 
@@ -416,7 +413,7 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
             try:
                 if getmode == 0:
                     return
-                elif getmode == 1:
+                if getmode == 1:
                     await message.delete()
                 elif getmode == 2:
                     await message.delete()
