@@ -48,7 +48,6 @@ def _selective_escape(to_parse: str) -> str:
 
 
 def get_emoji_regexp():
-    global _EMOJI_REGEXP
     if _EMOJI_REGEXP is None:
         emojis = sorted(unicode_codes.EMOJI_DATA, key=len, reverse=True)
         pattern = u'(' + u'|'.join(re.escape(u) for u in emojis) + u')'

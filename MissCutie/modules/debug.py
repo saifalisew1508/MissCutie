@@ -33,7 +33,6 @@ async def debug(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @telethn.on(events.NewMessage(pattern="[/!].*"))
 async def i_do_nothing_yes(event):
-    global DEBUG_MODE
     if DEBUG_MODE:
         if os.path.exists("updates.txt"):
             with open("updates.txt", "r") as f:

@@ -79,7 +79,6 @@ def get_all_filters():
         SESSION.close()
 
 def new_add_filter(chat_id, keyword, reply_text, file_type, file_id, buttons, media_spoiler):
-    global CHAT_FILTERS
 
     if buttons is None:
         buttons = []
@@ -122,7 +121,6 @@ def new_add_filter(chat_id, keyword, reply_text, file_type, file_id, buttons, me
 
 
 def remove_filter(chat_id, keyword):
-    global CHAT_FILTERS
     with CUST_FILT_LOCK:
         filt = SESSION.query(CustomFilters).get((str(chat_id), keyword))
         if filt:
