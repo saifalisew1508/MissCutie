@@ -1,15 +1,12 @@
 import dateparser 
-import os
-import asyncio
-import pytz
 
 from pyrogram import filters
 from pymongo import MongoClient
-from datetime import datetime, timedelta
+from datetime import timedelta
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ChatPermissions
 
 from MissCutie import pbot
-from MissCutie import BOT_ID, MONGO_DB_URI
+from MissCutie import MONGO_DB_URI
 
 
 client = MongoClient(MONGO_DB_URI)

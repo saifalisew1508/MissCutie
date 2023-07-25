@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 from requests import get, post
-from telethon.tl import functions
 from MissCutie import telethn
 from MissCutie.events import register
 from MissCutie.utils.permissions import adminsOnly as is_register_admin

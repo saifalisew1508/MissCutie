@@ -2,7 +2,7 @@ import html
 
 from telegram import Update
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, ContextTypes, filters
+from telegram.ext import CommandHandler, ContextTypes
 from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin

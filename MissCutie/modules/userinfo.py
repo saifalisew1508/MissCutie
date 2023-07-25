@@ -13,10 +13,10 @@ from telegram.helpers import mention_html
 from telethon import events
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
-from MissCutie import (DEV_USERS, DRAGONS, INFOPIC, LOGGER, OWNER_ID,
+from MissCutie import (DEV_USERS, DRAGONS, INFOPIC, OWNER_ID,
                         application)
 from MissCutie import telethn
-from MissCutie.__main__ import STATS, TOKEN, USER_INFO
+from MissCutie.__main__ import STATS, USER_INFO
 from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.extraction import extract_user

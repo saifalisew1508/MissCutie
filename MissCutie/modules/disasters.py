@@ -7,7 +7,6 @@ from MissCutie import (
     DEV_USERS,
     OWNER_ID,
     DRAGONS,
-    SUPPORT_CHAT,
     application,
 )
 from MissCutie.modules.helper_funcs.chat_status import (

@@ -2,18 +2,13 @@ import importlib
 import contextlib
 import time
 import re
-import random
 
 from MissCutie import (
     ALLOW_EXCL,
-    CERT_PATH,
     DONATION_LINK,
     LOGGER,
     OWNER_ID,
-    PORT,
     TOKEN,
-    URL,
-    WEBHOOK,
     SUPPORT_CHAT,
     PYTHON_VERSION,
     BOT_VERSION,
@@ -24,12 +19,10 @@ from MissCutie import (
     SQL_VERSION,
     MONGO_VERSION,
     BOT_NAME,
-    BOT_USERNAME,
-    BOT_ID,
     application,
     StartTime,
     telethn,
-    pbot)
+    )
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
@@ -38,7 +31,6 @@ from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
 from MissCutie.modules.helper_funcs.misc import paginate_modules
 from MissCutie.modules.connection import connected
-from MissCutie.modules.language import gs, set_lang
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Chat, User
 from telegram.error import (
     BadRequest,
@@ -50,7 +42,6 @@ from telegram.error import (
 )
 from telegram.ext import (
     ContextTypes,
-    CallbackContext,
     CallbackQueryHandler,
     CommandHandler,
     filters,

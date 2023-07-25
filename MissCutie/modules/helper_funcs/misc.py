@@ -1,4 +1,3 @@
-import os
 import cv2
 from math import ceil
 from typing import Dict, List, Union

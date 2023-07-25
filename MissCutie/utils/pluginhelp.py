@@ -9,12 +9,11 @@ from typing import Callable, Coroutine, Dict, List, Tuple, Union
 
 from PIL import Image
 from pyrogram import Client
-from pyrogram.enums import ChatType, ChatMemberStatus
+from pyrogram.enums import ChatType
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Chat, Message, User
 
 from MissCutie import OWNER_ID, SUPPORT_CHAT
-from MissCutie import pbot
 from MissCutie.utils.errors import split_limits
 
 

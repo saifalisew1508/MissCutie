@@ -6,9 +6,7 @@ from telegram.ext import (
     ContextTypes,
     CallbackQueryHandler,
     CommandHandler,
-    filters,
-    MessageHandler,
-)
+    )
 from telegram.constants import ParseMode
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.helpers import mention_html

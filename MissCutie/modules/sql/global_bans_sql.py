@@ -1,7 +1,7 @@
 import threading
 
 from MissCutie.modules.sql import BASE, SESSION
-from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, BigInteger
+from sqlalchemy import Boolean, Column, String, UnicodeText, BigInteger
 
 
 class GloballyBannedUsers(BASE):

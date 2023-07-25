@@ -3,17 +3,14 @@ import re
 import math
 import time
 import wget
-import aiohttp
 import asyncio
 import logging
 import requests
 from pathlib import Path
 from pySmartDL import SmartDL
-from datetime import datetime
 from urllib.error import HTTPError
-from pyrogram import Client, filters
+from pyrogram import filters
 from urllib.parse import unquote_plus
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 
 from MissCutie import pbot

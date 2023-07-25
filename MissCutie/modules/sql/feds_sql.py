@@ -1,5 +1,4 @@
 import ast
-import asyncio
 import threading
 
 from MissCutie import application

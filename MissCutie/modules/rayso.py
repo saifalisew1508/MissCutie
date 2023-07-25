@@ -6,7 +6,7 @@ import os
 import random
 from MissCutie import pbot
 from MissCutie.utils.errors import capture_err
-from pyrogram import Client, filters
+from pyrogram import filters
 from MissCutie.utils.google_chrome import chromeDriver
 
 THEMES = [

@@ -1,22 +1,14 @@
 import ast
 import os
-import re
 import time
 import base64
-import random
 import base64
 import json
-import math
 import ssl
 
-from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
+from PIL import Image
 from json.decoder import JSONDecodeError
-from traceback import format_exc
-from datetime import datetime as dt
 from random import choice
-from shutil import rmtree
-from sqlalchemy import Boolean, Column
 
 from MissCutie.events import register
 
@@ -25,11 +17,9 @@ from asyncio import sleep
 
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
-from telethon.tl.types import MessageService, DocumentAttributeAudio, DocumentAttributeVideo
+from telethon.tl.types import MessageService
 from telethon.tl import types
 from telethon.utils import get_display_name, get_peer_id
-from requests.exceptions import MissingSchema
-from telethon import Button
 
 ##api
 

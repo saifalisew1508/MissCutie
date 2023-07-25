@@ -12,7 +12,7 @@ from MissCutie.modules.helper_funcs.string_handling import extract_time
 
 from MissCutie.modules.log_channel import loggable
 from MissCutie.modules.warns import warn
-from telegram import Chat, Message, Update, User, ChatPermissions
+from telegram import Update, ChatPermissions
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes, CommandHandler, filters, MessageHandler

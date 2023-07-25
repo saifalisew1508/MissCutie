@@ -2,7 +2,7 @@ import threading
 from typing import Union
 
 from MissCutie.modules.sql import BASE, SESSION
-from sqlalchemy import Boolean, Column, Integer, String, BigInteger
+from sqlalchemy import Boolean, Column, String, BigInteger
 
 
 class RequestUserSettings(BASE):

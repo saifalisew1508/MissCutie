@@ -3,7 +3,7 @@ from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import RPCError, ChannelPrivate, ChatAdminRequired, UserNotParticipant
 from MissCutie.modules.sql import forceSubscribe_sql as sql
-from MissCutie import BOT_ID, DEV_USERS, pbot
+from MissCutie import BOT_ID, pbot
 
 logging.basicConfig(level=logging.INFO)
 

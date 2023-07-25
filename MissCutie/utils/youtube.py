@@ -2,13 +2,9 @@ import asyncio
 import os
 import re
 from typing import Union
-
-import aiohttp
 import yt_dlp
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
-
-from MissCutie import YTDOWNLOADER
 from MissCutie.modules.mongo.song_mongo import is_on_off
 from MissCutie.utils.formatters import time_to_seconds
 

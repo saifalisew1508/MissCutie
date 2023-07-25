@@ -1,4 +1,3 @@
-import os.path
 from pyrogram import filters
 from MissCutie import DEV_USERS, arq, pbot
 from MissCutie.utils.errors import capture_err

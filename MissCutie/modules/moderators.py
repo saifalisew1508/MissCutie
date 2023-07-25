@@ -1,5 +1,4 @@
 import html
-import contextlib
 import MissCutie.modules.sql.moderators_sql as sql
 
 from MissCutie import application
@@ -7,13 +6,11 @@ from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.extraction import (
     extract_user,
-    extract_user_and_text,
-)
+    )
 from MissCutie.modules.log_channel import loggable
 from telegram import Update
 from telegram.ext import ContextTypes
-from telegram.constants import ParseMode, ChatMemberStatus, ChatID, ChatType
-from telegram.error import BadRequest
+from telegram.constants import ParseMode, ChatMemberStatus
 from telegram.helpers import mention_html
 
 

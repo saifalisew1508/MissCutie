@@ -1,4 +1,4 @@
-from MissCutie import DEV_USERS, DRAGONS, telethn
+from MissCutie import DEV_USERS, DRAGONS
 
 IMMUNE_USERS = DRAGONS+ DEV_USERS
 

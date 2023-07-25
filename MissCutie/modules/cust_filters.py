@@ -2,7 +2,7 @@ import re
 import random
 from html import escape
 
-from telegram import InlineKeyboardMarkup, Message, InlineKeyboardButton, Update
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.constants import ParseMode, MessageLimit, ChatMemberStatus
 from telegram.error import BadRequest
 from telegram.ext import (

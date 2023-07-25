@@ -3,7 +3,7 @@ import threading
 from datetime import datetime
 
 from MissCutie.modules.sql import BASE, SESSION
-from sqlalchemy import Boolean, Column, Integer, UnicodeText, DateTime, BigInteger
+from sqlalchemy import Boolean, Column, UnicodeText, DateTime, BigInteger
 
 
 class AFK(BASE):

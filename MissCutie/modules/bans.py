@@ -1,5 +1,4 @@
 import html
-import re
 
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, ChatMemberAdministrator
 from telegram.constants import ParseMode

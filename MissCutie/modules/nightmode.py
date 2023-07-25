@@ -3,7 +3,6 @@ from telethon import functions, types
 from telethon.tl.types import ChatBannedRights
 
 from MissCutie import telethn as tbot
-from MissCutie import BOT_NAME
 from MissCutie.events import register
 from MissCutie.modules.sql.night_mode_sql import (
     add_nightmode,

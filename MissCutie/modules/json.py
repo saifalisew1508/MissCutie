@@ -1,6 +1,6 @@
 import os
-from pyrogram import Client, filters, enums
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from MissCutie import pbot
 
 @pbot.on_message(filters.command(["json", 'js', 'showjson']))

@@ -5,23 +5,18 @@ import sys
 import time
 import asyncio
 import telegram.ext as tg
-import random
 
 from telethon import __version__ as tlhver
 
 # Pyrogram Imports
 from pyrogram import __version__ as pyrover
-from pyrogram import Client, errors
-from pyrogram.types import Message
-from pyrogram.enums import ParseMode
-from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
+from pyrogram import Client
 
 from Python_ARQ import ARQ
 
 from aiohttp import ClientSession
 
 from telegram.ext import Application
-from telegram.error import BadRequest, Forbidden
 from telethon.sessions import MemorySession
 from telethon import TelegramClient
 from telegram import __bot_api_version__, __version__ as ptb_version

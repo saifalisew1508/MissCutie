@@ -1,6 +1,5 @@
 import os
 from datetime import datetime
-from PIL import Image
 from telegraph.aio import Telegraph
 from MissCutie import TEMP_DOWNLOAD_LOC, application
 from telegram import Update

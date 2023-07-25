@@ -1,9 +1,6 @@
-import os
 import openai
-import logging
-from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler
+from telegram.ext import ContextTypes, CommandHandler
 from telegram import Update
-from datetime import datetime
 from MissCutie import application, OPENAI_API_KEY
 
 

@@ -1,7 +1,7 @@
 import threading
 
 from MissCutie.modules.sql import BASE, SESSION
-from sqlalchemy import Column, String, distinct, func
+from sqlalchemy import Column, String
 
 
 class TopicsAction(BASE):

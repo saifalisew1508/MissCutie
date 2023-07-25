@@ -1,13 +1,9 @@
-import os 
-import io
-import wget
-import subprocess
-from pyrogram import Client, filters
-from requests import JSONDecodeError, get
+from pyrogram import filters
+from requests import get
 
 from MissCutie import pbot
 from MissCutie.utils.errors import capture_err
-from pyrogram.types import InputMedia, InputMediaPhoto, InputMediaVideo, InputMediaDocument, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InputMediaPhoto, InputMediaVideo
 
 # IG_SESSION = Config.IG_SESSION
 

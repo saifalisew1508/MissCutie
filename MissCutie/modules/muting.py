@@ -13,7 +13,7 @@ from MissCutie.modules.helper_funcs.extraction import (
 )
 from MissCutie.modules.helper_funcs.string_handling import extract_time
 from MissCutie.modules.log_channel import loggable
-from telegram import Bot, Chat, ChatPermissions, Update, ChatMemberRestricted, ChatMember
+from telegram import Bot, Chat, ChatPermissions, Update, ChatMember
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes, CommandHandler

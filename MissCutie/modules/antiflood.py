@@ -2,7 +2,7 @@ import html
 from typing import Optional, List
 import re
 
-from telegram import Message, Chat, Update, User, ChatPermissions
+from telegram import Update, ChatPermissions
 
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import (

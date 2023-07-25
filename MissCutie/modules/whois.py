@@ -1,7 +1,7 @@
 import os
 import time
 from datetime import datetime
-from pyrogram import Client, filters, enums
+from pyrogram import filters, enums
 from pyrogram.errors import UserNotParticipant
 from MissCutie.utils.extract_user import extract_user
 from MissCutie.utils.last_online_help import last_online

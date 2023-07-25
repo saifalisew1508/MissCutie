@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import re
 from datetime import datetime
@@ -8,7 +7,6 @@ from telethon import custom, events
 from MissCutie import telethn as bot
 from MissCutie import telethn as tgbot
 from MissCutie.events import register
-from MissCutie import BOT_NAME
 
 edit_time = 5
 """ =======================𝑴𝒊𝒔𝒔𝑪𝒖𝒕𝒊𝒆 𝑹𝒐𝒃𝒐𝒕====================== """

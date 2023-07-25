@@ -1,6 +1,6 @@
 import threading
 
-from sqlalchemy import Column, String, Integer, BigInteger
+from sqlalchemy import Column, String, BigInteger
 
 from MissCutie.modules.sql import BASE, SESSION
 

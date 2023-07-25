@@ -1,5 +1,5 @@
 import time
-from pyrogram import Client, filters
+from pyrogram import filters
 from MissCutie import pbot
 
 banned_users = {}

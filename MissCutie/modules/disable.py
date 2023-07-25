@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, Union
 
 from future.utils import string_types
 from MissCutie import application
-from MissCutie.modules.helper_funcs.handlers import CMD_STARTERS, SpamChecker
+from MissCutie.modules.helper_funcs.handlers import CMD_STARTERS
 from MissCutie.modules.helper_funcs.misc import is_module_loaded
 from telegram import Update
 from telegram.constants import ParseMode

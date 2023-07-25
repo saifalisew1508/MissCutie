@@ -4,7 +4,6 @@ from functools import wraps
 from telegram.ext import ContextTypes
 from telegram.constants import ChatType
 from MissCutie.modules.helper_funcs.misc import is_module_loaded
-from MissCutie.modules.sql.topics_sql import get_action_topic
 
 FILENAME = __name__.rsplit(".", 1)[-1]
 

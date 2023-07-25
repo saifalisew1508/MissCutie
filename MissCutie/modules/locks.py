@@ -3,13 +3,11 @@ from typing import Optional
 
 import MissCutie.modules.sql.locks_sql as sql
 from alphabet_detector import AlphabetDetector
-from telegram import (Chat, ChatPermissions, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, MessageEntity,
+from telegram import (Chat, ChatPermissions, MessageEntity,
                     Update, ChatMemberAdministrator)
 from telegram.constants import ParseMode
 from telegram.error import BadRequest, TelegramError
-from telegram.ext import (ContextTypes, CallbackQueryHandler,
-                          CommandHandler, filters, MessageHandler)
+from telegram.ext import (ContextTypes, CommandHandler, filters, MessageHandler)
 from telegram.helpers import mention_html
 from MissCutie import DRAGONS, LOGGER, application
 from MissCutie.modules.connection import connected
@@ -18,7 +16,6 @@ from MissCutie.modules.helper_funcs.alternate import (send_message,
                                                        typing_action)
 from MissCutie.modules.helper_funcs.chat_status import (
                                                          is_bot_admin,
-                                                         is_user_admin,
                                                          check_admin,
                                                          user_not_admin)
 from MissCutie.modules.log_channel import loggable

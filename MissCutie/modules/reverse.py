@@ -1,10 +1,9 @@
 """Custom module written by kishore/joker to reverse search any image by replying
 to it, or url given as args."""
-import os
 
 from GoogleSearch import Search
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup,
-                      MessageEntity, Update)
+                      Update)
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 from MissCutie import application

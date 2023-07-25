@@ -1,6 +1,5 @@
 from MissCutie import application, LOGGER, DRAGONS
 from MissCutie.modules.helper_funcs.chat_status import (
-    check_admin,
     is_bot_admin,
     is_user_ban_protected,
     is_user_in_chat,
