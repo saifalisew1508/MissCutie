@@ -469,8 +469,6 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-
-
     elif query.data == "sponsor":
         await query.message.edit_text(
             text="*Heyaa, Nice So You Want To Sponsor @MissCutieRobot ?*"
@@ -478,28 +476,22 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-
-
     elif query.data == "source":
         await query.message.edit_text(
-            text="*SORRY TO SAY YOU THAT BUT @MISSCUTIEROBOT IS'NT LONGER OPEN SOURCE PROJECT*"
-            f"\n\nBUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT",
+            text="*SORRY TO SAY YOU THAT BUT @MISSCUTIEROBOT ISN'T LONGER OPEN SOURCE PROJECT*"
+            f"\n\nBUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT"
             f"\n\nMarie (BASE CODE) -> [CLICK HERE](https://github.com/PaulSonOfLars/tgbot) \nMissCutie OLD -> [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot) \nKigyo Robot -> [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-
-                
     elif query.data == "saif_back":
-        first_name = update.effective_user.first_name 
+        first_name = update.effective_user.first_name
         await query.message.edit_text(
-            PM_START_TEXT.format(escape_markdown(first_name), 
-                                 escape_markdown(context.bot.first_name)),
+            PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
         )
-
 
 
 async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
