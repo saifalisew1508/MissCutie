@@ -465,24 +465,36 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         )
     elif query.data == "saif_support":
         await query.message.edit_text(
-            text="*HERE IS THE SUPPORT CONTACT OF MISSCUTIE*"
-            f"\n\nSUPPORT CHAT -> @PUBLICSOURCE_CHAT \nSUPPORT CHANNEL -> @BOTXNEWS \nCONTACT OWNER -> @LOSTEDPERSON",
+            text="*SUPPORT FOR @MissCutieRobot*"
+            f"""
+BOT SUPPORT -> @PUBLICSOURCE_CHAT
+BOT UPDATES -> @BOTXNEWS
+BOT OWNER -> @LOSTEDPERSON
+""",
             parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
     elif query.data == "sponsor_me":
         await query.message.edit_text(
-            text="*Heyaa, Nice So You Want To Sponsor @MissCutieRobot ?*"
-            f"\n\nSPONSOR ON GITHUB -> [CLICK HERE](https://github.com/sponsors/saifalisew1508) \nSPONSOR VIA UPI -> 9708973259@UPI \nIF YOU WANT TO SPONSOR VIA CRYPTO, PLEASE CONTACT -> @SAIFFFF2004",
+            DONATE_STRING.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
     elif query.data == "source_code":
         await query.message.edit_text(
             text="*SORRY TO SAY YOU THAT BUT @MISSCUTIEROBOT ISN'T LONGER OPEN SOURCE PROJECT*"
-            f"\n\nBUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT"
-            f"\n\nMarie (BASE CODE) -> [CLICK HERE](https://github.com/PaulSonOfLars/tgbot) \nMissCutie OLD -> [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot) \nKigyo Robot -> [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)",
+            f"""
+BUT YOU CAN GET OLD SOURCE AND SUPPORTIVE SOURCE OF @MISSCUTIEROBOT
+Marie (BASE CODE) -> [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)
+MissCutie OLD -> [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)
+Kigyo Robot -> [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)
+
+We Always respect our supporters and give full credit when we copy some modules from other bots
+""",
             parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
     elif query.data == "saif_back":
