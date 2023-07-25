@@ -27,7 +27,6 @@ from MissCutie.modules.helper_funcs.extraction import (
     extract_user_fban,
 )
 from MissCutie.modules.helper_funcs.string_handling import markdown_parser
-from MissCutie.modules.language import gs
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,

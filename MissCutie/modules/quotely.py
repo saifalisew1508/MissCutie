@@ -4,7 +4,6 @@ import re
 import time
 import base64
 import random
-import base64
 import json
 import math
 import ssl
@@ -39,7 +38,7 @@ except ImportError:
     ContentTypeError = None
 
 try:
-    from PIL import Image
+    pass
 except ImportError:
     Image = None
 
