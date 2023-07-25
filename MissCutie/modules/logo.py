@@ -3,7 +3,6 @@ import requests
 import os
 import re
 import random
-import requests
 from pyrogram import filters
 from MissCutie import pbot
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton

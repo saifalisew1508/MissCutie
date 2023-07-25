@@ -6,7 +6,6 @@ from datetime import datetime
 from telethon import custom, events
 
 from MissCutie import telethn as bot
-from MissCutie import telethn as tgbot
 from MissCutie.events import register
 from MissCutie import BOT_NAME
 
