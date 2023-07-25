@@ -103,8 +103,8 @@ buttons = [
         InlineKeyboardButton(text="HELPABLE COMMANDS ⚙️", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="about"),
-        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="music_help"),
+        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="about_"),
+        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="music_"),
     ],
     [
         InlineKeyboardButton(
@@ -427,7 +427,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    if query.data == "about":
+    if query.data == "about_":
         uptime = get_readable_time((time.time() - StartTime))
         first_name = update.effective_user.first_name
         await query.message.edit_text(
@@ -493,7 +493,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     first_name = update.effective_user.first_name 
-    if query.data == "music_help":
+    if query.data == "music_":
         await query.message.edit_text(
             text=MUSIC_TEXT.format(escape_markdown(first_name), 
                                    escape_markdown(context.bot.first_name)),
