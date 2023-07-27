@@ -118,6 +118,9 @@ buttons = [
 
 about_buttons = [
     [
+        InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
+    ]
+    [
         InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
         InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
     ],
@@ -481,10 +484,10 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            f"\n*So you want to donate for {context.bot.first_name} ? Amazing!*"
+            f"\n\n*So you want to donate for {context.bot.first_name} ? Amazing!*"
             f"\n\n*Here is some payment method for donate {context.bot.first_name}*"
-            "\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
-            "\n\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
+            "\n\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
+            "\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
             "\n*PhonePay, GooglePay, PayTM UPI :* [Pay Now](https://pay.upilink.in/pay/md.saif2752@oksbi)"
             "\n\n*Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.*"
             "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
