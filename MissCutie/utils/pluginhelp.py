@@ -291,7 +291,6 @@ def admins_only(func: Callable) -> Coroutine:
     return wrapper
 
 
-# @Mr_Dark_Prince
 def capture_err(func):
 
     @wraps(func)

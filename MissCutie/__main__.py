@@ -360,7 +360,6 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
     chat = update.effective_chat
-    # print(query.message.chat.id)
 
     try:
         if mod_match:

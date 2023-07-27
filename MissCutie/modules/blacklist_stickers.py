@@ -428,7 +428,6 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                         ),
                         message,
                         update.effective_user,
-                        # conn=False,
                     )
                     return
                 elif getmode == 3:

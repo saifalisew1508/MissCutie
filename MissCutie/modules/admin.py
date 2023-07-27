@@ -87,7 +87,6 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 can_edit_messages=bot_member.can_edit_messages,
                 can_delete_messages=bot_member.can_delete_messages,
                 can_invite_users=bot_member.can_invite_users,
-                # can_promote_members=bot_member.can_promote_members,
                 can_restrict_members=bot_member.can_restrict_members,
                 can_pin_messages=bot_member.can_pin_messages,
                 can_manage_chat=bot_member.can_manage_chat,
@@ -535,8 +534,6 @@ async def adminlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ),
                 )
 
-            # if user.username:
-            #    name = escape_markdown("@" + user.username)
             if status == ChatMemberStatus.OWNER:
                 text += "\n 👑 Creator:"
                 text += "\n<code> • </code>{}\n".format(name)
@@ -630,7 +627,6 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     can_edit_messages=bot_member.can_edit_messages,
                     can_delete_messages=bot_member.can_delete_messages,
                     can_invite_users=bot_member.can_invite_users,
-                    # can_promote_members=bot_member.can_promote_members,
                     can_restrict_members=bot_member.can_restrict_members,
                     can_pin_messages=bot_member.can_pin_messages,
                     can_manage_chat=bot_member.can_manage_chat,

@@ -81,7 +81,6 @@ if is_module_loaded(FILENAME):
         context: ContextTypes.DEFAULT_TYPE, log_chat_id: str, orig_chat_id: str, result: str,
     ):
         bot = context.bot
-        # topic_chat = get_action_topic(orig_chat_id)
         try:
             await bot.send_message(
                 log_chat_id,

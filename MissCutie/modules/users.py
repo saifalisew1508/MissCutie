@@ -12,7 +12,6 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.helpers import escape_markdown
-# from MissCutie.modules.sql.topics_sql import get_action_topic
 
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie import DEV_USERS, LOGGER, OWNER_ID, application
@@ -77,7 +76,6 @@ async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if to_group:
             for chat in chats:
                 try:
-                    # topic_chat = get_action_topic(chat.chat_id)
                     await context.bot.sendMessage(
                         int(chat.chat_id),
                         escape_markdown(to_send[1], 2),

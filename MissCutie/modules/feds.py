@@ -667,8 +667,6 @@ async def fed_ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # starting = "The reason fban is replaced for {} in the Federation <b>{}</b>.".format(user_target, fed_name)
         # await send_message(update.effective_message, starting, parse_mode=ParseMode.HTML)
 
-        # if reason == "":
-        #    reason = "No reason given."
 
         temp = sql.un_fban_user(fed_id, fban_user_id)
         if not temp:
@@ -829,8 +827,6 @@ async def fed_ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     #    user_target, fed_name)
     # await update.effective_message.reply_text(starting, parse_mode=ParseMode.HTML)
 
-    # if reason == "":
-    #    reason = "No reason given."
 
     x = sql.fban_user(
         fed_id,
@@ -1820,8 +1816,6 @@ async def fed_import_bans(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     multi_import_username.append(import_username)
                     multi_import_reason.append(import_reason)
                     success += 1
-                    # t = ThreadWithReturnValue(target=sql.fban_user, args=(fed_id, str(import_userid), import_firstname, import_lastname, import_username, import_reason,))
-                    # t.start()
                 sql.multi_fban_user(
                     multi_fed_id,
                     multi_import_userid,

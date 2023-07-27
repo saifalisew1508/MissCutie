@@ -12,15 +12,11 @@ from MissCutie.__main__ import DATA_IMPORT
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.alternate import typing_action
 
-# from MissCutie.modules.rules import get_rules
 import MissCutie.modules.sql.rules_sql as rulessql
 
-# from MissCutie.modules.sql import warns_sql as warnssql
 import MissCutie.modules.sql.blacklist_sql as blacklistsql
 from MissCutie.modules.sql import disable_sql as disabledsql
 
-# from MissCutie.modules.sql import cust_filters_sql as filtersql
-# import MissCutie.modules.sql.welcome_sql as welcsql
 import MissCutie.modules.sql.locks_sql as locksql
 from MissCutie.modules.connection import connected
 
@@ -143,7 +139,6 @@ async def export_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return ""
         chat = update.effective_chat
         chat_id = update.effective_chat.id
-        # chat_name = update.effective_message.chat.title
 
     jam = time.time()
     new_jam = jam + 10800
@@ -169,7 +164,6 @@ async def export_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     note_list = sql.get_all_chat_notes(chat_id)
     backup = {}
-    # button = ""
     buttonlist = []
     namacat = ""
     isicat = ""
@@ -179,11 +173,9 @@ async def export_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Notes
     for note in note_list:
         count += 1
-        # getnote = sql.get_note(chat_id, note.name)
         namacat += "{}<###splitter###>".format(note.name)
         if note.msgtype == 1:
             tombol = sql.get_buttons(chat_id, note.name)
-            # keyb = []
             for btn in tombol:
                 countbtn += 1
                 if btn.same_line:
@@ -271,9 +263,6 @@ async def export_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
 		export_filters[filters] = content
 	print(export_filters)
 	"""
-    # Welcome (TODO)
-    # welc = welcsql.get_welc_pref(chat_id)
-    # Locked
     curr_locks = locksql.get_locks(chat_id)
     curr_restr = locksql.get_restr(chat_id)
 

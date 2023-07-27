@@ -95,10 +95,6 @@ async def mentioned_alert(client, message):
               reason = c["reason"]
               present = dateparser.parse('now', settings={'TIMEZONE': f'{zone}', 'DATE_ORDER': 'YMD'}) 
               ttime = dateparser.parse(f'{time}', settings={'TIMEZONE': f'{zone}'}) 
-              #print(ttime)
-              #print(present)
-              #print (zone)
-              #print(present>=ttime)
               if present > ttime:
                try:
                  alarms.delete_one({"chat": chat, "user": user, "time": time, "zone": zone, "reason": reason})
@@ -241,7 +237,6 @@ async def mentioned_alert(client, message):
             pass
         else:
             return message.continue_propagation()
-        #print("Im inn")
         try:
             chat_name = message.chat.title
             chat_id = message.chat.id
