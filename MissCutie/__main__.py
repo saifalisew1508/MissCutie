@@ -1012,5 +1012,8 @@ def main():
 
 if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
+    LOGGER.info("Starting Telethon bot client")
     telethn.start(bot_token=TOKEN)
+    LOGGER.info("Starting Pyrogram bot client")
+    pbot.start()
     main()
