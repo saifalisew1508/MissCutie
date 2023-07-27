@@ -101,7 +101,7 @@ Telethon==1.28.5
 TgCrypto==1.2.5
 tornado==6.3.2
 tqdm==4.62.3
-typing-extensions==3.10.0.2
+typing-extensions==4.7.1
 tzdata==2023.3
 tzlocal==4.1
 ujson==5.4.0
