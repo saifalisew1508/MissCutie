@@ -119,7 +119,7 @@ buttons = [
 about_buttons = [
     [
         InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
-    ]
+    ],
     [
         InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
         InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
