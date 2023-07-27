@@ -447,8 +447,6 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n\n*About Bot DataBase and its Version*"
             f"\n➥ MongoDB Version : v{MONGO_VERSION}"
             f"\n➥ SQLAlchemy Version : v{SQL_VERSION}"
-            f"\n➥ {BOT_NAME} : v{BOT_VERSION}"
-            f"\n➥ Uptime : {uptime}"
             f"\n➥ Total Users : {sql.num_users()}"
             f"\n➥ Total Chats : {sql.num_chats()}"
             "\n\n*Bot Admins.*"
@@ -464,13 +462,17 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
     elif query.data == "saif_support":
+        first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="*SUPPORT FOR @MissCutieRobot*"
-            f"""
-*Support Group :* @PublicSource_Chat
-*Updates Channel:* @BotXNews
-*Bot Developer :* @LostedPerson
-""",
+            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
+            "\n*Support Group :* @PublicSource_Chat"
+            "\n*Updates Channel:* @BotXNews"
+            "\n*Bot Developer :* @LostedPerson"
+            "\n\n*Supporters*"
+            "\n• [Click here](http://t.me/BotXNews) to consult the updated list of Official Supporters of the bot."
+            "\n\n• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
+            "\n• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!"
+            f"\n\nClick on the *Commands* buttons given below for getting basic help and info about {context.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
@@ -630,7 +632,7 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
 
 5️⃣ *Command Clean* : When activated, Bot will delete its executed commands (/play, /pause, /shuffle, /stop etc) immediately.
 
-6️⃣ **Play Settings:*
+6️⃣ *Play Settings:*
 
 /playmode - Get a complete play settings panel with buttons where you can set your group's play settings. 
 
