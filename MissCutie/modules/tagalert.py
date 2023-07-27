@@ -265,5 +265,7 @@ async def mentioned_alert(client, message):
 
 __mod_name__ = "Tag-Alert"
 
+from MissCutie.modules.language import gs
+
 def get_help(chat):
     return gs(chat, "tagalert_help")
