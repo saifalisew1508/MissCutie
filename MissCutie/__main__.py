@@ -481,7 +481,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            f"\n*So you want to donate for {context.bot.first_name} ? Amazing!"
+            f"\n*So you want to donate for {context.bot.first_name} ? Amazing!*"
             f"\n\n*Here is some payment method for donate {context.bot.first_name}*"
             "\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
             "\n\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
