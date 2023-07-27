@@ -119,11 +119,11 @@ buttons = [
 about_buttons = [
     [
         InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
-        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="Sponsor_"),
+        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
     ],
     [
         InlineKeyboardButton(text="Developer ", url=f"tg://user?id={OWNER_ID}"),
-        InlineKeyboardButton(text="Source 🤖", callback_data="Source_"),
+        InlineKeyboardButton(text="Source 🤖", callback_data="saif_source"),
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
@@ -477,8 +477,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-        
-    elif query.data == "Sponsor_":
+    elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
@@ -493,8 +492,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-        
-    elif query.data == "Source_":
+    elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
@@ -508,8 +506,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
-        )
-        
+        ) 
     elif query.data == "saif_back":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
