@@ -193,14 +193,9 @@ telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 # Pyrogram Client
 
 pbot = Client("MissCutie", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
-
-LOGGER.info("Starting pyrogram bot client")
-pbot.start()
-
-
 aiohttpsession = ClientSession()
-
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+
 
 application = Application.builder().token(TOKEN).concurrent_updates(True).build()
 asyncio.get_event_loop().run_until_complete(application.bot.initialize())
