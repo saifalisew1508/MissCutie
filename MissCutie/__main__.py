@@ -465,7 +465,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            "\n*Support Group :* @PublicSource_Chat"
+            "\n*Support Group :* @None"
             "\n*Updates Channel:* @BotXNews"
             "\n*Bot Developer :* @LostedPerson"
             "\n\n*Supporters*"
