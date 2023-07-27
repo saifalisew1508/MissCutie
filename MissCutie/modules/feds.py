@@ -2473,12 +2473,15 @@ __mod_name__ = "Federations"
 
 
 def get_help(chat):
-    return [gs(chat, "feds_help"),
-    [
-        InlineKeyboardButton(text="Fedadmins", callback_data="fed_help_admin"),
-        InlineKeyboardButton(text="Fedowners", callback_data="fed_help_owner")
-    ],
-    [
-        InlineKeyboardButton(text="Users", callback_data="fed_help_user")
-    ],
-]
+    return [
+        gs(chat, "feds_help"),
+        InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton(text="Fedadmins", callback_data="fed_help_admin"),
+                InlineKeyboardButton(text="Fedowners", callback_data="fed_help_owner")
+            ],
+            [
+                InlineKeyboardButton(text="Users", callback_data="fed_help_user")
+            ]
+        ])
+    ]
