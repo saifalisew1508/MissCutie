@@ -119,11 +119,11 @@ buttons = [
 about_buttons = [
     [
         InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
-        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="sponsor_me"),
+        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="Sponsor_"),
     ],
     [
         InlineKeyboardButton(text="Developer ", url=f"tg://user?id={OWNER_ID}"),
-        InlineKeyboardButton(text="Source 🤖", callback_data="source_code"),
+        InlineKeyboardButton(text="Source 🤖", callback_data="Source_"),
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
@@ -469,37 +469,47 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n*Updates Channel:* @BotXNews"
             "\n*Bot Developer :* @LostedPerson"
             "\n\n*Supporters*"
-            "\n• [Click here](http://t.me/BotXNews) to consult the updated list of Official Supporters of the bot."
-            "\n\n• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
-            "\n• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!"
-            f"\n\nClick on the *Commands* buttons given below for getting basic help and info about {context.bot.first_name}.",
+            "\n*Main Developer :* @LostedPerson & @saiffff2004"
+            "\n*Server Manager :* @Soon"
+            "\n*Bug Hunter :* @Soon"
+            "\n\nENJOY YOUR JOURNEY WITH ME , THANKS FOR USING ME",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "sponsor_me":
+        
+    elif query.data == "Sponsor_":
+        first_name = update.effective_user.first_name
         await query.message.edit_text(
-            DONATE_STRING.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
+            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
+            f"\n*So you want to donate for {context.bot.first_name} ? Amazing!"
+            f"\n\n*Here is some payment method for donate {context.bot.first_name}*"
+            "\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
+            "\n\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
+            "\n*PhonePay, GooglePay, PayTM UPI :* [Pay Now](https://pay.upilink.in/pay/md.saif2752@oksbi)"
+            "\n\n*Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.*"
+            "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "source_code":
+        
+    elif query.data == "Source_":
+        first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="*Sorry to say you that but @MissCutieRobot isn't longer open source project*"
-            f"""
-But Can get old source and supportive source of @MissCutieRobot
-
-*Marie (BASE CODE) :* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)
-*MissCutie Old :* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)
-*Kigyo Robot :* [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)
-
-We Always respect our supporters and give full credit when we copy some modules from other bots
-""",
+            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
+            f"\n*So you want source of {context.bot.first_name} ? Amazing!"
+            f"\n\n*But sorry to say that {context.bot.first_name} source isn't longer public*"
+            f"\n*Don't worry buddy, you can still get old source of {context.bot.first_name} and other alternatives & supportive source"
+            "\n\n*Marie (BASE CODE) :* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)"
+            "\n*MissCutie Old :* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)"
+            "\n*Kigyo Robot :* [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)"
+            "\n\n*We Always respect our supporters and give full credit when we copy some modules from other bots!*",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
+        
     elif query.data == "saif_back":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
