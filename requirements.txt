@@ -83,7 +83,7 @@ regex==2023.6.3
 requests==2.31.0
 rfc==0.1.0
 rfc3986==1.5.0
-rsa==4.7.2
+rsa==4.9
 selenium>=3.141.0
 sgmllib3k==1.0.0
 simplejson==3.17.5
