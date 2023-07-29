@@ -119,17 +119,19 @@ buttons = [
 about_buttons = [
     [
         InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
+        InlineKeyboardButton(text="Commands ⚙️", callback_data="help_back"),
     ],
     [
         InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
         InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
     ],
     [
-        InlineKeyboardButton(text="Developer ", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="Developer 🙋🏻", url=f"tg://user?id={OWNER_ID}"),
         InlineKeyboardButton(text="Source 🤖", callback_data="saif_source"),
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
+        InlineKeyboardButton(text="🗑", callback_data="close_data"),
     ],
 ]
 
@@ -146,6 +148,7 @@ music_buttons = [
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
+        InlineKeyboardButton(text="🗑", callback_data="close_data"),
     ],
 ]
 
