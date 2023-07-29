@@ -131,7 +131,7 @@ about_buttons = [
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="close_data"),
+        InlineKeyboardButton(text="🗑", callback_data="saif_close"),
     ],
 ]
 
@@ -148,7 +148,7 @@ music_buttons = [
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="close_data"),
+        InlineKeyboardButton(text="🗑", callback_data="Music_close"),
     ],
 ]
 
