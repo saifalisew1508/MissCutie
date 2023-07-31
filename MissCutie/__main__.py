@@ -126,7 +126,7 @@ about_buttons = [
         InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
     ],
     [
-        InlineKeyboardButton(text="Developer 🙋🏻", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="Developers 🙋🏻", callback_data="saif_developer"),
         InlineKeyboardButton(text="Source 🤖", callback_data="saif_source"),
     ],
     [
@@ -486,8 +486,8 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            f"\n\n*So you want to donate for {context.bot.first_name} ? Amazing!*"
+            text=f"Hey Buddy,"
+            f"\nMy name is {context.bot.first_name}"
             f"\n\n*Here is some payment method for donate {context.bot.first_name}*"
             "\n\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
             "\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
@@ -498,10 +498,25 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
+    elif query.data == "saif_developer":
+        first_name = update.effective_user.first_name
+        await query.message.edit_text(
+            text=f"Hey Buddy,"
+            f"\nI'm {BOT_NAME} ( {BOT_USERNAME} )"
+            f"\n\nHere You Can See The Bot Owner, Developers and Moderators Contact & Info"
+            "\n\n*🤴🏻 BOT OWNER :* @LostedPerson"
+            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SAIFFFF2004"
+            "\n*👮🏻‍♂️ SERVER MANAGER :* @Its\_rohan\_yrus\_wala"
+            "\n\nThanks to all developers and Moderators who managed my Servers and improving my codes very well to manage your group best"
+            "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(about_buttons),
+        )
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
+            text=f"*Hey Buddy,*"
             f"\n*So you want source of {context.bot.first_name} ? Amazing!"
             f"\n\n*But sorry to say that {context.bot.first_name} source isn't longer public*"
             f"\n*Don't worry buddy, you can still get old source of {context.bot.first_name} and other alternatives & supportive source"
