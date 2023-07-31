@@ -38,7 +38,7 @@ hstspreload==2023.1.1
 httpcore==0.15.0
 httpx==0.24.1
 humanize==3.12.0
-hyperframe==5.2.0
+hyperframe==6.0.1
 hachoir==3.2.0
 idna==2.10
 instaloader==4.9.6
