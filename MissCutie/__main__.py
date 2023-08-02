@@ -131,7 +131,7 @@ about_buttons = [
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="close"),
+        InlineKeyboardButton(text="🗑", callback_data="saif_close"),
     ],
 ]
 
@@ -148,7 +148,7 @@ music_buttons = [
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="close"),
+        InlineKeyboardButton(text="🗑", callback_data="Music_close"),
     ],
 ]
 
@@ -527,6 +527,13 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
+        )
+        elif query.data == "saif_close":
+        first_name = update.effective_user.first_name
+        await query.message.edit_text(
+            text=f"*See You Later*",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
         ) 
     elif query.data == "saif_back":
         first_name = update.effective_user.first_name
@@ -676,6 +683,13 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
+    elif query.data == "Music_close":
+        first_name = update.effective_user.first_name
+        await query.message.edit_text(
+            text=f"*See You Later*",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        ) 
     elif query.data == "Music_back":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
