@@ -528,7 +528,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-        elif query.data == "saif_close":
+    elif query.data == "saif_close":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*See You Later*",
