@@ -14,7 +14,7 @@
          "options": {
             "version": "13"
          },
-         "plan": "eco"
+         "plan": "heroku-postgresql"
       }
    ],
    "env": {
@@ -67,11 +67,6 @@
          "description": "Required for timezone information. Get yours from https://timezonedb.com/api",
          "required": true,
          "value": "BZ06IUOSX4GH"
-      },
-      "OPENAI_API_KEY": {
-         "description": "Required for ChatGPT. Get yours from https://chat.openai.com",
-         "required": true,
-         "value": ""
       },
       "DEV_USERS": {
          "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Saitama support then keep the current ID's here at they are and add yours.",
