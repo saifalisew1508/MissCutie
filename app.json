@@ -14,7 +14,7 @@
          "options": {
             "version": "13"
          },
-         "plan": "heroku-postgresql"
+         "plan": "basic"
       }
    ],
    "env": {
