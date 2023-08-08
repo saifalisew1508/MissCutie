@@ -12,10 +12,17 @@ RUN apt update && apt upgrade -y && \
 
 
     
+echo -e "\e[32mInstalling ffmpeg...\e[0m"
+sudo apt-get install ffmpeg -y
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt -fqqy install ./google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb
+echo -e "\e[32mInstalling gifsicle...\e[0m"
+sudo apt-get install gifsicle -y
 
-RUN wget https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && mv -f chromedriver /usr/bin/ && rm chromedriver_linux64.zip
+echo -e "\e[32mInstalling GOOGLE-CHROME-STABLE...\e[0m"
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt -fqqy install ./google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb
+
+echo -e "\e[32mInstalling GOOGLE-CHROME-STABLE...\e[0m"
+wget https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && mv -f chromedriver /usr/bin/ && rm chromedriver_linux64.zip
 
 
 RUN pip3 install --upgrade pip setuptools
