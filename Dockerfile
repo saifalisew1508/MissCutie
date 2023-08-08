@@ -14,6 +14,9 @@ RUN apt update && apt upgrade -y && \
 
 echo -e "\e[32mInstalling Wget...\e[0m"
 sudo apt install wget
+
+echo -e "\e[32mInstalling Wget...\e[0m"
+sudo apt install wget
     
 echo -e "\e[32mInstalling ffmpeg...\e[0m"
 sudo apt-get install ffmpeg -y
