@@ -182,7 +182,7 @@ from pyrogram.types import InputMedia, InputMediaPhoto, InputMediaVideo, InputMe
 #         await msg.delete()
 
 
-@pbot.on_message(filters.command(["instadl", "insdl", "insta", "instadownload"]))
+@pbot.on_message(filters.command(["instadl", "ig", "insdl", "insta", "instadownload"]))
 @capture_err
 async def idgl(c, m):
     try:
