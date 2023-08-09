@@ -125,6 +125,7 @@ openai
 fontTools # QuoteLy module
 pymongo
 img2pdf
+safoneapi
 gtts
 python-arq
 unzip
