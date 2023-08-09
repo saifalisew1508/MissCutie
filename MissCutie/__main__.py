@@ -528,13 +528,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "saif_close":
-        first_name = update.effective_user.first_name
-        await query.message.edit_text(
-            text=f"*See You Later*",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-        ) 
+    elif query.data == "saif_close"
+        await query.message.delete()
+            
     elif query.data == "saif_back":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
@@ -684,12 +680,8 @@ ForcePlay Commands = playforce , vplayforce , cplayforce
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_close":
-        first_name = update.effective_user.first_name
-        await query.message.edit_text(
-            text=f"*See You Later*",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-        ) 
+        await query.message.delete()
+        
     elif query.data == "Music_back":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
