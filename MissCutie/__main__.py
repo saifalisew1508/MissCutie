@@ -1,3 +1,4 @@
+import tracemalloc
 import importlib
 import contextlib
 import time
@@ -1050,4 +1051,5 @@ if __name__ == "__main__":
     telethn.start(bot_token=TOKEN)
     LOGGER.info("Starting Pyrogram bot client")
     pbot.start()
+    tracemalloc.start()
     main()
