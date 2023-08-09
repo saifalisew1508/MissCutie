@@ -185,6 +185,27 @@ disable_help: |
       ➥ /listcmds: 可能なすべての無効化可能なコマンドをリストします。
 
 
+
+download_help: |
+     Make it easy to download files from most sites!
+     
+     *USAGE:*
+     ➥ /fbdl - Download videos from facebook.
+     ➥ /ytdl - Download videos from youtube.
+     ➥ /igdl - Download media from instagram.
+     ➥ /pindl - Download videos from pinterest.
+     ➥ /gdtot - Download files from gdtot.
+     ➥ /mdisk - Download videos from mdisk.
+     ➥ /tiktok - Download videos from tiktok.
+     ➥ /terabox - Download files from terabox.
+     ➥ /gdrive - Download files from google drive.
+     ➥ /onedrive - Download files from onedrive.
+     ➥ /mediafire - Download files from mediafire.
+
+     *NOTE* Currently only some modules are workable.
+
+
+
 extra_help: |
      *炭素*
      /carbon *:* 指定されたテキストまたは返信されたテキストに Carbon を作成します
