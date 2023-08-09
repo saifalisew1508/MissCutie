@@ -528,7 +528,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
         )
-    elif query.data == "saif_close"
+    elif query.data == "saif_close":
         await query.message.delete()
             
     elif query.data == "saif_back":
