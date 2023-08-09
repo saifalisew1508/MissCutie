@@ -200,3 +200,12 @@ async def url_upload(c, m):
         else:
             await msg.edit("Max Upload File Size Allowed 2GB, Do You Think I Will Upload it Fool ?")
         path.unlink(missing_ok=True)
+
+
+
+from MissCutie.modules.language import gs
+
+def get_help(chat):
+    return gs(chat, "download_help")
+
+__mod_name__ = "Download"
