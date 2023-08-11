@@ -472,11 +472,11 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            "\n*Support Group :* @None"
+            "\n*Support Group :* @PublicSource\_Chat"
             "\n*Updates Channel:* @BotXNews"
             "\n*Bot Developer :* @LostedPerson"
             "\n\n*Supporters*"
-            "\n*Main Developer :* @LostedPerson & @saiffff2004"
+            "\n*Main Developer :* @LostedPerson"
             "\n*Server Manager :* @Soon"
             "\n*Bug Hunter :* @Soon"
             "\n\nENJOY YOUR JOURNEY WITH ME , THANKS FOR USING ME",
@@ -489,12 +489,12 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         await query.message.edit_text(
             text=f"Hey Buddy,"
             f"\nMy name is {context.bot.first_name}"
-            f"\n\n*Here is some payment method for donate {context.bot.first_name}*"
+            f"\n\nHere is some payment method for donate {context.bot.first_name}"
             "\n\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
             "\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
             "\n*PhonePay, GooglePay, PayTM UPI :* [Pay Now](https://pay.upilink.in/pay/md.saif2752@oksbi)"
-            "\n\n*Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.*"
-            "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
+            "\n\nThanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
+            "\n\nWe also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
@@ -507,6 +507,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             f"\n\nHere You Can See The Bot Owner, Developers and Moderators Contact & Info"
             "\n\n*🤴🏻 BOT OWNER :* @LostedPerson"
             "\n*👨🏻‍💻️ BOT DEVELOPER :* @SAIFFFF2004"
+            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SexyShekhar"
             "\n*👮🏻‍♂️ SERVER MANAGER :* @Its\_rohan\_yrus\_wala"
             "\n\nThanks to all developers and Moderators who managed my Servers and improving my codes very well to manage your group best"
             "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
@@ -518,13 +519,14 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=f"*Hey Buddy,*"
-            f"\n*So you want source of {context.bot.first_name} ? Amazing!"
-            f"\n\n*But sorry to say that {context.bot.first_name} source isn't longer public*"
-            f"\n*Don't worry buddy, you can still get old source of {context.bot.first_name} and other alternatives & supportive source"
+            f"\nSo you want source of {context.bot.first_name} ? Amazing!"
+            f"\n\nBut sorry to say that {context.bot.first_name} source isn't longer public"
+            f"\nDon't worry buddy, you can still get old source of {context.bot.first_name} and other alternatives & supportive source"
             "\n\n*Marie (BASE CODE) :* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)"
             "\n*MissCutie Old :* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)"
             "\n*Kigyo Robot :* [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)"
-            "\n\n*We Always respect our supporters and give full credit when we copy some modules from other bots!*",
+            "\n\nI'm really thankful to the persons behind this [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot) projects, this inspired me a lot to create this awesome project."
+            "\n\nWe Always respect our supporters and give full credit when we copy some modules from other bots!",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(about_buttons),
