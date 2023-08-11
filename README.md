@@ -41,6 +41,10 @@
 
 </details>
 
+## Deploy To Render 
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/saifalisew1508/MissCutie)
+
 <details><summary><h3>𝗖𝗥𝗘𝗗𝗜𝗧😎</h3></summary>
   
 <p align="center"><a href="https://github.com/PaulSonOfLars/tgbot"><img src="https://github-readme-stats.vercel.app/api/pin?username=PaulSonOfLars&show_icons=true&theme=dracula&hide_border=true&repo=tgbot"></a>
