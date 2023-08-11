@@ -193,7 +193,7 @@ async def idgl(c, m):
         await m.reply_text("`Pass a URL along with the command`")
         return
     if url:
-        msg = await m.reply_text("Downloading...................................................................................................................................")
+        msg = await m.reply_text("Downloading...")
         rdata = get(f"https://igdownloader.onrender.com/dl?key=naveen&url={url}").json()
         data = rdata["urls"]
         try:
