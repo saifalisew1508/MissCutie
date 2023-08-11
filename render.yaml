@@ -1,0 +1,19 @@
+services:
+  - type: web
+    plan: free
+    name: MissCutie
+    env: python
+    buildCommand: pip install -U -r requirements.txt
+    startCommand: python3 server.py & python3 -m MissCutie
+    repo: https://github.com/saifalisew1508/MissCutie    
+    branch: master
+    envVars:
+      - key: TOKEN 
+        sync: false
+      - key: OWNER_ID 
+        sync: false
+      - key: SQLALCHEMY_DATABASE_URI
+        sync: false
+      - key: MONGO_DB_URI
+        sync: false    
+    autoDeploy: false
