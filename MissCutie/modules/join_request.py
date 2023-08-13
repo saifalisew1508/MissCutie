@@ -224,11 +224,11 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
     query = update.callback_query
     chat = update.effective_chat
     user = update.effective_user
-    match = re.match(r"cb_decline=(.+)", query.data)
+    match = re.match(r"cb_ban=(.+)", query.data)
 
     user_id = match.group(1)
     try:
-        await bot.ban_chat_member(chat.id, user_id)  # Await here
+        await bot.ban_chat_member(chat.id, user_id)
         joined_user = await bot.get_chat_member(chat.id, user_id)
         joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
         admin_mention = mention_html(user.id, html.escape(user.first_name))
@@ -239,7 +239,7 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
         logmsg = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#JOIN_REQUEST_BANNED\n"
-            f"Declined\n"
+            f"Banned\n"
             f"<b>Admin:</b> {admin_mention}\n"
             f"<b>User:</b> {joined_mention}\n"
         )
@@ -247,6 +247,7 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
     except Exception as e:
         await update.effective_message.edit_text(str(e))
         pass
+
 
 
 def __migrate__(old_chat_id, new_chat_id):
