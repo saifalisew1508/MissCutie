@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 
 from MissCutie import MONGO_URL
 
