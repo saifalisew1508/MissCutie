@@ -117,14 +117,20 @@ async def chat_join_req(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [
             [
                 InlineKeyboardButton(
-                    "✅ Approve", callback_data="cb_approve={}".format(user.id)
+                    "✅ Approve", callback_data=f"cb_approve={}".format(user.id)
                 ),
                 InlineKeyboardButton(
-                    "❌ Decline", callback_data="cb_decline={}".format(user.id)
+                    "❌ Decline", callback_data=f"cb_decline={}".format(user.id)
                 ),
-            ]
-        ]
+            ],
+            [
+                InlineKeyboardButton(
+                    "🚫 Ban", callback_data=f"cb_ban={}".format(user.id)
+                ),
+            ],
+        ],
     )
+
 
     # Check if auto-approve is enabled
     if join_req_status(chat.id) and join_req_status(chat.id):
@@ -211,6 +217,37 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         await update.effective_message.edit_text(str(e))
         pass
 
+@check_admin(permission="can_invite_users", is_both=True)
+@loggable
+async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
+    bot = context.bot
+    query = update.callback_query
+    chat = update.effective_chat
+    user = update.effective_user
+    match = re.match(r"cb_decline=(.+)", query.data)
+
+    user_id = match.group(1)
+    try:
+        await bot.ban_chat_member(chat.id, user_id)  # Await here
+        joined_user = await bot.get_chat_member(chat.id, user_id)
+        joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
+        admin_mention = mention_html(user.id, html.escape(user.first_name))
+        await update.effective_message.edit_text(
+            f"{joined_mention}'s join request was banned by {admin_mention}.",
+            parse_mode="HTML",
+        )
+        logmsg = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#JOIN_REQUEST_BANNED\n"
+            f"Declined\n"
+            f"<b>Admin:</b> {admin_mention}\n"
+            f"<b>User:</b> {joined_mention}\n"
+        )
+        return logmsg
+    except Exception as e:
+        await update.effective_message.edit_text(str(e))
+        pass
+
 
 def __migrate__(old_chat_id, new_chat_id):
     migrate_chat(old_chat_id, new_chat_id)
@@ -221,3 +258,4 @@ application.add_handler(CommandHandler('autoapprove', set_auto_approve))  # Adde
 application.add_handler(ChatJoinRequestHandler(callback=chat_join_req, block=False))
 application.add_handler(CallbackQueryHandler(callback=approve_joinReq, pattern=r"cb_approve="))
 application.add_handler(CallbackQueryHandler(callback=decline_joinReq, pattern=r"cb_decline="))
+application.add_handler(CallbackQueryHandler(callback=ban_joinReq, pattern=r"cb_ban="))
