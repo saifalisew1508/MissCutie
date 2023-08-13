@@ -65,8 +65,8 @@ async def cb_handler(_, query: CallbackQuery):
 
 
 
-@pbot.on_cmd("chatbot", group_only=True)
-@adminsOnly("can_delete_messages")
+@pbot.on_message(filters.command("chatbot") & filters.group)
+@adminsOnly
 async def chaton_(_, m: Message):
     await m.reply_text(
         f"ᴄʜᴀᴛ: {m.chat.title}\n**Choose an option to enable/disable chatbot.**",
