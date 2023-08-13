@@ -233,8 +233,8 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
     try:
         await bot.ban_chat_member(chat.id, user_id)
         joined_user = await bot.get_chat_member(chat.id, user_id)
-        joined_mention = await mention_html(user_id, html.escape(joined_user.user.first_name))
-        admin_mention = await mention_html(user.id, html.escape(user.first_name))
+        joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
+        admin_mention = mention_html(user.id, html.escape(user.first_name))
         await update.effective_message.edit_text(
             f"{joined_mention}'s join request was banned by {admin_mention}.",
             parse_mode="HTML",
