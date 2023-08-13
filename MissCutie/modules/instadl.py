@@ -217,7 +217,7 @@ async def idgl(c, m):
 
 
 # Command handler for downloading TikTok video
-@app.on_message(filters.command(["tiktokdl", "tiktok"]))
+@pbot.on_message(filters.command(["tiktokdl", "tiktok"]))
 async def tiktok_dl(client, message):
     try:
         url = message.text.split(None, 1)[1]
