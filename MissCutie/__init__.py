@@ -118,6 +118,7 @@ if ENV:
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+    MONGO_URL = os.environ.get("MONGO_URL", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
@@ -173,6 +174,7 @@ else:
     TEMP_DOWNLOAD_LOC = Config.TEMP_DOWNLOAD_LOC
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
     MONGO_DB_URI = Config.MONGO_DB_URI
+    MONGO_URL = Config.MONGO_URL
     ARQ_API_KEY = Config.ARQ_API_KEY
     OPENAI_API_KEY = Config.OPENAI_API_KEY
 

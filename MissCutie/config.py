@@ -31,6 +31,7 @@ class Config(object):
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = "something://somewhat:user@hosturl:port/databasename"  # needed for any database modules
     MONGO_DB_URI = "MONGO_DB_URI"
+    MONGO_URL = ""
     ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
     OPENAI_API_KEY = "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"
     LOAD = []
