@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from MissCutie MONGO_URL2
+from MissCutie import MONGO_URL2
 
 mongo = MongoCli(MONGO_URL2)
 db = mongo.MissCutie
