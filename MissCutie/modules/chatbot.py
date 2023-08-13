@@ -1,11 +1,16 @@
 import random
 from MissCutie.utils.permissions import adminsOnly
 from MissCutie.utils.admins import can_change_info
+from pyrogram.enums import ChatMemberStatus as CMS
+from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
+
+from MissCutie.utils.chatbot import vick
 
 from pymongo import MongoClient
 from pyrogram import Client, filters
 from pyrogram.enums import ChatAction
-from pyrogram.types import InlineKeyboardMarkup, Message
+from pyrogram.types import InlineKeyboardMarkup, Message, InlineKeyboardButton
+
 
 from MissCutie import pbot, MONGO_URL2
 
