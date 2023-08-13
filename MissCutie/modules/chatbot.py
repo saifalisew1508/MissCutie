@@ -17,8 +17,8 @@ from MissCutie import pbot, MONGO_URL
 
 CHATBOT_ON = [
     [
-        InlineKeyboardButton(text="ᴇɴᴀʙʟᴇ", callback_data=f"addchat"),
-        InlineKeyboardButton(text="ᴅɪsᴀʙʟᴇ", callback_data=f"rmchat"),
+        InlineKeyboardButton(text="Enable", callback_data=f"addchat"),
+        InlineKeyboardButton(text="Disable", callback_data=f"rmchat"),
     ],
 ]
 
@@ -30,24 +30,24 @@ async def cb_handler(_, query: CallbackQuery):
         user_status = (await query.message.chat.get_member(user_id)).status
         if user_status not in [CMS.OWNER, CMS.ADMINISTRATOR]:
             return await query.answer(
-                "ʏᴏᴜ'ʀᴇ ɴᴏᴛ ᴇᴠᴇɴ ᴀɴ ᴀᴅᴍɪɴ, ᴅᴏɴ'ᴛ ᴛʀʏ ᴛʜɪs ᴇxᴘʟᴏsɪᴠᴇ sʜɪᴛ!",
+                "You're not even a admin, Don't try this explosive shit !",
                 show_alert=True,
             )
         else:
             is_vick = vick.find_one({"chat_id": query.message.chat.id})
             if not is_vick:
-                await query.edit_message_text(f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ.**")
+                await query.edit_message_text(f"**Chat Bot is already enabled for this chat.**")
             if is_vick:
                 vick.delete_one({"chat_id": query.message.chat.id})
                 await query.edit_message_text(
-                    f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴇɴᴀʙʟᴇᴅ ʙʏ** {query.from_user.mention}."
+                    f"**Chat Bot Enabled by** {query.from_user.mention}."
                 )
     elif query.data == "rmchat":
         user_id = query.from_user.id
         user_status = (await query.message.chat.get_member(user_id)).status
         if user_status not in [CMS.OWNER, CMS.ADMINISTRATOR]:
             await query.answer(
-                "ʏᴏᴜ'ʀᴇ ɴᴏᴛ ᴇᴠᴇɴ ᴀɴ ᴀᴅᴍɪɴ, ᴅᴏɴ'ᴛ ᴛʀʏ ᴛʜɪs ᴇxᴘʟᴏsɪᴠᴇ sʜɪᴛ!",
+                "You're not even a admin, Don't try this explosive shit !",
                 show_alert=True,
             )
             return
@@ -56,10 +56,10 @@ async def cb_handler(_, query: CallbackQuery):
             if not is_vick:
                 vick.insert_one({"chat_id": query.message.chat.id})
                 await query.edit_message_text(
-                    f"**ᴄʜᴀᴛ-ʙᴏᴛ ᴅɪsᴀʙʟᴇᴅ ʙʏ** {query.from_user.mention}."
+                    f"**Chat Bot is Disabled By** {query.from_user.mention}."
                 )
             if is_vick:
-                await query.edit_message_text("**ᴄʜᴀᴛ-ʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ.**")
+                await query.edit_message_text("**Chat Bot already disabled.**")
 
 
 
@@ -69,7 +69,7 @@ async def cb_handler(_, query: CallbackQuery):
 @adminsOnly("can_delete_messages")
 async def chaton_(_, m: Message):
     await m.reply_text(
-        f"ᴄʜᴀᴛ: {m.chat.title}\n**ᴄʜᴏᴏsᴇ ᴀɴ ᴏᴩᴛɪᴏɴ ᴛᴏ ᴇɴᴀʙʟᴇ/ᴅɪsᴀʙʟᴇ ᴄʜᴀᴛʙᴏᴛ.**",
+        f"ᴄʜᴀᴛ: {m.chat.title}\n**Choose an option to enable/disable chatbot.**",
         reply_markup=InlineKeyboardMarkup(CHATBOT_ON),
     )
     return
