@@ -10,5 +10,5 @@ vickdb = MongoClient(MONGO_URL)
 vick = vickdb["VickDb"]["Vick"]
 
 
-from ..chats import *
-from ..users import *
+from ...chats import *
+from ...users import *
