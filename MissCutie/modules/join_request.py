@@ -117,15 +117,15 @@ async def chat_join_req(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [
             [
                 InlineKeyboardButton(
-                    "✅ Approve", callback_data=f"cb_approve={}".format(user.id)
+                    "✅ Approve", callback_data=f"cb_approve={user.id}"
                 ),
                 InlineKeyboardButton(
-                    "❌ Decline", callback_data=f"cb_decline={}".format(user.id)
+                    "❌ Decline", callback_data=f"cb_decline={user.id}"
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    "🚫 Ban", callback_data=f"cb_ban={}".format(user.id)
+                    "🚫 Ban", callback_data=f"cb_ban={user.id}"
                 ),
             ],
         ],
