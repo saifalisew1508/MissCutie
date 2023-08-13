@@ -1,4 +1,4 @@
-from .. import db
+from MissCutie.modules.chatbot import db
 
 chatsdb = db.chatsdb
 
