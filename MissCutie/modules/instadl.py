@@ -230,8 +230,7 @@ async def tiktok_dl(client, message):
     msg = await message.reply_text("Downloading...")
     
     try:
-        response = requests.get(f"https://api.sdbots.tech/tiktok?url={url}")
-        rdata = response.json()
+        rdata = get(f"https://api.sdbots.tech/tiktok?url={url}").json()
         data = rdata["withoutWaterMarkVideo"]
         if "withoutWaterMarkVideo" in rdata:
             video_url = rdata["withoutWaterMarkVideo"]
