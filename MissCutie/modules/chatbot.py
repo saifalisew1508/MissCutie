@@ -4,7 +4,7 @@ from MissCutie.utils.admins import can_change_info
 from pyrogram.enums import ChatMemberStatus as CMS
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
 
-from MissCutie.utils.chatbot import vick
+from MissCutie.modules.chatbot import vick
 
 from pymongo import MongoClient
 from pyrogram import Client, filters
