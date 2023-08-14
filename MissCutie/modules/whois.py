@@ -10,7 +10,7 @@ from MissCutie import pbot
 
 @pbot.on_message(filters.command(["whois", "info"]))
 async def who_is(client, message):
-    status_message = await message.reply_text("Wait Bro, Let Me Check 🙂")
+    status_message = await message.reply_text("Please Wait a Moment 🙇🏻")
 
     from_user = None
     from_user_id, _ = extract_user(message)

@@ -217,13 +217,13 @@ async def song_helper_cb(client, CallbackQuery):
 @app.on_callback_query(filters.regex(pattern=r"song_download"))
 async def song_download_cb(client, CallbackQuery):
     try:
-        await CallbackQuery.answer("Downloading")
+        await CallbackQuery.answer("Please Wait a Moment 🙇🏻")
     except:
         pass
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
     stype, format_id, vidid = callback_request.split("|")
-    mystic = await CallbackQuery.edit_message_text("Download Started\n\nDownloading speed could be slow. Please hold on..")
+    mystic = await CallbackQuery.edit_message_text("Please Wait a Moment 🙇🏻\n\nDownloading speed could be slow. Please hold on..")
     yturl = f"https://www.youtube.com/watch?v={vidid}"
     with yt_dlp.YoutubeDL({"quiet": True}) as ytdl:
         x = ytdl.extract_info(yturl, download=False)
@@ -254,7 +254,7 @@ async def song_download_cb(client, CallbackQuery):
             caption=title,
             supports_streaming=True,
         )
-        await mystic.edit_text("Uploading Started\n\nUploading speed could be slow. Please hold on..")
+        await mystic.edit_text("Please Wait a Moment 🙇🏻\n\nUploading speed could be slow. Please hold on..")
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=ChatAction.UPLOAD_VIDEO,

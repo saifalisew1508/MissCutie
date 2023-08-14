@@ -9,9 +9,6 @@ from MissCutie import TEMP_DOWNLOAD_LOC
 from MissCutie import telethn as client
 from MissCutie.events import register
 
-
-
-
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 

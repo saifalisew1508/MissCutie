@@ -193,7 +193,7 @@ async def idgl(c, m):
         await m.reply_text("`Pass a URL along with the command`")
         return
     if url:
-        msg = await m.reply_text("Downloading...")
+        msg = await m.reply_text("Please Wait a Moment 🙇🏻")
         rdata = get(f"https://igdownloader.onrender.com/dl?key=naveen&url={url}").json()
         data = rdata["urls"]
         try:
@@ -217,6 +217,9 @@ async def idgl(c, m):
 
 
 # Command handler for downloading TikTok video
+
+API_BASE_URL = ""
+
 @pbot.on_message(filters.command(["tiktokdl", "tiktok"]))
 async def tiktok_dl(client, message):
     try:
@@ -227,14 +230,15 @@ async def tiktok_dl(client, message):
         await message.reply_text("`Pass a TikTok URL along with the command`")
         return
     
-    msg = await message.reply_text("Downloading...")
+    msg = await message.reply_text("Please Wait a Moment 🙇🏻")
     
     try:
         rdata = get(f"https://api.sdbots.tech/tiktok?url={url}").json()
-        data = rdata["withoutWaterMarkVideo"]
-        if "withoutWaterMarkVideo" in rdata:
-            video_url = rdata["withoutWaterMarkVideo"]
-            await message.reply_video(video_url, caption=rdata["desc"])
+        
+        data = rdata.get("withoutWaterMarkVideo")
+        if data:
+            video_url = data
+            await message.reply_video(video_url, caption=rdata.get("desc"))
         else:
             await msg.edit("No video found for the given TikTok URL.")
     except Exception as e:

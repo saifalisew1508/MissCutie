@@ -20,7 +20,7 @@ sucessfully written text 💘
 
 ✨ **Written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
 🥀 **Requested By :** {message.from_user.mention}
-❄ **link :** `{req}`
+🔗 **Link :** `{req}`
 """
         await m.delete()
         await saif.send_photo(
@@ -43,7 +43,7 @@ sucessfully written text 💘
 
 ✨ **Written By :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
 🥀 **Requested By :** {message.from_user.mention}
-❄ **link :** `{req}`
+🔗 **Link :** `{req}`
 """
         await m.delete()
         await saif.send_photo(
