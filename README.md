@@ -1,14 +1,4 @@
 
-<p align="center">
-𝗧𝗛𝗘 𝗠𝗢𝗦𝗧 𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟 𝗔𝗡𝗗 𝗔𝗡𝗜𝗠𝗘 𝗧𝗛𝗘𝗠𝗘 𝗕𝗢𝗧❤🖤
-</p>
-
-<p align="center">
-  <img src="https://te.legra.ph/file/f2b0a5b123b8c6de9cb39.jpg">
-</p>
-
-</details>
-
 <details><summary><h3>BOT STATS🏆</h3></summary>
   
 
@@ -33,17 +23,104 @@
 <a target="_blank"href="https://t.me/MissCutie_Bot"><img src="MissCutie/resources/telegram_badge.png" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 </details>
+
+
+## Deployment
+Read [Docs](https://notreallyshikhar.gitbook.io/yukkimusicbot/deployment/requirements) for Detailed Description and Setup Guide on deploying Bot.
+
+> Click on buttons to expand!
+<details>
+<summary><b>🔗 Requirements</b></summary>
+<br>
+    
+- [Python3.10](https://www.python.org/downloads/release/python-390/)
+- [Telegram API Key](https://my.telegram.org)
+- [Telegram Bot Token](https://t.me/botfather)
+- [MongoDB URI](https://telegra.ph/How-To-get-Mongodb-URI-04-06)
+- [Heroku Account or VPS](https://heroku.com)
+    
 </details>
-<details><summary><h3>Deploy on Heroku💳</h3></summary>
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/saifalisew1508/MissCutie"><img src="https://img.shields.io/badge/HEROKU-DEPLOY-blue?style=plastic&logo=heroku&logoColor=yellow"width="300"heigh="100" /></a></p>
+<details>
+<summary><b>🔗 Generate APIs</b></summary>
+<br>
+    
+> You'll need a [API_ID](https://my.telegram.org) & [API_HASH](https://my.telegram.org) in order to make Pyrogram or Telethon 
+> Always remeber to use good API combo else your client could be slow.
 
+<h4> Generate API: </h4>    
+<p><a href="https://my.telegram.org"><img src="https://img.shields.io/badge/Generate%20APIs-blueviolet?style=for-the-badge&logo=appveyor" width="200""/></a></p>
 
+<h4> Generate Session via Telegram StringGen Bot: </h4>    
+<p><a href="https://t.me/YukkiStringBot"><img src="https://img.shields.io/badge/TG%20String%20Gen%20Bot-blueviolet?style=for-the-badge&logo=appveyor" width="200""/></a></p>
+    
 </details>
 
-## Deploy To Render 
+<details>
+<summary><b>🔗 Deploy to Heroku</b></summary>
+<br>
+
+> Heroku has two vars[ HEROKU_API_KEY & HEROKU_APP_NAME ] for Updater to work. 
+> By setting those two vars you can get logs of your heroku app, set var, edit var, delete vars , check dyno usage and update bot. 
+> Those two vars are not Mandatory! You can leave them blank too. 
+    
+<h4>Click the button below to deploy MissCutie on Heroku!</h4>
+
+[![Deploy+On+Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/saifalisew1508/MissCutie)
+
+    
+</details>
+
+<details>
+<summary><b>🔗 Deploy to Render</b></summary>
+<br>
+  
+> By setting those two vars you can get logs of your render app, set var, edit var, delete vars , check dyno usage and update bot. 
+> Those two vars are not Mandatory! You can leave them blank too. 
+    
+<h4>Click the button below to deploy MissCutie on Render!</h4>
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/saifalisew1508/MissCutie)
+
+    
+</details>
+
+<details>
+<summary><b>🔗 Deploy to Railway</b></summary>
+<br>
+  
+> By setting those two vars you can get logs of your Railway app, set var, edit var, delete vars , check dyno usage and update bot. 
+> Those two vars are not Mandatory! You can leave them blank too. 
+    
+<h4>Click the button below to deploy MissCutie on Railway!</h4>
+
+[![Deploy+on+Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/saifalisew1508/MissCutie&envs=TOKEN,OWNER_ID,SQLALCHEMY_DATABASE_URI,MONGO_DB_URI)
+    
+</details>
+
+
+
+<details>
+<summary><b>🔗 Deploy to VPS</b></summary>
+<br>
+
+> Checkout [Docs](https://t.me/PubicSource_Chat) for Detailed Explanation on VPS Deploy
+
+
+```console
+saifalisew1508@MacBook~ $ git clone https://github.com/saifalisew1508/MissCutie
+saifalisew1508@MacBook~ $ cd MissCutie
+saifalisew1508@MacBook~ $ pip3 install -U -r requirements.txt
+saifalisew1508@MacBook~ $ cp sample.env .env
+```
+> Edit .env with your values and then start bot with
+```console
+shikhar@MacBook~ $ bash start
+```
+
+> Not Getting VPS Method? [Get Help](https://t.me/PublicSource_Chat)
+</details>
+
 
 <details><summary><h3>𝗖𝗥𝗘𝗗𝗜𝗧😎</h3></summary>
   
