@@ -1,6 +1,6 @@
 {
-      "name": "MissCUTIE",
-      "description": "an Telegram modular group management bot.",
+      "name": "MissCutie Robot",
+      "description": "A Telegram modular group management bot.",
       "keywords": [
          "telegram",
          "anime",
@@ -144,6 +144,10 @@
          "required": false,
          "value": ""
       }
-
    }
+   "buildpacks": [
+      {
+         "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+      }
+   ],
 }
