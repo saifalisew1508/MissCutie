@@ -45,11 +45,6 @@
          "required": true,
          "value": ""
       },
-      "MONGO_URL": {
-         "description": "MongoDB Database Url.",
-         "required": true,
-         "value": ""
-      },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where users will ask for help.",
          "required": true,
