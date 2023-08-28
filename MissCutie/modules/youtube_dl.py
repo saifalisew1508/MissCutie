@@ -34,7 +34,7 @@ SONG_DOWNLOAD_DURATION_LIMIT = int(
 YouTube = YouTubeAPI()
 
 @app.on_message(
-    filters.command(["yt", "song", "video"])
+    filters.command(["yt", "ytdl", "youtube"])
     & filters.group
 )
 async def song_commad_group(client, message: Message):
@@ -43,19 +43,16 @@ async def song_commad_group(client, message: Message):
             [
                 InlineKeyboardButton(
                     text="↗️ Open Private Chat",
-                    url=f"https://t.me/{BOT_USERNAME}?start=song",
+                    url=f"https://t.me/{BOT_USERNAME}?start=yt",
                 ),
             ]
         ]
     )
     await message.reply_text("You can download Music or Video from YouTube only in private chat. Please start me in private chat.", reply_markup=upl)
-
-
-# Song Module
-
+  
 
 @app.on_message(
-    filters.command(["yt", "song", "video"])
+    filters.command(["yt", "ytdl", "youtube"])
     & filters.private
 )
 async def song_commad_private(client, message: Message):
@@ -205,14 +202,6 @@ async def song_helper_cb(client, CallbackQuery):
     return await CallbackQuery.edit_message_reply_markup(
         reply_markup=keyboard
     )
-
-
-# Downloading Songs Here
-
-
-
-
-# ...
 
 @app.on_callback_query(filters.regex(pattern=r"song_download"))
 async def song_download_cb(client, CallbackQuery):
