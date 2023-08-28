@@ -122,17 +122,15 @@ Use the /donate command to donate our devlopers
 
 buttons = [
     [
-        InlineKeyboardButton(text="HELPABLE COMMANDS ⚙️", callback_data="help_back"),
+        InlineKeyboardButton(text="Help Menu", callback_data="help_back"),
+        InlineKeyboardButton(text="Music Menu", callback_data="Music_"),
     ],
     [
-        InlineKeyboardButton(text="ABOUT ME 🤖", callback_data="saif_"),
-        InlineKeyboardButton(text="MUSIC HELP 🎵", callback_data="Music_"),
+        InlineKeyboardButton(text="About", callback_data="saif_"),
+        InlineKeyboardButton(text="Manager", url=f"tg://user?id={OWNER_ID}"),
     ],
     [
-        InlineKeyboardButton(
-            text="Add Your Group ➕️",
-            url=f"https://t.me/{application.bot.username}?startgroup=true",
-        ),
+        InlineKeyboardButton(text="Add Your Group ➕️", url=f"https://t.me/{application.bot.username}?startgroup=true"),
     ],
 ]
 
