@@ -32,9 +32,29 @@ from MissCutie import (
     telethn,
     pbot)
 
+# Music Import
+from Music.helpers import (
+    ADMIN_MUSIC,
+    AUTH_MUSIC,
+    BROADCAST_MUSIC,
+    BLACKCHAT_MUSIC,
+    BLACKUSER_MUSIC,
+    CPLAY_MUSIC,
+    GBAN_MUSIC,
+    LOOP_MUSIC,
+    MAINTAINANCE_MUSIC,
+    PING_MUSIC,
+    PLAY_MUSIC,
+    SHUFFLE_MUSIC,
+    SEEK_MUSIC,
+    SONG_MUSIC,
+    SPEED_MUSIC)
+
+
+
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from Music import helpers
+
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
@@ -672,9 +692,9 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
-    elif query.data == "Music_sudo":
+    elif query.data == "Music_speed":
         await query.message.edit_text(
-            text=SUDO_MUSIC,
+            text=SPEED_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
