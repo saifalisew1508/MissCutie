@@ -68,7 +68,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     sys.exit(1)
 
 ENV = bool(os.environ.get("ENV", False))
-BOT_VERSION = "3.0"
+BOT_VERSION = "4.0-Beta"
 PTB_VERSION = ptb_version
 PYRO_VERSION = pyrover
 TELETHON_VERSION = tlhver
@@ -187,11 +187,9 @@ else:
 DEV_USERS.add(OWNER_ID)
 
 # Telethon Client
-
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-
 pbot = Client("MissCutie", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
 aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
@@ -213,6 +211,7 @@ BOT_PIC = application.bot.get_user_profile_photos
 
 
 # Don't edit below this line
+
 YTDOWNLOADER = 1
 
 
