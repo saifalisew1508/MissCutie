@@ -34,6 +34,7 @@ from MissCutie import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
+from Music import helpers
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
@@ -140,12 +141,29 @@ about_buttons = [
 
 music_buttons = [
     [
-        InlineKeyboardButton(text="🤴 Admin 🤴", callback_data="Music_admin"),
-        InlineKeyboardButton(text="🎶 Play 🎶", callback_data="Music_play"),
+        InlineKeyboardButton(text="Admin", callback_data="Music_admin"),
+        InlineKeyboardButton(text="Auth", callback_data="Music_auth"),
+        InlineKeyboardButton(text="Broadcast", callback_data="Music_broadcast"),
     ],
     [
-        InlineKeyboardButton(text="🤖 Bot 🤖", callback_data="Music_bot"),
-        InlineKeyboardButton(text="🛡 Extra 🛡", callback_data="Music_extra"),
+        InlineKeyboardButton(text="BL-Chat", callback_data="Music_blackchat"),
+        InlineKeyboardButton(text="BL-User", callback_data="Music_blackuser"),
+        InlineKeyboardButton(text="C-Play", callback_data="Music_cplay"),
+    ],
+    [
+        InlineKeyboardButton(text="Gban", callback_data="Music_gban"),
+        InlineKeyboardButton(text="Loop", callback_data="Music_loop"),
+        InlineKeyboardButton(text="Maintainance", callback_data="Music_maintainance"),
+    ],
+    [
+        InlineKeyboardButton(text="Ping", callback_data="Music_ping"),
+        InlineKeyboardButton(text="Play", callback_data="Music_play"),
+        InlineKeyboardButton(text="Shuffle", callback_data="Music_shuffle"),
+    ],
+    [
+        InlineKeyboardButton(text="Seek", callback_data="Music_seek"),
+        InlineKeyboardButton(text="Song", callback_data="Music_song"),
+        InlineKeyboardButton(text="Speed", callback_data="Music_speed"),
     ],
     [
         InlineKeyboardButton(text="🔙", callback_data="saif_back"),
@@ -558,126 +576,105 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
 
     elif query.data == "Music_admin":
         await query.message.edit_text(
-            text="*Admin Commands*"
-            f"""
-*c* stands for channel play
-
-/pause or /cpause - Pause the playing music.
-/resume or /cresume- Resume the paused music.
-/mute or /cmute- Mute the playing music.
-/unmute or /cunmute- Unmute the muted music.
-/skip or /cskip- Skip the current playing music.
-/stop or /cstop- Stop the playing music.
-/shuffle or /cshuffle- Randomly shuffles the queued playlist.
-/seek or /cseek - Forward Seek the music to your duration
-/seekback or /cseekback - Backward Seek the music to your duration
-/restart - Restart bot for your chat .
-
-
-✅ *Specific Skip:*
-/skip or /cskip [Number(example: 3)] 
-    - Skips music to a the specified queued number. Example: /skip 3 will skip music to third queued music and will ignore 1 and 2 music in queue.
-
-✅ *Loop Play:*
-/loop or /cloop [enable/disable] or [Numbers between 1-10] 
-    - When activated, bot loops the current playing music to 1-10 times on voice chat. Default to 10 times.
-
-✅ *Auth Users:*
-Auth Users can use admin commands without admin rights in your chat.
-
-/auth [Username] - Add a user to AUTH LIST of the group.
-/unauth [Username] - Remove a user from AUTH LIST of the group.
-/authusers - Check AUTH LIST of the group.
-""",
+            text=ADMIN_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_auth":
+        await query.message.edit_text(
+            text=AUTH_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_broadcast":
+        await query.message.edit_text(
+            text=BROADCAST_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_blackchat":
+        await query.message.edit_text(
+            text=BLACKCHAT_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_blackuser":
+        await query.message.edit_text(
+            text=BLACKUSER_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_cplay":
+        await query.message.edit_text(
+            text=CPLAY_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_gban":
+        await query.message.edit_text(
+            text=GBAN_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_loop":
+        await query.message.edit_text(
+            text=LOOP_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_maintainance":
+        await query.message.edit_text(
+            text=MAINTAINANCE_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_ping":
+        await query.message.edit_text(
+            text=PING_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
     elif query.data == "Music_play":
         await query.message.edit_text(
-            text="*Play Commands*"
-            f"""
-Available Commands = play , vplay , cplay
-
-ForcePlay Commands = playforce , vplayforce , cplayforce
-
-*c* stands for channel play.
-*v* stands for video play.
-*force* stands for force play.
-
-/play or /vplay or /cplay  - Bot will start playing your given query on voice chat or Stream live links on voice chats.
-
-/playforce or /vplayforce or /cplayforce -  *Force Play* stops the current playing track on voice chat and starts playing the searched track instantly without disturbing/clearing queue.
-
-/channelplay [Chat username or id] or [Disable] - Connect channel to a group and stream music on channel's voice chat from your group.
-
-
-✅ *Bot's Server Playlists:*
-/playlist  - Check Your Saved Playlist On Servers.
-/deleteplaylist - Delete any saved music in your playlist
-/play  - Start playing Your Saved Playlist from Servers.
-""",
+            text=PLAY_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
-    elif query.data == "Music_bot":
+    elif query.data == "Music_shuffle":
         await query.message.edit_text(
-            text="*Bot Commands*"
-            f"""
-/stats - Get Top 10 Tracks Global Stats, Top 10 Users of bot, Top 10 Chats on bot, Top 10 Played in a chat etc etc.
-
-/sudolist - Check Sudo Users of Yukki Music Bot
-
-/lyrics [Music Name] - Searches Lyrics for the particular Music on web.
-
-/song [Track Name] or [YT Link] - Download any track from youtube in mp3 or mp4 formats.
-
-/player -  Get a interactive Playing Panel.
-
-*c* stands for channel play.
-
-/queue or /cqueue- Check Queue List of Music.
-""",
+            text=SHUFFLE_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
         )
-    elif query.data == "Music_extra":
+    elif query.data == "Music_seek":
         await query.message.edit_text(
-            text="*Extra Commands *"
-            f"""
-/mstart - Start the Music Bot.
-/mhelp  - Get Commands Helper Menu with detailed explanations of commands.
-/ping- Ping the Bot and check Ram, Cpu etc stats of Bot.
-
-✅ *Group Settings:*
-/settings - Get a complete group's settings with inline buttons
-
-🔗 *Options in Settings:*
-
-1️⃣ You can set *Audio Quality* you want to stream on voice chat.
-
-2️⃣ You can set *Video Quality* you want to stream on voice chat.
-
-3️⃣ *Auth Users*:- You can change admin commands mode from here to everyone or admins only. If everyone, anyone present in you group will be able to use admin commands(like /skip, /stop etc)
-
-4️⃣ *Clean Mode:* When enabled deletes the bot's messages after 5 mins from your group to make sure your chat remains clean and good.
-
-5️⃣ *Command Clean* : When activated, Bot will delete its executed commands (/play, /pause, /shuffle, /stop etc) immediately.
-
-6️⃣ *Play Settings:*
-
-/playmode - Get a complete play settings panel with buttons where you can set your group's play settings. 
-
-*Options in playmode:*
-
-1️⃣ **Search Mode** [Direct or Inline] - Changes your search mode while you give /play mode. 
-
-2️⃣ **Admin Commands** [Everyone or Admins] - If everyone, anyone present in you group will be able to use admin commands(like /skip, /stop etc)
-
-3️⃣ *Play Type* [Everyone or Admins] - If admins, only admins present in group can play music on voice chat.
-""",
+            text=SEEK_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_song":
+        await query.message.edit_text(
+            text=SONG_MUSIC,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_sudo":
+        await query.message.edit_text(
+            text=SUDO_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(music_buttons),
@@ -994,16 +991,16 @@ async def send_alive(context: ContextTypes.DEFAULT_TYPE):
                 f"@{SUPPORT_CHAT}",
                 photo="https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg",
                 caption=f"""
-Hey developer's {context.bot.first_name} online now.
+Hey Developer's {context.bot.first_name} is online now.
 
-**Python : v{PYTHON_VERSION}**
-**Telethon : v{TELETHON_VERSION}**
-**Pyrogram : v{PYRO_VERSION}**
-**Python Telegram Bot : v{PTB_VERSION}**
-**Telegram Bot API :** v{BOT_API_VERSION}**
-**{BOT_NAME} : v{BOT_VERSION}**
+**Python :** `v{PYTHON_VERSION}`
+**Telethon :** `v{TELETHON_VERSION}`
+**Pyrogram :** `v{PYRO_VERSION}`
+**Python Telegram Bot :** `v{PTB_VERSION}`
+**Telegram Bot API :** `v{BOT_API_VERSION}`
+**{BOT_NAME} :** `v{BOT_VERSION}`
 
-Presented By @BotXNews
+⚡  𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝑩𝒚: @BotXNews
 """,
                 parse_mode=ParseMode.MARKDOWN,
             )
