@@ -172,7 +172,6 @@ class MessageHandler:
                 ListenerTypes.MESSAGE,
             )[0]
         except AttributeError as err:
-            logger.warning(f"Get : {err}\n\n{message}")
             raise err
 
         listener_does_match = handler_does_match = False
@@ -252,7 +251,6 @@ class CallbackQueryHandler:
                 ListenerTypes.CALLBACK_QUERY,
             )[0]
         except AttributeError as err:
-            logger.warning(f"Get : {err}\n\n{message}")
             raise err
 
         # managing unallowed user clicks
