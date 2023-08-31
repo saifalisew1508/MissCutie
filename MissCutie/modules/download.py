@@ -1,207 +1,212 @@
-import os
-import re
-import math
-import time
-import wget
-import aiohttp
 import asyncio
-import logging
-import requests
-from pathlib import Path
-from pySmartDL import SmartDL
+import math
+import os
+import time
 from datetime import datetime
-from urllib.error import HTTPError
-from pyrogram import Client, filters
-from urllib.parse import unquote_plus
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from logging import getLogger
+from urllib.parse import unquote
+
+from pyrogram import filters
+from pyrogram.file_id import FileId
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pySmartDL import SmartDL
+
+from MissCutie import pbot as app
+from MissCutie.utils.errors import capture_err, new_task
+from MissCutie.utils.ratelimiter import ratelimiter
+from MissCutie.utils.post import http as fetch
+from MissCutie.utils.pyro_progress import humanbytes, progress_for_pyrogram
 
 
-from MissCutie import pbot
-from MissCutie.utils.errors import capture_err
-
-
-DOWN_PATH = "./downloads"
-
-def humanbytes(size: float) -> str:
-    if not size:
-        return "0 B"
-    power = 2**10
-    n = 0
-    Dic_powerN = {0: "", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
-    while size > power:
-        size /= power
-        n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + "B"
-
-def time_formatter(milliseconds: int) -> str:
-    """Time Formatter"""
-    seconds, milliseconds = divmod(int(milliseconds), 1000)
-    minutes, seconds = divmod(seconds, 60)
-    hours, minutes = divmod(minutes, 60)
-    days, hours = divmod(hours, 24)
-    tmp = (
-        ((str(days) + " day(s), ") if days else "")
-        + ((str(hours) + " hour(s), ") if hours else "")
-        + ((str(minutes) + " minute(s), ") if minutes else "")
-        + ((str(seconds) + " second(s), ") if seconds else "")
-        + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
-    )
-    return tmp[:-2]
-
-
-async def progress_for_pyrogram(current, total, ud_type, message, start):
+@app.on_message(filters.command(["anon", "anondl"]))
+@ratelimiter
+async def upload(bot, message):
+    if not message.reply_to_message:
+        return await message.reply("Please reply to media file.")
+    vid = [
+        message.reply_to_message.video,
+        message.reply_to_message.document,
+        message.reply_to_message.audio,
+        message.reply_to_message.photo,
+    ]
+    media = next((v for v in vid if v is not None), None)
+    if not media:
+        return await message.reply("Unsupported media type..")
+    m = await message.reply("Download your file to my Server...")
     now = time.time()
-    diff = now - start
-    if round(diff % 10.00) == 0 or current == total:
-        percentage = current * 100 / total
-        speed = current / diff
-        elapsed_time = round(diff) * 1000
-        time_to_completion = round((total - current) / speed) * 1000
-        estimated_total_time = elapsed_time + time_to_completion
-
-        elapsed_time = time_formatter(milliseconds=elapsed_time)
-        estimated_total_time = time_formatter(milliseconds=estimated_total_time)
-
-        progress = "`[{0}{1}]` \n".format(
-            "".join(["#" for i in range(math.floor(percentage / 5))]),
-            "".join(["-" for i in range(20 - math.floor(percentage / 5))]),
-        )
-
-        ok = "`{0}%` \n".format(round(percentage, 2))
-
-        tmp = (
-            ok
-            + progress
-            + "\n★ Done: `{0}` \n★  Total: `{1}` \n★  Speed `{2}/s` \n★ Time left: `{3}`".format(
-                humanbytes(current),
-                humanbytes(total),
-                humanbytes(speed),
-                estimated_total_time if estimated_total_time != "" else "0 s",
-            )
-        )
-        try:
-            await message.edit(
-                text="**{}** {}".format(ud_type, tmp)
-            )
-        except BaseException:
-            pass
-
-async def download_video(quality, url, filename):
-    html = requests.get(url).content.decode("utf-8")
-    video_url = re.search(rf'{quality.lower()}_src:"(.+?)"', html).group(1)
-    file_size_request = requests.get(video_url, stream=True)
-    total_size = int(file_size_request.headers["Content-Length"])
-    block_size = 1024
-    with open(filename, "wb") as f:
-        for data in file_size_request.iter_content(block_size):
-            f.write(data)
-    logging.info("Video Downloaded Successfully!")
-
-
-async def download_from_url(url, dl_loc, message):
+    dc_id = FileId.decode(media.file_id).dc_id
+    fileku = await message.reply_to_message.download(
+        progress=progress_for_pyrogram,
+        progress_args=("Trying to download, please wait..", m, now, dc_id),
+    )
     try:
-        dl = SmartDL(url, dl_loc, progress_bar=False)
-        dl.start(blocking=False)
-        while not dl.isFinished():
-            total_length = dl.filesize or 0
-            downloaded = dl.get_dl_size()
-            percentage = dl.get_progress() * 100
-            speed = dl.get_speed(human=True)
-            estimated_total_time = dl.get_eta(human=True)
-            progress = "`[{0}{1}]` \n".format(
-                "".join(["#" for i in range(math.floor(percentage / 5))]),
-                "".join(["-" for i in range(20 - math.floor(percentage / 5))]),
-            )
-            ok = "`{0}%` \n".format(round(percentage, 2))
-            tmp = (
-                ok
-                + progress
-                + "\n>> DONE: `{0}` \n>> TOTAL: `{1}` \n>> SPEED: `{2}` \n>> TIME LEFT: `{3}`".format(
-                    humanbytes(downloaded),
-                    humanbytes(total_length),
-                    speed.title(),
-                    estimated_total_time.title(),
-                )
-            )
-            try:
-                await message.edit(
-                    text="**{}** {}".format("DOWNLOADING...", tmp),
-                )
-            except BaseException:
-                pass
-            await asyncio.sleep(5)
-        if dl.isSuccessful():
-            return True, dl.get_dest()
-        else:
-            return False, dl.get_errors()
-    except HTTPError as error:
-        return False, error
-    except Exception as error:
-        try:
-            await message.edit("DOWNLOADING...\nNOTE: KEEP YOUR PATIENT!")
-            f_name = wget.download(url, dl_loc)
-            return True, f_name
-        except HTTPError:
-            return False, error
+        files = {"file": open(fileku, "rb")}
+        await m.edit("Uploading to Anonfile, Please Wait||")
+        callapi = await fetch.post("https://api.anonfiles.com/upload", files=files)
+        text = callapi.json()
+        output = f'<u>File Uploaded to Anonfile</u>\n\n📂 File Name: {text["data"]["file"]["metadata"]["name"]}\n\n📦 File Size: {text["data"]["file"]["metadata"]["size"]["readable"]}\n\n📥 Download Link: {text["data"]["file"]["url"]["full"]}'
 
-@pbot.on_message(filters.command(["urlupload"]))
+        btn = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "📥 Download 📥", url=f"{text['data']['file']['url']['full']}"
+                    )
+                ]
+            ]
+        )
+        await m.edit(output, reply_markup=btn)
+    except Exception as e:
+        await bot.send_message(message.chat.id, text=f"Something Went Wrong!\n\n{e}")
+    os.remove(fileku)
+
+
+@app.on_message(filters.command(["download", "dl"]))
 @capture_err
-async def url_upload(c, m):
-    if (
-      m.reply_to_message
-      and not m.reply_to_message.text
-      or not m.reply_to_message
-      and not m.text.split(None, 1)[1]
-      ):
-        return await m.reply_text(
-          "Reply to an URL link or Give URL link with this command!"
-          )
-    elif m.reply_to_message:
-        link = m.reply_to_message.text
-    else:
-        link = m.text.split(None, 1)[1]
-
-    msg = await m.reply_text("Processing ...", quote=True)
-    if "http" not in link:
-        return await msg.edit("This is not a direct download link LMAO!")
-
-    if "|" in link:
-        link, filename = link.split("|")
-        link = link.strip()
-        filename = filename.strip()
-    else:
-        link = link.strip()
-        filename = unquote_plus(os.path.basename(link))
-    tmp_directory_for_each_user = DOWN_PATH + "/" + str(m.from_user.id)
-    if not os.path.isdir(tmp_directory_for_each_user):
-        os.makedirs(tmp_directory_for_each_user, exist_ok=True)
-    dl_loc = os.path.join(tmp_directory_for_each_user, filename)
-    ok, file_path = await download_from_url(link, dl_loc, msg)
-    if ok is False:
-        return await msg.edit(f"ErRoR...\n```{file_path}```")
-    try:
-        path = Path(file_path)
-    except IndexError:
-        return await msg.edit("Downloading Filed!")
-    if path.exists():
-        start = time.time()
-        await msg.edit("Downloaded Succesfully!")
-        if path.is_file() and path.stat().st_size < 2097152000:
-            await c.send_document(
-                chat_id=m.chat.id,
-                document=str(path),
-                thumb="MissCutie/utils/images/thumb.jpg",
-                caption="Url Uploaded Using @MissCutieRobot",
-                force_document=False,
-                progress=progress_for_pyrogram,
-                progress_args=("**Please Wait Uploading...**", msg, start),
+@new_task
+async def download(client, message):
+    pesan = await message.reply_text("Processing...", quote=True)
+    if message.reply_to_message is not None:
+        start_t = datetime.now()
+        c_time = time.time()
+        vid = [
+            message.reply_to_message.video,
+            message.reply_to_message.document,
+            message.reply_to_message.audio,
+            message.reply_to_message.photo,
+        ]
+        media = next((v for v in vid if v is not None), None)
+        if not media:
+            return await pesan.edit_msg("Unsupported media type..")
+        dc_id = FileId.decode(media.file_id).dc_id
+        the_real_download_location = await client.download_media(
+            message=message.reply_to_message,
+            progress=progress_for_pyrogram,
+            progress_args=("Trying to download, sabar yakk..", pesan, c_time, dc_id),
+        )
+        end_t = datetime.now()
+        ms = (end_t - start_t).seconds
+        await pesan.edit(
+            f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds."
+        )
+    elif len(message.command) > 1:
+        start_t = datetime.now()
+        the_url_parts = " ".join(message.command[1:])
+        url = the_url_parts.strip()
+        custom_file_name = os.path.basename(url)
+        if "|" in the_url_parts:
+            url, custom_file_name = the_url_parts.split("|")
+            url = url.strip()
+            custom_file_name = custom_file_name.strip()
+        download_file_path = os.path.join("downloads/", custom_file_name)
+        downloader = SmartDL(url, download_file_path, progress_bar=False, timeout=10)
+        try:
+            downloader.start(blocking=False)
+        except Exception as err:
+            return await message.edit_msg(str(err))
+        c_time = time.time()
+        while not downloader.isFinished():
+            total_length = downloader.filesize or None
+            downloaded = downloader.get_dl_size(human=True)
+            display_message = ""
+            now = time.time()
+            diff = now - c_time
+            percentage = downloader.get_progress() * 100
+            speed = downloader.get_speed(human=True)
+            progress_str = "[{0}{1}]\nProgress: {2}%".format(
+                "".join(["●" for _ in range(math.floor(percentage / 5))]),
+                "".join(["○" for _ in range(20 - math.floor(percentage / 5))]),
+                round(percentage, 2),
             )
-            await msg.delete()
-        else:
-            await msg.edit("Max Upload File Size Allowed 2GB, Do You Think I Will Upload it Fool ?")
-        path.unlink(missing_ok=True)
+
+            estimated_total_time = downloader.get_eta(human=True)
+            try:
+                current_message = "Trying to download...\n"
+                current_message += f"URL: <code>{url}</code>\n"
+                current_message += (
+                    f"File Name: <code>{unquote(custom_file_name)}</code>\n"
+                )
+                current_message += f"Speed: {speed}\n"
+                current_message += f"{progress_str}\n"
+                current_message += f"{downloaded} of {humanbytes(total_length)}\n"
+                current_message += f"ETA: {estimated_total_time}"
+                if round(diff % 10.00) == 0 and current_message != display_message:
+                    await pesan.edit(
+                        disable_web_page_preview=True, text=current_message
+                    )
+                    display_message = current_message
+                    await asyncio.sleep(10)
+            except Exception as e:
+                LOGGER.info(str(e))
+        if os.path.exists(download_file_path):
+            end_t = datetime.now()
+            ms = (end_t - start_t).seconds
+            await pesan.edit(
+                f"Downloaded to <code>{download_file_path}</code> in {ms} seconds"
+            )
+    else:
+        await pesan.edit(
+            "Reply to a Telegram Media, to download it to my local server."
+        )
 
 
+@app.on_message(filters.command(["tiktokdl", "tiktok"]))
+@capture_err
+@ratelimiter
+async def tiktokdl(_, message):
+    if len(message.command) == 1:
+        return await message.reply(
+            f"Use command /{message.command[0]} [link] to download tiktok video."
+        )
+    link = message.command[1]
+    msg = await message.reply("Trying download...")
+    try:
+        r = (
+            await fetch.get(f"https://apimu.my.id/downloader/tiktok3?link={link}")
+        ).json()
+        await message.reply_video(
+            r["hasil"]["download_mp4_hd"],
+            caption=f"<b>Title:</b> <code>{r['hasil']['video_title']}</code>\n<b>Uploader</b>: <a href='https://www.tiktok.com/@{r['hasil']['username']}'>{r['hasil']['name']}</a>\n👍: {r['hasil']['like']} 🔁: {r['hasil']['share']} 💬: {r['hasil']['comment']}\n\nUploaded for {message.from_user.mention} [<code>{message.from_user.id}</code>]",
+        )
+        await msg.delete()
+    except Exception as e:
+        await message.reply(f"Failed to download tiktok video..\n\n<b>Reason:</b> {e}")
+        await msg.delete()
+
+
+@app.on_message(filters.command(["fbdl", "facebook"]))
+@capture_err
+async def fbdl(_, message):
+    if len(message.command) == 1:
+        return await message.reply(
+            f"Use command /{message.command[0]} [link] to download Facebook video."
+        )
+    link = message.command[1]
+    msg = await message.reply("Trying download...")
+    try:
+        resjson = (await fetch.get(f"https://yasirapi.eu.org/fbdl?link={link}")).json()
+        try:
+            url = resjson["result"]["links"]["hd"].replace("&amp;", "&")
+        except:
+            url = resjson["result"]["links"]["sd"].replace("&amp;", "&")
+        obj = SmartDL(url, progress_bar=False, timeout=10)
+        obj.start()
+        path = obj.get_dest()
+        await message.reply_video(
+            path,
+            caption=f"<code>{os.path.basename(path)}</code>\n\nUploaded for {message.from_user.mention} [<code>{message.from_user.id}</code>]",
+            thumb="assets/thumb.jpg",
+        )
+        await msg.delete()
+        try:
+            os.remove(path)
+        except:
+            pass
+    except Exception as e:
+        await message.reply(
+            f"Failed to download Facebook video..\n\n<b>Reason:</b> {e}"
+        )
+        await msg.delete()
 
 from MissCutie.modules.language import gs
 
