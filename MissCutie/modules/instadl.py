@@ -213,33 +213,3 @@ async def idgl(c, m):
         except:
           for i in data:
             await m.reply_video(i)
-
-
-
-# Command handler for downloading TikTok video
-
-API_BASE_URL = ""
-
-@pbot.on_message(filters.command(["tiktokdl", "tiktok"]))
-async def tiktok_dl(client, message):
-    try:
-        url = message.text.split(None, 1)[1]
-    except IndexError:
-        url = None
-    if not url:
-        await message.reply_text("`Pass a TikTok URL along with the command`")
-        return
-    
-    msg = await message.reply_text("Please Wait a Moment 🙇🏻")
-    
-    try:
-        rdata = get(f"https://api.sdbots.tech/tiktok?url={url}").json()
-        
-        data = rdata.get("withoutWaterMarkVideo")
-        if data:
-            video_url = data
-            await message.reply_video(video_url, caption=rdata.get("desc"))
-        else:
-            await msg.edit("No video found for the given TikTok URL.")
-    except Exception as e:
-        await msg.edit(f"An error occurred: {e}")
