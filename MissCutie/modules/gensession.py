@@ -24,7 +24,7 @@ from telethon.sessions import StringSession
 
 from MissCutie import API_HASH, API_ID, pbot as app
 from MissCutie.utils.ratelimiter import ratelimiter
-from MissCutie.utils.listen.listen import ListenerTimeout
+from MissCutie.utils.listen import ListenerTimeout
 
 
 
