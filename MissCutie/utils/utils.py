@@ -44,9 +44,6 @@ def patch(obj):
                 else:
                     func = contextmanager(func)
 
-            logger.info(
-                f"Patch Attribute To {obj.__name__} From {container.__name__} : {name}"
-            )
             setattr(obj, name, func)
         return container
 
