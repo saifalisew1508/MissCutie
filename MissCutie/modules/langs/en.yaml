@@ -186,19 +186,16 @@ download_help: |
      Make it easy to download files from most sites!
      
      *USAGE:*
-     ➥ /fbdl - Download videos from facebook.
-     ➥ /ytdl - Download videos from youtube.
-     ➥ /igdl - Download media from instagram.
-     ➥ /pindl - Download videos from pinterest.
-     ➥ /gdtot - Download files from gdtot.
-     ➥ /mdisk - Download videos from mdisk.
-     ➥ /tiktok - Download videos from tiktok.
-     ➥ /terabox - Download files from terabox.
-     ➥ /gdrive - Download files from google drive.
-     ➥ /onedrive - Download files from onedrive.
-     ➥ /mediafire - Download files from mediafire.
+     ➥ /download [url] - Download file from URL (Sudo Only)
+     ➥ /download [reply_to_TG_File] - Download TG File
+     ➥ /telegraph [reply_to_TG_File] - Download TG File
+     ➥ /tiktokdl [link] - Download TikTok Video, try use ytdown command if error.
+     ➥ /fbdl [link] - Download Facebook Video.
+     ➥ /anon [link] - Upload files to Anonfiles.
+     ➥ /ytdl [YT-DLP Supported URL] - Downloading YT-DLP Supported Video and Audio.
+     ➥ /song [URL or Query] Download song from YouTube
+     ➥ /video [URL or Query] Download video from YouTube
 
-     *NOTE* Currently only some modules are workable.
 
 extra_help: |
     *Carbon*
