@@ -5,55 +5,8 @@ import time
 import re
 import random
 
-from MissCutie import (
-    ALLOW_EXCL,
-    CERT_PATH,
-    DONATION_LINK,
-    LOGGER,
-    OWNER_ID,
-    PORT,
-    TOKEN,
-    URL,
-    WEBHOOK,
-    SUPPORT_CHAT,
-    PYTHON_VERSION,
-    BOT_VERSION,
-    PTB_VERSION,
-    BOT_API_VERSION,
-    PYRO_VERSION,
-    TELETHON_VERSION,
-    SQL_VERSION,
-    MONGO_VERSION,
-    BOT_NAME,
-    BOT_USERNAME,
-    BOT_ID,
-    application,
-    StartTime,
-    telethn,
-    pbot)
-
-# Music Import
-from Music.helpers import (
-    ADMIN_MUSIC,
-    AUTH_MUSIC,
-    BROADCAST_MUSIC,
-    BLACKCHAT_MUSIC,
-    BLACKUSER_MUSIC,
-    CPLAY_MUSIC,
-    GBAN_MUSIC,
-    LOOP_MUSIC,
-    MAINTAINANCE_MUSIC,
-    PING_MUSIC,
-    PLAY_MUSIC,
-    SHUFFLE_MUSIC,
-    SEEK_MUSIC,
-    SONG_MUSIC,
-    SPEED_MUSIC)
-
-
-
-# needed to dynamically load modules
-# NOTE: Module order is not guaranteed, specify that in the config file!
+from MissCutie import *
+from Music.helpers import *
 
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
@@ -513,8 +466,8 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n*Bot Developer :* @LostedPerson"
             "\n\n*Supporters*"
             "\n*Main Developer :* @LostedPerson"
-            "\n*Server Manager :* @Soon"
-            "\n*Bug Hunter :* @Soon"
+            "\n*Server Manager :* @NA"
+            "\n*Bug Hunter :* @NA"
             "\n\nENJOY YOUR JOURNEY WITH ME , THANKS FOR USING ME",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -542,9 +495,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             f"\nI'm {BOT_NAME} ( {BOT_USERNAME} )"
             f"\n\nHere You Can See The Bot Owner, Developers and Moderators Contact & Info"
             "\n\n*🤴🏻 BOT OWNER :* @LostedPerson"
-            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SAIFFFF2004"
-            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SexyShekhar"
-            "\n*👮🏻‍♂️ SERVER MANAGER :* @Its\_rohan\_yrus\_wala"
+            "\n*👨🏻‍💻️ BOT DEVELOPER :* @DearSaif"
+            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SexySaif"
+            "\n*👮🏻‍♂️ SERVER MANAGER :* @NA"
             "\n\nThanks to all developers and Moderators who managed my Servers and improving my codes very well to manage your group best"
             "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
             parse_mode=ParseMode.MARKDOWN,
