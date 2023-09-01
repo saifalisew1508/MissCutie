@@ -4,14 +4,14 @@ from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler, MessageHandler, filters
 
 from MissCutie import application
-from MissCutie.modules.helper_funcs.chat_status import user_not_admin, is_user_admin, can_delete
+from MissCutie.modules.helper_funcs.chat_status import user_not_admin, check_admin, can_delete
 from MissCutie.modules.helper_funcs.extraction import extract_text
 from MissCutie.modules.sql import antiarabic_sql as sql
 
 ANTIARABIC_GROUPS = 12
 
 
-@is_user_admin
+@check_admin(is_user=True)
 async def antiarabic_setting(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     bot = context.bot
     args = context.args
