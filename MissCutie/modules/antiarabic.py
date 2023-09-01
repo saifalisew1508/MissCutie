@@ -92,5 +92,5 @@ MessageHandler(
     block=False
 )
 
-dispatcher.add_handler(SETTING_HANDLER)
-dispatcher.add_handler(ANTI_ARABIC, group=ANTIARABIC_GROUPS)
+application.add_handler(SETTING_HANDLER)
+application.add_handler(ANTI_ARABIC, group=ANTIARABIC_GROUPS)
