@@ -3,7 +3,7 @@ from typing import Union
 
 from sqlalchemy import Column, String, Boolean
 
-from AsunaRobot.modules.sql import SESSION, BASE
+from MissCutie.modules.sql import SESSION, BASE
 
 
 class AntiArabicChatSettings(BASE):
