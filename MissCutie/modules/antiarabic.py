@@ -1,8 +1,9 @@
 from typing import List
-from telegram import Update, ParseMode
-from telegram.ext import CallbackContext, CommandHandler, MessageHandler, Filters
+from telegram.constants import ParseMode
+from telegram import Update
+from telegram.ext import ContextTypes, CommandHandler, MessageHandler, filters
 
-from MissCutie import dispatcher
+from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import user_not_admin, is_user_admin, can_delete
 from MissCutie.modules.helper_funcs.extraction import extract_text
 from MissCutie.modules.sql import antiarabic_sql as sql
@@ -11,7 +12,7 @@ ANTIARABIC_GROUPS = 12
 
 
 @is_user_admin
-async def antiarabic_setting(update: Update, context: CallbackContext) -> None:
+async def antiarabic_setting(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     bot = context.bot
     args = context.args
 
@@ -32,7 +33,7 @@ async def antiarabic_setting(update: Update, context: CallbackContext) -> None:
 
 
 @user_not_admin
-async def antiarabic(update: Update, context: CallbackContext) -> None:
+async def antiarabic(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     bot = context.bot
     args = context.args
 
@@ -86,7 +87,7 @@ __mod_name__ = "Anti Arabic"
 
 SETTING_HANDLER = CommandHandler("antiarabic", antiarabic_setting, pass_args=True)
 ANTI_ARABIC = MessageHandler(
-    (Filters.text | Filters.command | Filters.sticker | Filters.photo) & Filters.group, antiarabic)
+    (filters.TEXT | filters.COMMAND | filters.STICKER | Filters.PHOTO) & filters.GROUP, antiarabic)
 
 dispatcher.add_handler(SETTING_HANDLER)
 dispatcher.add_handler(ANTI_ARABIC, group=ANTIARABIC_GROUPS)
