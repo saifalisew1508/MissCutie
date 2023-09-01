@@ -86,7 +86,7 @@ Admin only:
 __mod_name__ = "Anti Arabic"
 
 SETTING_HANDLER = CommandHandler("antiarabic", antiarabic_setting, block=False)
-MessageHandler(
+ANTI_ARABIC = MessageHandler(
     (filters.TEXT | filters.COMMAND | filters.Sticker.ALL | filters.PHOTO) & filters.ChatType.GROUPS,
     antiarabic,
     block=False
