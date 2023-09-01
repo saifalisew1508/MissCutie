@@ -7,7 +7,7 @@ import random
 
 from MissCutie import *
 from Music.helpers import *
-from Helpers.buttons import *
+from MissCutie.Helpers.buttons import *
 
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
