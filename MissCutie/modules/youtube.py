@@ -34,7 +34,7 @@ SONG_DOWNLOAD_DURATION_LIMIT = int(
 YouTube = YouTubeAPI()
 
 @app.on_message(
-    filters.command(["yt", "ytdl", "youtube"])
+    filters.command(["yt", "ytdl", "youtube", "song", "video"])
     & filters.group
 )
 async def song_commad_group(client, message: Message):
@@ -52,7 +52,7 @@ async def song_commad_group(client, message: Message):
   
 
 @app.on_message(
-    filters.command(["yt", "ytdl", "youtube"])
+    filters.command(["yt", "ytdl", "youtube", "song", "video"])
     & filters.private
 )
 async def song_commad_private(client, message: Message):
