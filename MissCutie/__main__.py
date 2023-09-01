@@ -7,6 +7,7 @@ import random
 
 from MissCutie import *
 from Music.helpers import *
+from Helpers.buttons import *
 
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
@@ -73,76 +74,6 @@ Join my [updates channel](http://t.me/BotXNews) to get information on all the la
 Use the /donate command to donate our devlopers
 """
 
-buttons = [
-    [
-        InlineKeyboardButton(text="Help Menu", callback_data="help_back"),
-        InlineKeyboardButton(text="Music Menu", callback_data="Music_"),
-    ],
-    [
-        InlineKeyboardButton(text="About", callback_data="saif_"),
-        InlineKeyboardButton(text="Manager", url=f"tg://user?id={OWNER_ID}"),
-    ],
-    [
-        InlineKeyboardButton(text="Add Your Group ➕️", url=f"https://t.me/{application.bot.username}?startgroup=true"),
-    ],
-]
-
-
-
-about_buttons = [
-    [
-        InlineKeyboardButton(text="About 🤖", callback_data="saif_"),
-        InlineKeyboardButton(text="Commands ⚙️", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="Support 🌍", callback_data="saif_support"),
-        InlineKeyboardButton(text="Sponsor Me ❤", callback_data="saif_sponsor"),
-    ],
-    [
-        InlineKeyboardButton(text="Developers 🙋🏻", callback_data="saif_developer"),
-        InlineKeyboardButton(text="Source 🤖", callback_data="saif_source"),
-    ],
-    [
-        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="saif_close"),
-    ],
-]
-
-
-
-music_buttons = [
-    [
-        InlineKeyboardButton(text="Admin", callback_data="Music_admin"),
-        InlineKeyboardButton(text="Auth", callback_data="Music_auth"),
-        InlineKeyboardButton(text="Broadcast", callback_data="Music_broadcast"),
-    ],
-    [
-        InlineKeyboardButton(text="BL-Chat", callback_data="Music_blackchat"),
-        InlineKeyboardButton(text="BL-User", callback_data="Music_blackuser"),
-        InlineKeyboardButton(text="C-Play", callback_data="Music_cplay"),
-    ],
-    [
-        InlineKeyboardButton(text="Gban", callback_data="Music_gban"),
-        InlineKeyboardButton(text="Loop", callback_data="Music_loop"),
-        InlineKeyboardButton(text="Maintainance", callback_data="Music_maintainance"),
-    ],
-    [
-        InlineKeyboardButton(text="Ping", callback_data="Music_ping"),
-        InlineKeyboardButton(text="Play", callback_data="Music_play"),
-        InlineKeyboardButton(text="Shuffle", callback_data="Music_shuffle"),
-    ],
-    [
-        InlineKeyboardButton(text="Seek", callback_data="Music_seek"),
-        InlineKeyboardButton(text="Song", callback_data="Music_song"),
-        InlineKeyboardButton(text="Speed", callback_data="Music_speed"),
-    ],
-    [
-        InlineKeyboardButton(text="🔙", callback_data="saif_back"),
-        InlineKeyboardButton(text="🗑", callback_data="Music_close"),
-    ],
-]
-
-
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
@@ -169,7 +100,7 @@ This project is entirely run by volunteers, and server fees aren't cheap, so we 
 
 MUSIC_TEXT = """Heyaaaa {},
 
-Click on the buttons below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
+Click on the PM_START_BUTTON below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
 
 *Note ➨* Due to Music Bot and Modular Group Help Bot running on the same server it may be possible that sometimes Music Bot may slow down. Don't worry this is a temporary problem it will be fixed soon by our developers and server managers.
 
@@ -278,7 +209,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.effective_message.reply_text(
                 PM_START_TEXT.format(escape_markdown(first_name),
                                      escape_markdown(context.bot.first_name)),
-                reply_markup=InlineKeyboardMarkup(buttons),
+                reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
                 parse_mode=ParseMode.MARKDOWN,
             )
     else:
@@ -362,17 +293,17 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             help_list = HELPABLE[module].get_help(update.effective_chat.id)
             if isinstance(help_list, list):
                 help_text = help_list[0]
-                help_buttons = help_list[1:]
+                help_PM_START_BUTTON = help_list[1:]
             elif isinstance(help_list, str):
                 help_text = help_list
-                help_buttons = []
+                help_PM_START_BUTTON = []
             text = (
                     "Here is the help for the *{}* module:\n".format(
                         HELPABLE[module].__mod_name__
                     )
                     + help_text
             )
-            help_buttons.append(
+            help_PM_START_BUTTON.append(
                 [InlineKeyboardButton(text="🔙", callback_data="help_back")]
             )
             await query.message.edit_text(
@@ -452,10 +383,10 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n• [Click here](http://t.me/BotXNews) to consult the updated list of Official Supporters of the bot."
             "\n\n• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
             "\n• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!"
-            f"\n\nClick on the *Commands* buttons given below for getting basic help and info about {context.bot.first_name}.",
+            f"\n\nClick on the *Commands* PM_START_BUTTON given below for getting basic help and info about {context.bot.first_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(about_buttons),
+            reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
         )
     elif query.data == "saif_support":
         first_name = update.effective_user.first_name
@@ -471,7 +402,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n\nENJOY YOUR JOURNEY WITH ME , THANKS FOR USING ME",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(about_buttons),
+            reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
         )
     elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
@@ -486,7 +417,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n\nWe also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(about_buttons),
+            reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
         )
     elif query.data == "saif_developer":
         first_name = update.effective_user.first_name
@@ -502,7 +433,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(about_buttons),
+            reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
         )
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
@@ -518,7 +449,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             "\n\nWe Always respect our supporters and give full credit when we copy some modules from other bots!",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(about_buttons),
+            reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
         )
     elif query.data == "saif_close":
         await query.message.delete()
@@ -527,7 +458,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
-            reply_markup=InlineKeyboardMarkup(buttons),
+            reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
         )
@@ -542,7 +473,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                                    escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
 
     elif query.data == "Music_admin":
@@ -550,105 +481,105 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             text=ADMIN_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_auth":
         await query.message.edit_text(
             text=AUTH_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_broadcast":
         await query.message.edit_text(
             text=BROADCAST_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_blackchat":
         await query.message.edit_text(
             text=BLACKCHAT_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_blackuser":
         await query.message.edit_text(
             text=BLACKUSER_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_cplay":
         await query.message.edit_text(
             text=CPLAY_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_gban":
         await query.message.edit_text(
             text=GBAN_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_loop":
         await query.message.edit_text(
             text=LOOP_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_maintainance":
         await query.message.edit_text(
             text=MAINTAINANCE_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_ping":
         await query.message.edit_text(
             text=PING_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_play":
         await query.message.edit_text(
             text=PLAY_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_shuffle":
         await query.message.edit_text(
             text=SHUFFLE_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_seek":
         await query.message.edit_text(
             text=SEEK_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_song":
         await query.message.edit_text(
             text=SONG_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_speed":
         await query.message.edit_text(
             text=SPEED_MUSIC,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(music_buttons),
+            reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_close":
         await query.message.delete()
@@ -658,7 +589,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         await query.message.edit_text(
             PM_START_TEXT.format(escape_markdown(first_name),
                                  escape_markdown(context.bot.first_name)),
-            reply_markup=InlineKeyboardMarkup(buttons),
+            reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
         )
@@ -858,7 +789,7 @@ async def settings_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Query_id_invalid",
             "Message can't be deleted",
         ]:
-            LOGGER.exception("Exception in settings buttons. %s", str(query.data))
+            LOGGER.exception("Exception in settings PM_START_BUTTON. %s", str(query.data))
 
 
 
