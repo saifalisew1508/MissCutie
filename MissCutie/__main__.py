@@ -1,5 +1,4 @@
 import tracemalloc
-import threading
 import importlib
 import contextlib
 import time
@@ -912,4 +911,4 @@ if __name__ == "__main__":
     LOGGER.info("Starting Pyrogram bot client")
     pbot.start()
     tracemalloc.start()
-     main()
+    main()
