@@ -423,6 +423,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
+    chat = update.effective_chat
     first_name = update.effective_user.first_name 
     if query.data == "Music_":
         await query.message.edit_text(
