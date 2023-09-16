@@ -436,105 +436,105 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
 
     elif query.data == "Music_admin":
         await query.message.edit_text(
-            text=ADMIN_MUSIC,
+            text=gs(chat.id, "ADMIN_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_auth":
         await query.message.edit_text(
-            text=AUTH_MUSIC,
+            text=gs(chat.id, "AUTH_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_broadcast":
         await query.message.edit_text(
-            text=BROADCAST_MUSIC,
+            text=gs(chat.id, "BROADCAST_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_blackchat":
         await query.message.edit_text(
-            text=BLACKCHAT_MUSIC,
+            text=gs(chat.id, "BLACKCHAT_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_blackuser":
         await query.message.edit_text(
-            text=BLACKUSER_MUSIC,
+            text=gs(chat.id, "BLACKUSER_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_cplay":
         await query.message.edit_text(
-            text=CPLAY_MUSIC,
+            text=gs(chat.id, "CPLAY_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_gban":
         await query.message.edit_text(
-            text=GBAN_MUSIC,
+            text=gs(chat.id, "GBAN_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_loop":
         await query.message.edit_text(
-            text=LOOP_MUSIC,
+            text=gs(chat.id, "LOOP_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_maintainance":
         await query.message.edit_text(
-            text=MAINTAINANCE_MUSIC,
+            text=gs(chat.id, "MAINTAINANCE_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_ping":
         await query.message.edit_text(
-            text=PING_MUSIC,
+            text=gs(chat.id, "PING_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_play":
         await query.message.edit_text(
-            text=PLAY_MUSIC,
+            text=gs(chat.id, "PLAY_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_shuffle":
         await query.message.edit_text(
-            text=SHUFFLE_MUSIC,
+            text=gs(chat.id, "SHUFFLE_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_seek":
         await query.message.edit_text(
-            text=SEEK_MUSIC,
+            text=gs(chat.id, "SEEK_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_song":
         await query.message.edit_text(
-            text=SONG_MUSIC,
+            text=gs(chat.id, "SONG_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
     elif query.data == "Music_speed":
         await query.message.edit_text(
-            text=SPEED_MUSIC,
+            text=gs(chat.id, "SPEED_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
