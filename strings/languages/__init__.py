@@ -1,4 +1,4 @@
-from MissCutie.modules.langs.language import langs
+from strings.languages.language import langs
 
 get_string = langs.get_string
 reload_strings = langs.reload_strings
