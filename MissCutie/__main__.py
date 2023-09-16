@@ -205,9 +205,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         else:
             first_name = update.effective_user.first_name
-
+            chat = update.effective_chat
             await update.effective_message.reply_text(
-                PM_START_TEXT.format(escape_markdown(first_name),
+                text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name),
                                      escape_markdown(context.bot.first_name)),
                 reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
                 parse_mode=ParseMode.MARKDOWN,
@@ -455,9 +455,10 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         await query.message.delete()
             
     elif query.data == "saif_back":
+        chat = update.effective_chat
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
+            text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
             reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
@@ -586,8 +587,9 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         
     elif query.data == "Music_back":
         first_name = update.effective_user.first_name
+        chat = update.effective_chat
         await query.message.edit_text(
-            PM_START_TEXT.format(escape_markdown(first_name),
+            text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name),
                                  escape_markdown(context.bot.first_name)),
             reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
