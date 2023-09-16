@@ -31,7 +31,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            await enable_join_req(chat.id)
+            enable_join_req(chat.id)
             await message.reply_html(
                 "Enabled join request menu in {}\nI will send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
@@ -43,7 +43,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            await disable_join_req(chat.id)
+            disable_join_req(chat.id)
             await message.reply_html(
                 "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
