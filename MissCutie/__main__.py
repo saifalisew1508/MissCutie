@@ -912,4 +912,4 @@ if __name__ == "__main__":
     LOGGER.info("Starting Pyrogram bot client")
     pbot.start()
     tracemalloc.start()
-    threading.Thread(target=main).start()
+     main()
