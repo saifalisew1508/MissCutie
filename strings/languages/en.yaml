@@ -8,7 +8,7 @@ curr_chat_lang: "Hey. Your current language is {}, select the one you want from 
 set_chat_lang: "Great, {} it is from now on!"
 
 
-pm_start_text: |
+PM_START_TEXT: |
    *Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
    
    - /language: change your default language by using this command
@@ -716,10 +716,10 @@ tools_help: |
 
 
 ADMIN_MUSIC: |
-   **Admin Commands:**
-
+   *Admin Commands:*
+   
    Just add 'c' in the starting of the commands to use them for channel.
-
+   
    /pause : Pause the currently playing stream.
    /resume : Resume the paused stream.
    /skip : Skip the current playing stream and start streaming the next track in queue.
@@ -730,9 +730,9 @@ ADMIN_MUSIC: |
 
 AUTH_MUSIC: |
    *Authorized Users:*
-
+   
    Authorized users can use admin rights in the bot without admin rights in the chat.
-
+   
    /auth [username/user_id] : Add a user to the auth list of the bot.
    /unauth [username/user_id] : Remove a user from the auth users list.
    /authusers : Show the list of auth users of the group.
@@ -740,25 +740,25 @@ AUTH_MUSIC: |
 
 BROADCAST_MUSIC: |
    *Broadcast Feature [Only for sudoers]:*
-
+   
    /broadcast [message or reply to a message] : Broadcast a message to served chats of the bot.
-
+   
    *Broadcasting Modes:*
    -pin : Pins your broadcasted messages in served chats.
    -pinloud : Pins your broadcasted messages in served chats and sends notification to the members.
    -user : Broadcasts the message to the users who have started your bot.
    -assistant : Broadcast your message from the assistant account of the bot.
    -nobot : Forces the bot to not broadcast the message.
-
+    
    *Example:* /broadcast -user -assistant -pin Testing broadcast
 
 
 
 BLACKCHAT_MUSIC: |
    *Chat Blacklist Feature [Only for sudoers]:*
-
+   
    Restrict shit chats to use our precious bot.
-
+   
    /blacklistchat [chat_id] : Blacklist a chat from using the bot.
    /whitelistchat [chat_id] : Whitelist the blacklisted chat.
    /blacklistedchat : Shows the list of blacklisted chats.
@@ -766,7 +766,7 @@ BLACKCHAT_MUSIC: |
 
 BLACKUSER_MUSIC: |
    *Block Users [Only for sudoers]:*
-
+   
    Start ignoring the blacklisted user, so that he can't use bot commands.
    
    /block [username or reply to a user] : Block the user from our bot.
@@ -776,9 +776,9 @@ BLACKUSER_MUSIC: |
 
 CPLAY_MUSIC: |
    *Channel Play Commands:*
-
+   
    You can stream audio/video in channel.
-
+   
    /cplay : Starts streaming the requested audio track on the channel's video chat.
    /cvplay : Starts streaming the requested video track on the channel's video chat.
    /cplayforce or /cvplayforce : Stops the ongoing stream and starts streaming the requested track.
@@ -803,43 +803,42 @@ LOOP_MUSIC: |
 
 
 MAINTAINANCE_MUSIC: |
-   Maintenance Mode [Only for sudoers]:
+   *Maintenance Mode [Only for sudoers]:*
    
    /logs : Get logs of the bot.
-
+   
    /logger [enable/disable] : Bot will start logging the activities happened on bot.
    
    /maintenance [enable/disable] : Enable or disable the maintenance mode of your bot.
 
 
-PING_MUSIC = """
-Ping & Stats:
+PING_MUSIC: |
+   *Ping & Stats:*
+   
+   /mstart : Starts the music bot.
+   /musichelp : Get help menu with explanation of commands.
+   
+   /ping : Shows the ping and system stats of the bot.
+   
+   /stats : Shows the overall stats of the bot.
 
-/start : Starts the music bot.
-/help : Get help menu with explanation of commands.
 
-/ping : Shows the ping and system stats of the bot.
+PLAY_MUSIC: |
+   *Play Commands:*
+   
+   v stands for video play.
+   force stands for force play.
+    
+   /play or /vplay : Starts streaming the requested track on video chat.
+   /playforce or /vplayforce : Stops the ongoing stream and starts streaming the requested track.
 
-/stats : Shows the overall stats of the bot.
-"""
 
-PLAY_MUSIC = """
-Play Commands:
+SHUFFLE_MUSIC: |
+   *Shuffle Queue:*
+   
+   /shuffle : Shuffles the queue.
+   /queue : Shows the shuffled queue.
 
-v stands for video play.
-force stands for force play.
-
-/play or /vplay : Starts streaming the requested track on video chat.
-
-/playforce or /vplayforce : Stops the ongoing stream and starts streaming the requested track.
-"""
-
-SHUFFLE_MUSIC = """
-Shuffle Queue:
-
-/shuffle : Shuffles the queue.
-/queue : Shows the shuffled queue.
-"""
 
 SEEK_MUSIC: |
    *Seek Stream:*
