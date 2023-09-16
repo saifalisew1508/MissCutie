@@ -64,51 +64,6 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-PM_START_TEXT = """
-*Hey* {} there! My name is *{}* - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
-
-- /language: change your default language by using this command
-
-Join my [updates channel](http://t.me/BotXNews) to get information on all the latest updates.
-
-Use the /donate command to donate our devlopers
-"""
-
-
-HELP_STRINGS = """
-Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
-the things I can help you with.
-*Main* commands available:
- - /start: start the bot
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /donate: information about how to donate!
- - /language: change your default language
- - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
-{}
-And the following:
-""".format(application.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
-
-
-DONATE_STRING = """Hey {},
-So you want to donate {} ? Amazing!
-You can donate on [PayPal](https://paypal.me/saifalisew1508), or you can set up a recurring donation on [GitHub Sponsors](https://github.com/sponsors/saifalisew1508). **UPI :** `saif.9@paytm` if you have any other way to donate contact at @PrinceXofficial ,
-This project is entirely run by volunteers, and server fees aren't cheap, so we thank you for your support!."""
-
-MUSIC_TEXT = """Heyaaaa {},
-
-Click on the PM_START_BUTTON below for more information. If you're facing any problem in command you can contact my bot owner or ask in support chat.
-
-*Note ➨* Due to Music Bot and Modular Group Help Bot running on the same server it may be possible that sometimes Music Bot may slow down. Don't worry this is a temporary problem it will be fixed soon by our developers and server managers.
-
-Enjoy With {}
-
-All commands can be used with: /
-"""
-
 START_IMG = "https://te.legra.ph/file/5196d5fa658145cb6b9ef.jpg"
 
 
@@ -175,10 +130,11 @@ async def send_help(chat_id, text, keyboard=None):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     uptime = get_readable_time((time.time() - StartTime))
+    chat = update.effective_chat
     if update.effective_chat.type == "private":
         if len(args) >= 1:
             if args[0].lower() == "help":
-                await send_help(update.effective_chat.id, HELP_STRINGS)
+                await send_help(update.effective_chat.id, (gs(chat.id, "HELP_STRINGS")))
             elif args[0].lower().startswith("ghelp_"):
                 mod = args[0].lower().split("_", 1)[1]
                 if not HELPABLE.get(mod, False):
@@ -207,7 +163,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             first_name = update.effective_user.first_name
             chat = update.effective_chat
             await update.effective_message.reply_text(
-                text=gs(chat.id, "pm_start_text").format(escape_markdown(first_name),
+                text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name),
                                      escape_markdown(context.bot.first_name)),
                 reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
                 parse_mode=ParseMode.MARKDOWN,
@@ -279,6 +235,7 @@ async def error_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     query = update.callback_query
+    chat = update.effective_chat
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
     next_match = re.match(r"help_next\((.+?)\)", query.data)
@@ -317,7 +274,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif prev_match:
             curr_page = int(prev_match.group(1))
             await query.message.edit_text(
-                text=HELP_STRINGS,
+                text=gs(chat.id, "HELP_STRINGS"),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(curr_page - 1, HELPABLE, "help"),
@@ -327,7 +284,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif next_match:
             next_page = int(next_match.group(1))
             await query.message.edit_text(
-                text=HELP_STRINGS,
+                text=gs(chat.id, "HELP_STRINGS"),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(next_page + 1, HELPABLE, "help"),
@@ -336,7 +293,7 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         elif back_match:
             await query.message.edit_text(
-                text=HELP_STRINGS,
+                text=gs(chat.id, "HELP_STRINGS"),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, HELPABLE, "help"),
@@ -458,7 +415,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         chat = update.effective_chat
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "pm_start_text").format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
+            text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
             reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
@@ -470,7 +427,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
     first_name = update.effective_user.first_name 
     if query.data == "Music_":
         await query.message.edit_text(
-            text=MUSIC_TEXT.format(escape_markdown(first_name), 
+            text=gs(chat.id, "MUSIC_TEXT").format(escape_markdown(first_name), 
                                    escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -589,7 +546,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         first_name = update.effective_user.first_name
         chat = update.effective_chat
         await query.message.edit_text(
-            text=gs(chat.id, "pm_start_text").format(escape_markdown(first_name),
+            text=gs(chat.id, "PM_START_TEXT").format(escape_markdown(first_name),
                                  escape_markdown(context.bot.first_name)),
             reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
             parse_mode=ParseMode.MARKDOWN,
@@ -660,7 +617,7 @@ async def get_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     else:
-        await send_help(chat.id, HELP_STRINGS)
+        await send_help(chat.id, (gs(chat.id, "HELP_STRINGS")))
 
 
 async def send_settings(chat: Chat | (int | str), user: User, update: Update, context:ContextTypes.DEFAULT_TYPE, is_user=False):
@@ -834,7 +791,7 @@ async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     if chat.type == "private":
         await update.effective_message.reply_text(
-            DONATE_STRING.format(escape_markdown(first_name), 
+            text=gs(chat.id, "DONATE_STRING").format(escape_markdown(first_name), 
                                  escape_markdown(context.bot.first_name)),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True
@@ -852,7 +809,7 @@ async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await bot.send_message(
                 user.id,
-                DONATE_STRING.format(escape_markdown(first_name), 
+                text=gs(chat.id, "DONATE_STRING").format(escape_markdown(first_name), 
                                      escape_markdown(context.bot.first_name)),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
