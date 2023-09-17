@@ -71,6 +71,7 @@ pyperclip==1.8.2
 pyrate-limiter==2.10.0
 pyfiglet==0.8.post1
 Pyrogram==2.0.106
+pyromod==2.1.0
 PySocks==1.7.1
 pyYAML>=5.1.2
 python-dotenv==0.19.2
@@ -121,7 +122,6 @@ youtube-search
 youtube-search-python
 git+https://github.com/yt-dlp/yt-dlp.git
 ffmpeg-python
-openai
 fontTools # QuoteLy module
 pymongo
 img2pdf
