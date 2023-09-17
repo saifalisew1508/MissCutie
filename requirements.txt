@@ -74,7 +74,7 @@ Pyrogram==2.0.106
 pyromod==2.1.0
 PySocks==1.7.1
 pyYAML>=5.1.2
-python-dotenv==0.19.2
+python-dotenv==1.0.0
 python-telegram-bot==20.5
 python-whatanime==0.1.2
 pytz==2021.3
