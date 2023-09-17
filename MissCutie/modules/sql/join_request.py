@@ -33,9 +33,10 @@ def enable_join_req(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
-            chat = JoinRequestSettings(chat_id, True)
+            chat = JoinRequestSettings(chat_id, True, False)  # Set auto_approve to False initially
 
         chat.setting = True
+        chat.auto_approve = False  # Turn off auto-approve when join request is enabled
         try:
             DISABLED_CHATS.remove(chat_id)
         except KeyError:
@@ -64,16 +65,16 @@ def set_auto_approve_true(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
         chat = SESSION.query(JoinRequestSettings).get(chat_id)
         if not chat:
-            chat = JoinRequestSettings(chat_id, True, True)
+            chat = JoinRequestSettings(chat_id, False, True)  # Set join request to False initially
 
         chat.auto_approve = True
+        chat.setting = False  # Turn off join request when auto-approve is enabled
         try:
             DISABLED_CHATS.remove(chat_id)
         except KeyError:
             pass
         SESSION.add(chat)
         SESSION.commit()
-
 
 def set_auto_approve_false(chat_id: int):
     with JOINREQUEST_SETTING_LOCK:
