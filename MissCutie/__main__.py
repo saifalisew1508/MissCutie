@@ -314,32 +314,15 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         uptime = get_readable_time((time.time() - StartTime))
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            "\n*This is a Bot developed in Python using Telethon, Pyrogram and PTB Library. it's online since 09 January 2022 and it's constantly updated!*"
-            "\n*Written in Python with SQLalchemy and MongoDB as database.*"
-            "\n\nAbout bot Library, Databse Users and Chats"
-            "\n\n*About Bot Version & Its Uptime*"
-            f"\n➥ {BOT_NAME} Version : v{BOT_VERSION}"
-            f"\n➥ Uptime : {uptime}"
-            "\n\n*About bot Library & Working Framework Versions*"
-            f"\n➥ Python Version : v{PYTHON_VERSION}"
-            f"\n➥ Pyrogram Version : v{PYRO_VERSION}"
-            f"\n➥ Telethon Version : v{TELETHON_VERSION}"
-            f"\n➥ PTB Library Version : v{PTB_VERSION}"
-            f"\n➥ Telegram Bot API Version : v{BOT_API_VERSION}"
-            "\n\n*About Bot DataBase and its Version*"
-            f"\n➥ MongoDB Version : v{MONGO_VERSION}"
-            f"\n➥ SQLAlchemy Version : v{SQL_VERSION}"
-#             f"\n➥ Total Users : {sql.num_users()}"
-#             f"\n➥ Total Chats : {sql.num_chats()}"
-            "\n\n*Bot Admins.*"
-            "\n• @LostedPerson, bot creator and main developer."
-            "\n\n__⚠️ The bot staff cannot assist you in situations involving groups using this bot.__"
-            "\n\n*Supporters*"
-            "\n• [Click here](http://t.me/BotXNews) to consult the updated list of Official Supporters of the bot."
-            "\n\n• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
-            "\n• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!"
-            f"\n\nClick on the *Commands* PM_START_BUTTON given below for getting basic help and info about {context.bot.first_name}.",
+            text=gs(chat.id, "ABOUT_TEXT").format(escape_markdown(BOT_VERSION),
+                                 escape_markdown(uptime),
+                                 escape_markdown(PYTHON_VERSION),
+                                 escape_markdown(PYRO_VERSION),
+                                 escape_markdown(TELETHON_VERSION),
+                                 escape_markdown(PTB_VERSION),
+                                 escape_markdown(BOT_API_VERSION),
+                                 escape_markdown(MONGO_VERSION),
+                                 escape_markdown(SQL_VERSION),),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -347,15 +330,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_support":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"*Hey Buddy, My name is {context.bot.first_name}*"
-            "\n*Support Group :* @PublicSource\_Chat"
-            "\n*Updates Channel:* @BotXNews"
-            "\n*Bot Developer :* @LostedPerson"
-            "\n\n*Supporters*"
-            "\n*Main Developer :* @LostedPerson"
-            "\n*Server Manager :* @NA"
-            "\n*Bug Hunter :* @NA"
-            "\n\nENJOY YOUR JOURNEY WITH ME , THANKS FOR USING ME",
+            text=gs(chat.id, "SAIF_SUPPORT"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -363,14 +338,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"Hey Buddy,"
-            f"\nMy name is {context.bot.first_name}"
-            f"\n\nHere is some payment method for donate {context.bot.first_name}"
-            "\n\n*PayPal :* [Click Here](https://paypal.me/saifalisew1508)"
-            "\n*GitHub Sponsorship :* [Click Here](https://github.com/sponsors/saifalisew1508)"
-            "\n*PhonePay, GooglePay, PayTM UPI :* [Pay Now](https://pay.upilink.in/pay/md.saif2752@oksbi)"
-            "\n\nThanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features."
-            "\n\nWe also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!",
+            text=gs(chat.id, "SAIF_SPONSORS"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -378,15 +346,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_developer":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"Hey Buddy,"
-            f"\nI'm {BOT_NAME} ( {BOT_USERNAME} )"
-            f"\n\nHere You Can See The Bot Owner, Developers and Moderators Contact & Info"
-            "\n\n*🤴🏻 BOT OWNER :* @LostedPerson"
-            "\n*👨🏻‍💻️ BOT DEVELOPER :* @DearSaif"
-            "\n*👨🏻‍💻️ BOT DEVELOPER :* @SexySaif"
-            "\n*👮🏻‍♂️ SERVER MANAGER :* @NA"
-            "\n\nThanks to all developers and Moderators who managed my Servers and improving my codes very well to manage your group best"
-            "\n\n*We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!*",
+            text=gs(chat.id, "SAIF_DEVELOPERS"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -394,15 +354,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=f"*Hey Buddy,*"
-            f"\nSo you want source of {context.bot.first_name} ? Amazing!"
-            f"\n\nBut sorry to say that {context.bot.first_name} source isn't longer public"
-            f"\nDon't worry buddy, you can still get old source of {context.bot.first_name} and other alternatives & supportive source"
-            "\n\n*Marie (BASE CODE) :* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)"
-            "\n*MissCutie Old :* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)"
-            "\n*Kigyo Robot :* [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)"
-            "\n\nI'm really thankful to the persons behind this [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot) projects, this inspired me a lot to create this awesome project."
-            "\n\nWe Always respect our supporters and give full credit when we copy some modules from other bots!",
+            text=gs(chat.id, "SAIF_SOURCE"),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
