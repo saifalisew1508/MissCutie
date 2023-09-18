@@ -314,6 +314,8 @@ async def help_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
+    first_name = update.effective_user.first_name 
+    chat = update.effective_chat
     if query.data == "saif_":
         uptime = get_readable_time((time.time() - StartTime))
         first_name = update.effective_user.first_name
