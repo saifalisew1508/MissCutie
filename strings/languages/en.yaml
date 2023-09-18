@@ -131,9 +131,9 @@ SAIF_SUPPORT: |
 SAIF_SPONSORS: |
   Hey Buddy,
   
-  My name is {{ context.bot.first_name }}.
+  My name is {context.bot.first_name}.
 
-  Here are some payment methods if you'd like to support {{ context.bot.first_name }}:
+  Here are some payment methods if you'd like to support {context.bot.first_name}:
 
   - PayPal: [Click Here](https://paypal.me/saifalisew1508)
   - GitHub Sponsorship: [Click Here](https://github.com/sponsors/saifalisew1508)
