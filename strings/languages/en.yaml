@@ -54,6 +54,167 @@ MUSIC_TEXT: |
    All commands can be used with: /
 
 
+ABOUT_TEXT: |
+  *Introduction:*
+
+  Hey there! I'm {context.bot.first_name}, your friendly Python-based Telegram bot. Let me introduce myself and tell you more about what I can do for you.
+
+  *About Me:*
+
+  - I'm a Python bot developed using Telethon, Pyrogram, and PTB Library.
+  - I've been online since 09 January 2022 and receive regular updates to improve my features.
+  - My core is built with Python, and I use SQLalchemy and MongoDB as my databases.
+
+  *Bot Features:*
+
+  - I provide various features including managing users, chats, and more.
+  - I can help you with administrative tasks in your Telegram groups or channels.
+  - You can interact with me using commands and buttons.
+
+  *About Bot Version & Uptime:*
+
+  - {context.bot.first_name} Version: v{}
+  - Uptime: {}
+
+  *About Bot Library & Framework Versions:*
+
+  - Python Version: v{}
+  - Pyrogram Version: v{}
+  - Telethon Version: v{}
+  - PTB Library Version: v{}
+  - Telegram Bot API Version: v{}
+
+  *About Bot Database:*
+
+  - MongoDB Version: v{}
+  - SQLAlchemy Version: v{}
+  - Total Users: NA
+  - Total Chats: NA
+
+  *Bot Administration:*
+
+  - I'm managed by @LostedPerson, the bot creator, and main developer.
+  - Please note that my staff cannot assist with group-specific issues.
+
+  *Support and Thanks:*
+
+  - [Click here](http://t.me/BotXNews) to see the list of Official Supporters of this bot.
+  - Thanks to our donors for supporting server and development expenses.
+  - Special thanks to all groups that rely on me we're always working to improve your experience.
+
+  *Getting Started:*
+
+  To get started, click on the *Commands* button below for basic help and info about {context.bot.first_name }.
+
+
+SAIF_SUPPORT: |
+  *Introduction:*
+
+  Hey there! I'm {context.bot.first_name}, your friendly Python-based Telegram bot. Let me introduce myself and provide you with some useful information.
+
+  *Support and Updates:*
+
+  - Support Group: @PublicSource\_Chat
+  - Updates Channel: @BotXNews
+  - Bot Developer: @LostedPerson
+
+  *Supporters:*
+
+  - Main Developer: @LostedPerson
+  - Server Manager: @NA
+  - Bug Hunter: @NA
+
+  *Enjoy Your Journey:*
+
+  Thank you for using me! I'm here to assist you and make your experience enjoyable. If you have any questions or need assistance, feel free to ask. Enjoy your journey with me!
+
+SAIF_SPONSORS: |
+  Hey Buddy,
+  
+  My name is {{ context.bot.first_name }}.
+
+  Here are some payment methods if you'd like to support {{ context.bot.first_name }}:
+
+  - PayPal: [Click Here](https://paypal.me/saifalisew1508)
+  - GitHub Sponsorship: [Click Here](https://github.com/sponsors/saifalisew1508)
+  - PhonePay, GooglePay, PayTM UPI: [Pay Now](https://pay.upilink.in/pay/md.saif2752@oksbi)
+
+  Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.
+
+  We also thank all the groups who rely on our Bot for this service; we hope you will always like it. We are constantly working to improve it!
+
+SAIF_DEVELOPERS: |
+  Hey there,
+
+  Allow me to introduce myself. I am {context.bot.first_name}, your trusty companion on Telegram. In this message, you'll find comprehensive information about our team, our commitment, and how you can support our mission.
+
+  *Meet the Team:*
+
+  - 🤴🏻 **Bot Owner:** @LostedPerson
+  - 👨🏻‍💻️ **Bot Developer (Lead):** @DearSaif
+  - 👨🏻‍💻️ **Bot Developer:** @SexySaif
+  - 👮🏻‍♂️ **Server Manager:** @NA
+
+  Our team is dedicated to providing you with top-notch service. From development to server management, our goal is to deliver the best experience to our users.
+
+  *How You Can Support Us:*
+
+  If you appreciate our work and want to contribute to our mission, here are a few ways you can support us:
+
+  - **PayPal:** [Donate Here](https://paypal.me/saifalisew1508)
+  - **GitHub Sponsorship:** [Support Us](https://github.com/sponsors/saifalisew1508)
+  - **UPI (PhonePay, GooglePay, PayTM):** [Make a Payment](https://pay.upilink.in/pay/md.saif2752@oksbi)
+
+  Your contributions help cover server and development expenses, ensuring that we can continue to improve and expand our services.
+
+  *For Developers:*
+
+  If you are a developer and wish to contribute to our project, we welcome your skills and ideas. Please reach out to our lead developer, @DearSaif, to discuss potential contributions, improvements, or new features.
+
+  *Feature Requests:*
+
+  We value your feedback and ideas for improving our bot. If you have a feature request or suggestion, please don't hesitate to share it with us. Your input helps us enhance your experience. Feel free to submit your ideas in our support group, @PublicSource\_Chat.
+
+  *A Word of Thanks:*
+
+  We extend our heartfelt gratitude to our developers and moderators who tirelessly manage our servers and enhance our codebase to deliver the best possible experience for your Telegram groups.
+
+  Additionally, we'd like to thank all the groups that trust our bot for their services. Your support drives us to continually refine and enhance our offerings.
+
+  Thank you for being a part of our journey. We are committed to excellence and look forward to serving you better with each passing day.
+
+SAIF_SOURCE: |
+  *Greetings,*
+
+  If you're interested in the source code of {context.bot.first_name}, we truly appreciate your curiosity and enthusiasm. While we regret to inform you that the current source code for {context.bot.first_name} is not publicly available, we'd like to share our gratitude with the developers who have contributed to this project and acknowledge their open-source contributions.
+
+  *A Heartfelt Thanks to Our Developers:*
+
+  We extend our heartfelt thanks to the talented and dedicated developers who have poured their time, creativity, and expertise into {context.bot.first_name}. It's their hard work and innovation that have made this project what it is today. We couldn't have come this far without them.
+
+  *Open Source Initiatives:*
+
+  It's important to recognize the open-source ethos that fuels innovation in the tech community. We stand on the shoulders of giants, benefiting from the collective wisdom and effort of countless open-source projects. We're grateful to the entire open-source community for their contributions and inspiration.
+
+  *Explore Other Open-Source Projects:*
+
+  While you may not have access to the current source code of {context.bot.first_name}, there are numerous open-source Telegram bot projects that you can explore and contribute to. Here are a few of them:
+
+  - *Marie (BASE CODE):* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)
+  - *MissCutie Old:* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)
+  - *Kigyo Robot:* [CLICK HERE](https://github.com/AnimeKaizoku/EnterpriseALRobot)
+
+  We always respect and give full credit to the developers and projects that inspire and contribute to our work. It's a testament to the collaborative spirit of the tech community.
+
+  *Join the Open Source Movement:*
+
+  If you're passionate about open-source development, we encourage you to join the movement. Contribute to existing projects, create your own, and share your knowledge with the world. Open source is not just about code; it's about building a global community of creators and innovators.
+
+  Once again, thank you for your interest in {context.bot.first_name}. We're committed to providing a great user experience, and we're inspired by the support of the open-source community. Together, we can continue to push the boundaries of what's possible in the world of technology.
+
+
+
+
 admin_help: |
    *Any User*
    ➥ /admins*:* list of admins in the chat
