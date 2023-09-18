@@ -130,6 +130,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     args = context.args
     uptime = get_readable_time((time.time() - StartTime))
     chat = update.effective_chat
+    
     if update.effective_chat.type == "private":
         if len(args) >= 1:
             if args[0].lower() == "help":
@@ -145,19 +146,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         [[InlineKeyboardButton(text="🔙", callback_data="help_back")]],
                     ),
                 )
-
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
                 chat = await application.bot.getChat(match.group(1))
-
                 if await is_user_admin(chat, update.effective_user.id):
                     await send_settings(match.group(1), update.effective_user, update, context, False)
                 else:
                     await send_settings(match.group(1), update.effective_user, update, context, True)
-
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
                 await IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
-
         else:
             first_name = update.effective_user.first_name
             chat = update.effective_chat
@@ -169,8 +166,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
     else:
         await update.effective_message.reply_text(
-            "Hello I'm Still Running On {} v{}\n\n<b>Uptime:</b> <code>{}</code>\n<b>Python:</b> <code>v{}</code>\n<b>Telethon:</b> <code>v{}</code>\n<b>Pyrogram:</b> <code>v{}</code>\n<b>Python Telegram Bot:</b> <code>v{}</code>\n<b>Telegram Bot API:</b> <code>v{}</code>".format(
-                BOT_NAME,BOT_VERSION,uptime,PYTHON_VERSION,TELETHON_VERSION,PYRO_VERSION,PTB_VERSION,BOT_API_VERSION,
+            "Hello! I'm currently running on {} version {}.\n\n"
+            "<b>Uptime:</b> <code>{}</code>\n"
+            "<b>Python Version:</b> <code>v{}</code>\n"
+            "<b>Telethon Version:</b> <code>v{}</code>\n"
+            "<b>Pyrogram Version:</b> <code>v{}</code>\n"
+            "<b>Python Telegram Bot Version:</b> <code>v{}</code>\n"
+            "<b>Telegram Bot API Version:</b> <code>v{}</code>".format(
+                BOT_NAME, BOT_VERSION, uptime, PYTHON_VERSION, TELETHON_VERSION, PYRO_VERSION, PTB_VERSION, BOT_API_VERSION,
             ),
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
@@ -179,17 +182,18 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         InlineKeyboardButton(
                             text="Developer 🧑‍💻",
                             url="tg://user?id={}".format(OWNER_ID),
-                            ),
+                        ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Click here for help!",
+                            text="Need help?",
                             url="t.me/{}?start=help".format(context.bot.username),
                         ),
                     ],
                 ],
             ),
         )
+
 
 
 
