@@ -1,5 +1,5 @@
 {
-      "name": "MissCUTIE",
+      "name": "@MissCutieRobot",
       "description": "an Telegram modular group management bot.",
       "keywords": [
          "telegram",
@@ -37,11 +37,11 @@
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "required": true,
-         "value": "1930139488"
+         "value": "6193432445"
       },
       "OWNER_USERNAME": {
          "description": "Your username without the @",
-         "value": "LostedPerson"
+         "value": "SexySaif"
       },
       "MONGO_DB_URI": { 
           "description": "MongoDB Databse Url.", 
@@ -51,7 +51,7 @@
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to saitama support than consider you made an enemy.",
          "required": true,
-         "value": "MissCutie_Support"
+         "value": "PublicSource_Chat"
       },
       "EVENT_LOGS": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
