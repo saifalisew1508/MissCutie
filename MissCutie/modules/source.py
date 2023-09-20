@@ -18,11 +18,11 @@ async def repo(client, message):
         photo=saif,
         caption=f"""**Hey {message.from_user.mention()},\n\ni am [{application.bot.first_name}](t.me/{application.bot.username})**
 
-**➥ My Developer :** @PrinceXofficial
-**➥ Python Version :** `{y()}`
-**➥ Library Version :** `{o}` 
-**➥ Telethon Version :** `{s}` 
-**➥ Pyrogram Version :** `{z}`
+**- My Developer :** @PrinceXofficial
+**- Python Version :** `{y()}`
+**- Library Version :** `{o}` 
+**- Telethon Version :** `{s}` 
+**- Pyrogram Version :** `{z}`
 
 **{BOT_NAME} source is now public and now you can make your own bot.**
 """,

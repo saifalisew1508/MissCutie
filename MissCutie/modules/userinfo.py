@@ -312,11 +312,11 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 __help__ = """
 *ID:*
- ➥ `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
- ➥ `/gifid`*:* reply to a gif to me to tell you its file ID.
+ - `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
+ - `/gifid`*:* reply to a gif to me to tell you its file ID.
 
 *Overall Information about you:*
- ➥ `/info`*:* get information about a user.
+ - `/info`*:* get information about a user.
 """
 
 

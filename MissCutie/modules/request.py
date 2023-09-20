@@ -153,10 +153,10 @@ application.add_handler(HASH_REQUEST_HANDLER)
 
 __mod_name__ = "Request Handling"
 __help__ = """
-  ➥ `/request <content>`*:*  request content to admins.
+  - `/request <content>`*:*  request content to admins.
 
 *Admins only:*
-  ➥ `/requests <on/off>`*:* change request setting, or view current status.
+  - `/requests <on/off>`*:* change request setting, or view current status.
    • If done in pm, toggles your status.
    • If in group, toggles that groups's status.
 """

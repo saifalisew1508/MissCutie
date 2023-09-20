@@ -57,7 +57,7 @@ MUSIC_TEXT: |
 ABOUT_TEXT: |
   *Introduction:*
 
-  Hey there! I'm {context.bot.first_name}, your friendly Python-based Telegram bot. Let me introduce myself and tell you more about what I can do for you.
+  Hey there! I'm {}, your friendly Python-based Telegram bot. Let me introduce myself and tell you more about what I can do for you.
 
   *About Me:*
 
@@ -73,7 +73,7 @@ ABOUT_TEXT: |
 
   *About Bot Version & Uptime:*
 
-  - {context.bot.first_name} Version: v{}
+  - {} Version: v{}
   - Uptime: {}
 
   *About Bot Library & Framework Versions:*
@@ -104,13 +104,13 @@ ABOUT_TEXT: |
 
   *Getting Started:*
 
-  To get started, click on the *Commands* button below for basic help and info about {context.bot.first_name }.
+  To get started, click on the *Commands* button below for basic help and info about { }.
 
 
 SAIF_SUPPORT: |
   *Introduction:*
 
-  Hey there! I'm {context.bot.first_name}, your friendly Python-based Telegram bot. Let me introduce myself and provide you with some useful information.
+  Hey there! I'm {}, your friendly Python-based Telegram bot. Let me introduce myself and provide you with some useful information.
 
   *Support and Updates:*
 
@@ -131,9 +131,9 @@ SAIF_SUPPORT: |
 SAIF_SPONSORS: |
   Hey Buddy,
   
-  My name is {context.bot.first_name}.
+  My name is {}.
 
-  Here are some payment methods if you'd like to support {context.bot.first_name}:
+  Here are some payment methods if you'd like to support {}:
 
   - PayPal: [Click Here](https://paypal.me/saifalisew1508)
   - GitHub Sponsorship: [Click Here](https://github.com/sponsors/saifalisew1508)
@@ -146,7 +146,7 @@ SAIF_SPONSORS: |
 SAIF_DEVELOPERS: |
   Hey there,
 
-  Allow me to introduce myself. I am {context.bot.first_name}, your trusty companion on Telegram. In this message, you'll find comprehensive information about our team, our commitment, and how you can support our mission.
+  Allow me to introduce myself. I am {}, your trusty companion on Telegram. In this message, you'll find comprehensive information about our team, our commitment, and how you can support our mission.
 
   *Meet the Team:*
 
@@ -186,11 +186,11 @@ SAIF_DEVELOPERS: |
 SAIF_SOURCE: |
   *Greetings,*
 
-  If you're interested in the source code of {context.bot.first_name}, we truly appreciate your curiosity and enthusiasm. While we regret to inform you that the current source code for {context.bot.first_name} is not publicly available, we'd like to share our gratitude with the developers who have contributed to this project and acknowledge their open-source contributions.
+  If you're interested in the source code of {}, we truly appreciate your curiosity and enthusiasm. While we regret to inform you that the current source code for {} is not publicly available, we'd like to share our gratitude with the developers who have contributed to this project and acknowledge their open-source contributions.
 
   *A Heartfelt Thanks to Our Developers:*
 
-  We extend our heartfelt thanks to the talented and dedicated developers who have poured their time, creativity, and expertise into {context.bot.first_name}. It's their hard work and innovation that have made this project what it is today. We couldn't have come this far without them.
+  We extend our heartfelt thanks to the talented and dedicated developers who have poured their time, creativity, and expertise into {}. It's their hard work and innovation that have made this project what it is today. We couldn't have come this far without them.
 
   *Open Source Initiatives:*
 
@@ -198,7 +198,7 @@ SAIF_SOURCE: |
 
   *Explore Other Open-Source Projects:*
 
-  While you may not have access to the current source code of {context.bot.first_name}, there are numerous open-source Telegram bot projects that you can explore and contribute to. Here are a few of them:
+  While you may not have access to the current source code of {}, there are numerous open-source Telegram bot projects that you can explore and contribute to. Here are a few of them:
 
   - *Marie (BASE CODE):* [CLICK HERE](https://github.com/PaulSonOfLars/tgbot)
   - *MissCutie Old:* [CLICK HERE](https://github.com/saifalisew1508/MissCutieRobot)
@@ -210,40 +210,40 @@ SAIF_SOURCE: |
 
   If you're passionate about open-source development, we encourage you to join the movement. Contribute to existing projects, create your own, and share your knowledge with the world. Open source is not just about code; it's about building a global community of creators and innovators.
 
-  Once again, thank you for your interest in {context.bot.first_name}. We're committed to providing a great user experience, and we're inspired by the support of the open-source community. Together, we can continue to push the boundaries of what's possible in the world of technology.
+  Once again, thank you for your interest in {}. We're committed to providing a great user experience, and we're inspired by the support of the open-source community. Together, we can continue to push the boundaries of what's possible in the world of technology.
 
 
 
 
 admin_help: |
    *Any User*
-   ➥ /admins*:* list of admins in the chat
+   - /admins*:* list of admins in the chat
 
    *Admins only*
-   ➥ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
-   ➥ /unpin*:* unpins the currently pinned message
-   ➥ /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
-   ➥ /del*:* deletes the message you replied to
-   ➥ /purge*:* deletes all messages between this and the replied to message.
-   ➥ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
-   ➥ /invitelink*:* gets invitelink
-   ➥ /promote*:* promotes the user replied to
-   ➥ /demote*:* demotes the user replied to
-   ➥ /title <title here> *:* sets a custom title for an admin that the bot promoted
-   ➥ /admincache*:* force refresh the admins list
+   - /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
+   - /unpin*:* unpins the currently pinned message
+   - /unpinall*:* unpins all the pinned message, works in topics too (only OWNER can do.)
+   - /del*:* deletes the message you replied to
+   - /purge*:* deletes all messages between this and the replied to message.
+   - /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
+   - /invitelink*:* gets invitelink
+   - /promote*:* promotes the user replied to
+   - /demote*:* demotes the user replied to
+   - /title <title here> *:* sets a custom title for an admin that the bot promoted
+   - /admincache*:* force refresh the admins list
 
    *Group Join Request*
-   ➥ /approveall approve all pending join request *(NO MORE)*
-   ➥ /joinrequest `<yes|on|true/no|off|false>` To activate join request acceptabe button
-   ➥ /autoapprove `<yes|on|true/no|off|false>` To activate join request auto accept by bot
+   - /approveall approve all pending join request *(NO MORE)*
+   - /joinrequest `<yes|on|true/no|off|false>` To activate join request acceptabe button
+   - /autoapprove `<yes|on|true/no|off|false>` To activate join request auto accept by bot
 
    *Mass Action Tool*
-   ➥ /unbanall*:* Unban all banned members in Group 
-   ➥ /unmuteall*:* Unmute all banned members in Group
-   ➥ /banall*:* Ban all members in Group *(Only Group Owner Use This Command)*
-   ➥ /zombies*:* Starts searching for deleted accounts in the group.
-   ➥ /zombies clean*:* Removes the deleted accounts from the group.
-   ➥ /users*:* get group users list
+   - /unbanall*:* Unban all banned members in Group 
+   - /unmuteall*:* Unmute all banned members in Group
+   - /banall*:* Ban all members in Group *(Only Group Owner Use This Command)*
+   - /zombies*:* Starts searching for deleted accounts in the group.
+   - /zombies clean*:* Removes the deleted accounts from the group.
+   - /users*:* get group users list
 
 afk_help: |
    - /afk <reason>: mark yourself as AFK(away from keyboard).
@@ -262,11 +262,11 @@ antiflood_help: |
      Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood \
      will result in restricting that user.
      This will mute users if they send more than 10 messages in a row, bots are ignored.
-      ➥ /flood*:* Get the current flood control setting
+      - /flood*:* Get the current flood control setting
      • *Admins only:*
-     ➥ /setflood <int/'no'/'off'>*:* enables or disables flood control
+     - /setflood <int/'no'/'off'>*:* enables or disables flood control
      *Example:* `/setflood 10`
-     ➥ /setfloodmode <ban/kick/mute/tban/tmute> <value>*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
+     - /setfloodmode <ban/kick/mute/tban/tmute> <value>*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
      • *Note:*
      • Value must be filled for tban and tmute!!
      It can be:
@@ -281,67 +281,67 @@ approve_help: |
      Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
      That's what approvals are for - approve of trustworthy users to allow them to send
      *Admin commands:*
-     ➥ /approval*:* Check a user's approval status in current chat.
-     ➥ /approve*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-     ➥ /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
-     ➥ /approved*:* List all approved users.
-     ➥ /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
+     - /approval*:* Check a user's approval status in current chat.
+     - /approve*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
+     - /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
+     - /approved*:* List all approved users.
+     - /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
 
 backup_help: |
     *Admin only:*
-     ➥ /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
+     - /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
        that files/photos can't be imported due to telegram restrictions.
-     ➥ /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons)
+     - /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons)
 
 bans_help: |
    *Any User*
-    ➥ /kickme: kicks the user who issued the command
+    - /kickme: kicks the user who issued the command
 
    *Admin only:*
-    ➥ /ban <userhandle>: bans a user. (via handle, or reply)
-    ➥ /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-    ➥ /unban <userhandle>: unbans a user. (via handle, or reply)
-    ➥ /kick <userhandle>: kick a user out of the group, (via handle, or reply)
+    - /ban <userhandle>: bans a user. (via handle, or reply)
+    - /tban <userhandle> x(m/h/d): bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+    - /unban <userhandle>: unbans a user. (via handle, or reply)
+    - /kick <userhandle>: kick a user out of the group, (via handle, or reply)
 
 blacklist_help: |
     Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
 
     *NOTE*: Blacklists do not affect group admins.
 
-     ➥ /blacklist*:* View the current blacklisted words.
+     - /blacklist*:* View the current blacklisted words.
 
     Admin only:
-     ➥ /addblacklist <triggers>*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
-     ➥ /unblacklist <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
-     ➥ /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Action to perform when someone sends blacklisted words.
+     - /addblacklist <triggers>*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
+     - /unblacklist <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
+     - /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Action to perform when someone sends blacklisted words.
 
 cleaner_help: |
-    ➥ /cleanbluetext <on/off/yes/no> - clean commands after sending
-    ➥ /ignorecleanbluetext <word> - prevent auto cleaning of the command
-    ➥ /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
-    ➥ /listcleanbluetext - list currently whitelisted commands
+    - /cleanbluetext <on/off/yes/no> - clean commands after sending
+    - /ignorecleanbluetext <word> - prevent auto cleaning of the command
+    - /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
+    - /listcleanbluetext - list currently whitelisted commands
 
 connections_help: |
-    ➥ /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
-    ➥ /connection: list connected chats
-    ➥ /disconnect: disconnect from a chat
-    ➥ /helpconnect: list available commands that can be done remotely
+    - /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
+    - /connection: list connected chats
+    - /disconnect: disconnect from a chat
+    - /helpconnect: list available commands that can be done remotely
 
      *Admin only:*
-    ➥ /allowconnect <yes/no>: allow a user to connect to a chat
+    - /allowconnect <yes/no>: allow a user to connect to a chat
 
 cust_filters_help: |
-    ➥ /filters*:* List all active filters saved in the chat.
+    - /filters*:* List all active filters saved in the chat.
 
      *Admin only:*
-    ➥ /filter <keyword> <reply message>*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'
+    - /filter <keyword> <reply message>*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'
       is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter
       keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you
       doin?
-    ➥ /stop <filter keyword>*:* Stop that filter.
+    - /stop <filter keyword>*:* Stop that filter.
 
      *Chat creator only:*
-    ➥ /removeallfilters*:* Remove all chat filters at once.
+    - /removeallfilters*:* Remove all chat filters at once.
 
       *Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
         Check /markdownhelp to know more!
@@ -353,28 +353,28 @@ disable_help: |
     This allows you to disable some commonly used commands, so noone can use them.
     It'll also allow you to autodelete them, stopping people from bluetexting.
 
-     ➥ /cmds: Check the current status of disabled commands
+     - /cmds: Check the current status of disabled commands
 
      *Admin only:*
-     ➥ /enable <cmd name>: Enable that command
-     ➥ /disable <cmd name>: Disable that command
-     ➥ /enablemodule <module name>*:* enable all commands in that module
-     ➥ /disablemodule <module name>*:* disable all commands in that module
-     ➥ /listcmds: List all possible disablable commands
+     - /enable <cmd name>: Enable that command
+     - /disable <cmd name>: Disable that command
+     - /enablemodule <module name>*:* enable all commands in that module
+     - /disablemodule <module name>*:* disable all commands in that module
+     - /listcmds: List all possible disablable commands
 
 download_help: |
      Make it easy to download files from most sites!
      
      *USAGE:*
-     ➥ /download [url] - Download file from URL (Sudo Only)
-     ➥ /download [reply_to_TG_File] - Download TG File
-     ➥ /telegraph [reply_to_TG_File] - Download TG File
-     ➥ /tiktokdl [link] - Download TikTok Video, try use ytdown command if error.
-     ➥ /fbdl [link] - Download Facebook Video.
-     ➥ /anon [link] - Upload files to Anonfiles.
-     ➥ /ytdl [YT-DLP Supported URL] - Downloading YT-DLP Supported Video and Audio.
-     ➥ /song [URL or Query] Download song from YouTube
-     ➥ /video [URL or Query] Download video from YouTube
+     - /download [url] - Download file from URL (Sudo Only)
+     - /download [reply_to_TG_File] - Download TG File
+     - /telegraph [reply_to_TG_File] - Download TG File
+     - /tiktokdl [link] - Download TikTok Video, try use ytdown command if error.
+     - /fbdl [link] - Download Facebook Video.
+     - /anon [link] - Upload files to Anonfiles.
+     - /ytdl [YT-DLP Supported URL] - Downloading YT-DLP Supported Video and Audio.
+     - /song [URL or Query] Download song from YouTube
+     - /video [URL or Query] Download video from YouTube
 
 
 extra_help: |
@@ -382,43 +382,43 @@ extra_help: |
     /carbon *:* Make Carbon To Given or Replied Text
 
     *Couples*
-    ➥ /couples *:* Choose 2 users and send their name as couples in your chat.
+    - /couples *:* Choose 2 users and send their name as couples in your chat.
 
     *Echo*
-    ➥ /echo *:* reply to a text
+    - /echo *:* reply to a text
 
     *Emoji Game*
     *Play Game With Emojis:*
-    ➥ /dice or /dice 1 to 6 any value
-    ➥ /ball or /ball 1 to 5 any value
-    ➥ /dart or /dart 1 to 6 any value
+    - /dice or /dice 1 to 6 any value
+    - /ball or /ball 1 to 5 any value
+    - /dart or /dart 1 to 6 any value
      *Usage:* hahaha just a magic.
      *warning:* you would be in trouble if you input any other value than mentioned.
 
     *Markdown:*
-    ➥ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
+    - /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
  
     *Mamefy*
-    ➥ /mmf <TEXT>*:* Add Text to Replied Sticker
+    - /mmf <TEXT>*:* Add Text to Replied Sticker
 
     *Prank*
-    ➥ /horny *:* check your current hornyess
-    ➥ /gay *:* check your current guyness
-    ➥ /lezbian *:* check ur current lazbian
-    ➥ /boob *:* check your current boobs size
-    ➥ /cute *:* check your current cuteness
+    - /horny *:* check your current hornyess
+    - /gay *:* check your current guyness
+    - /lezbian *:* check ur current lazbian
+    - /boob *:* check your current boobs size
+    - /cute *:* check your current cuteness
 
     *React:*
-    ➥ /react*:* Reacts with a random reaction
+    - /react*:* Reacts with a random reaction
 
     *Tag/Mention All*
-    ➥ /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
+    - /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
 
     *QuoteLy*
-    ➥ /q - To quote a message.
-    ➥ /q [INTEGER] - To quote more than 1 messages.
-    ➥ /q r - to quote a message with it's reply
-    ➥ /q r [INTEGER] To quote more than 1 reply messages
+    - /q - To quote a message.
+    - /q [INTEGER] - To quote more than 1 messages.
+    - /q r - to quote a message with it's reply
+    - /q r [INTEGER] To quote more than 1 reply messages
 
 feds_help: |
     Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
@@ -428,42 +428,42 @@ feds_help: |
     
     *Commands:*
     Feds are now divided into 3 sections for your ease.
-    ➥ /fedownerhelp*:* Provides help for fed creation and owner only commands
-    ➥ /fedadminhelp*:* Provides help for fed administration commands
-    ➥ /feduserhelp*:* Provides help for commands anyone can use
+    - /fedownerhelp*:* Provides help for fed creation and owner only commands
+    - /fedadminhelp*:* Provides help for fed administration commands
+    - /feduserhelp*:* Provides help for commands anyone can use
 
 FED_OWNER_HELP: | 
     *Fed Owner Only:*
-    ➥ /newfed <fed_name>*:* Creates a Federation, One allowed per user
-    ➥ /renamefed <fed_id> <new_fed_name>*:* Renames the fed id to a new name
-    ➥ /delfed <fed_id>*:* Delete a Federation, and any information related to it. Will not cancel blocked users
-    ➥ /fpromote <user>*:* Assigns the user as a federation admin. Enables all commands for the user under `Fed Admins`
-    ➥ /fdemote <user>*:* Drops the User from the admin Federation to a normal User
-    ➥ /subfed <fed_id>*:* Subscribes to a given fed ID, bans from that subscribed fed will also happen in your fed
-    ➥ /unsubfed <fed_id>*:* Unsubscribes to a given fed ID
-    ➥ /setfedlog <fed_id>*:* Sets the group as a fed log report base for the federation
-    ➥ /unsetfedlog <fed_id>*:* Removed the group as a fed log report base for the federation
-    ➥ /fbroadcast <message>*:* Broadcasts a messages to all groups that have joined your fed
-    ➥ /fedsubs*:* Shows the feds your group is subscribed to `(broken rn)`
+    - /newfed <fed_name>*:* Creates a Federation, One allowed per user
+    - /renamefed <fed_id> <new_fed_name>*:* Renames the fed id to a new name
+    - /delfed <fed_id>*:* Delete a Federation, and any information related to it. Will not cancel blocked users
+    - /fpromote <user>*:* Assigns the user as a federation admin. Enables all commands for the user under `Fed Admins`
+    - /fdemote <user>*:* Drops the User from the admin Federation to a normal User
+    - /subfed <fed_id>*:* Subscribes to a given fed ID, bans from that subscribed fed will also happen in your fed
+    - /unsubfed <fed_id>*:* Unsubscribes to a given fed ID
+    - /setfedlog <fed_id>*:* Sets the group as a fed log report base for the federation
+    - /unsetfedlog <fed_id>*:* Removed the group as a fed log report base for the federation
+    - /fbroadcast <message>*:* Broadcasts a messages to all groups that have joined your fed
+    - /fedsubs*:* Shows the feds your group is subscribed to `(broken rn)`
 
 FED_ADMIN_HELP: |
     *Fed Admins:*
-    ➥ /fban <user> <reason>*:* Fed bans a user
-    ➥ /unfban <user> <reason>*:* Removes a user from a fed ban
-    ➥ /fedinfo <fed_id>*:* Information about the specified Federation
-    ➥ /joinfed <fed_id>*:* Join the current chat to the Federation. Only chat owners can do this. Every chat can only be in one Federation
-    ➥ /leavefed <fed_id>*:* Leave the Federation given. Only chat owners can do this
-    ➥ /setfrules <rules>*:* Arrange Federation rules
-    ➥ /fedadmins*:* Show Federation admin
-    ➥ /fbanlist*:* Displays all users who are victimized at the Federation at this time
-    ➥ /fedchats*:* Get all the chats that are connected in the Federation
-    ➥ /chatfed *:* See the Federation in the current chat
+    - /fban <user> <reason>*:* Fed bans a user
+    - /unfban <user> <reason>*:* Removes a user from a fed ban
+    - /fedinfo <fed_id>*:* Information about the specified Federation
+    - /joinfed <fed_id>*:* Join the current chat to the Federation. Only chat owners can do this. Every chat can only be in one Federation
+    - /leavefed <fed_id>*:* Leave the Federation given. Only chat owners can do this
+    - /setfrules <rules>*:* Arrange Federation rules
+    - /fedadmins*:* Show Federation admin
+    - /fbanlist*:* Displays all users who are victimized at the Federation at this time
+    - /fedchats*:* Get all the chats that are connected in the Federation
+    - /chatfed *:* See the Federation in the current chat
 
 FED_USER_HELP: | 
     *Any user:*
-    ➥ /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
-    ➥ /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
-    ➥ /frules*:* See Federation regulations
+    - /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
+    - /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
+    - /frules*:* See Federation regulations
 
 formt_help_bse: |
     Cutie supports a large number of formatting options to make your messages more expressive. Take a look!
@@ -479,26 +479,26 @@ force_subscribe: |
     Note: Only the creator of the group can set me up, and I will not allow force subscribe again if not done so.
 
     *Commands*
-    ➥ /forcesubscribe: Get the current settings.
-    ➥ /forcesubscribe <no/off/disable>: Turn off ForceSubscribe.
-    ➥ /forcesubscribe <channel username>: Turn on and set up the channel.
-    ➥ /forcesubscribe clear: Unmute all members who are muted by me.
+    - /forcesubscribe: Get the current settings.
+    - /forcesubscribe <no/off/disable>: Turn off ForceSubscribe.
+    - /forcesubscribe <channel username>: Turn on and set up the channel.
+    - /forcesubscribe clear: Unmute all members who are muted by me.
 
     Note /forcesub is an alias of /forcesubscribe.
 
 
 google_search: |
     *Google Search*
-    ➥ /google <text>*:* Perform a google search
-    ➥ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
-    ➥ /app <appname>*:* Searches for an app in Play Store and returns its details.
-    ➥ /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
+    - /google <text>*:* Perform a google search
+    - /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
+    - /app <appname>*:* Searches for an app in Play Store and returns its details.
+    - /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
 
     *Google Translate*
-    ➥ `/tr` or `/tl` (language code) as reply to a long message
+    - `/tr` or `/tl` (language code) as reply to a long message
     *Example:*
-    ➥ `/tr en`*:* translates something to english
-    ➥ `/tr hi-en`*:* translates hindi to english
+    - `/tr en`*:* translates something to english
+    - `/tr hi-en`*:* translates hindi to english
 
 
     
@@ -589,10 +589,10 @@ locks_help: |
 
 log_help: |
       *Admins only:*
-      ➥ /logchannel*:* get log channel info
-      ➥ /setlog*:* set the log channel.
-      ➥ /unsetlog*:* unset the log channel.
-      ➥ /announce*:* toggle setting to announce admin actions in chatroom.
+      - /logchannel*:* get log channel info
+      - /setlog*:* set the log channel.
+      - /unsetlog*:* unset the log channel.
+      - /announce*:* toggle setting to announce admin actions in chatroom.
 
       Setting the log channel is done by:
       • adding the bot to the desired channel (as an admin!)
@@ -637,16 +637,16 @@ moderators_help: |
        That's what modcheck are for - mod of trustworthy users to allow to manage your group.
 
        *Commands*
-       ➥ /addmod *:* moderator of a user. 
-       ➥ /rmmod *:* Unmoderator of a user.
-       ➥ /modcheck *:* moderation cheak of a user.
-       ➥ /modlist *:* moderation user list.
+       - /addmod *:* moderator of a user. 
+       - /rmmod *:* Unmoderator of a user.
+       - /modcheck *:* moderation cheak of a user.
+       - /modlist *:* moderation user list.
 
 
 nightmode_help: |
        *Admins Only*
-       ➥ /nightmode: Adds the group to Night Mode chats.
-       ➥ /rmnight: Removes the group from Night Mode chats.
+       - /nightmode: Adds the group to Night Mode chats.
+       - /rmnight: Removes the group from Night Mode chats.
 
        *Note:* Night Mode chats are automatically closed at 12 AM (IST) and automatically opened at 6 AM (IST) to prevent night spams.
 
@@ -685,10 +685,10 @@ reports_help: |
           • If in group, toggles that groups's status.
 
 rules_help: |
-      ➥ /rules*:* get the rules for this chat.
+      - /rules*:* get the rules for this chat.
        *Admins only:*
-      ➥ /setrules <your rules here>*:* set the rules for this chat.
-      ➥ /clearrules*:* clear the rules for this chat.
+      - /setrules <your rules here>*:* set the rules for this chat.
+      - /clearrules*:* clear the rules for this chat.
 
 userinfo_help: |
       - /setbio <text>: while replying, will save another user's bio
@@ -697,36 +697,36 @@ userinfo_help: |
       - /me: will get your or another user's info
 
 warns_help: |
-      ➥ /warns <userhandle>*:* get a user's number, and reason, of warns.
-      ➥ /warnlist*:* list of all current warning filters
+      - /warns <userhandle>*:* get a user's number, and reason, of warns.
+      - /warnlist*:* list of all current warning filters
 
       *Admins only:*
-      ➥ /warn <userhandle>*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
-      ➥ /resetwarn <userhandle>*:* reset the warns for a user. Can also be used as a reply.
-      ➥ /addwarn <keyword> <reply message>*:* set a warning filter on a certain keyword. If you want your keyword to
+      - /warn <userhandle>*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
+      - /resetwarn <userhandle>*:* reset the warns for a user. Can also be used as a reply.
+      - /addwarn <keyword> <reply message>*:* set a warning filter on a certain keyword. If you want your keyword to
       be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
-      ➥ /nowarn <keyword>*:* stop a warning filter
-      ➥ /warnlimit <num>*:* set the warning limit
-      ➥ /strongwarn <on/yes/off/no>*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
+      - /nowarn <keyword>*:* stop a warning filter
+      - /warnlimit <num>*:* set the warning limit
+      - /strongwarn <on/yes/off/no>*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
 
 greetings_help: |
        *Admins only:*
-       ➥ /welcome <on/off>*:* enable/disable welcome messages.
-       ➥ /welcome*:* shows current welcome settings.
-       ➥ /welcome noformat*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
-       ➥ /goodbye*:* same usage and args as `/welcome`.
-       ➥ /setwelcome <sometext>*:* set a custom welcome message. If used replying to media, uses that media.
-       ➥ /setgoodbye <sometext>*:* set a custom goodbye message. If used replying to media, uses that media.
-       ➥ /resetwelcome*:* reset to the default welcome message.
-       ➥ /resetgoodbye*:* reset to the default goodbye message.
-       ➥ /cleanwelcome <on/off>*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
-       ➥ /welcomemutehelp*:* gives information about welcome mutes.
-       ➥ /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
+       - /welcome <on/off>*:* enable/disable welcome messages.
+       - /welcome*:* shows current welcome settings.
+       - /welcome noformat*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
+       - /goodbye*:* same usage and args as `/welcome`.
+       - /setwelcome <sometext>*:* set a custom welcome message. If used replying to media, uses that media.
+       - /setgoodbye <sometext>*:* set a custom goodbye message. If used replying to media, uses that media.
+       - /resetwelcome*:* reset to the default welcome message.
+       - /resetgoodbye*:* reset to the default goodbye message.
+       - /cleanwelcome <on/off>*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
+       - /welcomemutehelp*:* gives information about welcome mutes.
+       - /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
        *Example:*
        user joined chat, user left chat.
 
        *Welcome markdown:*
-       ➥ `/welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
+       - `/welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
 
 nation_help: |
       - /eagle - Lists all Eagle Union members.
@@ -740,20 +740,20 @@ nation_help: |
 
 sticker_blacklist_help: |
        **Only admin:**
-         ➥ /addblsticker <sticker link>**:** Add the sticker trigger to the black list. Can be added via reply sticker
-         ➥ /unblsticker <sticker link>**:** Remove triggers from blacklist. The same newline logic applies here, so you can delete multiple triggers at once
-         ➥ /rmblsticker <sticker link>**:** Same as above
-         ➥ /blstickermode <delete/ban/tban/mute/tmute>**:** sets up a default action on what to do if users use blacklisted stickers
+         - /addblsticker <sticker link>**:** Add the sticker trigger to the black list. Can be added via reply sticker
+         - /unblsticker <sticker link>**:** Remove triggers from blacklist. The same newline logic applies here, so you can delete multiple triggers at once
+         - /rmblsticker <sticker link>**:** Same as above
+         - /blstickermode <delete/ban/tban/mute/tmute>**:** sets up a default action on what to do if users use blacklisted stickers
        Note:
-         ➥ `<sticker link>` can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
+         - `<sticker link>` can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
 
 
 stickers_help: |
-         ➥ /stickerid*:* reply to a sticker to me to tell you its file ID.
-         ➥ /getsticker*:* reply to a sticker to me to upload its raw PNG file.
-         ➥ /delstcker*:* reply to a sticker to delete it from the pack, I can delete what I made only.
-         ➥ /kang*:* reply to sticker (animated/static/video) or image or gif to kang into your own pack.
-         ➥ /stickers*:* Find stickers for given term on combot sticker catalogue
+         - /stickerid*:* reply to a sticker to me to tell you its file ID.
+         - /getsticker*:* reply to a sticker to me to upload its raw PNG file.
+         - /delstcker*:* reply to a sticker to delete it from the pack, I can delete what I made only.
+         - /kang*:* reply to sticker (animated/static/video) or image or gif to kang into your own pack.
+         - /stickers*:* Find stickers for given term on combot sticker catalogue
 
 
 raid_help: |
@@ -795,77 +795,77 @@ topics_help: |
 
   As a group management bot I have some useful commands to help you
   create, delete, close and reopen topics in your chat.
-  ➥ /topicnew*:* Create new topic, requires topic name to create.
-  ➥ /topicdel*:* Delete an existing topic, requires topic ID to delete.  
-  ➥ /topicclose*:* Close an existing topic, requires topic ID to close.
-  ➥ /topicopen*:* Open an already closed topic, requires topic ID to open.
-  ➥ /setactiontopic*:* Set issuing topic for action messages such as welcome, goodbye, warns, bans,..etc
-  ➥ /delactiontopic*:* Delete default topic for actions messages.
+  - /topicnew*:* Create new topic, requires topic name to create.
+  - /topicdel*:* Delete an existing topic, requires topic ID to delete.  
+  - /topicclose*:* Close an existing topic, requires topic ID to close.
+  - /topicopen*:* Open an already closed topic, requires topic ID to open.
+  - /setactiontopic*:* Set issuing topic for action messages such as welcome, goodbye, warns, bans,..etc
+  - /delactiontopic*:* Delete default topic for actions messages.
 
 
 
 tools_help: |
   *Country*
-  ➥ /country <country name>*:* Gathering info about given country
+  - /country <country name>*:* Gathering info about given country
 
   *Currency converter:*
-  ➥ /cash*:* currency converter
+  - /cash*:* currency converter
   *Example:*
-  ➥ /cash 1 USD INR
-  ➥ /cash 1 usd inr
+  - /cash 1 USD INR
+  - /cash 1 usd inr
   *Output:* 1.0 USD = 75.505 INR
 
   *English Tools*
-  ➥ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
-  ➥ /spell*:* while replying to a message, will reply with a grammar corrected version
-  ➥ /synonyms <word>*:* Find the synonyms of a word
-  ➥ /antonyms <word>*:* Find the antonyms of a word
+  - /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+  - /spell*:* while replying to a message, will reply with a grammar corrected version
+  - /synonyms <word>*:* Find the synonyms of a word
+  - /antonyms <word>*:* Find the antonyms of a word
 
   *Encryption & Decryption*
-  ➥ /encrypt *:* Encrypts The Given Text
-  ➥ /decrypt *:* Decrypts Previously Ecrypted Text
+  - /encrypt *:* Encrypts The Given Text
+  - /decrypt *:* Decrypts Previously Ecrypted Text
  
   *GitHub*
-  ➥ /github <username>*:* get information about a github user.
+  - /github <username>*:* get information about a github user.
 
   *GPS & Location*
-  ➥ /gps <location>*:* Get gps location.
+  - /gps <location>*:* Get gps location.
 
   *Paste*
-  ➥ /paste *:* Saves replied content to nekobin.com and replies with a url
+  - /paste *:* Saves replied content to nekobin.com and replies with a url
  
   *PDF Tool*
   /pdf *:* Make PDF of Replied Image
 
   *QR Code*
-  ➥ /getqr *:* Get QR Code content from a replied photo.
-  ➥ /makeqr <text> *:* Make a QR Code containing the given text.
+  - /getqr *:* Get QR Code content from a replied photo.
+  - /makeqr <text> *:* Make a QR Code containing the given text.
 
-  ➥ /time <query>*:* Gives information about a timezone.
+  - /time <query>*:* Gives information about a timezone.
   *Available queries:* Country Code/Country Name/Timezone Name 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
   *Urban Dictonary:*
-  ➥ /ud <word>*:* Type the word or expression you want to search use
+  - /ud <word>*:* Type the word or expression you want to search use
  
   *Wikipedia:*
-  ➥ /wiki <query>*:* wikipedia your query
+  - /wiki <query>*:* wikipedia your query
 
   *WallPaper*
-  ➥ /wall <query>*:* get a wallpaper from wall.alphacoders.com
+  - /wall <query>*:* get a wallpaper from wall.alphacoders.com
   
   *Weather*
-  ➥ /weather <city>*:* Advanced weather module, usage same as /weather
-  ➥ /weather moon*:* Get the current status of moon
+  - /weather <city>*:* Advanced weather module, usage same as /weather
+  - /weather moon*:* Get the current status of moon
   
   *Website Screenshot*
-  ➥ /webss <URL Link>*;* Sends the screenshot of the given url.
+  - /webss <URL Link>*;* Sends the screenshot of the given url.
   
   *Write Tool*
-  ➥ /write <text>*:* Writes the given text.
+  - /write <text>*:* Writes the given text.
   
   *Zip*
-  ➥ /zip *:* reply to a telegram file to compress it in .zip format
-  ➥ /unzip *:* reply to a telegram file to decompress it from the .zip format
+  - /zip *:* reply to a telegram file to compress it in .zip format
+  - /unzip *:* reply to a telegram file to decompress it from the .zip format
 
 
 
