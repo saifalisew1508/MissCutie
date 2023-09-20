@@ -321,18 +321,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=gs(chat.id, "ABOUT_TEXT").format(
-                escape_markdown(context.bot.first_name),
-                escape_markdown(context.bot.first_name),
-                escape_markdown(BOT_VERSION),
-                escape_markdown(uptime),
-                escape_markdown(PYTHON_VERSION),
-                escape_markdown(PYRO_VERSION),
-                escape_markdown(TELETHON_VERSION),
-                escape_markdown(PTB_VERSION),
-                escape_markdown(BOT_API_VERSION),
-                escape_markdown(MONGO_VERSION),
-                escape_markdown(SQL_VERSION),
-                escape_markdown(context.bot.first_name),
+                BOT_NAME, BOT_NAME, BOT_VERSION, uptime, PYTHON_VERSION, PYRO_VERSION, TELETHON_VERSION, PTB_VERSION, BOT_API_VERSION, MONGO_VERSION, SQL_VERSION, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -341,7 +330,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_support":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_SUPPORT").format(escape_markdown(context.bot.first_name),),
+            text=gs(chat.id, "SAIF_SUPPORT").format(
+                BOT_NAME,
+            ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -349,7 +340,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_SPONSORS").format(escape_markdown(context.bot.first_name),),
+            text=gs(chat.id, "SAIF_SPONSORS").format(
+                BOT_NAME,
+            ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -357,7 +350,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_developer":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_DEVELOPERS").format(escape_markdown(context.bot.first_name),),
+            text=gs(chat.id, "SAIF_DEVELOPERS").format(
+                BOT_NAME,
+            ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
@@ -365,9 +360,9 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_SOURCE").format(escape_markdown(context.bot.first_name),
-                                 escape_markdown(context.bot.first_name),
-                                 escape_markdown(context.bot.first_name),),
+            text=gs(chat.id, "SAIF_SOURCE").format(
+                BOT_NAME, BOT_NAME, BOT_NAME,
+            ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(ABOUT_BUTTON),
