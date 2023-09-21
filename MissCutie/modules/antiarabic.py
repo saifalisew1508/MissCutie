@@ -70,13 +70,13 @@ __help__ = """
 Here is some help for the AntiArabicScript module:
 AntiArabicScript module is used to delete messages containing characters from one of the following automatically:
 
-• Arabic
-• Arabic Supplement
-• Arabic Extended-A
-• Arabic Presentation Forms-A
-• Arabic Presentation Forms-B
-• Rumi Numeral Symbols
-• Arabic Mathematical Alphabetic Symbol
+- Arabic
+- Arabic Supplement
+- Arabic Extended-A
+- Arabic Presentation Forms-A
+- Arabic Presentation Forms-B
+- Rumi Numeral Symbols
+- Arabic Mathematical Alphabetic Symbol
 
 NOTE: AntiArabicScript module doesn't affect messages sent by admins.
 

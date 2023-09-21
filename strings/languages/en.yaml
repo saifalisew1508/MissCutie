@@ -267,12 +267,12 @@ antiflood_help: |
      will result in restricting that user.
      This will mute users if they send more than 10 messages in a row, bots are ignored.
       - /flood*:* Get the current flood control setting
-     • *Admins only:*
+     - *Admins only:*
      - /setflood <int/'no'/'off'>*:* enables or disables flood control
      *Example:* `/setflood 10`
      - /setfloodmode <ban/kick/mute/tban/tmute> <value>*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
-     • *Note:*
-     • Value must be filled for tban and tmute!!
+     - *Note:*
+     - Value must be filled for tban and tmute!!
      It can be:
      `5m` = 5 minutes
      `6h` = 6 hours
@@ -539,23 +539,23 @@ filling_help: |
       - <code>{chatname}</code>: The chat's name.
 
 fun_help: |
-     • /runs: reply a random string from an array of replies.
-     • /pat: pat a person, cool thing to have for cute ones :3
-     • /slap: slap a user, or get slapped if not a reply.
-     • /shrug : get shrug XD.
-     • /table : get flip/unflip :v.
-     • /decide : Randomly answers yes/no/maybe
-     • /toss : Tosses A coin
-     • /roll : Roll a dice.
-     • /rlg : Join ears,nose,mouth and create an emo ;-;
-     • /shout <keyword>: write anything you want to give loud shout.
-     • /stickerid: reply to a sticker to get its ID.
-     • /getsticker: reply to a sticker to get the raw PNG image.
-     • /steal: reply to a sticker or image to add it to your pack.
+     - /runs: reply a random string from an array of replies.
+     - /pat: pat a person, cool thing to have for cute ones :3
+     - /slap: slap a user, or get slapped if not a reply.
+     - /shrug : get shrug XD.
+     - /table : get flip/unflip :v.
+     - /decide : Randomly answers yes/no/maybe
+     - /toss : Tosses A coin
+     - /roll : Roll a dice.
+     - /rlg : Join ears,nose,mouth and create an emo ;-;
+     - /shout <keyword>: write anything you want to give loud shout.
+     - /stickerid: reply to a sticker to get its ID.
+     - /getsticker: reply to a sticker to get the raw PNG image.
+     - /steal: reply to a sticker or image to add it to your pack.
 
 antispam_help: |
      *Admins only:*
-      • `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
+      - `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
 
      Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect
      you and your groups by removing spam flooders as quickly as possible.
@@ -575,12 +575,12 @@ locks_help: |
      The locks module allows you to lock away some common items in the
      telegram world; the bot will automatically delete them!
 
-      • `/locktypes`*:* Lists all possible locktypes
+      - `/locktypes`*:* Lists all possible locktypes
 
       *Admins only:*
-      • `/lock <type>`*:* Lock items of a certain type (not available in private)
-      • `/unlock <type>`*:* Unlock items of a certain type (not available in private)
-      • `/locks`*:* The current list of locks in this chat.
+      - `/lock <type>`*:* Lock items of a certain type (not available in private)
+      - `/unlock <type>`*:* Unlock items of a certain type (not available in private)
+      - `/locks`*:* The current list of locks in this chat.
 
      Locks can be used to restrict a group's users.
      eg:
@@ -589,8 +589,8 @@ locks_help: |
      Locking bots will stop non-admins from adding bots to the chat.
 
      *Note:*
-      • Unlocking permission *info* will allow members (non-admins) to change the group information, such as the description or the group name
-      • Unlocking permission *pin* will allow members (non-admins) to pinned a message in a group
+      - Unlocking permission *info* will allow members (non-admins) to change the group information, such as the description or the group name
+      - Unlocking permission *pin* will allow members (non-admins) to pinned a message in a group
 
 log_help: |
       *Admins only:*
@@ -600,9 +600,9 @@ log_help: |
       - /announce*:* toggle setting to announce admin actions in chatroom.
 
       Setting the log channel is done by:
-      • adding the bot to the desired channel (as an admin!)
-      • sending `/setlog` in the channel
-      • forwarding the `/setlog` to the group
+      - adding the bot to the desired channel (as an admin!)
+      - sending `/setlog` in the channel
+      - forwarding the `/setlog` to the group
 
 markdown_help_text: |
       Markdown is a very powerful formatting tool supported by telegram. Cutie has some enhancements, to make sure that
@@ -630,9 +630,9 @@ markdown_help_text: |
 
 muting_help: |
        *Admins only:*
-       • `/mute <userhandle>`*:* silences a user. Can also be used as a reply, muting the replied to user.
-       • `/tmute <userhandle> x(m/h/d)`*:* mutes a user for x time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
-       • `/unmute <userhandle>`*:* unmutes a user. Can also be used as a reply, muting the replied to user.
+       - `/mute <userhandle>`*:* silences a user. Can also be used as a reply, muting the replied to user.
+       - `/tmute <userhandle> x(m/h/d)`*:* mutes a user for x time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
+       - `/unmute <userhandle>`*:* unmutes a user. Can also be used as a reply, muting the replied to user.
 
 
 
@@ -657,37 +657,37 @@ nightmode_help: |
 
 
 notes_help: |
-       • `/get <notename>`*:* get the note with this notename
-       • `#<notename>`*:* same as /get
-       • `/notes` or `/saved`*:* list all saved notes in this chat
-       • `/number` *:* Will pull the note of that number in the list.
+       - `/get <notename>`*:* get the note with this notename
+       - `#<notename>`*:* same as /get
+       - `/notes` or `/saved`*:* list all saved notes in this chat
+       - `/number` *:* Will pull the note of that number in the list.
         If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can
         be useful when updating a current note.
 
         *Admins only:*
-       • `/save <notename> <notedata>`*:* saves notedata as a note with name notename
+       - `/save <notename> <notedata>`*:* saves notedata as a note with name notename
         A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a
          `buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check `/markdownhelp` for more info.
-       • `/save <notename>`*:* save the replied message as a note with name notename
-       • `/clear <notename>`*:* clear note with this name
-       • `/removeallnotes`*:* removes all notes from the group
+       - `/save <notename>`*:* save the replied message as a note with name notename
+       - `/clear <notename>`*:* clear note with this name
+       - `/removeallnotes`*:* removes all notes from the group
        *Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 
 purge_help: |
        *Admin only:*
-        • /del: deletes the message you replied to
-        • /purge: deletes all messages between this and the replied to message.
-        • /purge <integer X>: deletes the replied message, and X messages following it if replied to a message.
+        - /del: deletes the message you replied to
+        - /purge: deletes all messages between this and the replied to message.
+        - /purge <integer X>: deletes the replied message, and X messages following it if replied to a message.
 
 reports_help: |
-        • `/report <reason>`*:* reply to a message to report it to admins.
-        • `@admin`*:* reply to a message to report it to admins.
+        - `/report <reason>`*:* reply to a message to report it to admins.
+        - `@admin`*:* reply to a message to report it to admins.
          *NOTE:* Neither of these will get triggered if used by admins.
 
          *Admins only:*
-          • `/reports <on/off>`*:* change report setting, or view current status.
-          • If done in pm, toggles your status.
-          • If in group, toggles that groups's status.
+          - `/reports <on/off>`*:* change report setting, or view current status.
+          - If done in pm, toggles your status.
+          - If in group, toggles that groups's status.
 
 rules_help: |
       - /rules*:* get the rules for this chat.
@@ -769,14 +769,14 @@ raid_help: |
   
    *Admins only!* 
 
-  • /raid `(off/time optional)` : toggle the raid mode (on/off)
+  - /raid `(off/time optional)` : toggle the raid mode (on/off)
   if no time is given it will default to 2 hours then turn off automatically
   By enabling *raid mode* I will kick every user on joining the group.
 
-  • /raidtime `(time optional)` : view or set the default duration for raid mode, after that time from toggling the raid mode will turn off automatically
+  - /raidtime `(time optional)` : view or set the default duration for raid mode, after that time from toggling the raid mode will turn off automatically
   Default is 6 hours
 
-  • /raidactiontime `(time optional)` : view or set the default duration that the raid mode will tempban
+  - /raidactiontime `(time optional)` : view or set the default duration that the raid mode will tempban
   Default is 1 hour
 
 
