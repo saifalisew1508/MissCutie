@@ -360,7 +360,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_DEVELOPERS").format(
+            text=gs(chat.id, "SAIF_SOURCE").format(
                 BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
