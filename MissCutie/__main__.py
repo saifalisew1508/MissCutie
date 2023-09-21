@@ -450,7 +450,7 @@ async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(MUSIC_BUTTON),
         )
-    elif query.data == "Music_maintainance":
+    elif query.data == "Music_maintenance":
         await query.message.edit_text(
             text=gs(chat.id, "MAINTAINANCE_MUSIC"),
             parse_mode=ParseMode.MARKDOWN,
