@@ -341,7 +341,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         first_name = update.effective_user.first_name
         await query.message.edit_text(
             text=gs(chat.id, "SAIF_SPONSORS").format(
-                BOT_NAME,
+                BOT_NAME, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -360,8 +360,8 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text=gs(chat.id, "SAIF_SOURCE").format(
-                BOT_NAME, BOT_NAME, BOT_NAME,
+            text=gs(chat.id, "SAIF_DEVELOPERS").format(
+                BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
