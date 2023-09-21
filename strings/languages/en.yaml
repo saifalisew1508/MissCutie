@@ -55,56 +55,56 @@ MUSIC_TEXT: |
 
 
 ABOUT_TEXT: |
-  *Introduction:*
-
-  Hey there! I'm {}, your friendly Python-based Telegram bot. Let me introduce myself and tell you more about what I can do for you.
-
-  *About Me:*
-
-  - I'm a Python bot developed using Telethon, Pyrogram, and PTB Library.
-  - I've been online since 09 January 2022 and receive regular updates to improve my features.
-  - My core is built with Python, and I use SQLalchemy and MongoDB as my databases.
-
-  *Bot Features:*
-
-  - I provide various features including managing users, chats, and more.
-  - I can help you with administrative tasks in your Telegram groups or channels.
-  - You can interact with me using commands and buttons.
-
-  *About Bot Version & Uptime:*
-
-  - {} Version: v{}
-  - Uptime: {}
-
-  *About Bot Library & Framework Versions:*
-
-  - Python Version: v{}
-  - Pyrogram Version: v{}
-  - Telethon Version: v{}
-  - PTB Library Version: v{}
-  - Telegram Bot API Version: v{}
-
-  *About Bot Database:*
-
-  - MongoDB Version: v{}
-  - SQLAlchemy Version: v{}
-  - Total Users: NA
-  - Total Chats: NA
-
-  *Bot Administration:*
-
-  - I'm managed by @LostedPerson, the bot creator, and main developer.
-  - Please note that my staff cannot assist with group-specific issues.
-
-  *Support and Thanks:*
-
-  - [Click here](http://t.me/BotXNews) to see the list of Official Supporters of this bot.
-  - Thanks to our donors for supporting server and development expenses.
-  - Special thanks to all groups that rely on me we're always working to improve your experience.
-
-  *Getting Started:*
-
-  To get started, click on the *Commands* button below for basic help and info about { }.
+   *Introduction:*
+   
+   Hey there! I'm {}, your friendly Python-based Telegram bot. Let me introduce myself and tell you more about what I can do for you.
+   
+   *About Me:*
+   
+   - I'm a Python bot developed using Telethon, Pyrogram, and PTB Library.
+   - I've been online since 09 January 2022 and receive regular updates to improve my features.
+   - My core is built with Python, and I use SQLalchemy and MongoDB as my databases.
+   
+   *Bot Features:*
+   
+   - I provide various features including managing users, chats, and more.
+   - I can help you with administrative tasks in your Telegram groups or channels.
+   - You can interact with me using commands and buttons.
+   
+   *About Bot Version & Uptime:*
+   
+   - {} Version: v{}
+   - Uptime: {}
+   
+   *About Bot Library & Framework Versions:*
+   
+   - Python Version: v{}
+   - Pyrogram Version: v{}
+   - Telethon Version: v{}
+   - PTB Library Version: v{}
+   - Telegram Bot API Version: v{}
+   
+   *About Bot Database:*
+   
+   - MongoDB Version: v{}
+   - SQLAlchemy Version: v{}
+   - Total Users: NA
+   - Total Chats: NA
+   
+   *Bot Administration:*
+   
+   - I'm managed by @LostedPerson, the bot creator, and main developer.
+   - Please note that my staff cannot assist with group-specific issues.
+   
+   *Support and Thanks:*
+   
+   - [Click here](http://t.me/BotXNews) to see the list of Official Supporters of this bot.
+   - Thanks to our donors for supporting server and development expenses.
+   - Special thanks to all groups that rely on me we're always working to improve your experience.
+   
+   *Getting Started:*
+   
+   To get started, click on the *Commands* button below for basic help and info about {}.
 
 
 SAIF_SUPPORT: |
