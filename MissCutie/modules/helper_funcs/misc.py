@@ -3,6 +3,7 @@ import cv2
 from math import ceil
 from typing import Dict, List, Union
 from html import escape
+from time import sleep
 import ffmpeg
 
 from MissCutie import NO_LOAD
@@ -212,3 +213,11 @@ def convert_gif(input):
     )
 
     return converted_name
+
+
+def delete(delmsg, timer):
+    sleep(timer)
+    try:
+        delmsg.delete()
+    except:
+        return
