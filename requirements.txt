@@ -132,4 +132,6 @@ unzip
 google-play-scraper
 play_scraper
 pySmartDL
+pytube
+moviepy
 
