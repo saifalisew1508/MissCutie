@@ -16,7 +16,7 @@ from pyrogram.types import ChatPermissions, InlineKeyboardButton, InlineKeyboard
 
 from MissCutie import OWNER_ID, BOT_ID, BOT_NAME, BOT_USERNAME
 from MissCutie import pbot
-from MissCutie.Database import forceSubscribe_sql as sql
+from MissCutie.modules.sql import forceSubscribe_sql as sql
 
 logging.basicConfig(level=logging.INFO)
 
