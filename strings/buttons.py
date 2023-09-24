@@ -4,12 +4,12 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 # Emojis
 HELP_ICON = "❓"
 MUSIC_ICON = "🎵"
-ABOUT_ICON = "ℹ️"
+INFORMATION_ICON = "ℹ️"
 MANAGER_ICON = "👤"
 ADD_GROUP_ICON = "➕"
 BACK_ICON = "🔙"
 CLOSE_ICON = "🗑"
-ABOUT_BOT_ICON = "🤖"
+BOT_ICON = "🤖"
 COMMANDS_ICON = "⚙️"
 SUPPORT_ICON = "🌍"
 SPONSOR_ICON = "❤️"
@@ -22,7 +22,7 @@ PM_START_BUTTON = [
         InlineKeyboardButton(text=f"{MUSIC_ICON} Music Menu", callback_data="Music_"),
     ],
     [
-        InlineKeyboardButton(text=f"{ABOUT_ICON} About", callback_data="saif_"),
+        InlineKeyboardButton(text=f"{INFORMATION_ICON} information", callback_data="saif_"),
         InlineKeyboardButton(text=f"{MANAGER_ICON} Manager", url=f"tg://user?id={OWNER_ID}"),
     ],
     [
@@ -32,7 +32,7 @@ PM_START_BUTTON = [
 
 ABOUT_BUTTON = [
     [
-        InlineKeyboardButton(text=f"{ABOUT_BOT_ICON} About", callback_data="saif_"),
+        InlineKeyboardButton(text=f"{INFORMATION_ICON} information", callback_data="saif_"),
         InlineKeyboardButton(text=f"{COMMANDS_ICON} Commands", callback_data="help_back"),
     ],
     [
