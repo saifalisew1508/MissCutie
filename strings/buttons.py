@@ -18,15 +18,15 @@ SOURCE_ICON = "🔍"
 
 PM_START_BUTTON = [
     [
+        InlineKeyboardButton(text=f"{ADD_GROUP_ICON} Add Your Group {ADD_GROUP_ICON}", url=f"https://t.me/{application.bot.username}?startgroup=true"),
+    ],
+    [
         InlineKeyboardButton(text=f"{HELP_ICON} Help Menu", callback_data="help_back"),
         InlineKeyboardButton(text=f"{MUSIC_ICON} Music Menu", callback_data="Music_"),
     ],
     [
         InlineKeyboardButton(text=f"{INFORMATION_ICON} information", callback_data="saif_"),
         InlineKeyboardButton(text=f"{MANAGER_ICON} Manager", url=f"tg://user?id={OWNER_ID}"),
-    ],
-    [
-        InlineKeyboardButton(text=f"{ADD_GROUP_ICON} Add Your Group", url=f"https://t.me/{application.bot.username}?startgroup=true"),
     ],
 ]
 
