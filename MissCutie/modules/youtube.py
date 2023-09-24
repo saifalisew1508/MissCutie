@@ -189,46 +189,12 @@ async def video(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
-async def lyrics(bot: Bot, update: Update, args):
-    msg = update.effective_message
-    if query := " ".join(args):
-        song = ""
-        if song := Song.find_song(query):
-            reply = (
-                song.format()
-                if song.lyrics
-                else "Couldn't find any lyrics for that song!"
-            )
-        else:
-            reply = "Song not found!"
-        if len(reply) > 4090:
-            with open("lyrics.txt", 'w') as f:
-                f.write(f"{reply}\n\n\nOwO UwU OmO")
-            with open("lyrics.txt", 'rb') as f:
-                await msg.reply_document(document=f,
-                caption="Message length exceeded max limit! Sending as a text file.")
-        else:
-            await msg.reply_text(reply)
-
-    else:
-        await msg.reply_text("You haven't specified which song to look for!")
-        return
-
-
-__help__ = """ *Now Donwload and hear/watch song on telegram
- ‣ `/song on my way`*:* it will down song from youtube server for you
- ‣ `/video born alone die alone` *:* download video from youtube
- ‣ `/lyrics besharam rang` *:* returns the lyrics of that song.
- You can either enter just the song name or both the artist and song name.
-"""
 
 __mod_name__ = "Music"
 
 
 SONG_HANDLER = DisableAbleCommandHandler("song", music, block=False)
 VIDEO_HANDLER = DisableAbleCommandHandler("video", video, block=False)
-LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, block=False)
 
 application.add_handler(SONG_HANDLER)
 application.add_handler(VIDEO_HANDLER)
-application.add_handler(LYRICS_HANDLER)
