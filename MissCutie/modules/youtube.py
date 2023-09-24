@@ -185,7 +185,8 @@ async def video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     await pablo.delete()
     for files in (sedlyf, file_stark):
-        if files and os.path.exists(files)
+        if files and os.path.exists(files):
+
 
 
 async def lyrics(bot: Bot, update: Update, args):
