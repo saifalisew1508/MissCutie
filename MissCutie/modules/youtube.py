@@ -224,7 +224,7 @@ __help__ = """ *Now Donwload and hear/watch song on telegram
 __mod_name__ = "Music"
 
 
-SONG_HANDLER = DisableAbleCommandHandler(["song", music, block=False)
+SONG_HANDLER = DisableAbleCommandHandler("song", music, block=False)
 VIDEO_HANDLER = DisableAbleCommandHandler("video", video, block=False)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, block=False)
 
