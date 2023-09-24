@@ -2,14 +2,17 @@ import os
 import json
 import random
 import string
-from datetime import datetime
-from telegram import Bot, Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import CommandHandler, CallbackQueryHandler, CallbackContext, run_async
-from MissCutie.modules.sql.clear_cmd_sql import get_clearcmd
+import datetime
+import pytube
+
+from telegram.constants import ParseMode
+from telegram import Bot, Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CommandHandler, CallbackQueryHandler, ContextTypes
+
 from MissCutie import application
 from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie.modules.helper_funcs.misc import delete
-import pytube
+
 from moviepy.editor import *
 
 def get_random():
@@ -26,7 +29,7 @@ def format_link(youtube_link):
         youtube_link = youtube_link.split('&ab_channel')[0]
     return youtube_link
 
-def dyt_video(youtube_link, resolution, filename):
+async def dyt_video(youtube_link, resolution, filename):
     youtube_link = format_link(youtube_link)
     youtube = pytube.YouTube(youtube_link)
 
@@ -38,7 +41,6 @@ def dyt_video(youtube_link, resolution, filename):
         except:
             if i == 4:
                 return "Could not get video length! Try again in a few seconds or try another video."
-
 
     if video_length > 10: # 10 minutes limit for video
         return "Video is longer than 10 minutes! Try again with a shorter one."
@@ -67,7 +69,7 @@ def dyt_video(youtube_link, resolution, filename):
 
     return ""
 
-def dyt_audio(youtube_link, filename):
+async def dyt_audio(youtube_link, filename):
     youtube_link = format_link(youtube_link)
     youtube = pytube.YouTube(youtube_link)
 
@@ -91,7 +93,7 @@ def dyt_audio(youtube_link, filename):
         return "Unknown Error."
     return ""
 
-def youtube(update: Update, context: CallbackContext):
+async def youtube(update: Update, context: CallbackContext):
     message_id = update.message.message_id
     message = update.effective_message
     chat = update.effective_chat
@@ -120,29 +122,29 @@ def youtube(update: Update, context: CallbackContext):
 
     if type == "video":
         filename += ".mp4"
-        msg = message.reply_text("Downloading as video, Please wait...")
-        ret = dyt_video(yt, res, filename)
+        msg = await message.reply_text("Downloading as video, Please wait...")
+        ret = await dyt_video(yt, res, filename)
         caption = "Type: mp4\nQuality: {}".format(res)
         if ret == "":
-            msg.edit_text("Uploading...")
+            await msg.edit_text("Uploading...")
             with open(filename, "rb") as video:
-                context.bot.send_video(chat_id=chat_id, video=video, caption=caption, reply_to_message_id=message_id)
-            msg.delete()
+                await context.bot.send_video(chat_id=chat_id, video=video, caption=caption, reply_to_message_id=message_id)
+            await msg.delete()
         else:
-            msg.edit_text(ret)
+            await msg.edit_text(ret)
 
     else:
         filename += ".mp3"
-        msg = message.reply_text("Downloading as mp3 audio, Please wait...")
-        ret = dyt_audio(yt, filename)
+        msg = await message.reply_text("Downloading as mp3 audio, Please wait...")
+        ret = await dyt_audio(yt, filename)
         caption = "Type: mp3\nQuality: 128kbps".format(res)
         if ret == "":
-            msg.edit_text("Uploading...")
+            await msg.edit_text("Uploading...")
             with open(filename, "rb") as audio:
-                context.bot.send_audio(chat_id=chat_id, audio=audio, caption=caption.format(type), reply_to_message_id=message_id)
-            msg.delete()
+                await context.bot.send_audio(chat_id=chat_id, audio=audio, caption=caption.format(type), reply_to_message_id=message_id)
+            await msg.delete()
         else:
-            msg.edit_text(ret)
+            await msg.edit_text(ret)
 
     try:
         os.remove(filename)
@@ -151,5 +153,5 @@ def youtube(update: Update, context: CallbackContext):
 
     return
 
-YOUTUBE_HANDLER = DisableAbleCommandHandler(["youtube", "yt"], youtube, run_async = True)
-dispatcher.add_handler(YOUTUBE_HANDLER)
+YOUTUBE_HANDLER = DisableAbleCommandHandler(["youtube", "yt"], youtube, block=False)
+application.add_handler(YOUTUBE_HANDLER)
