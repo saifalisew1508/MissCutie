@@ -78,7 +78,7 @@ SQL_VERSION = sql_version
 MONGO_VERSION = mongo_version
 
 if ENV:
-    TOKEN = os.environ.get("TOKEN", None)
+    TOKEN = os.environ.get("TOKEN", "5810582849:AAHgoiQj1mr7ZYj7z8XcyOYfyGbBksvsLl4")
 
     try:
         OWNER_ID = int(os.environ.get("OWNER_ID", None))
@@ -117,7 +117,7 @@ if ENV:
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
-    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://MissCutieRobot:MissCutieRobot@atlascluster.jzg32tp.mongodb.net/?retryWrites=true&w=majority")
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
