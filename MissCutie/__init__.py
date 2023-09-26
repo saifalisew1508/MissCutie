@@ -76,20 +76,17 @@ BOT_API_VERSION = __bot_api_version__
 PYTHON_VERSION = platform.python_version()
 SQL_VERSION = sql_version
 MONGO_VERSION = mongo_version
-ARQ_API_URL = "https://arq.hamker.in"
-ARQ_API_KEY = "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ"
-OPENAI_API_KEY = "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"
 
 if ENV:
-    TOKEN = os.environ.get("TOKEN", "5810582849:AAHgoiQj1mr7ZYj7z8XcyOYfyGbBksvsLl4")
+    TOKEN = os.environ.get("TOKEN", None)
 
     try:
-        OWNER_ID = int(os.environ.get("OWNER_ID", 6193432445))
+        OWNER_ID = int(os.environ.get("OWNER_ID", None))
     except ValueError:
         raise Exception("Your OWNER_ID env variable is not a valid integer.")
 
-    JOIN_LOGGER = os.environ.get("JOIN_LOGGER", 1001660668029)
-    OWNER_USERNAME = os.environ.get("OWNER_USERNAME", "SexySaif")
+    JOIN_LOGGER = os.environ.get("JOIN_LOGGER", None)
+    OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
 
     try:
         DRAGONS = set(int(x) for x in os.environ.get("DRAGONS", "").split())
@@ -98,13 +95,13 @@ if ENV:
         raise Exception("Your sudo or dev users list does not contain valid integers.")
 
     INFOPIC = bool(os.environ.get("INFOPIC", False))
-    EVENT_LOGS = os.environ.get("EVENT_LOGS", 1001660668029)
+    EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
     URL = os.environ.get("URL", "")  # Does not contain token
     PORT = int(os.environ.get("PORT", 8443))
     CERT_PATH = os.environ.get("CERT_PATH")
-    API_ID = os.environ.get("API_ID", 23738177)
-    API_HASH = os.environ.get("API_HASH", "d54a6609d5cc5ba0094ee206791e1490")
+    API_ID = os.environ.get("API_ID", None)
+    API_HASH = os.environ.get("API_HASH", None)
     DONATION_LINK = os.environ.get("DONATION_LINK")
     LOAD = os.environ.get("LOAD", "").split()
     NO_LOAD = os.environ.get("NO_LOAD", "cleaner disasters").split()
@@ -113,14 +110,14 @@ if ENV:
     WORKERS = int(os.environ.get("WORKERS", 8))
     BAN_STICKER = os.environ.get("BAN_STICKER", "CAACAgUAAxkBAAEDRNJhjolhBDkOeJLs2cPuhskKthnoQwACFwIAAs4DwFWTjimU8iDvqiIE")
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
-    TIME_API_KEY = os.environ.get("TIME_API_KEY", "BZ06IUOSX4GH")
+    TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     AI_API_KEY = os.environ.get("AI_API_KEY", None)
     WALL_API = os.environ.get("WALL_API", None)
-    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "PublicSource_Chat")
-#    ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
-#    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
-#    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
-    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://MissCutieRobot:MissCutieRobot@atlascluster.jzg32tp.mongodb.net/?retryWrites=true&w=majority")
+    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
+    ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
+    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
+    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
