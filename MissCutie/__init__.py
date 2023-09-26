@@ -77,13 +77,19 @@ PYTHON_VERSION = platform.python_version()
 SQL_VERSION = sql_version
 MONGO_VERSION = mongo_version
 
-if ENV:
-    TOKEN = os.environ.get("TOKEN", None)
 
-    try:
-        OWNER_ID = int(os.environ.get("OWNER_ID", None))
-    except ValueError:
-        raise Exception("Your OWNER_ID env variable is not a valid integer.")
+TOKEN = "5810582849:AAHgoiQj1mr7ZYj7z8XcyOYfyGbBksvsLl4"
+OWNER_ID = 6193432445
+MONGO_DB_URI = "mongodb+srv://MissCutieRobot:MissCutieRobot@atlascluster.jzg32tp.mongodb.net/?retryWrites=true&w=majority"
+
+
+if ENV:
+#    TOKEN = os.environ.get("TOKEN", None)
+
+#    try:
+#        OWNER_ID = int(os.environ.get("OWNER_ID", None))
+#    except ValueError:
+#        raise Exception("Your OWNER_ID env variable is not a valid integer.")
 
     JOIN_LOGGER = os.environ.get("JOIN_LOGGER", None)
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
@@ -117,7 +123,7 @@ if ENV:
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
-    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+#    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     DB_URI = os.environ.get("DATABASE_URL")
 
@@ -134,12 +140,12 @@ if ENV:
 
 else:
 
-    TOKEN = Config.TOKEN
+#    TOKEN = Config.TOKEN
 
-    try:
-        OWNER_ID = int(Config.OWNER_ID)
-    except ValueError:
-        raise Exception("Your OWNER_ID variable is not a valid integer.")
+#    try:
+#        OWNER_ID = int(Config.OWNER_ID)
+#    except ValueError:
+#        raise Exception("Your OWNER_ID variable is not a valid integer.")
 
     JOIN_LOGGER = Config.JOIN_LOGGER
     OWNER_USERNAME = Config.OWNER_USERNAME
@@ -172,7 +178,7 @@ else:
     INFOPIC = Config.INFOPIC
     TEMP_DOWNLOAD_LOC = Config.TEMP_DOWNLOAD_LOC
     DB_URI = Config.SQLALCHEMY_DATABASE_URI 
-    MONGO_DB_URI = Config.MONGO_DB_URI
+#    MONGO_DB_URI = Config.MONGO_DB_URI
     ARQ_API_KEY = Config.ARQ_API_KEY
     OPENAI_API_KEY = Config.OPENAI_API_KEY
 
