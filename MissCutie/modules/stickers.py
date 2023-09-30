@@ -177,7 +177,7 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.add_sticker_to_set(
                     user_id=user.id,
                     name=packname,
-                    png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                    sticker=open(f"kangsticker_{user.id}.png", "rb"),
                     emojis=sticker_emoji,
                 )
                 await msg.reply_text(
@@ -201,14 +201,14 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         sticker_emoji,
                         packname,
                         packnum,
-                        png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                        sticker=open(f"kangsticker_{user.id}.png", "rb"),
                     )
                 elif e.message == "Sticker_png_dimensions":
                     im.save(kangsticker, "PNG")
                     await context.bot.add_sticker_to_set(
                         user_id=user.id,
                         name=packname,
-                        png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                        sticker=open(f"kangsticker_{user.id}.png", "rb"),
                         emojis=sticker_emoji,
                     )
                     await msg.reply_text(
@@ -352,12 +352,12 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             try:
                 urlemoji = msg.text.split(" ")
-                png_sticker = urlemoji[1]
+                sticker = urlemoji[1]
                 sticker_emoji = urlemoji[2]
             except IndexError:
                 sticker_emoji = "🃏"
             try:
-                urllib.urlretrieve(png_sticker, kangsticker)
+                urllib.urlretrieve(sticker, kangsticker)
             except ValueError:
                 msg.reply_text("Please provide valid image URL.")
                 return
@@ -385,7 +385,7 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.add_sticker_to_set(
                 user_id=user.id,
                 name=packname,
-                png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                sticker=open(f"kangsticker_{user.id}.png", "rb"),
                 emojis=sticker_emoji,
             )
             await msg.reply_text(
@@ -407,14 +407,14 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     sticker_emoji,
                     packname,
                     packnum,
-                    png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                    sticker=open(f"kangsticker_{user.id}.png", "rb"),
                 )
             elif e.message == "Sticker_png_dimensions":
                 im.save(kangsticker, "PNG")
                 await context.bot.add_sticker_to_set(
                     user_id=user.id,
                     name=packname,
-                    png_sticker=open(f"kangsticker_{user.id}.png", "rb"),
+                    sticker=open(f"kangsticker_{user.id}.png", "rb"),
                     emojis=sticker_emoji,
                 )
                 await msg.reply_text(
@@ -503,7 +503,7 @@ async def makepack_internal(
     emoji,
     packname,
     packnum,
-    png_sticker=None,
+    sticker=None,
     tgs_sticker=None,
     webm_sticker=None,
 ):
@@ -513,12 +513,12 @@ async def makepack_internal(
         extra_version = ""
         if packnum > 0:
             extra_version = " " + str(packnum)
-        if png_sticker:
+        if sticker:
             success = await context.bot.create_new_sticker_set(
                 user.id,
                 packname,
                 f"{name}s kang pack" + extra_version,
-                png_sticker=png_sticker,
+                sticker=sticker,
                 emojis=emoji,
             )
         if tgs_sticker:
