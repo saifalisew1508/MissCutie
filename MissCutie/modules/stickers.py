@@ -178,7 +178,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     user_id=user.id,
                     name=packname,
                     sticker=open(f"kangsticker_{user.id}.png", "rb"),
-                    emojis=sticker_emoji,
                 )
                 await msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
@@ -209,7 +208,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         user_id=user.id,
                         name=packname,
                         sticker=open(f"kangsticker_{user.id}.png", "rb"),
-                        emojis=sticker_emoji,
                     )
                     await msg.reply_text(
                         f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
@@ -257,7 +255,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     user_id=user.id,
                     name=packname,
                     tgs_sticker=open(f"kangsticker_{user.id}.tgs", "rb"),
-                    emojis=sticker_emoji,
                 )
                 await msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
@@ -318,7 +315,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     user_id=user.id,
                     name=packname,
                     webm_sticker=open(f"kangsticker_{user.id}.webm", "rb"),
-                    emojis=sticker_emoji,
                 )
                 await msg.reply_text(
                     f"Sticker Successfully added to [pack](t.me/addstickers/{packname})"
@@ -415,7 +411,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     user_id=user.id,
                     name=packname,
                     sticker=open(f"kangsticker_{user.id}.png", "rb"),
-                    emojis=sticker_emoji,
                 )
                 await msg.reply_text(
                     "Sticker successfully added to [pack](t.me/addstickers/%s)"
