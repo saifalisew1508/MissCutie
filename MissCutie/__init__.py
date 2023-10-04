@@ -206,7 +206,6 @@ asyncio.get_event_loop().run_until_complete(application.bot.initialize())
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
-DEV_USERS.add(6626709874)
 
 # Bot Info
 LOGGER.info("Getting Bot Info")
