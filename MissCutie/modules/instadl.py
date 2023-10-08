@@ -194,19 +194,19 @@ async def idgl(c, m):
         return
     if url:
         msg = await m.reply_text("Please Wait a Moment 🙇🏻")
-        rdata = get(f"https://igdownloader.onrender.com/dl?key=naveen&url={url}").json()
-        data = rdata["urls"]
+        rdata = get(f"https://ig.sarojpaudel1.repl.co/fetch.php?url={url}").json()
+        data = rdata["media"]
         try:
               ismediagroup = bool(len(data) > 1)
               if not ismediagroup:
-                      await m.reply_video(data[0], caption=rdata["caption"]) if "mp4" in data[0] else await m.reply_photo(data[0], caption=rdata["caption"])
+                      await m.reply_video(data[0], caption=rdata["title"]) if "mp4" in data[0] else await m.reply_photo(data[0], caption=rdata["title"])
               else:
                     files = []
                     for ind, x in enumerate(data):
                             if "mp4" in data[ind]:
-                               files.append(InputMediaVideo(x, caption=rdata["caption"] if ind == 0 else ""))
+                               files.append(InputMediaVideo(x, caption=rdata["title"] if ind == 0 else ""))
                             else:
-                               files.append(InputMediaPhoto(x, caption=rdata["caption"] if ind == 0 else ""))
+                               files.append(InputMediaPhoto(x, caption=rdata["title"] if ind == 0 else ""))
 
                     await c.send_media_group(m.chat.id, files)
                     await msg.delete()
