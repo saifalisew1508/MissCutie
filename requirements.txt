@@ -36,7 +36,7 @@ h2==3.2.0
 hpack==3.0.0
 hstspreload==2023.1.1
 httpcore==0.15.0
-httpx==0.24.1
+httpx==0.25.0
 humanize==3.12.0
 hyperframe==5.2.0
 hachoir==3.2.0
@@ -75,7 +75,7 @@ pyromod==2.1.0
 PySocks==1.7.1
 pyYAML>=5.1.2
 python-dotenv==0.19.2
-python-telegram-bot==20.5
+python-telegram-bot==20.6
 python-whatanime==0.1.2
 pytz==2021.3
 pytz-deprecation-shim==0.1.0.post0
@@ -100,7 +100,7 @@ SQLAlchemy==1.4.32
 telegraph==2.2.0
 Telethon==1.28.5
 TgCrypto==1.2.5
-tornado==6.3.2
+tornado==6.3.3
 tqdm==4.62.3
 typing-extensions==4.7.1
 tzdata==2023.3
