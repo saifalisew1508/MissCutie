@@ -137,13 +137,13 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
         kang_file = await context.bot.get_file(file_id)
         if not is_animated and not (is_video or is_gif):
             with open(kangsticker, "wb") as sticker_file:
-                await kang_file.download(out=sticker_file)
+                await kang_file.download_to_drive(out=sticker_file)
         elif is_animated:
-            await kang_file.download(out=f"kangsticker_{user.id}.tgs")
+            await kang_file.download_to_drive(out=f"kangsticker_{user.id}.tgs")
         elif is_video and not is_gif:
-            await kang_file.download(out=f"kangsticker_{user.id}.webm")
+            await kang_file.download_to_drive(out=f"kangsticker_{user.id}.webm")
         elif is_gif:
-            await kang_file.download(out=f"kang_{user.id}.mp4")
+            await kang_file.download_to_drive(out=f"kang_{user.id}.mp4")
             convert_gif(f"kang_{user.id}.mp4")
 
         if args:
@@ -201,7 +201,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         context,
                         msg,
                         user,
-                        sticker_emoji,
                         packname,
                         packnum,
                         sticker=open(f"kangsticker_{user.id}.png", "rb"),
@@ -274,7 +273,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         context,
                         msg,
                         user,
-                        sticker_emoji,
                         packname,
                         packnum,
                         tgs_sticker=open(f"kangsticker_{user.id}.tgs", "rb"),
@@ -336,7 +334,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         context,
                         msg,
                         user,
-                        sticker_emoji,
                         packname,
                         packnum,
                         webm_sticker=open(f"kangsticker_{user.id}.webm", "rb"),
@@ -391,7 +388,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     user_id=user.id,
                     name=packname,
                     sticker=sticker_file,
-                    emojis=sticker_emoji,
                 )
             await msg.reply_text(
                 f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
@@ -409,7 +405,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context,
                     msg,
                     user,
-                    sticker_emoji,
                     packname,
                     packnum,
                     sticker=open(f"kangsticker_{user.id}.png", "rb"),
