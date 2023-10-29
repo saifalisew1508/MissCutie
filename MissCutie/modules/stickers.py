@@ -137,13 +137,13 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
         kang_file = await context.bot.get_file(file_id)
         if not is_animated and not (is_video or is_gif):
             with open(kangsticker, "wb") as sticker_file:
-                await kang_file.download_to_drive(out=sticker_file)
+                await kang_file.download_to_drive(sticker_file)
         elif is_animated:
-            await kang_file.download_to_drive(out=f"kangsticker_{user.id}.tgs")
+            await kang_file.download_to_drive(f"kangsticker_{user.id}.tgs")
         elif is_video and not is_gif:
-            await kang_file.download_to_drive(out=f"kangsticker_{user.id}.webm")
+            await kang_file.download_to_drive(f"kangsticker_{user.id}.webm")
         elif is_gif:
-            await kang_file.download_to_drive(out=f"kang_{user.id}.mp4")
+            await kang_file.download_to_drive(f"kang_{user.id}.mp4")
             convert_gif(f"kang_{user.id}.mp4")
 
         if args:
