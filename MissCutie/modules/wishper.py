@@ -1,112 +1,101 @@
-from MissCutie import pbot as pgram, BOT_USERNAME
-from pyrogram import filters
-from pyrogram.types import (
-    InlineQueryResultArticle, InputTextMessageContent,
-    InlineKeyboardMarkup, InlineKeyboardButton
-)
+from MissCutie import telethn
+from telethon import events, Button, types
+from telethon.tl.functions.messages import EditInlineBotMessageRequest
+import shortuuid
+from MissCutie.modules.sql import whisper_sql
+import asyncio
 
-whisper_db = {}
-
-switch_btn = InlineKeyboardMarkup([[InlineKeyboardButton("💒 Start Whisper", switch_inline_query_current_chat="")]])
-
-@pgram.on_inline_query(filters.regex(r'^whisper_\w+ .+'))
-async def whisper_inline(_, inline_query):
-    data = inline_query.query
-    results = []
-    
-    try:
-        user_id, msg = data.split(" ", 1)
-        user = await _.get_users(user_id)
-        
-        whisper_btn = InlineKeyboardMarkup([[InlineKeyboardButton("💒 Whisper", callback_data=f"fdaywhisper_{inline_query.from_user.id}_{user.id}")]])
-        one_time_whisper_btn = InlineKeyboardMarkup([[InlineKeyboardButton("🔩 One-Time Whisper", callback_data=f"fdaywhisper_{inline_query.from_user.id}_{user.id}_one")]])
-        
-        whisper_db[f"{inline_query.from_user.id}_{user.id}"] = msg
-        
-        whisper_article = InlineQueryResultArticle(
-            title="💒 Whisper",
-            description=f"Send a Whisper to {user.first_name}!",
-            input_message_content=InputTextMessageContent(f"💒 You are sending a whisper to {user.first_name}.\n\nType your message/sentence."),
-            thumb_url="https://graph.org/file/6b3ad00adaa8e7db0fb86.jpg",
-            reply_markup=whisper_btn
-        )
-        
-        one_time_whisper_article = InlineQueryResultArticle(
-            title="🔩 One-Time Whisper",
-            description=f"Send a one-time whisper to {user.first_name}!",
-            input_message_content=InputTextMessageContent(f"🔩 You are sending a one-time whisper to {user.first_name}.\n\nType your message/sentence."),
-            thumb_url="https://graph.org/file/6b3ad00adaa8e7db0fb86.jpg",
-            reply_markup=one_time_whisper_btn
-        )
-        
-        results.extend([whisper_article, one_time_whisper_article])
-    except Exception as e:
-        results.append(InlineQueryResultArticle(
-            title="💒 Whisper",
-            description="Invalid format! Use: /whisper_username_or_id Your message",
-            input_message_content=InputTextMessageContent("Invalid format! Use: /whisper_username_or_id Your message"),
-            thumb_url="https://graph.org/file/6b3ad00adaa8e7db0fb86.jpg",
-            reply_markup=switch_btn
-        ))
-    
-    await inline_query.answer(results)
-
-@pgram.on_callback_query(filters.regex(pattern=r'^fdaywhisper_(\d+)_(\d+)(_one)?$'))
-async def whisper_callback(_, query):
-    data = query.data.split("_")
-    from_user = int(data[1])
-    to_user = int(data[2])
-    user_id = query.from_user.id
-    
-    if user_id not in [from_user, to_user, 5667156680]:
+@telethn.on(events.InlineQuery)
+async def mainwhisper(event):
+    builder = event.builder
+    if not event.text:
+        return await event.answer(switch_pm='Give me a username or ID!', switch_pm_param='ghelp_whisper')
+    text = event.text.split(' ')
+    user = text[0]
+    first = True
+    if not user.startswith('@') and not user.isdigit():
+        user = text[-1]
+        first = False
+        if not user.startswith('@') and not user.isdigit():
+            return await event.answer(switch_pm='Give me a username or ID!', switch_pm_param='ghelp_whisper')
+    if user.isdigit():
         try:
-            await _.send_message(from_user, f"{query.from_user.mention} is trying to open your whisper.")
-        except Exception as e:
-            pass
-        
-        return await query.answer("This whisper is not for you 🚧", show_alert=True)
-    
-    search_msg = f"{from_user}_{to_user}"
-    
-    try:
-        msg = whisper_db[search_msg]
-    except KeyError:
-        msg = "🚫 Error!\n\nWhisper has been deleted from the database!"
-    
-    SWITCH = InlineKeyboardMarkup([[InlineKeyboardButton("Go Inline 🪝", switch_inline_query_current_chat="")]])
-    
-    await query.answer(msg, show_alert=True)
-    
-    if len(data) > 3 and data[3] == "one":
-        if user_id == to_user:
-            await query.edit_message_text("📬 Whisper has been read!\n\nPress the button below to send a whisper!", reply_markup=SWITCH)
+            chat = await telethn.get_entity(int(user))
+            user = f"@{chat.username}" if chat.username else chat.first_name
+        except:
+            user = user
+    message = ' '.join(text[1:]) if first else ' '.join(text[:1])
+    if len(message) > 200:
+        return await event.answer(switch_pm='Only text upto 200 characters is allowed!', switch_pm_param='ghelp_whisper')
+    answers = [
+        builder.article(
+            f'🤫 Send a whisper message to {user}!',
+            description='Only they can see it!',
+            text='Generating Whisper message...',
+            buttons=Button.inline('🤫 Show Whisper', 'huehue'),
+        )
+    ]
+    await event.answer(answers)
 
-@pgram.on_inline_query()
-async def bot_inline(_, inline_query):
-    string = inline_query.query.lower()
-    
-    if string.strip() == "":
-        answers = [
-            InlineQueryResultArticle(
-                title="💒 Whisper",
-                description=f"@{BOT_USERNAME} [USERNAME | ID] [TEXT]",
-                input_message_content=InputTextMessageContent(f"**📍Usage:**\n\n@{BOT_USERNAME} (Target Username or ID) (Your Message).\n\n**Example:**\n@{BOT_USERNAME} @username I Wanna Phuck You"),
-                thumb_url="https://te.legra.ph/file/3eec679156a393c6a1053.jpg",
-                reply_markup=switch_btn
-            )
-        ]
-        await inline_query.answer(answers)
+@telethn.on(events.Raw(types.UpdateBotInlineSend))
+async def handler(update):
+    if not update.query:
+        return
+    text = update.query.split(' ')
+    user = text[0]
+    first = True
+    if not user.startswith('@') and not user.isdigit():
+        user = text[-1]
+        first = False
+    if first:
+        message = ' '.join(text[1:])
     else:
-        results = []
+        text.pop()
+        message = ' '.join(text)
+    if len(message) > 200:
+        return
+    usertype = 'username'
+    whisperType = 'inline'
+    if user.startswith('@'):
+        usertype = 'username'
+    elif user.isdigit():
+        usertype = 'id'
+    if user.isdigit():
         try:
-            user_id, _ = string.split(" ", 1)
-            user = await _.get_users(user_id)
-            results.append(InlineQueryResultArticle(
-                title="💒 Whisper",
-                description=f"Send a Whisper to {user.first_name}!",
-                input_message_content=InputTextMessageContent(f"💒 You are sending a whisper to {user.first_name}.\n\nType your message/sentence."),
-                thumb_url="https://graph.org/file/6b3ad00adaa8e7db0fb86.jpg",
-            ))
-        except Exception as e:
-            pass
-        await inline_query.answer(results, cache_time=0)
+            chat = await telethn.get_entity(int(user))
+            username = f"@{chat.username}" if chat.username else f"**{chat.first_name}**"
+        except:
+            username = f"`{user}`"
+    else:
+        username = user
+    whisperData = {'user': update.user_id, 'withuser': user, 'usertype': usertype, 'type': whisperType, 'message': message}
+    whisperId = shortuuid.uuid()
+    whisper_sql.add_whisper(WhisperId=whisperId, WhisperData=whisperData)
+    markup = telethn.build_reply_markup([
+        [Button.inline('🤫 Show Whisper', f'whisper_{whisperId}')]
+    ])
+    return await telethn(EditInlineBotMessageRequest(update.msg_id, message=f"A Whisper message for {username}.\nOnly they can read it!", reply_markup=markup))
+
+@telethn.on(events.CallbackQuery(func=lambda event: event.data.decode().startswith('whisper_')))
+async def showWhisper(event):
+    whisperId = event.data.decode().split('_')[-1]
+    whisper =  whisper_sql.get_whisper(whisperId)
+    if not whisper:
+        return await event.edit("This whisper is not valid anymore!")
+    userType = whisper['usertype']
+    if event.sender_id == whisper['user']:
+        return await event.answer(whisper['message'], alert=True)
+    if userType == 'username' and event.sender.username.lower() == whisper[
+        'withuser'
+    ].replace('@', '').lower():
+        await event.answer(whisper['message'], alert=True)
+        whisper_sql.del_whisper(whisperId)
+        return await event.edit(f"{whisper['withuser']} read the Whisper.")
+    elif userType == 'id' and event.sender_id == int(whisper['withuser']):
+        user = await telethn.get_entity(int(whisper['withuser']))
+        username = user.username or user.first_name
+        await event.answer(whisper['message'], alert=True)
+        whisper_sql.del_whisper(whisperId)
+        return await event.edit(f"{username} read the whisper.")
+    else:
+        await event.answer("Not your Whisper!", alert=True)
