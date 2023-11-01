@@ -181,7 +181,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         user_id=user.id,
                         name=packname,
                         sticker=sticker_file,
-                        emojis=sticker_emoji,
                     )
                 await msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
@@ -218,8 +217,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         + f"\nEmoji is: {sticker_emoji}",
                         parse_mode=ParseMode.MARKDOWN,
                     )
-                elif e.message == "Invalid sticker emojis":
-                    await msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
                     await msg.reply_text("Max packsize reached. Press F to pay respecc.")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
@@ -277,8 +274,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         packnum,
                         tgs_sticker=open(f"kangsticker_{user.id}.tgs", "rb"),
                     )
-                elif e.message == "Invalid sticker emojis":
-                    await msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
                     await msg.reply_text(
                         "Sticker successfully added to [pack](t.me/addstickers/%s)"
@@ -338,8 +333,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         packnum,
                         webm_sticker=open(f"kangsticker_{user.id}.webm", "rb"),
                     )
-                elif e.message == "Invalid sticker emojis":
-                    await msg.reply_text("Invalid emoji(s)")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
                     await msg.reply_text(
                         f"Sticker Successfully added to [pack](t.me/addsticker/{packname})",
@@ -426,8 +419,6 @@ async def kang(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     + sticker_emoji,
                     parse_mode=ParseMode.MARKDOWN,
                 )
-            elif e.message == "Invalid sticker emojis":
-                await msg.reply_text("Invalid emoji(s).")
             elif e.message == "Stickers_too_much":
                 await msg.reply_text("Max packsize reached. Press F to pay respect.")
             elif e.message == "Internal Server Error: sticker set not found (500)":
@@ -501,7 +492,6 @@ async def makepack_internal(
     context: ContextTypes.DEFAULT_TYPE,
     msg: Message,
     user: User,
-    emoji,
     packname,
     packnum,
     sticker=None,
@@ -520,7 +510,6 @@ async def makepack_internal(
                 packname,
                 f"{name}s kang pack" + extra_version,
                 sticker=sticker,
-                emojis=emoji,
             )
         if tgs_sticker:
             success = await context.bot.create_new_sticker_set(
@@ -528,7 +517,6 @@ async def makepack_internal(
                 packname,
                 f"{name}s animated kang pack" + extra_version,
                 tgs_sticker=tgs_sticker,
-                emojis=emoji,
             )
         if webm_sticker:
             success = await context.bot.create_new_sticker_set(
@@ -536,7 +524,6 @@ async def makepack_internal(
                 packname,
                 f"{name}s video kang pack" + extra_version,
                 webm_sticker=webm_sticker,
-                emojis=emoji,
             )
 
     except TelegramError as e:
