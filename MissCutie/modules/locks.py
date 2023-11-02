@@ -51,12 +51,13 @@ LOCK_TYPES = {
     "anonchannel": "anonchannel",
     "forwardchannel": "forwardchannel",
     "forwardbot": "forwardbot",
-    #"invitelink": ,
+    "invitelink": "invitelink",
     "videonote": filters.VIDEO_NOTE,
     "emojicustom": filters.Entity(MessageEntity.CUSTOM_EMOJI) 
         | filters.CaptionEntity(MessageEntity.CUSTOM_EMOJI),
     "stickerpremium": filters.Sticker.PREMIUM,
     "stickeranimated": filters.Sticker.ANIMATED,
+    "story": filters.STORY,
 
 }
 
@@ -450,6 +451,18 @@ async def del_lockables(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             LOGGER.exception("ERROR in lockables - inline")
                     break
             continue
+        if lockable == "invitelink":
+            if sql.is_locked(chat.id, lockable):
+                if "t.me/joinchat" in message.text or "t.me/" in message.text:
+                    try:
+                        await message.delete()
+                    except BadRequest as excp:
+                        if excp.message == "Message to delete not found":
+                            pass
+                        else:
+                            LOGGER.exception("ERROR in lockables - invite")
+                    break
+            continue
         if lockable == "forwardchannel":
             if sql.is_locked(chat.id, lockable):
                 if message.forward_from_chat:
@@ -560,6 +573,7 @@ async def build_lock_message(chat_id):
             locklist.append("emojicustom = `{}`".format(locks.emojicustom))
             locklist.append("stickerpremium = `{}`".format(locks.stickerpremium))
             locklist.append("stickeranimated = `{}`".format(locks.stickeranimated))
+            locklist.append("story = `{}`".format(locks.story))
 
     permissions = await application.bot.get_chat(chat_id)
     if isinstance(permissions, Chat):
