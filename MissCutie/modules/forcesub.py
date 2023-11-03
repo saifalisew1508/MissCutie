@@ -18,8 +18,6 @@ from MissCutie import OWNER_ID, BOT_ID, BOT_NAME, BOT_USERNAME
 from MissCutie import pbot
 from MissCutie.modules.sql import forceSubscribe_sql as sql
 
-logging.basicConfig(level=logging.INFO)
-
 static_data_filter = filters.create(
     lambda _, __, query: query.data == "onUnMuteRequest"
 )
