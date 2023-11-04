@@ -16,7 +16,7 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql.join_request import enable_join_req, disable_join_req, join_req_status, set_auto_approve_true, set_auto_approve_false, migrate_chat
+from MissCutie.modules.sql.join_request import enable_join_request, disable_features, join_request_status, enable_auto_approve, auto_approve_status, migrate_chat
 
 
 @check_admin(permission="can_invite_users", is_both=True)
@@ -31,7 +31,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            enable_join_req(chat.id)
+            enable_join_request(chat.id)
             await message.reply_html(
                 "Enabled join request menu in {}\nI will send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
@@ -43,7 +43,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            disable_join_req(chat.id)
+            disable_features(chat.id)
             await message.reply_html(
                 "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
                     html.escape(chat.title)))
@@ -61,7 +61,7 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await message.reply_html(
         "Join requests setting is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
         "When this setting is on, I will send a message with Approve/Decline buttons on every join request".format(
-            join_req_status(chat.id), html.escape(chat.title)))
+            join_request_status(chat.id), html.escape(chat.title)))
     return
 
 
@@ -77,7 +77,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
         s = args[0].lower()
 
         if s in ["yes", "on", "true"]:
-            set_auto_approve_true(chat.id)
+            enable_auto_approve(chat.id)
             await message.reply_html(
                 "Enabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
@@ -88,7 +88,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return log_message
 
         elif s in ["off", "no", "false"]:
-            set_auto_approve_false(chat.id)
+            disable_features(chat.id)
             await message.reply_html(
                 "Disabled auto-approve for join requests in {}".format(html.escape(chat.title)))
             log_message = (
@@ -105,7 +105,7 @@ async def set_auto_approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await message.reply_html(
         "Auto-approve for join requests is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
         "When this setting is on, new join requests will be automatically approved.".format(
-            join_req_status(chat.id), html.escape(chat.title)))
+            auto_approve_status(chat.id), html.escape(chat.title)))
     return
 
 
