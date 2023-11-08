@@ -1,6 +1,6 @@
 import os.path
 from pyrogram import filters
-from MissCutie import DEV_USERS, arq, pbot
+from MissCutie import DEV_USERS, arq, pyroclient
 from MissCutie.utils.errors import capture_err
 from MissCutie.utils.permissions import adminsOnly
 from MissCutie.modules.mongo.nsfw_mongo import is_nsfw_on, nsfw_off, nsfw_on
@@ -20,7 +20,7 @@ async def get_file_id_from_message(message):
     return file_id
 
 
-@pbot.on_message(
+@pyroclient.on_message(
     (
         filters.document
         | filters.photo
@@ -41,8 +41,8 @@ async def detect_nsfw(_, message):
     if not file_id:
         return
     try:
-        file_info = await pbot.get_file(file_id)
-        file_path = await pbot.download_media(file_info.file_path)
+        file_info = await pyroclient.get_file(file_id)
+        file_path = await pyroclient.download_media(file_info.file_path)
         results = await arq.nsfw_scan(file=file_path)
         if not results.ok:
             return
@@ -72,7 +72,7 @@ async def detect_nsfw(_, message):
         return
 
 
-@pbot.on_message(filters.command(["nsfwscan", "nsfwscan@MissCutieRobot"]))
+@pyroclient.on_message(filters.command(["nsfwscan", "nsfwscan@MissCutieRobot"]))
 @capture_err
 async def nsfw_scan_command(_, message):
     if not message.reply_to_message:
@@ -93,8 +93,8 @@ async def nsfw_scan_command(_, message):
     if not file_id:
         return await m.edit("Something wrong happened.")
     try:
-        file_info = await pbot.get_file(file_id)
-        file_path = await pbot.download_media(file_info.file_path)
+        file_info = await pyroclient.get_file(file_id)
+        file_path = await pyroclient.download_media(file_info.file_path)
         results = await arq.nsfw_scan(file=file_path)
         os.remove(file_path)
         if not results.ok:
@@ -114,7 +114,7 @@ async def nsfw_scan_command(_, message):
         return
 
 
-@pbot.on_message(
+@pyroclient.on_message(
     filters.command(["antinsfw", "antinsfw@MissCutieRobot"]) & ~filters.private
 )
 @adminsOnly("can_change_info")

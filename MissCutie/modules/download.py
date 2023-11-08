@@ -11,7 +11,7 @@ from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pySmartDL import SmartDL
 
-from MissCutie import pbot as app
+from MissCutie import pyroclient as app
 from MissCutie.utils.errors import capture_err, new_task
 from MissCutie.utils.ratelimiter import ratelimiter
 from MissCutie.utils.post import http as fetch

@@ -5,7 +5,7 @@ import subprocess
 from pyrogram import Client, filters
 from requests import JSONDecodeError, get
 
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.utils.errors import capture_err
 from pyrogram.types import InputMedia, InputMediaPhoto, InputMediaVideo, InputMediaDocument, InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -182,7 +182,7 @@ from pyrogram.types import InputMedia, InputMediaPhoto, InputMediaVideo, InputMe
 #         await msg.delete()
 
 
-@pbot.on_message(filters.command(["instadl", "ig", "insdl", "insta", "instadownload"]))
+@pyroclient.on_message(filters.command(["instadl", "ig", "insdl", "insta", "instadownload"]))
 @capture_err
 async def idgl(c, m):
     try:

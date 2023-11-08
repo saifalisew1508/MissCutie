@@ -15,7 +15,7 @@ from pyrogram.errors.exceptions.bad_request_400 import (
 from pyrogram.types import ChatPermissions, InlineKeyboardButton, InlineKeyboardMarkup
 
 from MissCutie import OWNER_ID, BOT_ID, BOT_NAME, BOT_USERNAME
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.modules.sql import forceSubscribe_sql as sql
 
 static_data_filter = filters.create(
@@ -23,7 +23,7 @@ static_data_filter = filters.create(
 )
 
 
-@pbot.on_callback_query(static_data_filter)
+@pyroclient.on_callback_query(static_data_filter)
 def _onUnMuteRequest(client, cb):
     user_id = cb.from_user.id
     chat_id = cb.message.chat.id
@@ -69,7 +69,7 @@ def _onUnMuteRequest(client, cb):
                 )
 
 
-@pbot.on_message(filters.text & ~filters.private, group=1)
+@pyroclient.on_message(filters.text & ~filters.private, group=1)
 def _check_member(client, message):
     chat_id = message.chat.id
     chat_db = sql.fs_settings(chat_id)
@@ -121,7 +121,7 @@ def _check_member(client, message):
                 )
 
 
-@pbot.on_message(filters.command(["forcesubscribe", "fsub"]) & ~filters.private)
+@pyroclient.on_message(filters.command(["forcesubscribe", "fsub"]) & ~filters.private)
 def config(client, message):
     user = client.get_chat_member(message.chat.id, message.from_user.id)
     if user.status is "creator" or user.user.id in OWNER_ID:

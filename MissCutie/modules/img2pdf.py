@@ -7,7 +7,7 @@ from PIL import Image
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MissCutie import pbot as app
+from MissCutie import pyroclient as app
 from MissCutie.utils.errors import capture_err
 from MissCutie.utils.sections import section
 

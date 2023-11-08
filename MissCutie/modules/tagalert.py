@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ChatPermissions
 
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie import BOT_ID, MONGO_DB_URI
 
 
@@ -26,7 +26,7 @@ def get_info(id):
     return nightmod.find_one({"id": id})
 
 
-@pbot.on_message(filters.command(["tagalert"]) & filters.private)
+@pyroclient.on_message(filters.command(["tagalert"]) & filters.private)
 async def locks_dfunc(_, message):
    lol = await message.reply("Processing..")
    if len(message.command) != 2:
@@ -68,7 +68,7 @@ async def locks_dfunc(_, message):
 
 
 
-@pbot.on_message(filters.incoming)
+@pyroclient.on_message(filters.incoming)
 async def mentioned_alert(client, message):
     try:
         if not message:

@@ -2,7 +2,7 @@ import asyncio
 
 from pyrogram import filters
 
-from MissCutie import OWNER_ID, pbot
+from MissCutie import OWNER_ID, pyroclient
 from MissCutie.utils.admins import can_change_info
 from MissCutie.utils.errors import capture_err
 from MissCutie.modules.mongo.karma_mongo import (
@@ -24,7 +24,7 @@ karma_positive_group = 3
 karma_negative_group = 4
 
 
-@pbot.on_message(
+@pyroclient.on_message(
     filters.text
     & filters.group
     & filters.incoming
@@ -65,7 +65,7 @@ async def upvote(_, message):
     )
 
 
-@pbot.on_message(
+@pyroclient.on_message(
     filters.text
     & filters.group
     & filters.incoming
@@ -106,7 +106,7 @@ async def downvote(_, message):
     )
 
 
-@pbot.on_message(filters.command("karmastat") & filters.group)
+@pyroclient.on_message(filters.command("karmastat") & filters.group)
 @capture_err
 async def karma(_, message):
     chat_id = message.chat.id
@@ -151,7 +151,7 @@ async def karma(_, message):
         await message.reply_text(f"**total points :** {karma}")
 
 
-@pbot.on_message(filters.command("karma") & ~filters.private)
+@pyroclient.on_message(filters.command("karma") & ~filters.private)
 @can_change_info
 async def captcha_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"

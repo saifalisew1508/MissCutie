@@ -12,7 +12,7 @@ from pyrogram.types import (InlineKeyboardButton,
 
 
 
-from MissCutie import pbot as app, BOT_USERNAME
+from MissCutie import pyroclient as app, BOT_USERNAME
 from MissCutie.utils.formatters import convert_bytes
 from MissCutie.utils.inline.song import song_markup
 from MissCutie.utils.youtube import YouTubeAPI

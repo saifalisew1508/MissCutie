@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 import wget
 import os
 
-from MissCutie import pbot as app
+from MissCutie import pyroclient as app
 
 buttons=InlineKeyboardMarkup(
                              [

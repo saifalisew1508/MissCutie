@@ -14,7 +14,7 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Chat, Message, User
 
 from MissCutie import OWNER_ID, SUPPORT_CHAT
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.utils.errors import split_limits
 
 

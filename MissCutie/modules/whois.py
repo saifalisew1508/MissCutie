@@ -5,10 +5,10 @@ from pyrogram import Client, filters, enums
 from pyrogram.errors import UserNotParticipant
 from MissCutie.utils.extract_user import extract_user
 from MissCutie.utils.last_online_help import last_online
-from MissCutie import pbot
+from MissCutie import pyroclient
 
 
-@pbot.on_message(filters.command(["whois", "info"]))
+@pyroclient.on_message(filters.command(["whois", "info"]))
 async def who_is(client, message):
     status_message = await message.reply_text("Please Wait a Moment 🙇🏻")
 

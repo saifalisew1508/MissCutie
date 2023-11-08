@@ -4,7 +4,7 @@
 
 import os
 import random
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.utils.errors import capture_err
 from pyrogram import Client, filters
 from MissCutie.utils.google_chrome import chromeDriver
@@ -42,7 +42,7 @@ def text_chunk_list(query, bits=29900):
     return text_list
 
 
-@pbot.on_message(filters.command("rayso"))
+@pyroclient.on_message(filters.command("rayso"))
 @capture_err
 async def rayso_by_pro_odi(c, m):
     "To paste text or file into image."
@@ -116,7 +116,7 @@ async def rayso_by_pro_odi(c, m):
     for name in files:
         os.remove(name)
 
-@pbot.on_message(filters.command(["lrayso", "light_rayso"]))
+@pyroclient.on_message(filters.command(["lrayso", "light_rayso"]))
 @capture_err
 async def light_mode_rayso(c, m):
     files = []

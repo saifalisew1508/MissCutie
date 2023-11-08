@@ -58,7 +58,7 @@ from json import JSONDecodeError
 from pyrogram import Client, filters
 from pyrogram.types import InputMediaPhoto
 
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.utils.errors import capture_err
 from SafoneAPI import SafoneAPI
 
@@ -91,7 +91,7 @@ class Lexica:
 
 #Generate gpt response...
 
-@pbot.on_message(filters.command(['gpt', 'askgpt', 'chatgpt']))
+@pyroclient.on_message(filters.command(['gpt', 'askgpt', 'chatgpt']))
 @capture_err
 async def chatgpt(c, m):
     try:
@@ -109,7 +109,7 @@ async def chatgpt(c, m):
     await c.send_message(m.chat.id, response, reply_to_message_id=m.id)
     await c.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
 
-@pbot.on_message(filters.command(["imagine"]))
+@pyroclient.on_message(filters.command(["imagine"]))
 @capture_err
 async def ai_img_search(c,m):
   try:

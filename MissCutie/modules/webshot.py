@@ -5,7 +5,7 @@ from io import BytesIO
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MissCutie import pbot as app
+from MissCutie import pyroclient as app
 from MissCutie.utils.post import post
 
 

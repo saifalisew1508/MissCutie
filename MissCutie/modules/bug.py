@@ -8,7 +8,7 @@ from pyrogram.types import (
     Message,
 )
 
-from MissCutie import pbot, OWNER_ID, OWNER_USERNAME, SUPPORT_CHAT
+from MissCutie import pyroclient, OWNER_ID, OWNER_USERNAME, SUPPORT_CHAT
 from MissCutie.utils.errors import capture_err
 
 
@@ -25,7 +25,7 @@ def content(msg: Message) -> [None, str]:
         return None
 
 
-@pbot.on_message(filters.command("bug"))
+@pyroclient.on_message(filters.command("bug"))
 @capture_err
 async def bug(_, msg: Message):
     if msg.chat.username:
@@ -71,7 +71,7 @@ async def bug(_, msg: Message):
 
         thumb = "https://www.upwork.com/catalog-images-resized/42702e3f95408aff535f8721368da41b/large@2x"
 
-        await pbot.send_photo(
+        await pyroclient.send_photo(
             SUPPORT_CHAT,
             photo=thumb,
             caption=f"{bug_report}",
@@ -85,14 +85,14 @@ async def bug(_, msg: Message):
         await msg.reply_text("❎ <b>No bug to Report!</b>")
 
 
-@pbot.on_callback_query(filters.regex("close_reply"))
+@pyroclient.on_callback_query(filters.regex("close_reply"))
 async def close_reply(CallbackQuery):
     await CallbackQuery.message.delete()
 
 
-@pbot.on_callback_query(filters.regex("close_send_photo"))
+@pyroclient.on_callback_query(filters.regex("close_send_photo"))
 async def close_send_photo(_, CallbackQuery):
-    is_Admin = await pbot.get_chat_member(CallbackQuery.message.chat.id,
+    is_Admin = await pyroclient.get_chat_member(CallbackQuery.message.chat.id,
                                            CallbackQuery.from_user.id)
     if not is_Admin.can_delete_messages:
         return await CallbackQuery.answer("You're not allowed to close this.",

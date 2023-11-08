@@ -1,11 +1,11 @@
 from pyrogram import filters
 
-from MissCutie import pbot
+from MissCutie import pyroclient
 from MissCutie.utils.errors import capture_err
 from MissCutie.utils.functions import make_carbon
 
 
-@pbot.on_message(filters.command("carbon"))
+@pyroclient.on_message(filters.command("carbon"))
 @capture_err
 async def carbon_func(_, message): 
      if message.reply_to_message: 
@@ -21,7 +21,7 @@ async def carbon_func(_, message):
      m = await message.reply_text("Keep Patience Carbon Generating for your text\n Example : /carbon <@MissCutieRobot/>") 
      carbon = await make_carbon(txt) 
      await m.edit_text("Sending Carbon Generated image to you") 
-     await pbot.send_photo( 
+     await pyroclient.send_photo( 
          message.chat.id, 
          photo=carbon, 
          caption=f"» Requested By :  {message.from_user.mention}", 

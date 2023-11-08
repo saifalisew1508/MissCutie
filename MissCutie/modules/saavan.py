@@ -1,6 +1,6 @@
 import requests, os, wget
 from pyrogram import filters
-from MissCutie import pbot as Client
+from MissCutie import pyroclient as Client
 
 @Client.on_message(filters.command('saavn') & filters.text)
 async def song(client, message):

@@ -1,11 +1,11 @@
 import time
 from pyrogram import Client, filters
-from MissCutie import pbot
+from MissCutie import pyroclient
 
 banned_users = {}
 
 
-@pbot.on_message(filters.group)
+@pyroclient.on_message(filters.group)
 def ban_check(client, message):
     if message.from_user and message.new_chat_members:
         user_id = message.from_user.id

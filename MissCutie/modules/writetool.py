@@ -3,7 +3,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from MissCutie import BOT_NAME, BOT_USERNAME
-from MissCutie import pbot as saif
+from MissCutie import pyroclient as saif
 
 
 @saif.on_message(filters.command("write"))

@@ -1,9 +1,9 @@
 import os
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
-from MissCutie import pbot
+from MissCutie import pyroclient
 
-@pbot.on_message(filters.command(["json", 'js', 'showjson']))
+@pyroclient.on_message(filters.command(["json", 'js', 'showjson']))
 async def jsonify(_, message):
     the_real_message = None
     reply_to_id = None

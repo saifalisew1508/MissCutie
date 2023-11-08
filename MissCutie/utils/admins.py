@@ -3,7 +3,7 @@ from typing import Callable
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import Message
 
-from MissCutie import DEV_USERS, DRAGONS, pbot
+from MissCutie import DEV_USERS, DRAGONS, pyroclient
 
 
 def can_change_info(func: Callable) -> Callable:
@@ -11,14 +11,14 @@ def can_change_info(func: Callable) -> Callable:
         if message.from_user.id in DRAGONS:
             return await func(_, message)
 
-        check = await pbot.get_chat_member(message.chat.id, message.from_user.id)
+        check = await pyroclient.get_chat_member(message.chat.id, message.from_user.id)
         if check.status not in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR]:
             return await message.reply_text(
                 "- you're not an admin , please stay in your limits."
             )
 
         admin = (
-            await pbot.get_chat_member(message.chat.id, message.from_user.id)
+            await pyroclient.get_chat_member(message.chat.id, message.from_user.id)
         ).privileges
         if admin.can_change_info:
             return await func(_, message)
@@ -35,14 +35,14 @@ def can_restrict(func: Callable) -> Callable:
         if message.from_user.id in DEV_USERS:
             return await func(_, message)
 
-        check = await pbot.get_chat_member(message.chat.id, message.from_user.id)
+        check = await pyroclient.get_chat_member(message.chat.id, message.from_user.id)
         if check.status not in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR]:
             return await message.reply_text(
                 "- you're not an admin , please stay in your limits."
             )
 
         admin = (
-            await pbot.get_chat_member(message.chat.id, message.from_user.id)
+            await pyroclient.get_chat_member(message.chat.id, message.from_user.id)
         ).privileges
         if admin.can_restrict_members:
             return await func(_, message)
