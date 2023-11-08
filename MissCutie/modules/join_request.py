@@ -133,7 +133,7 @@ async def chat_join_req(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
     # Check if auto-approve is enabled
-    if join_request_status(chat.id) and join_request_status(chat.id):
+    if auto_approve_status(chat.id) and auto_approve_status(chat.id):
         await bot.approve_chat_join_request(chat.id, user.id)
         await bot.send_message(
             chat.id,
