@@ -2,7 +2,7 @@ from MissCutie import *
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Emojis
-HELP_ICON = "❓"
+HELP_ICON = "📚"
 MUSIC_ICON = "🎵"
 INFORMATION_ICON = "ℹ️"
 MANAGER_ICON = "👤"
@@ -15,18 +15,22 @@ SUPPORT_ICON = "🌍"
 SPONSOR_ICON = "❤️"
 DEVELOPERS_ICON = "🙋‍♂️"
 SOURCE_ICON = "🔍"
+NEW_ICON = "🆕"
 
 PM_START_BUTTON = [
     [
+        InlineKeyboardButton(text=f"{HELP_ICON} Help & Commands Menu {HELP_ICON}", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text=f"{INFORMATION_ICON} Bot info", callback_data="saif_"),
+        InlineKeyboardButton(text=f"{MUSIC_ICON} Music Helper", callback_data="Music_"),
+    ],
+    [
+        InlineKeyboardButton(text=f"{NEW_ICON} Updates", url="https://t.me/BotXnews"),
+        InlineKeyboardButton(text=f"{BOT_ICON} Bot Network", url="https://t.me/BotzList"),
+    ],
+    [
         InlineKeyboardButton(text=f"{ADD_GROUP_ICON} Add Your Group {ADD_GROUP_ICON}", url=f"https://t.me/{application.bot.username}?startgroup=true"),
-    ],
-    [
-        InlineKeyboardButton(text=f"{HELP_ICON} Help Menu", callback_data="help_back"),
-        InlineKeyboardButton(text=f"{MUSIC_ICON} Music Menu", callback_data="Music_"),
-    ],
-    [
-        InlineKeyboardButton(text=f"{INFORMATION_ICON} information", callback_data="saif_"),
-        InlineKeyboardButton(text=f"{MANAGER_ICON} Manager", url=f"tg://user?id={OWNER_ID}"),
     ],
 ]
 
