@@ -42,30 +42,31 @@ except:
 load_dotenv()
 
 try:
-    LOGGER_LEVEL = int(os.environ.get("LOGGER_LEVEL"))
+    LOGGER_LEVEL = os.environ.get("LOGGER_LEVEL", 40)
+    "logger level, `debug(10)`, `info(20)`, `warn(30)` and `error(40)`. default is `info`"
 except:
     LOGGER_LEVEL = int(Config.LOGGER_LEVEL)
 
 StartTime = time.time()
 
-# enable logging
-# logging.basicConfig(
-#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-#     handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
-#     level=LOGGER_LEVEL,
-# )
+#setup logger
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
+    level=LOGGER_LEVEL
+)
 
 logging.getLogger("apscheduler").setLevel(logging.ERROR)
 logging.getLogger("telethon").setLevel(logging.ERROR)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 LOGGER = logging.getLogger(__name__)
 
-# if version < 3.9, stop bot.
+#python version check
 if sys.version_info[0] < 3 or sys.version_info[1] < 9:
-    LOGGER.error(
-        "You MUST have a python version of at least 3.9! Multiple features depend on this. Bot quitting.",
+    print(
+        "You MUST have a python version of at least 3.9, exiting..."
     )
-    sys.exit(1)
+    quit(1)
 
 ENV = bool(os.environ.get("ENV", False))
 BOT_VERSION = "4.0-Beta"
@@ -196,7 +197,13 @@ DEV_USERS.add(OWNER_ID)
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-pbot = Client("MissCutie", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
+pyroclient = Client(
+    "MissCutie",
+    API_ID,
+    API_HASH,
+    bot_token=TOKEN,
+    no_updates= True
+)
 aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
