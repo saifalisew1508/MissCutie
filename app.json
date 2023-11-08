@@ -18,6 +18,11 @@
       }
    ],
    "env": {
+      "TOKEN": {
+         "description": "Your bot token. Get one from @BotFather duh",
+         "required": true,
+         "value": ""
+      },
       "API_ID": {
          "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
          "required": true,
@@ -28,10 +33,21 @@
          "required": true,
          "value": "d54a6609d5cc5ba0094ee206791e1490"
       },
+
+      "OWNER_ID": {
+         "description": "Your user ID as an integer.",
+         "required": true,
+         "value": "6193432445"
+      },
       "OWNER_USERNAME": {
          "description": "Your username without the @",
          "value": "SexySaif"
       },
+      "MONGO_DB_URI": { 
+          "description": "MongoDB Databse Url.", 
+          "required": true, 
+          "value": "" 
+       },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to saitama support than consider you made an enemy.",
          "required": true,
