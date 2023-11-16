@@ -7,7 +7,7 @@ from telegram.helpers import mention_html
 from MissCutie import BOT_NAME, BOT_USERNAME, application
 
 
-async def handwrite(update, context: CallbackContext):
+async def handwrite(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
 
     if not message.reply_to_message:
