@@ -154,6 +154,8 @@ async def chat_join_req(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+
+@loggable
 async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     bot = context.bot
     query = update.callback_query
@@ -196,7 +198,7 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         pass
 
 
-@check_admin(permission="can_invite_users", is_both=True)
+
 @loggable
 async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     bot = context.bot
@@ -216,7 +218,7 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
         # Check if the user has the "invite users" permission
         if "can_invite_users" not in user_status.permissions:
-            await bot.answer_callback_query(query.id, "You don't have the permission to invite users." show_alert=True)
+            await bot.answer_callback_query(query.id, "You don't have the permission to invite users. so you can't approve/decline any join request", show_alert=True)
             return
 
         
@@ -240,7 +242,8 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         await update.effective_message.edit_text(str(e))
         pass
 
-@check_admin(permission="can_invite_users", is_both=True)
+
+
 @loggable
 async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     bot = context.bot
@@ -256,14 +259,15 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in ["administrator", "creator"]:
+        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
             await update.effective_message.edit_text("You are not authorized to approve join requests.")
             return
 
-        # Check if the user has the "invite users" permission
-        if "can_invite_users" not in user_status.permissions:
-            await update.effective_message.edit_text("You don't have the permission to invite users.")
+        # Check if the user has the "can_restrict_members" permission
+        if "can_restrict_members" not in user_status.permissions:
+            await update.effective_message.edit_text("You don't have the permission to ban users.")
             return
+        await bot.decline_chat_join_request(chat.id, user_id)
         await bot.ban_chat_member(chat.id, user_id)
         joined_user = await bot.get_chat_member(chat.id, user_id)
         joined_mention = mention_html(user_id, html.escape(joined_user.user.first_name))
