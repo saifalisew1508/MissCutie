@@ -100,7 +100,7 @@ safoneapi==1.0.48
 shortuuid
 selenium>=3.141.0
 sgmllib3k==1.0.0
-simplejson==3.17.5
+simplejson==3.19.2
 search_engine_parser==0.6.8
 secureme==0.0.4
 six==1.16.0
