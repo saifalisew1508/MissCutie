@@ -16,7 +16,7 @@ chardet==5.1.0
 charset-normalizer==2.0.7
 click==8.0.3
 coffeehouse==2.2.6
-colorama==0.4.4
+colorama==0.4.6
 countryinfo==0.1.2
 cryptography==41.0.2
 CurrencyConverter==0.17.8
