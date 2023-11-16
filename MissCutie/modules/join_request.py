@@ -9,7 +9,7 @@ from telegram.ext import (
     filters,
     MessageHandler,
 )
-from telegram.constants import ParseMode
+from telegram.constants import ParseMode, ChatMemberStatus
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.helpers import mention_html
 
@@ -166,13 +166,13 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in ["administrator", "creator"]:
-            await update.effective_message.edit_text("You are not authorized to approve join requests.")
+        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
+            await bot.answer_callback_query(query.id, "You are not authorized to approve join requests.", show_alert=True)
             return
 
         # Check if the user has the "invite users" permission
         if "can_invite_users" not in user_status.permissions:
-            await update.effective_message.edit_text("You don't have the permission to invite users.")
+            await bot.answer_callback_query(query.id, "You don't have the permission to invite users.", show_alert=True)
             return
 
         await bot.approve_chat_join_request(chat.id, user_id)
@@ -210,13 +210,13 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in ["administrator", "creator"]:
-            await update.effective_message.edit_text("You are not authorized to declined join requests.")
+        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
+            await bot.answer_callback_query(query.id, "You are not authorized to declined join requests.", show_alert=True)
             return
 
         # Check if the user has the "invite users" permission
         if "can_invite_users" not in user_status.permissions:
-            await update.effective_message.edit_text("You don't have the permission to invite users.")
+            await bot.answer_callback_query(query.id, "You don't have the permission to invite users." show_alert=True)
             return
 
         
