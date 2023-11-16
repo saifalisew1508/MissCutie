@@ -36,7 +36,7 @@ google-play-scraper==1.2.4
 greenlet==1.1.2
 gtts==2.4.0
 h11==0.14.0
-h2==3.2.0
+h2==4.1.0
 hpack==3.0.0
 hstspreload==2023.1.1
 httpcore==0.18.0
