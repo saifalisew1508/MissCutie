@@ -173,7 +173,7 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             return
 
         # Check if the user has the "invite users" permission
-        if "can_invite_users" not in user_status.permissions:
+        if not user_status.can_invite_users:
             await bot.answer_callback_query(query.id, "You don't have the permission to invite users.", show_alert=True)
             return
 
@@ -217,7 +217,7 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             return
 
         # Check if the user has the "invite users" permission
-        if "can_invite_users" not in user_status.permissions:
+        if not user_status.can_invite_users:
             await bot.answer_callback_query(query.id, "You don't have the permission to invite users. so you can't approve/decline any join request", show_alert=True)
             return
 
@@ -264,7 +264,7 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
             return
 
         # Check if the user has the "can_restrict_members" permission
-        if "can_restrict_members" not in user_status.permissions:
+        if not user_status.can_restrict_members:
             await update.effective_message.edit_text("You don't have the permission to ban users.")
             return
         await bot.decline_chat_join_request(chat.id, user_id)
