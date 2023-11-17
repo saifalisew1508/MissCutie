@@ -1,10 +1,20 @@
-# import os
+import uuid
+import time
+import json
+import httpx
+import random
+import string
+import urllib.parse
+import asyncio
+from io import BytesIO
+import os
 # import openai
-# import logging
-# from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler
-# from telegram import Update
-# from datetime import datetime
-# from MissCutie import application, OPENAI_API_KEY
+import logging
+from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler, InputMediaPhoto
+from telegram.constants import ChatAction
+from telegram import Update
+from datetime import datetime
+from MissCutie import application
 # 
 # 
 # 
@@ -40,29 +50,8 @@
 #     return response
 # 
 # 
-# application.add_handler(CommandHandler("ask", gpt, block=False))
-# application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
 
-import uuid
-import time 
-import json 
-import httpx
-import random
-import string
-import requests
-from io import BytesIO
-from pyrogram import enums
-from random import sample
-from urllib.parse import quote
-from json import JSONDecodeError
-from pyrogram import Client, filters
-from pyrogram.types import InputMediaPhoto
 
-from MissCutie import pyroclient
-from MissCutie.utils.errors import capture_err
-from SafoneAPI import SafoneAPI
-
-#Lexica Art thing ...
 class Lexica:
     def __init__(self, query, negativePrompt="", guidanceScale: int = 7, portrait: bool = True, cookie=None):
         self.query = query
@@ -83,50 +72,42 @@ class Lexica:
 
         return prompts
 
-    def _generate_random_string(self, length):
-        chars = string.ascii_letters + string.digits
-        result_str = ''.join(random.choice(chars) for _ in range(length))
-
-        return result_str
-
-#Generate gpt response...
-
-@pyroclient.on_message(filters.command(['gpt', 'askgpt', 'chatgpt']))
-@capture_err
-async def chatgpt(c, m):
-    try:
-        query = m.text.split(None, 1)[1]
-    except:
-        await m.reply_text(
-            "i didn't get this"
-        )
+async def chatgpt(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = context.args[0] if context.args else None
+    if not query:
+        await update.message.reply_text("I didn't get this")
         return
-    query = quote(query)
-    await c.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
+
+    query = urllib.parse.quote(query)
+    await context.bot.send_chat_action(update.message.chat_id, ChatAction.TYPING)
     api = SafoneAPI()
     resp = await api.chatgpt(query)
     response = resp.message
-    await c.send_message(m.chat.id, response, reply_to_message_id=m.id)
-    await c.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
+    await update.message.reply_text(response)
 
-@pyroclient.on_message(filters.command(["imagine"]))
-@capture_err
-async def ai_img_search(c,m):
-  try:
-    prompt= m.text.split(None, 1)[1]
-  except IndexError:
-    await m.reply_text("`What should i imagine??\nGive some prompt along with the command`")
-    return
-  x = await m.reply_text("`Processing...`")
-  try:
-    lex = Lexica(query=prompt).images()
-    k = sample(lex, 4)
-    result = [InputMediaPhoto(image) for image in k]
-    await c.send_media_group(
-              chat_id=m.chat.id,
-              media=result,
-              reply_to_message_id=m.id,
-          )
-    await x.delete()
-  except:
-    await x.edit("`Failed to get images`")
+async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        prompt = context.args[0]
+    except IndexError:
+        await update.message.reply_text("What should I imagine?\nGive some prompt along with the command")
+        return
+
+    x = await update.message.reply_text("Processing...")
+    try:
+        lex = Lexica(query=prompt).images()
+        k = random.sample(lex, 4)
+        result = [InputMediaPhoto(image) for image in k]
+        await context.bot.send_media_group(
+            chat_id=update.message.chat_id,
+            media=result,
+            reply_to_message_id=update.message.message_id,
+        )
+        await asyncio.sleep(0)  # Introduce a small delay to allow other tasks to run
+        await x.delete()
+    except:
+        await x.edit("Failed to get images")
+
+
+application.add_handler(CommandHandler("ask", chatgpt, block=False))
+application.add_handler(CommandHandler("imagine", ai_img_search, block=False))
+# application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
