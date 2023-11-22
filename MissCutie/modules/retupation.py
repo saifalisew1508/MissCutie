@@ -120,16 +120,16 @@ def __user_settings__(user_id):
 
 
 INCREASE_MESSAGE_HANDLER = DisableAbleMessageHandler(
-    filters.Regex(r"^\+$"), afk, friendly="afk", block=False
+    filters.Regex(r"^\+$"), increase, friendly="increase", block=False
 )
 DECREASE_MESSAGE_HANDLER = DisableAbleMessageHandler(
-    filters.Regex(r"^\-$"), afk, friendly="afk", block=False
+    filters.Regex(r"^\-$"), decrease, friendly="decrease", block=False
 )
 INCREASE_MESSAGE_HANDLER2 = DisableAbleMessageHandler(
-    filters.Regex(r"^\👍$"), afk, friendly="afk", block=False
+    filters.Regex(r"^\👍$"), increase, friendly="increase", block=False
 )
 DECREASE_MESSAGE_HANDLER2 = DisableAbleMessageHandler(
-    filters.Regex(r"^\👎$"), afk, friendly="afk", block=False
+    filters.Regex(r"^\👎$"), decrease, friendly="decrease", block=False
 )
 SETTINGS_HANDLER = CommandHandler("reputation", reputation, block=False)
 
