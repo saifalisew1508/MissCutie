@@ -168,12 +168,15 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
+        if user_status.status == ChatMemberStatus.OWNER:
+            # If the user is an owner, allow the operation without checking invite permission
+            pass
+        elif user_status.status != ChatMemberStatus.ADMINISTRATOR:    
             await bot.answer_callback_query(query.id, "You are not authorized to approve join requests.", show_alert=True)
             return
 
         # Check if the user has the "invite users" permission
-        if not user_status.can_invite_users:
+        if user_status.status != ChatMemberStatus.OWNER and not user_status.can_invite_users:
             await bot.answer_callback_query(query.id, "You don't have the permission to invite users.", show_alert=True)
             return
 
@@ -212,13 +215,16 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
-            await bot.answer_callback_query(query.id, "You are not authorized to declined join requests.", show_alert=True)
+        if user_status.status == ChatMemberStatus.OWNER:
+            # If the user is an owner, allow the operation without checking invite permission
+            pass
+        elif user_status.status != ChatMemberStatus.ADMINISTRATOR:    
+            await bot.answer_callback_query(query.id, "You are not authorized to approve join requests.", show_alert=True)
             return
 
         # Check if the user has the "invite users" permission
-        if not user_status.can_invite_users:
-            await bot.answer_callback_query(query.id, "You don't have the permission to invite users. so you can't approve/decline any join request", show_alert=True)
+        if user_status.status != ChatMemberStatus.OWNER and not user_status.can_invite_users:
+            await bot.answer_callback_query(query.id, "You don't have the permission to invite users.", show_alert=True)
             return
 
         
@@ -256,17 +262,23 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
         return
 
     user_id = match.group(1)
+
     try:
         # Check if the user is an admin or owner
         user_status = await bot.get_chat_member(chat.id, user.id)
-        if user_status.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
-            await bot.answer_callback_query(query.id, "You are not authorized to ban join requests.", show_alert=True)
+        if user_status.status == ChatMemberStatus.OWNER:
+            # If the user is an owner, allow the operation without checking invite permission
+            pass
+        elif user_status.status != ChatMemberStatus.ADMINISTRATOR:    
+            await bot.answer_callback_query(query.id, "You are not authorized to approve join requests.", show_alert=True)
             return
 
-        # Check if the user has the "can_restrict_members" permission
-        if not user_status.can_restrict_members:
-            await bot.answer_callback_query(query.id, "You don't have the permission to ban members. so you can't ban any join request", show_alert=True)
+        # Check if the user has the "restrict users" permission
+        if user_status.status != ChatMemberStatus.OWNER and not user_status.can_restrict_members:
+            await bot.answer_callback_query(query.id, "You don't have the permission to invite users.", show_alert=True)
             return
+            
+
         await bot.decline_chat_join_request(chat.id, user_id)
         await bot.ban_chat_member(chat.id, user_id)
         joined_user = await bot.get_chat_member(chat.id, user_id)
