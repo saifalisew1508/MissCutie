@@ -42,7 +42,7 @@ except:
 load_dotenv()
 
 try:
-    LOGGER_LEVEL = os.environ.get("LOGGER_LEVEL", 40)
+    LOGGER_LEVEL = os.environ.get("LOGGER_LEVEL", 10)
     "logger level, `debug(10)`, `info(20)`, `warn(30)` and `error(40)`. default is `info`"
 except:
     LOGGER_LEVEL = int(Config.LOGGER_LEVEL)
