@@ -10,9 +10,9 @@ from io import BytesIO
 import os
 # import openai
 import logging
-from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler, InputMediaPhoto
+from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler
 from telegram.constants import ChatAction
-from telegram import Update
+from telegram import Update, InputMediaPhoto
 from datetime import datetime
 from MissCutie import application
 # 
