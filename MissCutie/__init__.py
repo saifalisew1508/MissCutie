@@ -191,13 +191,7 @@ DEV_USERS.add(OWNER_ID)
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-pyroclient = Client(
-    "MissCutie",
-    API_ID,
-    API_HASH,
-    bot_token=TOKEN,
-    no_updates= True
-)
+pyroclient = Client("MissCutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
