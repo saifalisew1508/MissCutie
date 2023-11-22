@@ -98,7 +98,7 @@ async def reputation(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def __migrate__(old_chat_id, new_chat_id):
-    await sql.migrate_chat_latest_messages(old_chat_id, new_chat_id)
+    sql.migrate_chat_latest_messages(old_chat_id, new_chat_id)
 
 
 
