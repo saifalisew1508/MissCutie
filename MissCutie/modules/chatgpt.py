@@ -83,7 +83,7 @@ async def chatgpt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     api = SafoneAPI()
     resp = await api.chatgpt(query)
     response = resp.message
-    await update.message.reply_text(response)
+    await update.effective_chat.reply_text(response)
 
 async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
