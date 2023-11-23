@@ -1,19 +1,14 @@
 import random
 from datetime import datetime
+from telegram import Update
+from telegram.ext import ContextTypes, filters, MessageHandler, CommandHandler
 
-from pyrogram import filters
-from pyrogram.enums import ChatType
 
-from MissCutie import pyroclient
-from MissCutie.modules.mongo.couple_mongo import get_couple, save_couple
-
-# Date and time
 def dt():
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M")
     dt_list = dt_string.split(" ")
     return dt_list
-
 
 def dt_tom():
     a = (
@@ -25,48 +20,63 @@ def dt_tom():
     )
     return a
 
-
 today = str(dt()[0])
 tomorrow = str(dt_tom())
 
-
-@pyroclient.on_message(filters.command(["couple", "couples"]))
-async def couple(_, message):
-    if message.chat.type == ChatType.PRIVATE:
-        return await message.reply_text("This command only works in groups.")
+# Command handler for /couple and /couples
+async def couple(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message.chat.type == 'private':
+        return await update.message.reply_text("This command only works in groups.")
     try:
-        chat_id = message.chat.id
+        chat_id = update.message.chat.id
         is_selected = await get_couple(chat_id, today)
+
         if not is_selected:
             list_of_users = []
-            async for i in pyroclient.get_chat_members(message.chat.id):
+            chat_members = await context.bot.get_chat_members(chat_id)
+            for i in chat_members:
                 if not i.user.is_bot:
                     list_of_users.append(i.user.id)
+            
             if len(list_of_users) < 2:
-                return await message.reply_text("Not enough users")
+                return await update.message.reply_text("Not enough users")
+
             c1_id = random.choice(list_of_users)
             c2_id = random.choice(list_of_users)
+            
             while c1_id == c2_id:
                 c1_id = random.choice(list_of_users)
-            c1_mention = (await pyroclient.get_users(c1_id)).mention
-            c2_mention = (await pyroclient.get_users(c2_id)).mention
 
-            couple_selection_message = f"""** Couple Of the day 💏:**
-{c1_mention} + {c2_mention} = ❤️
-__New couple of the day may be chosen at 12AM {tomorrow}__"""
-            await pyroclient.send_message(message.chat.id, text=couple_selection_message)
+            c1_mention = (await context.bot.get_chat_member(chat_id, c1_id)).user.mention_html()
+            c2_mention = (await context.bot.get_chat_member(chat_id, c2_id)).user.mention_html()
+
+            couple_selection_message = f"""<b>Couple Of the day 💏:</b>\n{c1_mention} + {c2_mention} = ❤️\n
+            <i>New couple of the day may be chosen at 12AM {tomorrow}</i>"""
+            
+            await context.bot.send_message(chat_id, text=couple_selection_message, parse_mode='HTML')
+            
             couple = {"c1_id": c1_id, "c2_id": c2_id}
             await save_couple(chat_id, today, couple)
 
         elif is_selected:
             c1_id = int(is_selected["c1_id"])
             c2_id = int(is_selected["c2_id"])
-            c1_name = (await pyroclient.get_users(c1_id)).first_name
-            c2_name = (await pyroclient.get_users(c2_id)).first_name
-            couple_selection_message = f"""Couple of the day:
-[{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = 😘
-__New couple of the day may be chosen at 12AM {tomorrow}__"""
-            await pyroclient.send_message(message.chat.id, text=couple_selection_message)
+            c1_user = await context.bot.get_chat_member(chat_id, c1_id)
+            c2_user = await context.bot.get_chat_member(chat_id, c2_id)
+
+            c1_mention = c1_user.user.mention_html()
+            c2_mention = c2_user.user.mention_html()
+
+            couple_selection_message = f"""<b>Couple of the day:</b>\n{c1_mention} + {c2_mention} = 😘\n
+            <i>New couple of the day may be chosen at 12AM {tomorrow}</i>"""
+
+            await context.bot.send_message(chat_id, text=couple_selection_message, parse_mode='HTML')
+
     except Exception as e:
         print(e)
-        await message.reply_text(e)
+        await update.message.reply_text(str(e))
+
+
+# Add the command handler to the dispatcher
+couple_handler = CommandHandler(["couple", "couples"], couple)
+application.add_handler(couple_handler)
