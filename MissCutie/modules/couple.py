@@ -78,5 +78,5 @@ async def couple(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 # Add the command handler to the dispatcher
-couple_handler = CommandHandler(["couple", "couples"], couple)
-application.add_handler(couple_handler)
+COUPLE_HANDLER = CommandHandler(["couple", "couples"], couple, block=False)
+application.add_handler(COUPLE_HANDLER)
