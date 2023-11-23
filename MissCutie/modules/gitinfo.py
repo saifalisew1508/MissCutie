@@ -1,35 +1,34 @@
-from aiohttp import ClientSession
-from pyrogram import filters
+import requests
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes, CommandHandler, filters
+from MissCutie import application
 
-from MissCutie import pyroclient
-from MissCutie.utils.errors import capture_err
+async def github(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) != 1:
+        await update.message.reply_text("/github username")
+        return
 
-
-@pyroclient.on_message(filters.command("github"))
-@capture_err
-async def github(_, message):
-    if len(message.command) != 2:
-        return await message.reply_text("/git username")
-    username = message.text.split(None, 1)[1]
+    username = context.args[0]
     URL = f"https://api.github.com/users/{username}"
-    async with ClientSession() as session:
-        async with session.get(URL) as request:
-            if request.status == 404:
-                return await message.reply_text("No Github Account Founded For This Username")
-            result = await request.json()
-            try:
-                url = result["html_url"]
-                name = result["name"]
-                company = result["company"]
-                bio = result["bio"]
-                created_at = result["created_at"]
-                avatar_url = result["avatar_url"]
-                blog = result["blog"]
-                location = result["location"]
-                repositories = result["public_repos"]
-                followers = result["followers"]
-                following = result["following"]
-                caption = f"""**Info Of {name}**
+
+    try:
+        response = await requests.get(URL)
+        response.raise_for_status()
+        result = await response.json()
+
+        url = result.get("html_url")
+        name = result.get("name", "")
+        company = result.get("company", "")
+        bio = result.get("bio", "")
+        created_at = result.get("created_at", "")
+        avatar_url = result.get("avatar_url", "")
+        blog = result.get("blog", "")
+        location = result.get("location", "")
+        repositories = result.get("public_repos", 0)
+        followers = result.get("followers", 0)
+        following = result.get("following", 0)
+
+        caption = f"""**Info Of {name}**
 **Username :** `{username}`
 **Bio :** `{bio}`
 **Profile link :** [{name}]({url})
@@ -40,6 +39,14 @@ async def github(_, message):
 **Location :** `{location}`
 **Followers  :** `{followers}`
 **Following :** `{following}`"""
-            except:
-                print(str(e))
-    await message.reply_photo(photo=avatar_url, caption=caption)
+
+        await update.message.reply_photo(photo=avatar_url, caption=caption, parse_mode=ParseMode.MARKDOWN)
+
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            await update.message.reply_text("No Github Account Found For This Username")
+        else:
+            print(f"Error: {e}")
+
+
+application.add_handler(CommandHandler("github", github))
