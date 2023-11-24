@@ -72,18 +72,24 @@ class Lexica:
 
         return prompts
 
-async def chatgpt(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = context.args[0] if context.args else None
-    if not query:
-        await update.message.reply_text("I didn't get this")
-        return
+async def chatgpt(update: Update, context: CallbackContext) -> None:
+    try:
+        query = context.args[0] if context.args else None
+        if not query:
+            await update.message.reply_text("I didn't get this")
+            return
 
-    query = urllib.parse.quote(query)
-    await context.bot.send_chat_action(update.message.chat_id, ChatAction.TYPING)
-    api = SafoneAPI()
-    resp = await api.chatgpt(query)
-    response = resp.message
-    await update.effective_chat.reply_text(response)
+        query = urllib.parse.quote(query)
+        await context.bot.send_chat_action(update.message.chat_id, ChatAction.TYPING)
+        api = SafoneAPI()  # Assuming SafoneAPI is correctly implemented in your_module
+        resp = api.chatgpt(query)
+        response = resp.message
+        reply_text = f"Query: {query}\nResponse: {response}"
+        await update.message.reply_text(reply_text)
+
+    except Exception as e:
+        await update.message.reply_text("An error occurred during the request.")
+
 
 async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
