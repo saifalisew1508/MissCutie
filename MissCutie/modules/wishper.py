@@ -1,101 +1,107 @@
-from MissCutie import telethn
-from telethon import events, Button, types
-from telethon.tl.functions.messages import EditInlineBotMessageRequest
-import shortuuid
-from MissCutie.modules.sql import whisper_sql
-import asyncio
+from datetime import datetime
+from uuid import uuid4
 
-@telethn.on(events.InlineQuery)
-async def mainwhisper(event):
-    builder = event.builder
-    if not event.text:
-        return await event.answer(switch_pm='Give me a username or ID!', switch_pm_param='ghelp_whisper')
-    text = event.text.split(' ')
-    user = text[0]
-    first = True
-    if not user.startswith('@') and not user.isdigit():
-        user = text[-1]
-        first = False
-        if not user.startswith('@') and not user.isdigit():
-            return await event.answer(switch_pm='Give me a username or ID!', switch_pm_param='ghelp_whisper')
-    if user.isdigit():
-        try:
-            chat = await telethn.get_entity(int(user))
-            user = f"@{chat.username}" if chat.username else chat.first_name
-        except:
-            user = user
-    message = ' '.join(text[1:]) if first else ' '.join(text[:1])
-    if len(message) > 200:
-        return await event.answer(switch_pm='Only text upto 200 characters is allowed!', switch_pm_param='ghelp_whisper')
-    answers = [
-        builder.article(
-            f'🤫 Send a whisper message to {user}!',
-            description='Only they can see it!',
-            text='Generating Whisper message...',
-            buttons=Button.inline('🤫 Show Whisper', 'huehue'),
-        )
-    ]
-    await event.answer(answers)
+from telegram import Update, InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.error import BadRequest
+from telegram.ext import ContextTypes, InlineQueryHandler, CallbackQueryHandler, ChosenInlineResultHandler
+from telegram.constants import ParseMode
 
-@telethn.on(events.Raw(types.UpdateBotInlineSend))
-async def handler(update):
-    if not update.query:
+from MissCutie import LOGGER, application
+from MissCutie.modules.users import get_user_id
+import MissCutie.modules.sql.whisper_sql as sql
+
+class Whisper():
+    receiver = 0
+    message = 0
+
+    def __init__(self, receiver, message):
+        self.message = message,
+        self.receiver = receiver
+
+    def to_string(self):
+        return str(self.receiver.id) + str(self.message)
+
+
+LIST = []
+
+
+async def chosen_inline_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    result = update.chosen_inline_result
+    query = result.query
+    q = query.split(" ")
+    username = q[-1]
+    receiver_id = get_user_id(username)
+    sender_id = update.effective_user.id
+    text = ""
+    for element in q:
+        if element is not username:
+            text = text + " " + element
+    sql.add_whisper(sender_id, receiver_id, text, sql.get_whispers(context.bot.id))
+    sql.increase_whisper_ids(context.bot.id)
+
+
+async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    print(query)
+    id = query.data.replace("whisper_", "")
+    whisper_message = sql.get_message(int(id))
+    sender = whisper_message.sender_id
+    receiver = whisper_message.receiver_id
+    message = whisper_message.message
+    if update.effective_user.id not in (sender, receiver):
+        await context.bot.answer_callback_query(update.callback_query.id,
+                                          "You are not permitted to read this message.",
+                                          show_alert=False)
         return
-    text = update.query.split(' ')
-    user = text[0]
-    first = True
-    if not user.startswith('@') and not user.isdigit():
-        user = text[-1]
-        first = False
-    if first:
-        message = ' '.join(text[1:])
-    else:
-        text.pop()
-        message = ' '.join(text)
-    if len(message) > 200:
-        return
-    usertype = 'username'
-    whisperType = 'inline'
-    if user.startswith('@'):
-        usertype = 'username'
-    elif user.isdigit():
-        usertype = 'id'
-    if user.isdigit():
-        try:
-            chat = await telethn.get_entity(int(user))
-            username = f"@{chat.username}" if chat.username else f"**{chat.first_name}**"
-        except:
-            username = f"`{user}`"
-    else:
-        username = user
-    whisperData = {'user': update.user_id, 'withuser': user, 'usertype': usertype, 'type': whisperType, 'message': message}
-    whisperId = shortuuid.uuid()
-    whisper_sql.add_whisper(WhisperId=whisperId, WhisperData=whisperData)
-    markup = telethn.build_reply_markup([
-        [Button.inline('🤫 Show Whisper', f'whisper_{whisperId}')]
-    ])
-    return await telethn(EditInlineBotMessageRequest(update.msg_id, message=f"A Whisper message for {username}.\nOnly they can read it!", reply_markup=markup))
+    await context.bot.answer_callback_query(update.callback_query.id, message, show_alert=True)
 
-@telethn.on(events.CallbackQuery(func=lambda event: event.data.decode().startswith('whisper_')))
-async def showWhisper(event):
-    whisperId = event.data.decode().split('_')[-1]
-    whisper =  whisper_sql.get_whisper(whisperId)
-    if not whisper:
-        return await event.edit("This whisper is not valid anymore!")
-    userType = whisper['usertype']
-    if event.sender_id == whisper['user']:
-        return await event.answer(whisper['message'], alert=True)
-    if userType == 'username' and event.sender.username.lower() == whisper[
-        'withuser'
-    ].replace('@', '').lower():
-        await event.answer(whisper['message'], alert=True)
-        whisper_sql.del_whisper(whisperId)
-        return await event.edit(f"{whisper['withuser']} read the Whisper.")
-    elif userType == 'id' and event.sender_id == int(whisper['withuser']):
-        user = await telethn.get_entity(int(whisper['withuser']))
-        username = user.username or user.first_name
-        await event.answer(whisper['message'], alert=True)
-        whisper_sql.del_whisper(whisperId)
-        return await event.edit(f"{username} read the whisper.")
+
+async def process_inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    query = update.inline_query.query
+    results = []
+    q = query.split(" ")
+    username = q[-1]
+    if not username.startswith("@"):
+        results.append(InlineQueryResultArticle(
+            id=uuid4(),
+            title="This does not work.",
+            description="You need to specify the user you want to message. If this person does not have one, you can not whisper to them.",
+            input_message_content=InputTextMessageContent("Write targets @username at the end of your message in order to send a message.", ParseMode.MARKDOWN)
+        ))
     else:
-        await event.answer("Not your Whisper!", alert=True)
+        for element in q:
+            if element is not username:
+                try:
+                    current_time = datetime.now()
+                    receiver = context.bot.get_chat(get_user_id(username))
+                    name = receiver.first_name
+                    title = "A whisper message to " + name
+                    print("Title: " + title)
+                    results.append(InlineQueryResultArticle(
+                        id=uuid4(),
+                        title=title,
+                        description="Only they can open it.",
+                        input_message_content=InputTextMessageContent(f"🔒 A whisper message to @{receiver.username}, Only they can open it."),
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
+                            text="show message",
+                            callback_data="whisper_" + str(sql.get_whispers(context.bot.id)))
+                        ]])
+                    ))
+
+
+                except BadRequest as excp:
+                    if excp.message == 'Chat not found':
+                        pass
+                    else:
+                        LOGGER.exception("Error extracting user ID")
+    await update.inline_query.answer(results)
+
+
+QUERY_HANDLER = InlineQueryHandler(process_inline_query, block=False)
+BUTTON_HANDLER = CallbackQueryHandler(button, pattern=r"whisper", block=False)
+INLINE_RESULT_HANDLER = ChosenInlineResultHandler(chosen_inline_button, block=False)
+
+application.add_handler(QUERY_HANDLER)
+application.add_handler(BUTTON_HANDLER)
+application.add_handler(INLINE_RESULT_HANDLER)
