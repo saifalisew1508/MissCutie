@@ -2,6 +2,7 @@ import random
 from datetime import datetime
 from telegram import Update
 from telegram.ext import ContextTypes, filters, MessageHandler, CommandHandler
+from MissCutie import LOGGER, application
 
 
 def dt():
