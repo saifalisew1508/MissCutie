@@ -10,12 +10,13 @@ from MissCutie import LOGGER, application
 from MissCutie.modules.users import get_user_id
 import MissCutie.modules.sql.whisper_sql as sql
 
+
 class Whisper():
     receiver = 0
     message = 0
 
     def __init__(self, receiver, message):
-        self.message = message,
+        self.message = message
         self.receiver = receiver
 
     def to_string(self):
@@ -34,7 +35,7 @@ async def chosen_inline_button(update: Update, context: ContextTypes.DEFAULT_TYP
     sender_id = update.effective_user.id
     text = ""
     for element in q:
-        if element is not username:
+        if element != username:
             text = text + " " + element
     sql.add_whisper(sender_id, receiver_id, text, sql.get_whispers(context.bot.id))
     sql.increase_whisper_ids(context.bot.id)
@@ -50,8 +51,8 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = whisper_message.message
     if update.effective_user.id not in (sender, receiver):
         await context.bot.answer_callback_query(update.callback_query.id,
-                                          "You are not permitted to read this message.",
-                                          show_alert=False)
+                                                "You are not permitted to read this message.",
+                                                show_alert=False)
         return
     await context.bot.answer_callback_query(update.callback_query.id, message, show_alert=True)
 
@@ -71,7 +72,7 @@ async def process_inline_query(update: Update, context: ContextTypes.DEFAULT_TYP
         ))
     else:
         for element in q:
-            if element is not username:
+            if element != username:
                 try:
                     current_time = datetime.now()
                     receiver = context.bot.get_chat(get_user_id(username))
@@ -88,7 +89,6 @@ async def process_inline_query(update: Update, context: ContextTypes.DEFAULT_TYP
                             callback_data="whisper_" + str(sql.get_whispers(context.bot.id)))
                         ]])
                     ))
-
 
                 except BadRequest as excp:
                     if excp.message == 'Chat not found':
