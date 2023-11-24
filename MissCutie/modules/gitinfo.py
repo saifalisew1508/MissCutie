@@ -1,6 +1,7 @@
 import requests
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes, CommandHandler, filters
+from telegram import Update
 from MissCutie import application
 
 async def github(update: Update, context: ContextTypes.DEFAULT_TYPE):
