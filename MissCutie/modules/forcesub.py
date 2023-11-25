@@ -168,9 +168,9 @@ async def get_help(chat):
     return gs(chat, "force_subscribe")
 
 # Define your handlers
-ON_UNMUTE_REQUEST_HANDLER = CallbackQueryHandler(on_unmute_request, pattern='^onUnMuteRequest$')
-CHECK_MEMBER_HANDLER = MessageHandler(filters.TEXT & filters.ChatType.GROUPS, check_member)
-CONFIG_HANDLER = CommandHandler(["forcesubscribe", "fsub"], config, pass_args=True)
+ON_UNMUTE_REQUEST_HANDLER = CallbackQueryHandler(on_unmute_request, pattern='^onUnMuteRequest$', block=False)
+CHECK_MEMBER_HANDLER = MessageHandler(filters.TEXT & filters.ChatType.GROUPS, check_member, block=False)
+CONFIG_HANDLER = CommandHandler(["forcesubscribe", "fsub"], config, block=False)
 
 
 application.add_handler(ON_UNMUTE_REQUEST_HANDLER)
