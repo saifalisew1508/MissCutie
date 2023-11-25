@@ -72,7 +72,7 @@ class Lexica:
 
         return prompts
 
-async def chatgpt(update: Update, context: CallbackContext) -> None:
+async def chatgpt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         query = context.args[0] if context.args else None
         if not query:
