@@ -105,7 +105,7 @@ async def check_member(update, context):
 
 async def config(update, context):
     user = await context.bot.get_chat_member(update.message.chat_id, update.message.from_user.id)
-    if user.status == "creator" or user.user.id in OWNER_ID:
+    if user.status == ChatMemberStatus.OWNER:
         chat_id = update.message.chat_id
 
         if len(context.args) > 0:
