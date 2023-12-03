@@ -834,7 +834,7 @@ Hey Developer's {context.bot.first_name} is online now.
 
 def main():
 
-    application.job_queue.run_repeating(send_alive, interval=1800, first=10)
+#    application.job_queue.run_repeating(send_alive, interval=1800, first=10)
     start_handler = CommandHandler("start", start, block=False)
     help_handler = CommandHandler("help", get_help, block=False)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*", block=False)
@@ -857,7 +857,7 @@ def main():
     application.add_error_handler(error_callback)
 
     LOGGER.info("Using long polling.")
-    application.run_polling(timeout=15, drop_pending_updates=False)
+    application.run_polling(timeout=5, drop_pending_updates=False)
 
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
