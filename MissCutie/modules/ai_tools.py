@@ -8,50 +8,16 @@ import urllib.parse
 import asyncio
 from io import BytesIO
 import os
-# import openai
+import openai
 import logging
 from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler
 from telegram.constants import ChatAction
 from telegram import Update, InputMediaPhoto
 from datetime import datetime
-from MissCutie import application
-# 
-# 
-# 
-# 
-# async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     user_message = update.message.text.lower()
-#     if user_message in ["hi", "hello", "coé", "oi"]:
-#         await update.message.reply_text(f"Hello, how can I help you?")
-#     if user_message in ["time?", "time", "hora"]:
-#         await update.message.reply_text(f" TIME - {datetime.now()}")
-#       return f"You sent the following: {user_message}"
-# 
-# 
-# async def gpt(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     print(update.message.text)
-#     question = str(update.message.text[5:].capitalize())
-#     print(f"QUESTION: {question}")
-#     response = chatGPT_message(question)
-#     await update.message.reply_text(
-#         f"Question: {question}.\n"
-#         f"Answer: {response['choices'][0]['message']['content']}"
-#     )
-# 
-# 
-# def chatGPT_message(question):
-#     openai.api_key = OPENAI_API_KEY
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=[
-#             {"role": "user", "content": f"{question}"},
-#         ]
-#     )
-#     return response
-# 
-# 
+from MissCutie import application, OPENAI_API_KEY
 
 
+# LexicaAi Art
 class Lexica:
     def __init__(self, query, negativePrompt="", guidanceScale: int = 7, portrait: bool = True, cookie=None):
         self.query = query
@@ -72,25 +38,32 @@ class Lexica:
 
         return prompts
 
-async def chatgpt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    try:
-        query = context.args[0] if context.args else None
-        if not query:
-            await update.message.reply_text("I didn't get this")
-            return
-
-        query = urllib.parse.quote(query)
-        await context.bot.send_chat_action(update.message.chat_id, ChatAction.TYPING)
-        api = SafoneAPI()  # Assuming SafoneAPI is correctly implemented in your_module
-        resp = api.chatgpt(query)
-        response = resp.message
-        reply_text = f"Query: {query}\nResponse: {response}"
-        await update.message.reply_text(reply_text)
-
-    except Exception as e:
-        await update.message.reply_text("An error occurred during the request.")
+# ChatGPT response 
+def chat_gpt(prompt):
+    OpenAI.api_key = OPENAI_API_KEY
+    client = OpenAI()
+    MODEL = "gpt-3.5-turbo"
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "user", "content": f"{prompt}"}
+        ]
+    )
+    return response.choices[0].message.content.strip()
 
 
+# ChatGPT Response Using openai
+async def gpt(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    prompt = context.args[0]
+    chat = update.effective_chat.id
+    await context.bot.send_chat_action(update.message.chat_id, ChatAction.TYPING)
+    response = chat_gpt(prompt)
+    await update.message.reply_text(
+        text=f"*Query:* {prompt}\n\n*Response:* {response}",
+        parse_mode=ParseMode.MARKDOWN
+    )
+    
+# LexicaAi Image Generator
 async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         prompt = context.args[0]
@@ -114,6 +87,6 @@ async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await x.edit("Failed to get images")
 
 
-application.add_handler(CommandHandler("ask", chatgpt, block=False))
+application.add_handler(CommandHandler("ask", gpt, block=False))
 application.add_handler(CommandHandler("imagine", ai_img_search, block=False))
 # application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
