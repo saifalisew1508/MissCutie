@@ -53,7 +53,7 @@ jikanpy==4.3.2
 joblib==1.2.0
 lxml==4.9.1
 Markdown==3.4.4
-markdown2==2.4.8
+markdown2==2.4.12
 multidict==5.2.0
 motor==3.2.0
 nekos.py==1.1.0
