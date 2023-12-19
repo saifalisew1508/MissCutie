@@ -51,7 +51,7 @@ img2pdf==0.5.0
 IMDbPY==2022.7.9
 jikanpy==4.3.2
 joblib==1.2.0
-lxml==4.9.1
+lxml==4.9.4
 Markdown==3.4.4
 markdown2==2.4.8
 multidict==5.2.0
