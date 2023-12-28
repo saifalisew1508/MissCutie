@@ -36,9 +36,7 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     user_id = await extract_user(message, context, args)
     promoter = await chat.get_member(user.id)
 
-
     if message.from_user.id == ChatID.ANONYMOUS_ADMIN:
-
         await message.reply_text(
             text="You are an anonymous admin.",
             reply_markup=InlineKeyboardMarkup(
@@ -52,7 +50,6 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 ],
             ),
         )
-
         return
 
     if not user_id:
@@ -87,7 +84,6 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
                 can_edit_messages=bot_member.can_edit_messages,
                 can_delete_messages=bot_member.can_delete_messages,
                 can_invite_users=bot_member.can_invite_users,
-                # can_promote_members=bot_member.can_promote_members,
                 can_restrict_members=bot_member.can_restrict_members,
                 can_pin_messages=bot_member.can_pin_messages,
                 can_manage_chat=bot_member.can_manage_chat,
@@ -96,16 +92,30 @@ async def promote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
             )
         except BadRequest as err:
             if err.message == "User_not_mutual_contact":
-                await message.reply_text("I can't promote someone who isn't in the group.")
+                await message.reply_text("<b>Failed To Promote:<b> I can't promote someone who isn't in the group.")
             else:
-                await message.reply_text("An error occurred while promoting.")
+                await message.reply_text("<b>Failed To Promote:<b> An error occurred while promoting.")
             return
 
     await bot.sendMessage(
         chat.id,
         f"Successfully promoted <b>{user_member.user.first_name or user_id}</b>!",
         parse_mode=ParseMode.HTML,
-        message_thread_id=message.message_thread_id if chat.is_forum else None
+        message_thread_id=message.message_thread_id if chat.is_forum else None,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        text="Demote 🙍🏻",
+                        callback_data=f"admin_=demote={user_id}",
+                    ),
+                    InlineKeyboardButton(
+                        text="Delete ❌️",
+                        callback_data=f"admin_=delete",
+                    ),
+                ],
+            ],
+        )
     )
 
     log_message = (
@@ -153,7 +163,7 @@ async def demote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
 
     if not user_id:
         await message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect..",
+            "<b>Failed To Demote:<b> You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
 
@@ -163,15 +173,15 @@ async def demote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
         return
 
     if user_member.status == ChatMemberStatus.OWNER:
-        await message.reply_text("This person CREATED the chat, how would I demote them?")
+        await message.reply_text("<b>Failed To Demote:<b> This person CREATED the chat, how would I demote them?")
         return
 
     if not user_member.status == ChatMemberStatus.ADMINISTRATOR:
-        await message.reply_text("Can't demote what wasn't promoted!")
+        await message.reply_text("<b>Failed To Demote:<b> Can't demote what wasn't promoted!")
         return
 
     if user_id == bot.id:
-        await message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        await message.reply_text("<b>Failed To Demote:<b> I can't demote myself! Get an admin to do it for me.")
         return
 
     try:
@@ -733,6 +743,15 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 " user, so I can't act upon them!",
             )
             return
+
+    elif splitter[1] == "delete":
+        # Check if the user is OWNER or ADMINISTRATOR
+        user_member = await chat.get_member(admin_user.id)
+        if user_member.status in {ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR}:
+            await query.delete()
+        else:
+            await query.answer("You don't have the necessary rights to do this!", show_alert=True)
+        return
 
     elif splitter[1] == "title":
         title = splitter[3]
