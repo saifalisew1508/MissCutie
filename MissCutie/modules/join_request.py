@@ -171,7 +171,7 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         if user_status.status == ChatMemberStatus.OWNER:
             # If the user is an owner, allow the operation without checking invite permission
             pass
-        elif user_status.status != ChatMemberStatus.ADMINISTRATOR:    
+        elif user_status.status != ChatMemberStatus.ADMINISTRATOR:
             await bot.answer_callback_query(query.id, "You are not authorized to approve join requests.", show_alert=True)
             return
 
@@ -197,7 +197,13 @@ async def approve_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         )
         return logmsg
     except Exception as e:
-        await update.effective_message.edit_text(str(e))
+        error_message = str(e)
+        if "Hide_requester_missing" in error_message:
+            await update.effective_message.edit_text("This user has already been declined by admins manually.")
+        elif "User_already_participant" in error_message:
+            await update.effective_message.edit_text("This user has already been approved by admins manually.")
+        else:
+            await update.effective_message.edit_text(error_message)
         pass
 
 
@@ -245,7 +251,13 @@ async def decline_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         )
         return logmsg
     except Exception as e:
-        await update.effective_message.edit_text(str(e))
+        error_message = str(e)
+        if "Hide_requester_missing" in error_message:
+            await update.effective_message.edit_text("This user has already been declined by admins manually.")
+        elif "User_already_participant" in error_message:
+            await update.effective_message.edit_text("This user has already been approved by admins manually.")
+        else:
+            await update.effective_message.edit_text(error_message)
         pass
 
 
@@ -297,7 +309,13 @@ async def ban_joinReq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str
         )
         return logmsg
     except Exception as e:
-        await update.effective_message.edit_text(str(e))
+        error_message = str(e)
+        if "Hide_requester_missing" in error_message:
+            await update.effective_message.edit_text("This user has already been declined by admins manually.")
+        elif "User_already_participant" in error_message:
+            await update.effective_message.edit_text("This user has already been approved by admins manually.")
+        else:
+            await update.effective_message.edit_text(error_message)
         pass
 
 
