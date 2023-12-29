@@ -13,7 +13,7 @@ cachetools==5.3.1
 certifi==2023.7.22
 cffi==1.15.1
 chardet==5.1.0
-charset-normalizer==2.0.7
+charset-normalizer==3.0.1
 click==8.0.3
 coffeehouse==2.2.6
 colorama==0.4.4
@@ -61,7 +61,7 @@ nltk==3.8.1
 numpy==1.25.1
 opencv-python==4.5.5.62
 opencv-python-headless==4.5.4.60
-openai==0.27.8
+openai==1.6.1
 packaging==23.1
 Pillow==9.5.0
 pretty-errors==1.2.24
@@ -78,7 +78,7 @@ pyperclip==1.8.2
 pyrate-limiter==2.10.0
 pyfiglet==0.8.post1
 Pyrogram==2.0.106
-pyromod==2.1.0
+pyromod==3.1.6
 PySocks==1.7.1
 pyYAML>=5.1.2
 python-arq==6.0.5
@@ -120,7 +120,7 @@ tzdata==2023.3
 tzlocal==4.1
 tswift==0.7.0
 ujson==5.4.0
-urllib3>=1.21.1,<=1.26.9
+urllib3==1.26.18
 unzip==1.0.0
 webencodings==0.5.1
 wikipedia==1.4.0
