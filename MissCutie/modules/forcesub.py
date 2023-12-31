@@ -1,3 +1,4 @@
+"""
 import logging
 import time
 import asyncio
@@ -176,3 +177,4 @@ CONFIG_HANDLER = CommandHandler(["forcesubscribe", "fsub"], config, block=False)
 application.add_handler(ON_UNMUTE_REQUEST_HANDLER)
 application.add_handler(CHECK_MEMBER_HANDLER)
 application.add_handler(CONFIG_HANDLER)
+"""
