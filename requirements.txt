@@ -60,7 +60,7 @@ nekos.py==1.1.0
 nltk==3.8.1
 numpy==1.25.1
 opencv-python==4.5.5.62
-opencv-python-headless==4.5.4.60
+opencv-python-headless==4.9.0.80
 openai==1.6.1
 packaging==23.1
 Pillow==9.5.0
