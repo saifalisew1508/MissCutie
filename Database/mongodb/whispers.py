@@ -1,4 +1,4 @@
-from Database.mongodb import db
+from Database.mongodb import *
 
 collection = dbname["whisper"]
 
