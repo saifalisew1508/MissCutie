@@ -8,31 +8,8 @@ from telegram import (
     Update,
 )
 from telegram.ext import CallbackQueryHandler, ContextTypes, InlineQueryHandler
-
+from Database.mongodb.whispers import add_whisper, del_whisper, get_whisper
 from MissCutie import MONGO_DB_URI, application
-
-# Initialize MongoDB client
-client = MongoClient(MONGO_DB_URI)
-db = client["whispers"]
-collection = db
-
-
-
-class Whispers:
-    @staticmethod
-    def add_whisper(WhisperId, WhisperData):
-        whisper = {"WhisperId": WhisperId, "whisperData": WhisperData}
-        collection.insert_one(whisper)
-
-    @staticmethod
-    def del_whisper(WhisperId):
-        collection.delete_one({"WhisperId": WhisperId})
-
-    @staticmethod
-    def get_whisper(WhisperId):
-        whisper = collection.find_one({"WhisperId": WhisperId})
-        return whisper["whisperData"] if whisper else None
-
 
 
 async def mainwhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
