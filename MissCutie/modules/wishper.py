@@ -1,5 +1,4 @@
 import shortuuid
-from pymongo import MongoClient
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
