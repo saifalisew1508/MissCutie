@@ -15,7 +15,7 @@ from pyrogram.types import Message
 from MissCutie import DB_NAME, MONGO_DB_URI
 
 client = MongoClient(MONGO_DB_URI)
-dbname = client[DB_NAME]
+mongo = client[DB_NAME]
 
 LOGGER = getLogger(__name__)
 BANNED = {}
@@ -45,14 +45,14 @@ def broadcast_messages(user_id, message):
         asyncio.sleep(e.x)
         return broadcast_messages(user_id, message)
     except InputUserDeactivated:
-        dbname.delete_user(int(user_id))
+        mongo.delete_user(int(user_id))
         LOGGER.info(f"{user_id}-Removed from Database, since deleted account.")
         return False, "Deleted"
     except UserIsBlocked:
         LOGGER.info(f"{user_id} -Blocked the bot.")
         return False, "Blocked"
     except PeerIdInvalid:
-        dbname.delete_user(int(user_id))
+        mongo.delete_user(int(user_id))
         LOGGER.info(f"{user_id} - PeerIdInvalid")
         return False, "Error"
     except Exception:
