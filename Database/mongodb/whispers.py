@@ -1,6 +1,6 @@
 from Database.mongodb import *
 
-collection = dbname["whisper"]
+collection = mongo["whisper"]
 
 
 class Whispers:
