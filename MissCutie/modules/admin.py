@@ -961,7 +961,7 @@ application.add_handler(SET_TITLE_HANDLER)
 application.add_handler(ADMIN_REFRESH_HANDLER)
 application.add_handler(ADMIN_CALLBACK_HANDLER)
 
-__mod_name__ = "Admin"
+__mod_name__ = "Admins"
 
 from MissCutie.modules.language import gs
 
