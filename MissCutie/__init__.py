@@ -177,7 +177,7 @@ else:
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 # Pyrogram Client
-app = Client("Cutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN
+app = Client("Cutie", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 aiohttpsession = ClientSession()
 
 application = Application.builder().token(TOKEN).concurrent_updates(True).build()
