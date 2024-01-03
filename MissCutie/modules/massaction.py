@@ -1,7 +1,6 @@
 import os
 from time import sleep
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telethon import *
 from telethon.errors import *
 from telethon.errors import FloodWaitError, UserNotParticipantError
