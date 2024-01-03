@@ -74,6 +74,7 @@ if ENV:
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     BAN_STICKER = os.environ.get("BAN_STICKER", "CAACAgUAAxkBAAEDRNJhjolhBDkOeJLs2cPuhskKthnoQwACFwIAAs4DwFWTjimU8iDvqiIE")
     CERT_PATH = os.environ.get("CERT_PATH")
+    DB_NAME = os.environ.get("MONGO_DB_NAME", "Cutie")
     DB_URI = os.environ.get("DATABASE_URL")
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
     DONATION_LINK = os.environ.get("DONATION_LINK")
@@ -132,6 +133,7 @@ else:
     BAN_STICKER = Config.BAN_STICKER
     CERT_PATH = Config.CERT_PATH
     DB_URI = Config.SQLALCHEMY_DATABASE_URI
+    DB_NAME = Config.MONGO_DB_NAME
     DEL_CMDS = Config.DEL_CMDS
     DONATION_LINK = Config.DONATION_LINK
     EVENT_LOGS = Config.EVENT_LOGS
