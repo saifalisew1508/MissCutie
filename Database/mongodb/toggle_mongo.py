@@ -1,8 +1,8 @@
 from Database.mongodb import *
 
-dwelcomedb = dbname.dwelcome
-nsfwdb = dbname.nsfw
-nekomodedb = dbname.nekomode
+dwelcomedb = mongo.dwelcome
+nsfwdb = mongo.nsfw
+nekomodedb = mongo.nekomode
 
 
 async def is_dwelcome_on(chat_id: int) -> bool:
