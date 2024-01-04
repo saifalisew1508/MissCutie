@@ -86,6 +86,7 @@ if ENV:
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     NO_LOAD = os.environ.get("NO_LOAD", "cleaner disasters").split()
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "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")
     PORT = int(os.environ.get("PORT", 8443))
     STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
@@ -144,6 +145,7 @@ else:
     MONGO_DB_URI = Config.MONGO_DB_URI
     NO_LOAD = Config.NO_LOAD
     OWNER_USERNAME = Config.OWNER_USERNAME
+    OPENAI_API_KEY = Config.OPENAI_API_KEY
     PORT = Config.PORT
     STRICT_GBAN = Config.STRICT_GBAN
     SUPPORT_CHAT = Config.SUPPORT_CHAT
