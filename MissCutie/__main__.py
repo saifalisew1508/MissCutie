@@ -870,6 +870,6 @@ if __name__ == "__main__":
     LOGGER.info("Starting Telethon bot client")
     telethn.start(bot_token=TOKEN)
     LOGGER.info("Starting Pyrogram bot client")
-#     pyroclient.start()
+    app.start()
     tracemalloc.start()
     main()
