@@ -1,4 +1,5 @@
 import shortuuid
+from pymongo import MongoClient
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -7,10 +8,33 @@ from telegram import (
     Update,
 )
 from telegram.ext import CallbackQueryHandler, ContextTypes, InlineQueryHandler
-from Database.mongodb.whispers import add_whisper, del_whisper, get_whisper
-from MissCutie import MONGO_DB_URI, application
+
+from MissCutie import DB_NAME, MONGO_DB_URI, application
+
+# Initialize MongoDB client
+client = MongoClient(MONGO_DB_URI)
+db = client[DB_NAME]
+collection = db["whispers"]
 
 
+# Whispers Class
+class Whispers:
+    @staticmethod
+    def add_whisper(WhisperId, WhisperData):
+        whisper = {"WhisperId": WhisperId, "whisperData": WhisperData}
+        collection.insert_one(whisper)
+
+    @staticmethod
+    def del_whisper(WhisperId):
+        collection.delete_one({"WhisperId": WhisperId})
+
+    @staticmethod
+    def get_whisper(WhisperId):
+        whisper = collection.find_one({"WhisperId": WhisperId})
+        return whisper["whisperData"] if whisper else None
+
+ 
+# Inline query handler
 async def mainwhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query
     if not query.query:
@@ -129,3 +153,6 @@ def parse_user_message(query_text):
 
 application.add_handler(InlineQueryHandler(mainwhisper, block=False))
 application.add_handler(CallbackQueryHandler(showWhisper, pattern="^whisper_", block=False))
+
+
+__mod_name__ = "Whispers"
