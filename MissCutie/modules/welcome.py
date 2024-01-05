@@ -103,7 +103,7 @@ async def welcomepic(pic, user, chat, user_id):
     pfp_x = 55
     pfp_y = (background.size[1] - pfp.size[1]) // 2 + 38
     draw = ImageDraw.Draw(background)
-    font = ImageFont.truetype("Resources/Fonts/Calistoga-Regular.ttf", 42)
+    font = ImageFont.truetype("Resources/Fonts/AutourOne-Regular.ttf", 42)
     text_width, text_height = draw.textsize(f"{user} [{user_id}]", font=font)
     text_x = 20
     text_y = background.height - text_height - 20 - 25
