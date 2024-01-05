@@ -68,8 +68,8 @@ if ENV:
     # Extract environment variables...
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
-    API_HASH = os.environ.get("API_HASH", None)
-    API_ID = os.environ.get("API_ID", None)
+    API_HASH = os.environ.get("API_HASH", "fe8511ac2e3283dacee74792aadc3611")
+    API_ID = os.environ.get("API_ID", 21963730)
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", "TLKINQ-XEVTPG-FQPEVU-ODUYVW-ARQ")
     ARQ_API_URL = os.environ.get("ARQ_API_URL", "https://arq.hamker.in")
     BAN_STICKER = os.environ.get("BAN_STICKER", "CAACAgUAAxkBAAEDRNJhjolhBDkOeJLs2cPuhskKthnoQwACFwIAAs4DwFWTjimU8iDvqiIE")
@@ -102,7 +102,7 @@ if ENV:
         DB_URI = DB_URI.replace("postgres://", "postgresql://")
         
     try:
-        OWNER_ID = int(os.environ.get("OWNER_ID", None))
+        OWNER_ID = int(os.environ.get("OWNER_ID", 1930139488))
     except ValueError:
         raise Exception("Your OWNER_ID env variable is not a valid integer.")
 
@@ -176,6 +176,16 @@ else:
     except ValueError:
         raise Exception("Your sudo or dev users list does not contain valid integers.")
 
+
+# Permanent Version
+BOT_VERSION = "14.2"
+PTB_VERSION = ptb_version
+PYRO_VERSION = pyrover
+TELETHON_VERSION = tlhver
+BOT_API_VERSION = __bot_api_version__
+PYTHON_VERSION = platform.python_version()
+SQL_VERSION = sql_version
+MONGO_VERSION = mongo_version
 
 # Telethon Client
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
