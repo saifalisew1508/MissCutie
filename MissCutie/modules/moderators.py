@@ -1,6 +1,6 @@
 import html
 import contextlib
-import MissCutie.modules.sql.moderators_sql as sql
+import Database.sql.moderators_sql as sql
 
 from MissCutie import application
 from MissCutie.modules.disable import DisableAbleCommandHandler

@@ -6,22 +6,22 @@ from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, ContextTypes
 
-import MissCutie.modules.sql.notes_sql as sql
+import Database.sql.notes_sql as sql
 from MissCutie import application, LOGGER, OWNER_ID, JOIN_LOGGER, SUPPORT_CHAT
 from MissCutie.__main__ import DATA_IMPORT
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.alternate import typing_action
 
 # from MissCutie.modules.rules import get_rules
-import MissCutie.modules.sql.rules_sql as rulessql
+import Database.sql.rules_sql as rulessql
 
 # from Database.sql import warns_sql as warnssql
-import MissCutie.modules.sql.blacklist_sql as blacklistsql
+import Database.sql.blacklist_sql as blacklistsql
 from Database.sql import disable_sql as disabledsql
 
 # from Database.sql import cust_filters_sql as filtersql
-# import MissCutie.modules.sql.welcome_sql as welcsql
-import MissCutie.modules.sql.locks_sql as locksql
+# import Database.sql.welcome_sql as welcsql
+import Database.sql.locks_sql as locksql
 from MissCutie.modules.connection import connected
 
 @typing_action

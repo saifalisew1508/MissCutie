@@ -1,7 +1,7 @@
 import html
 from typing import Optional
 
-import MissCutie.modules.sql.blsticker_sql as sql
+import Database.sql.blsticker_sql as sql
 from MissCutie import LOGGER, application
 from MissCutie.modules.connection import connected
 from MissCutie.modules.disable import DisableAbleCommandHandler

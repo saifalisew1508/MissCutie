@@ -1,7 +1,7 @@
 import html
 from typing import Optional
 
-import MissCutie.modules.sql.locks_sql as sql
+import Database.sql.locks_sql as sql
 from alphabet_detector import AlphabetDetector
 from telegram import (Chat, ChatPermissions, InlineKeyboardButton,
                       InlineKeyboardMarkup, Message, MessageEntity,

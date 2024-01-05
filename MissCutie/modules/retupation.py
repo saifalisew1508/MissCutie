@@ -5,8 +5,8 @@ from telegram.ext import ContextTypes, filters, CommandHandler
 
 from MissCutie import application, LOGGER
 from MissCutie.modules.disable import DisableAbleMessageHandler
-import MissCutie.modules.sql.reputation_sql as sql
-import MissCutie.modules.sql.reputation_settings_sql as settings
+import Database.sql.reputation_sql as sql
+import Database.sql.reputation_settings_sql as settings
 
 
 

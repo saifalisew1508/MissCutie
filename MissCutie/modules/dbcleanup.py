@@ -1,7 +1,7 @@
 import asyncio
 
-import MissCutie.modules.sql.global_bans_sql as gban_sql
-import MissCutie.modules.sql.users_sql as user_sql
+import Database.sql.global_bans_sql as gban_sql
+import Database.sql.users_sql as user_sql
 from MissCutie import DEV_USERS, OWNER_ID, application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update

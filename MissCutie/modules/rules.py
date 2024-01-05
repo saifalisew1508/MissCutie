@@ -1,6 +1,6 @@
 from typing import Optional
 
-import MissCutie.modules.sql.rules_sql as sql
+import Database.sql.rules_sql as sql
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.string_handling import markdown_parser, markdown_to_html

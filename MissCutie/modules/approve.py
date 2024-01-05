@@ -3,7 +3,7 @@ from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie import application, DRAGONS
 from MissCutie.modules.helper_funcs.extraction import extract_user
 from telegram.ext import ContextTypes, CallbackQueryHandler
-import MissCutie.modules.sql.approve_sql as sql
+import Database.sql.approve_sql as sql
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update

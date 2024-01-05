@@ -6,7 +6,7 @@ from telegram.constants import ChatType, ChatMemberStatus, ParseMode
 from telegram.error import BadRequest, Forbidden
 from telegram.ext import CallbackQueryHandler, CommandHandler, ContextTypes
 
-import MissCutie.modules.sql.connection_sql as sql
+import Database.sql.connection_sql as sql
 from MissCutie import DEV_USERS, DRAGONS, application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.helper_funcs.alternate import send_message, typing_action

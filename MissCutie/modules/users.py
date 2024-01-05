@@ -14,7 +14,7 @@ from telegram.ext import (
 from telegram.helpers import escape_markdown
 # from Database.sql.topics_sql import get_action_topic
 
-import MissCutie.modules.sql.users_sql as sql
+import Database.sql.users_sql as sql
 from MissCutie import DEV_USERS, LOGGER, OWNER_ID, application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from Database.sql.users_sql import get_all_users

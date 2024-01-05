@@ -1,6 +1,6 @@
 # Module to blacklist users and prevent them from using commands by @TheRealPhoenix
 import html
-import MissCutie.modules.sql.blacklistusers_sql as sql
+import Database.sql.blacklistusers_sql as sql
 from MissCutie import (
     DEV_USERS,
     OWNER_ID,

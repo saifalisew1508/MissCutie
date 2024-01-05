@@ -3,7 +3,7 @@ from io import BytesIO
 import random
 from typing import Optional
 
-import MissCutie.modules.sql.notes_sql as sql
+import Database.sql.notes_sql as sql
 from MissCutie import LOGGER, JOIN_LOGGER, SUPPORT_CHAT, application, DRAGONS
 from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie.modules.helper_funcs.handlers import MessageHandlerChecker

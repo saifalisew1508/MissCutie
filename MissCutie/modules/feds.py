@@ -7,7 +7,7 @@ import time
 import uuid
 from io import BytesIO
 
-import MissCutie.modules.sql.feds_sql as sql
+import Database.sql.feds_sql as sql
 from MissCutie.modules.language import gs
 
 from MissCutie import (
