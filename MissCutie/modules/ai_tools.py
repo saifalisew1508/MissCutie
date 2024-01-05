@@ -8,8 +8,8 @@ import urllib.parse
 import asyncio
 from io import BytesIO
 import os
-import openai
 import logging
+from openai import OpenAI
 from telegram.ext import filters, ContextTypes, CommandHandler, MessageHandler
 from telegram.constants import ChatAction
 from telegram import Update, InputMediaPhoto
