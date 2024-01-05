@@ -7,7 +7,7 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, MessageHandler, filters, ContextTypes
 from telegram.helpers import mention_html
 
-import MissCutie.modules.sql.blacklist_sql as sql
+import Database.sql.blacklist_sql as sql
 from MissCutie import application, LOGGER
 from MissCutie.modules.disable import DisableAbleCommandHandler
 from MissCutie.modules.helper_funcs.chat_status import check_admin, user_not_admin
