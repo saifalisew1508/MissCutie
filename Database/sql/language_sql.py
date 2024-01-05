@@ -1,7 +1,7 @@
 import threading
 
 from sqlalchemy import Column, String, UnicodeText
-from MissCutie.modules.sql import SESSION, BASE
+from Database.sql import SESSION, BASE
 
 
 class ChatLangs(BASE):

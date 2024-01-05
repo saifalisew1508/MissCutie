@@ -1,6 +1,6 @@
 import threading
 from sqlalchemy import Column, String, Integer, BigInteger
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 
 class whisper_message():

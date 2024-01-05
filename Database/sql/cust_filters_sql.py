@@ -3,7 +3,7 @@ import threading
 from sqlalchemy import Column, String, UnicodeText, Boolean, Integer, distinct, func
 
 from MissCutie.modules.helper_funcs.msg_types import Types
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 class CustomFilters(BASE):
     __tablename__ = "cust_filters"

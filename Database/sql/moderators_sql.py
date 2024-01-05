@@ -3,7 +3,7 @@ import threading
 from sqlalchemy import Column, String
 from sqlalchemy.sql.sqltypes import BigInteger
 
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 
 class Mods(BASE):

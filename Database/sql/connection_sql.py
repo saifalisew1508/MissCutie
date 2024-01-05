@@ -4,7 +4,7 @@ from typing import Union
 
 from sqlalchemy import Column, String, Boolean, UnicodeText, Integer, BigInteger
 
-from MissCutie.modules.sql import SESSION, BASE
+from Database.sql import SESSION, BASE
 
 
 class ChatAccessConnectionSettings(BASE):
