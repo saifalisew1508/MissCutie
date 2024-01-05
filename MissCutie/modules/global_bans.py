@@ -14,7 +14,7 @@ from telegram.ext import (
 )
 from telegram.helpers import mention_html
 
-import MissCutie.modules.sql.global_bans_sql as sql
+import Database.sql.global_bans_sql as sql
 from Database.sql.users_sql import get_user_com_chats
 from MissCutie import (
     DEV_USERS,
