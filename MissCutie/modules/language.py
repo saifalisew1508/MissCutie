@@ -5,7 +5,7 @@ from telegram.ext import CommandHandler, CallbackQueryHandler
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 
 from MissCutie import application
-import MissCutie.modules.sql.language_sql as sql
+import Database.sql.language_sql as sql
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from strings.languages import get_string, get_languages, get_language
 
