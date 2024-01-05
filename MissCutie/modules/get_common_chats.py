@@ -3,7 +3,7 @@ import os
 
 from MissCutie import OWNER_ID, application
 from MissCutie.modules.helper_funcs.extraction import extract_user
-from MissCutie.modules.sql.users_sql import get_user_com_chats
+from Database.sql.users_sql import get_user_com_chats
 from telegram import Update, Chat
 from telegram.error import BadRequest, RetryAfter, Forbidden
 from telegram.ext import ContextTypes, CommandHandler, filters

@@ -2,7 +2,7 @@
 import threading
 
 from MissCutie.modules.helper_funcs.msg_types import Types
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, distinct, func
 
 

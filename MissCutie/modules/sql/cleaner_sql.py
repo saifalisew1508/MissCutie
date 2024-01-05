@@ -1,6 +1,6 @@
 import threading
 
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, UnicodeText
 
 

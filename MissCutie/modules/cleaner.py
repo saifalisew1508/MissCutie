@@ -6,7 +6,7 @@ from MissCutie.modules.helper_funcs.chat_status import (
     connection_status,
     check_admin
 )
-from MissCutie.modules.sql import cleaner_sql as sql
+from Database.sql import cleaner_sql as sql
 from telegram import Update, ChatMemberAdministrator
 from telegram.constants import ParseMode
 from telegram.ext import (

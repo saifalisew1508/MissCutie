@@ -1,7 +1,7 @@
 import threading
 
 from sqlalchemy import Column, String, UnicodeText, Integer, BigInteger
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 
 class LatestRepMessage(BASE):

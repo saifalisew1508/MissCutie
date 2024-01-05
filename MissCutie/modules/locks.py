@@ -22,7 +22,7 @@ from MissCutie.modules.helper_funcs.chat_status import (
                                                          check_admin,
                                                          user_not_admin)
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql.approve_sql import is_approved
+from Database.sql.approve_sql import is_approved
 
 ad = AlphabetDetector()
 

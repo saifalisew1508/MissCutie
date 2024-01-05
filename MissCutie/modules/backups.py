@@ -15,11 +15,11 @@ from MissCutie.modules.helper_funcs.alternate import typing_action
 # from MissCutie.modules.rules import get_rules
 import MissCutie.modules.sql.rules_sql as rulessql
 
-# from MissCutie.modules.sql import warns_sql as warnssql
+# from Database.sql import warns_sql as warnssql
 import MissCutie.modules.sql.blacklist_sql as blacklistsql
-from MissCutie.modules.sql import disable_sql as disabledsql
+from Database.sql import disable_sql as disabledsql
 
-# from MissCutie.modules.sql import cust_filters_sql as filtersql
+# from Database.sql import cust_filters_sql as filtersql
 # import MissCutie.modules.sql.welcome_sql as welcsql
 import MissCutie.modules.sql.locks_sql as locksql
 from MissCutie.modules.connection import connected

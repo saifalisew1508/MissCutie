@@ -9,7 +9,7 @@ from MissCutie.modules.helper_funcs.chat_status import check_admin, user_not_adm
 from MissCutie.modules.log_channel import loggable
 
 from MissCutie import LOGGER, application
-from MissCutie.modules.sql import request_sql as sql
+from Database.sql import request_sql as sql
 
 REQUEST_GROUP = 12
 

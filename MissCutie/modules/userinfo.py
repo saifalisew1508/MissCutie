@@ -9,7 +9,7 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, ContextTypes
 from telegram.helpers import mention_html
 
-from MissCutie.modules.sql.approve_sql import is_approved
+from Database.sql.approve_sql import is_approved
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.users import get_user_id
 from MissCutie import DEV_USERS, DRAGONS, INFOPIC, LOGGER, OWNER_ID, application

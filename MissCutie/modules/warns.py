@@ -17,7 +17,7 @@ from MissCutie.modules.helper_funcs.extraction import (
 from MissCutie.modules.helper_funcs.misc import split_message
 from MissCutie.modules.helper_funcs.string_handling import split_quotes
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql import warns_sql as sql
+from Database.sql import warns_sql as sql
 from telegram import (
     CallbackQuery,
     Chat,
@@ -40,7 +40,7 @@ from telegram.ext import (
     ApplicationHandlerStop,
 )
 from telegram.helpers import mention_html
-from MissCutie.modules.sql.approve_sql import is_approved
+from Database.sql.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"

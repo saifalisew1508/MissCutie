@@ -16,7 +16,7 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql.join_request import enable_join_request, disable_features, join_request_status, enable_auto_approve, auto_approve_status, migrate_chat
+from Database.sql.join_request import enable_join_request, disable_features, join_request_status, enable_auto_approve, auto_approve_status, migrate_chat
 
 
 @check_admin(permission="can_invite_users", is_both=True)

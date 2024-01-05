@@ -8,7 +8,7 @@ from MissCutie.modules.disable import (
     DisableAbleCommandHandler,
     DisableAbleMessageHandler,
 )
-from MissCutie.modules.sql import afk_sql as sql
+from Database.sql import afk_sql as sql
 from MissCutie.modules.users import get_user_id
 from telegram import MessageEntity, Update
 from telegram.error import BadRequest

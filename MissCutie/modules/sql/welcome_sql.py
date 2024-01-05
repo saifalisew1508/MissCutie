@@ -3,7 +3,7 @@ import threading
 from typing import Union
 
 from MissCutie.modules.helper_funcs.msg_types import Types
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 from sqlalchemy import BigInteger, Boolean, Column, Integer, String, UnicodeText
 
 DEFAULT_WELCOME = "Hey {first}, how are you?"

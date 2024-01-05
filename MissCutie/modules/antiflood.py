@@ -11,7 +11,7 @@ from MissCutie.modules.helper_funcs.chat_status import (
 
 )
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql import antiflood_sql as sql
+from Database.sql import antiflood_sql as sql
 from telegram.error import BadRequest
 from telegram.ext import (
     ContextTypes,
@@ -24,7 +24,7 @@ from telegram.helpers import mention_html
 from MissCutie.modules.helper_funcs.string_handling import extract_time
 from MissCutie.modules.connection import connected
 from MissCutie.modules.helper_funcs.alternate import send_message
-from MissCutie.modules.sql.approve_sql import is_approved
+from Database.sql.approve_sql import is_approved
 
 FLOOD_GROUP = 3
 

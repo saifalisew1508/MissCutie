@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import BigInteger, Column, UnicodeText
 
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 
 class UserInfo(BASE):

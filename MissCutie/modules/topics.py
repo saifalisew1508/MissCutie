@@ -7,7 +7,7 @@ from telegram.helpers import mention_html
 from MissCutie import application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql.topics_sql import (del_action_topic,
+from Database.sql.topics_sql import (del_action_topic,
                                               get_action_topic,
                                               set_action_topic)
 

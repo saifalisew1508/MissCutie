@@ -1,7 +1,7 @@
 import threading
 
 from MissCutie import application
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 from sqlalchemy import (
     Column,
     ForeignKey,

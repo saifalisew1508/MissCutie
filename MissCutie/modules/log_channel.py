@@ -4,7 +4,7 @@ from functools import wraps
 from telegram.ext import ContextTypes
 from telegram.constants import ChatType
 from MissCutie.modules.helper_funcs.misc import is_module_loaded
-from MissCutie.modules.sql.topics_sql import get_action_topic
+from Database.sql.topics_sql import get_action_topic
 
 FILENAME = __name__.rsplit(".", 1)[-1]
 
@@ -17,7 +17,7 @@ if is_module_loaded(FILENAME):
 
     from MissCutie import EVENT_LOGS, LOGGER, application
     from MissCutie.modules.helper_funcs.chat_status import check_admin
-    from MissCutie.modules.sql import log_channel_sql as sql
+    from Database.sql import log_channel_sql as sql
 
     def loggable(func):
         @wraps(func)

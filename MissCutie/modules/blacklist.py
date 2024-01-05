@@ -17,7 +17,7 @@ from MissCutie.modules.log_channel import loggable
 from MissCutie.modules.warns import warn
 from MissCutie.modules.helper_funcs.string_handling import extract_time
 from MissCutie.modules.connection import connected
-from MissCutie.modules.sql.approve_sql import is_approved
+from Database.sql.approve_sql import is_approved
 from MissCutie.modules.helper_funcs.alternate import send_message, typing_action
 
 BLACKLIST_GROUP = 11

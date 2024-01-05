@@ -5,7 +5,7 @@ from telethon.tl.types import ChatBannedRights
 from MissCutie import telethn as tbot
 from MissCutie import BOT_NAME
 from MissCutie.events import register
-from MissCutie.modules.sql.night_mode_sql import (
+from Database.sql.night_mode_sql import (
     add_nightmode,
     get_all_chat_id,
     is_nightmode_indb,

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String
 
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 
 
 class Nsfwatch(BASE):

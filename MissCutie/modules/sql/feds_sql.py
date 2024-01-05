@@ -3,7 +3,7 @@ import asyncio
 import threading
 
 from MissCutie import application
-from MissCutie.modules.sql import BASE, SESSION
+from Database.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, BigInteger
 from telegram.error import BadRequest, Forbidden
 

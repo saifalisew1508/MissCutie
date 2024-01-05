@@ -29,7 +29,7 @@ from MissCutie.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
     markdown_to_html,
 )
-from MissCutie.modules.sql import cust_filters_sql as sql
+from Database.sql import cust_filters_sql as sql
 
 from MissCutie.modules.connection import connected
 

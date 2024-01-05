@@ -12,12 +12,12 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.helpers import escape_markdown
-# from MissCutie.modules.sql.topics_sql import get_action_topic
+# from Database.sql.topics_sql import get_action_topic
 
 import MissCutie.modules.sql.users_sql as sql
 from MissCutie import DEV_USERS, LOGGER, OWNER_ID, application
 from MissCutie.modules.helper_funcs.chat_status import check_admin
-from MissCutie.modules.sql.users_sql import get_all_users
+from Database.sql.users_sql import get_all_users
 
 USERS_GROUP = 4
 CHAT_GROUP = 5

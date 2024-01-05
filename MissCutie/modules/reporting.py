@@ -3,7 +3,7 @@ import html
 from MissCutie import LOGGER, DRAGONS, application
 from MissCutie.modules.helper_funcs.chat_status import check_admin, user_not_admin
 from MissCutie.modules.log_channel import loggable
-from MissCutie.modules.sql import reporting_sql as sql
+from Database.sql import reporting_sql as sql
 from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.error import BadRequest, Forbidden
