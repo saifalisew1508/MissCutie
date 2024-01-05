@@ -8,7 +8,7 @@ import random
 from MissCutie import *
 from strings.buttons import *
 
-import MissCutie.modules.sql.users_sql as sql
+import Database.sql.users_sql as sql
 from MissCutie.modules import ALL_MODULES
 from MissCutie.modules.helper_funcs.chat_status import is_user_admin
 from MissCutie.modules.helper_funcs.misc import paginate_modules
