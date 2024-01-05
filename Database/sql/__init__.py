@@ -1,4 +1,3 @@
-"""
 from MissCutie import DB_URI
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,4 +13,3 @@ def start() -> scoped_session:
 
 BASE = declarative_base()
 SESSION = start()
-"""
