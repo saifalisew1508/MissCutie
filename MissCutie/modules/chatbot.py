@@ -26,7 +26,8 @@ from telegram.helpers import mention_html
 
 import Database.sql.kuki_sql as sql
 from MissCutie import application
-from MissCutie.plugins.log_channel import gloggable
+from MissCutie.modules.log_channel import gloggable, loggable
+
 
 
 @gloggable
