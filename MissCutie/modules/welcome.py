@@ -150,7 +150,7 @@ async def member_has_joined(client, member: ChatMemberUpdated):
                 user.photo.big_file_id, file_name=f"pp{user_id}.png"
             )
         except AttributeError:
-            pic = "Extra/profilepic.png"
+            pic = "Resources/Image/profilepic.png"
         try:
             welcomeimg = await welcomepic(
                 pic, user.first_name, member.chat.title, user_id
