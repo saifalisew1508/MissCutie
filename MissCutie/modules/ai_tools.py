@@ -31,7 +31,7 @@ class Lexica:
             "text": self.query,
             "searchMode": "images",
             "source": "search",
-            "model": "lexica-aperture-v2"
+            "model": "lexica-aperture-v3.5"
         })
 
         prompts = [f"https://image.lexica.art/full_jpg/{ids['id']}" for ids in response.json()["images"]]
@@ -68,20 +68,22 @@ async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         prompt = context.args[0]
     except IndexError:
-        await update.message.reply_text("What should I imagine?\nGive some prompt along with the command")
+        await update.message.reply_text("What should I imagine? Give some prompt along with the command")
         return
 
-    x = await update.message.reply_text("Processing...")
+    x = await update.message.reply_text("Processing with your Promot...")
+    await context.bot.send_chat_action(update.message.chat_id, ChatAction.UPLOAD_PHOTO)
     try:
         lex = Lexica(query=prompt).images()
         k = random.sample(lex, 4)
         result = [InputMediaPhoto(image) for image in k]
+        await context.bot.send_chat_action(update.message.chat_id, ChatAction.UPLOAD_PHOTO)
         await context.bot.send_media_group(
             chat_id=update.message.chat_id,
             media=result,
             reply_to_message_id=update.message.message_id,
         )
-        await asyncio.sleep(0)  # Introduce a small delay to allow other tasks to run
+        await asyncio.sleep(10)  # Introduce a small delay to allow other tasks to run
         await x.delete()
     except:
         await x.edit("Failed to get images")
@@ -89,4 +91,3 @@ async def ai_img_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 application.add_handler(CommandHandler("ask", gpt, block=False))
 application.add_handler(CommandHandler("imagine", ai_img_search, block=False))
-# application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message, block=False))
