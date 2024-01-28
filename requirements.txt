@@ -15,6 +15,7 @@ cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==3.0.1
 click==8.0.3
+cloudscraper
 coffeehouse==2.2.6
 colorama==0.4.4
 countryinfo==0.1.2
