@@ -17,7 +17,7 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from Mikasa.modules.disable import DisableAbleCommandHandler
+from MissCutie.modules.disable import DisableAbleCommandHandler
 from telegram.helpers import mention_html
 from telegram.error import TelegramError, BadRequest
 from telegram import InputSticker
