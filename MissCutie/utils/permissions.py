@@ -4,7 +4,7 @@ from traceback import format_exc as err
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from pyrogram.types import Message
 
-from MissCutie import DEV_USERS, LOGGER
+from MissCutie import DEV_USERS, app
 from MissCutie.utils.pluginhelp import member_permissions
 
 
@@ -13,27 +13,28 @@ async def authorised(func, subFunc2, client, message, *args, **kwargs):
     try:
         await func(client, message, *args, **kwargs)
     except ChatWriteForbidden:
-         return
+        await app.leave_chat(chatID)
     except Exception as e:
         try:
             await message.reply_text(str(e.MESSAGE))
         except AttributeError:
             await message.reply_text(str(e))
         e = err()
-        LOGGER.debug(str(e))
+        print(str(e))
     return subFunc2
 
 
 async def unauthorised(message: Message, permission, subFunc2):
     chatID = message.chat.id
     text = (
-        "You don't have the required permission to perform this action. :)"
-        + f"\n- **Permission:** `{permission}`"
+        "You don't have the required permission to perform this action."
+        + f"\n**Permission:** __{permission}__"
     )
     try:
         await message.reply_text(text)
     except ChatWriteForbidden:
-       return subFunc2
+        await app.leave_chat(chatID)
+    return subFunc2
 
 
 def adminsOnly(permission):
@@ -42,6 +43,7 @@ def adminsOnly(permission):
         async def subFunc2(client, message: Message, *args, **kwargs):
             chatID = message.chat.id
             if not message.from_user:
+                # For anonymous admins
                 if (
                     message.sender_chat
                     and message.sender_chat.id == message.chat.id
@@ -55,6 +57,7 @@ def adminsOnly(permission):
                         **kwargs,
                     )
                 return await unauthorised(message, permission, subFunc2)
+            # For admins and sudo users
             userID = message.from_user.id
             permissions = await member_permissions(chatID, userID)
             if userID not in DEV_USERS and permission not in permissions:
