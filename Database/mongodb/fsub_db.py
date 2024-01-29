@@ -1,6 +1,6 @@
 from Database.mongodb import *
 
-fsub = dbname.force_sub
+fsub = mongo.force_sub
 
 
 def fs_settings(chat_id: int):
