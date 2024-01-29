@@ -115,7 +115,8 @@ async def force_subscribe_new_message(e):
         return
 
     try:
-        channel = db.fs_settings(e.chat_id)["channel"]
+        channel_settings = await db.fs_settings(e.chat_id)
+        channel = channel_settings["channel"]
         check = await participant_check(channel, e.sender_id)
     except (ChatAdminRequiredError, UserNotParticipantError):
         return
