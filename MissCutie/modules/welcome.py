@@ -64,7 +64,7 @@ ENUM_FUNC_MAP = {
 }
 
 VERIFIED_USER_WAITLIST = {}
-
+welcum_message = random.choice(RANDOM_WELCUM)
 
 
 async def circle(pfp, size=(259, 259)):
@@ -151,7 +151,6 @@ async def member_has_joined(client, member: ChatMemberUpdated):
             )
         except AttributeError:
             pic = "Resources/Image/profilepic.png"
-            welcum_message = random.choice(RANDOM_WELCUM)
         try:
             welcomeimg = await welcomepic(
                 pic, user.first_name, member.chat.title, user_id
