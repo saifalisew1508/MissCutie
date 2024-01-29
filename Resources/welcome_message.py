@@ -63,5 +63,5 @@ RANDOM_WELCUM = [
     f"Hello, {mention}! 🚀 {member.chat.title} is now complete with your arrival.",
     f"Welcome, {mention}! 🌈 {member.chat.title} is now your adventure zone.",
     f"{mention}, welcome to the fantastic world of {member.chat.title}! 🌟",
-    f"A big hello to {mention}! 🎉,
+    f"A big hello to {mention}! 🎉",
 ]
