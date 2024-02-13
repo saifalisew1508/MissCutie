@@ -130,6 +130,9 @@ async def member_has_joined(client, member: ChatMemberUpdated):
         return
     else:
         chat_id = member.chat.id
+        count = await app.get_chat_members_count(chat_id)
+        if count:
+            return
         welcome_enabled = await is_dwelcome_on(chat_id)
         if not welcome_enabled:
             return
@@ -145,6 +148,10 @@ async def member_has_joined(client, member: ChatMemberUpdated):
         )
         user_id = user.id
         dc = user.dc_id
+        button_text = "👤 Joined User"
+        add_button_text = "➕️ Add me to your group"
+        deep_link = f"tg://openmessage?user_id={user.id}"
+        add_link = f"https://t.me/{app.username}?startgroup=true"
         try:
             pic = await client.download_media(
                 user.photo.big_file_id, file_name=f"pp{user_id}.png"
@@ -158,7 +165,11 @@ async def member_has_joined(client, member: ChatMemberUpdated):
             temp.MELCOW[f"welcome-{chat_id}"] = await client.send_photo(
                 member.chat.id,
                 photo=welcomeimg,
-                caption=f"{welcum_message}\n\n**Name : {first_name}**\n**User_Id : {user_id}**\n**Date Joined : {joined_date}**",
+                caption=f"✨Hey {mention}\n\n🏘Welcome to Group🥳\n           {member.chat.title}\n🔐Link » {member.chat.username}\n\nName : {first_name}\nUser_Id : {user_id}\nDate Joined : {joined_date}\nTotal Members Count : {count}",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton(button_text, url=deep_link)],
+                    [InlineKeyboardButton(text=add_button_text, url=add_link)],
+                ])
             )
         except Exception as e:
             print(e)
