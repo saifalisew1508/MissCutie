@@ -97,7 +97,7 @@ requests==2.31.0
 rfc==0.1.0
 rfc3986==1.5.0
 rsa==4.9
-safoneapi==1.0.48
+safoneapi==1.0.62
 shortuuid
 selenium>=3.141.0
 sgmllib3k==1.0.0
