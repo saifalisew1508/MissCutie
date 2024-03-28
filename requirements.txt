@@ -77,7 +77,7 @@ pydictionary==2.0.1
 pyparsing==2.4.7
 pyperclip==1.8.2
 pyrate-limiter==2.10.0
-pyfiglet==0.8.post1
+pyfiglet==1.0.2
 Pyrogram==2.0.106
 pyromod==3.1.6
 PySocks==1.7.1
