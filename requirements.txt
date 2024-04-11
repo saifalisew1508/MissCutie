@@ -46,7 +46,7 @@ humanize==3.12.0
 hyperframe==5.2.0
 hachoir==3.2.0
 heroku3==5.2.1
-idna==2.10
+idna==3.7
 instaloader==4.9.6
 img2pdf==0.5.0
 IMDbPY==2022.7.9
