@@ -19,6 +19,8 @@ from MissCutie.modules.log_channel import loggable
 from Database.sql.join_request import enable_join_request, disable_features, join_request_status, enable_auto_approve, auto_approve_status, migrate_chat
 
 
+
+
 @check_admin(permission="can_invite_users", is_both=True)
 @loggable
 async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -26,43 +28,75 @@ async def set_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     args = context.args
     user = update.effective_user
-
+    
     if len(args) > 0:
         s = args[0].lower()
-
         if s in ["yes", "on", "true"]:
             enable_join_request(chat.id)
             await message.reply_html(
                 "Enabled join request menu in {}\nI will send a button menu to approve/decline new requests".format(
-                    html.escape(chat.title)))
+                    html.escape(chat.title))
+            )
             log_message = (
                 f"#JOINREQUESTS\n"
                 f"Enabled\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
             return log_message
-
         elif s in ["off", "no", "false"]:
             disable_features(chat.id)
             await message.reply_html(
                 "Disabled join request menu in {}\nI will no longer send a button menu to approve/decline new requests".format(
-                    html.escape(chat.title)))
+                    html.escape(chat.title))
+            )
             log_message = (
                 f"#JOINREQUESTS\n"
                 f"Disabled\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
             return log_message
-
         else:
             await message.reply_text("Unrecognized arguments {}".format(s))
             return
+    else:
+        keyboard = [
+            [
+                InlineKeyboardButton(
+                    "Enable Join Requests", callback_data="enable_join_requests"
+                ),
+                InlineKeyboardButton(
+                    "Disable Join Requests", callback_data="disable_join_requests"
+                ),
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        await message.reply_html(
+            "Join requests setting is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
+            "When this setting is on, I will send a message with Approve/Decline buttons on every join request".format(
+                join_request_status(chat.id), html.escape(chat.title)
+            ),
+            reply_markup=reply_markup,
+        )
+        return
 
-    await message.reply_html(
-        "Join requests setting is currently <b><i>{}</i></b> in <code>{}</code>\n\n"
-        "When this setting is on, I will send a message with Approve/Decline buttons on every join request".format(
-            join_request_status(chat.id), html.escape(chat.title)))
-    return
+
+@callback_query_handler(pattern="enable_join_requests")
+async def enable_join_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    enable_join_request(chat_id)
+    await update.callback_query.answer()
+    await update.callback_query.edit_message_text(
+        "Join requests enabled in {}".format(html.escape(update.effective_chat.title))
+    )
+
+@callback_query_handler(pattern="disable_join_requests")
+async def disable_join_requests(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    disable_features(chat_id)
+    await update.callback_query.answer()
+    await update.callback_query.edit_message_text(
+        "Join requests disabled in {}".format(html.escape(update.effective_chat.title))
+    )
 
 
 @check_admin(permission="can_invite_users", is_both=True)
