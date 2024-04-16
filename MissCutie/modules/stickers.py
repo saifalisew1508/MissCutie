@@ -819,21 +819,27 @@ async def delsticker(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Please reply to sticker message to del sticker"
         )
             
+
+
 async def video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     msg = update.effective_message
     chat_id = update.effective_chat.id
-    if msg.reply_to_message and msg.reply_to_message.animation:
-        file_id = msg.reply_to_message.animation.file_id
-        new_file = bot.get_file(file_id)
-        new_file.download("video.mp4")
-        bot.send_video(chat_id, video=open("video.mp4", "rb"))
-        os.remove("video.mp4")
+
+    if msg.reply_to_message and msg.reply_to_message.sticker and msg.reply_to_message.sticker.is_video:
+        sticker_file_id = msg.reply_to_message.sticker.file_id
+        sticker_file = bot.get_file(sticker_file_id)
+        sticker_file.download("sticker.mp4")
+
+        video_file = await bot.convert_file(sticker_file, "video")
+        bot.send_video(chat_id, video=video_file)
+
+        os.remove("sticker.mp4")
     else:
         await update.effective_message.reply_text(
-            "Please reply to a gif for me to get it's video."
-
+            "Please reply to a video sticker for me to get its video."
         )
+
 
 __mod_name__ = "Stickers"
 
