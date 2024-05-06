@@ -115,7 +115,7 @@ telegraph==2.2.0
 Telethon==1.32.0
 TgCrypto==1.2.5
 tornado==6.3.3
-tqdm==4.62.3
+tqdm==4.66.4
 typing-extensions==4.7.1
 tzdata==2023.3
 tzlocal==4.1
