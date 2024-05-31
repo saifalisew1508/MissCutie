@@ -1,6 +1,7 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ContextTypes
 from datetime import datetime
+import html
 from MissCutie import application, OWNER_ID
 from Database.mongodb.copyright import (
     enable_anticopyright,
@@ -17,10 +18,12 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
         if (
             message.edit_date
             or message.sticker
-            or message.video
-            and message.date < datetime.now().timestamp() - 120
+            or (message.video and message.date < datetime.now().timestamp() - 120)
         ):
-            await message.delete()
+            try:
+                await message.delete()
+            except Exception as e:
+                context.bot.logger.error(f"Error deleting message: {e}")
 
 async def set_anticopyright(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
@@ -40,7 +43,8 @@ async def set_anticopyright(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"Enabled\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
-            return log_message
+            context.bot.logger.info(log_message)
+            return
         elif s in ["off", "no", "false"]:
             disable_anticopyright(chat.id)
             await message.reply_html(
@@ -51,15 +55,17 @@ async def set_anticopyright(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"Disabled\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}"
             )
-            return log_message
-        else:
-            await message.reply_text(f"Unrecognized arguments {s}")
+            context.bot.logger.info(log_message)
             return
+        else:
+            await message.reply_text(f"Unrecognized arguments: {s}")
+            return
+
+    status = "enabled" if is_anticopyright_enabled(chat.id) else "disabled"
     await message.reply_html(
-        f"Anticopyright setting is currently <b><i>{anticopyright_status(chat.id)}</i></b> in <code>{html.escape(chat.title)}</code>\n\n"
+        f"Anticopyright setting is currently <b><i>{status}</i></b> in <code>{html.escape(chat.title)}</code>\n\n"
         "When this setting is on, I will delete edited messages, stickers, and videos after 2 minutes"
     )
-    return
 
 application.add_handler(CommandHandler("anticopyright", set_anticopyright))
 application.add_handler(MessageHandler(Filters.all, handle_message))
