@@ -10,7 +10,7 @@ from MissCutie.modules.disable import (
 )
 from Database.sql import afk_sql as sql
 from MissCutie.modules.users import get_user_id
-from telegram import MessageEntity, Update
+from telegram import MessageEntity, Update, InputFile
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes, filters, MessageHandler
 
@@ -18,29 +18,37 @@ AFK_GROUP = 7
 AFK_REPLY_GROUP = 8
 
 
-
 async def afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_message.text:
         args = update.effective_message.text.split(None, 1)
     else:
-        return
+        args = []
+
     user = update.effective_user
+    message = update.effective_message
 
     if not user:  # ignore channels
         return
 
-
     notice = ""
-    if len(args) >= 2:
-        reason = args[1]
-        if len(reason) > 100:
-            reason = reason[:100]
-            notice = "\nYour afk reason was shortened to 100 characters."
-    else:
-        reason = ""
+    reason = args[1] if len(args) >= 2 else ""
+    if len(reason) > 100:
+        reason = reason[:100]
+        notice = "\nYour afk reason was shortened to 100 characters."
 
-    sql.set_afk(update.effective_user.id, reason)
-    fname = update.effective_user.first_name
+    # Handle media attachment
+    media_id = None
+    media_type = None
+    if message.reply_to_message:
+        if message.reply_to_message.photo:
+            media_id = message.reply_to_message.photo[-1].file_id
+            media_type = 'photo'
+        elif message.reply_to_message.document:
+            media_id = message.reply_to_message.document.file_id
+            media_type = 'document'
+
+    sql.set_afk(user.id, reason, media_id, media_type)
+    fname = user.first_name
     try:
         if reason:
             await update.effective_message.reply_text(
@@ -48,12 +56,11 @@ async def afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode="html"
             )
         else:
-                await update.effective_message.reply_text(
+            await update.effective_message.reply_text(
                 "{} is now away!{}".format(fname, notice),
-            )   
+            )
     except BadRequest:
         pass
-
 
 
 async def no_longer_afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -70,9 +77,9 @@ async def no_longer_afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     res = sql.rm_afk(user.id)
     if res:
-        if message.new_chat_members:  # dont say msg
+        if message.new_chat_members:  # don't say msg
             return
-        firstname = update.effective_user.first_name
+        firstname = user.first_name
         try:
             options = [
                 "{} is here!",
@@ -91,7 +98,6 @@ async def no_longer_afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         except:
             return
-
 
 
 async def reply_afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -166,9 +172,13 @@ async def check_afk(update: Update, context: ContextTypes.DEFAULT_TYPE, user_id:
                 html.escape(user.reason),
                 time,
             )
-            await update.effective_message.reply_text(res, parse_mode="html")
-
-
+            if user.media_id:
+                if user.media_type == 'photo':
+                    await update.effective_message.reply_photo(photo=user.media_id, caption=res, parse_mode="html")
+                elif user.media_type == 'document':
+                    await update.effective_message.reply_document(document=user.media_id, caption=res, parse_mode="html")
+            else:
+                await update.effective_message.reply_text(res, parse_mode="html")
 
 
 AFK_HANDLER = DisableAbleCommandHandler("afk", afk, block=False)
