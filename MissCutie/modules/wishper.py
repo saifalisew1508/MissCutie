@@ -16,7 +16,6 @@ client = MongoClient(MONGO_DB_URI)
 db = client[DB_NAME]
 collection = db["whispers"]
 
-
 # Whispers Class
 class Whispers:
     @staticmethod
@@ -33,34 +32,23 @@ class Whispers:
         whisper = collection.find_one({"WhisperId": WhisperId})
         return whisper["whisperData"] if whisper else None
 
- 
 # Inline query handler
 async def mainwhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query
     if not query.query:
         return await query.answer(
             [],
-            switch_pm_text="Give me a username or ID!",
+            switch_pm_text="Provide a message and user ID!",
             switch_pm_parameter="ghelp_whisper",
         )
 
-    user, message = parse_user_message(query.query)
-    if len(message) > 200:
+    user_id, message = parse_user_message(query.query)
+    if not user_id.isdigit() or len(message) > 200:
         return
-
-    usertype = "username" if user.startswith("@") else "id"
-
-    if user.isdigit():
-        try:
-            chat = await context.bot.get_chat(int(user))
-            user = f"@{chat.username}" if chat.username else chat.first_name
-        except Exception:
-            pass
 
     whisperData = {
         "user": query.from_user.id,
-        "withuser": user,
-        "usertype": usertype,
+        "withuser": int(user_id),
         "type": "inline",
         "message": message,
     }
@@ -72,10 +60,10 @@ async def mainwhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
     answers = [
         InlineQueryResultArticle(
             id=whisperId,
-            title=f"👤 Send a whisper message to {user}!",
+            title=f"👤 Send a whisper message to {user_id}!",
             description="Only they can see it!",
             input_message_content=InputTextMessageContent(
-                f"🔐 A Whisper Message For {user}\nOnly they can see it!"
+                f"🔐 A Whisper Message For User ID {user_id}\nOnly they can see it!"
             ),
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -92,7 +80,6 @@ async def mainwhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.answer_inline_query(query.id, answers)
 
-
 # Callback query handler
 async def showWhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
     callback_query = update.callback_query
@@ -105,23 +92,9 @@ async def showWhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    userType = whisper["usertype"]
     from_user_id = callback_query.from_user.id
 
-    if from_user_id == whisper["user"]:
-        await context.bot.answer_callback_query(
-            callback_query.id, whisper["message"], show_alert=True
-        )
-    elif (
-        userType == "username"
-        and callback_query.from_user.username
-        and callback_query.from_user.username.lower()
-        == whisper["withuser"].replace("@", "").lower()
-    ):
-        await context.bot.answer_callback_query(
-            callback_query.id, whisper["message"], show_alert=True
-        )
-    elif userType == "id" and from_user_id == int(whisper["withuser"]):
+    if from_user_id == whisper["user"] or from_user_id == whisper["withuser"]:
         await context.bot.answer_callback_query(
             callback_query.id, whisper["message"], show_alert=True
         )
@@ -130,29 +103,16 @@ async def showWhisper(update: Update, context: ContextTypes.DEFAULT_TYPE):
             callback_query.id, "Not your Whisper!", show_alert=True
         )
 
-
 # Function to parse user message
 def parse_user_message(query_text):
-    text = query_text.split(" ")
-    user = text[0]
-    first = True
-    message = ""
-
-    if not user.startswith("@") and not user.isdigit():
-        user = text[-1]
-        first = False
-
-    if first:
-        message = " ".join(text[1:])
-    else:
-        text.pop()
-        message = " ".join(text)
-
-    return user, message
-
+    parts = query_text.split(" ", 1)
+    if len(parts) < 2:
+        return "", ""
+    user_id = parts[0]
+    message = parts[1]
+    return user_id, message
 
 application.add_handler(InlineQueryHandler(mainwhisper, block=False))
 application.add_handler(CallbackQueryHandler(showWhisper, pattern="^whisper_", block=False))
-
 
 __mod_name__ = "Whispers"
