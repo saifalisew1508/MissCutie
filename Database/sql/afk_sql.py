@@ -3,7 +3,7 @@ import threading
 from datetime import datetime
 
 from Database.sql import BASE, SESSION
-from sqlalchemy import Boolean, Column, Integer, UnicodeText, DateTime, BigInteger
+from sqlalchemy import Boolean, Column, Integer, UnicodeText, DateTime, BigInteger, Text
 
 
 class AFK(BASE):
@@ -13,12 +13,16 @@ class AFK(BASE):
     is_afk = Column(Boolean)
     reason = Column(UnicodeText)
     time = Column(DateTime)
+    media_id = Column(Text, nullable=True)
+    media_type = Column(Text, nullable=True)
 
-    def __init__(self, user_id: int, reason: str = "", is_afk: bool = True):
+    def __init__(self, user_id: int, reason: str = "", is_afk: bool = True, media_id: str = None, media_type: str = None):
         self.user_id = user_id
         self.reason = reason
         self.is_afk = is_afk
         self.time = datetime.now()
+        self.media_id = media_id
+        self.media_type = media_type
 
     def __repr__(self):
         return "afk_status for {}".format(self.user_id)
@@ -41,15 +45,19 @@ def check_afk_status(user_id):
         SESSION.close()
 
 
-def set_afk(user_id, reason=""):
+def set_afk(user_id, reason="", media_id=None, media_type=None):
     with INSERTION_LOCK:
         curr = SESSION.query(AFK).get(user_id)
         if not curr:
-            curr = AFK(user_id, reason, True)
+            curr = AFK(user_id, reason, True, media_id, media_type)
         else:
             curr.is_afk = True
+            curr.reason = reason
+            curr.media_id = media_id
+            curr.media_type = media_type
+            curr.time = datetime.now()
 
-        AFK_USERS[user_id] = {"reason": reason, "time": curr.time}
+        AFK_USERS[user_id] = {"reason": reason, "time": curr.time, "media_id": media_id, "media_type": media_type}
 
         SESSION.add(curr)
         SESSION.commit()
@@ -70,11 +78,11 @@ def rm_afk(user_id):
         return False
 
 
-def toggle_afk(user_id, reason=""):
+def toggle_afk(user_id, reason="", media_id=None, media_type=None):
     with INSERTION_LOCK:
         curr = SESSION.query(AFK).get(user_id)
         if not curr:
-            curr = AFK(user_id, reason, True)
+            curr = AFK(user_id, reason, True, media_id, media_type)
         elif curr.is_afk:
             curr.is_afk = False
         elif not curr.is_afk:
@@ -88,7 +96,12 @@ def __load_afk_users():
     try:
         all_afk = SESSION.query(AFK).all()
         AFK_USERS = {
-            user.user_id: {"reason": user.reason, "time": user.time} for user in all_afk if user.is_afk
+            user.user_id: {
+                "reason": user.reason,
+                "time": user.time,
+                "media_id": user.media_id,
+                "media_type": user.media_type
+            } for user in all_afk if user.is_afk
         }
     finally:
         SESSION.close()
