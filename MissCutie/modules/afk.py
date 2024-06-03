@@ -63,6 +63,7 @@ async def afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
 
+
 async def no_longer_afk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     message = update.effective_message
@@ -165,7 +166,13 @@ async def check_afk(update: Update, context: ContextTypes.DEFAULT_TYPE, user_id:
                 fst_name,
                 time,
             )
-            await update.effective_message.reply_text(res)
+            if user.media_id:
+                if user.media_type == 'photo':
+                    await update.effective_message.reply_photo(photo=user.media_id, caption=res, parse_mode="html")
+                elif user.media_type == 'document':
+                    await update.effective_message.reply_document(document=user.media_id, caption=res, parse_mode="html")
+            else:
+                await update.effective_message.reply_text(res)
         else:
             res = "{} is afk.\nReason: <code>{}</code>\n\nLast seen {} ago.".format(
                 html.escape(fst_name),
@@ -179,6 +186,7 @@ async def check_afk(update: Update, context: ContextTypes.DEFAULT_TYPE, user_id:
                     await update.effective_message.reply_document(document=user.media_id, caption=res, parse_mode="html")
             else:
                 await update.effective_message.reply_text(res, parse_mode="html")
+
 
 
 AFK_HANDLER = DisableAbleCommandHandler("afk", afk, block=False)
