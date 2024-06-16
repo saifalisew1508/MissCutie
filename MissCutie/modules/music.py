@@ -1,13 +1,23 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackContext
 import YouTubeMusicAPI
+from MissCutie import application
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import (
+    CallbackQueryHandler,
+    CommandHandler,
+    ContextTypes,
+    MessageHandler,
+    filters,
+)
 
 
 
-def search(update: Update, context: CallbackContext) -> None:
+async def search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.effective_message
+    chat = update.effective_chat
+    user = update.effective_user
     query = ' '.join(context.args)
     if not query:
-        update.message.reply_text('Please provide a search query.')
+        await update.message.reply_text('Please provide a search query.')
         return
     
     result = YouTubeMusicAPI.search(query)
@@ -27,6 +37,9 @@ def search(update: Update, context: CallbackContext) -> None:
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
-        update.message.reply_photo(photo=artwork, caption=response_text, parse_mode='Markdown', reply_markup=reply_markup)
+        await update.message.reply_photo(photo=artwork, caption=response_text, parse_mode='Markdown', reply_markup=reply_markup)
     else:
-        update.message.reply_text('No Result Found')
+        await update.message.reply_text('No Result Found')
+
+
+application.add_handler(CommandHandler('song', search))
