@@ -132,4 +132,5 @@ yt-dlp==2023.3.4
 youtube-dl==2021.12.17
 youtube-search==2.1.2
 youtube-search-python==1.6.6
+YouTubeMusicAPI==2.8
 zalgo-text==0.6
