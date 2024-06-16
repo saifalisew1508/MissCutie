@@ -1,20 +1,15 @@
+import os
+import requests
 import YouTubeMusicAPI
 from MissCutie import application
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
-    CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
-    MessageHandler,
-    filters,
 )
 
 
-
 async def search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    message = update.effective_message
-    chat = update.effective_chat
-    user = update.effective_user
     query = ' '.join(context.args)
     if not query:
         await update.message.reply_text('Please provide a search query.')
@@ -29,15 +24,24 @@ async def search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         author_name = result.get("author", {}).get("name")
         author_url = result.get("author", {}).get("url")
         
+        # Download the song
+        song_data = requests.get(url)
+        download_path = f"./download/{title}.mp3"
+        
+        with open(download_path, "wb") as file:
+            file.write(song_data.content)
+        
+        # Send the downloaded audio file with the artwork as the thumbnail
         response_text = f"*{title}*\n[Watch on YouTube Music]({url})\n\n"
         response_text += f"Author: [{author_name}]({author_url})"
         
-        keyboard = [
-            [InlineKeyboardButton("Watch on YouTube Music", url=url)]
-        ]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        
-        await update.message.reply_photo(photo=artwork, caption=response_text, parse_mode='Markdown', reply_markup=reply_markup)
+        await update.message.reply_audio(
+            audio=open(download_path, 'rb'),
+            title=title,
+            caption=response_text,
+            thumb=artwork,
+            parse_mode='Markdown'
+        )
     else:
         await update.message.reply_text('No Result Found')
 
