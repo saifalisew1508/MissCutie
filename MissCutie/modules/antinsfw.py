@@ -1,13 +1,14 @@
 from os import remove
 
-from pyrogram import filters
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.constants import MessageEntityType
 
 from Database.mongodb.toggle_mongo import is_nsfw_on, nsfw_off, nsfw_on
-from MissCutie import BOT_USERNAME, DRAGONS, app
+from MissCutie import BOT_USERNAME, DRAGONS
 from MissCutie.utils.state import arq
 from MissCutie.utils.admins import can_restrict
 from MissCutie.utils.errors import capture_err
-
 
 
 async def get_file_id_from_message(message):
@@ -22,56 +23,49 @@ async def get_file_id_from_message(message):
 
     if message.sticker:
         if message.sticker.is_animated:
-            if not message.sticker.thumbs:
+            if not message.sticker.thumb:
                 return
-            file_id = message.sticker.thumbs[0].file_id
+            file_id = message.sticker.thumb.file_id
         else:
             file_id = message.sticker.file_id
 
     if message.photo:
-        file_id = message.photo.file_id
+        file_id = message.photo[-1].file_id
 
     if message.animation:
-        if not message.animation.thumbs:
+        if not message.animation.thumb:
             return
-        file_id = message.animation.thumbs[0].file_id
+        file_id = message.animation.thumb.file_id
 
     if message.video:
-        if not message.video.thumbs:
+        if not message.video.thumb:
             return
-        file_id = message.video.thumbs[0].file_id
+        file_id = message.video.thumb.file_id
     return file_id
 
 
-@app.on_message(
-    (
-        filters.document
-        | filters.photo
-        | filters.sticker
-        | filters.animation
-        | filters.video
-    )
-    & ~filters.private,
-    group=8,
-)
 @capture_err
-async def detect_nsfw(_, message):
-    if not await is_nsfw_on(message.chat.id):
+async def detect_nsfw(update: Update, context: CallbackContext):
+    message = update.effective_message
+    if not await is_nsfw_on(message.chat_id):
         return
     if not message.from_user:
         return
     file_id = await get_file_id_from_message(message)
     if not file_id:
         return
-    file = await _.download_media(file_id)
+    file = await context.bot.get_file(file_id)
+    file_path = file.file_path
+    file.download(custom_path=file_path)
+    
     try:
-        results = await arq.nsfw_scan(file=file)
+        results = await arq.nsfw_scan(file=file_path)
     except Exception:
         return
     if not results.ok:
         return
     results = results.result
-    remove(file)
+    remove(file_path)
     nsfw = results.is_nsfw
     if message.from_user.id in DRAGONS:
         return
@@ -85,19 +79,20 @@ async def detect_nsfw(_, message):
         f"""
 **🔞 NSFW Image Detected & Deleted Successfully!**
 
-**✪ User:** {message.from_user.mention} [`{message.from_user.id}`]
+**✪ User:** {message.from_user.mention_html()} [`{message.from_user.id}`]
 **✪ Safe:** `{results.neutral} %`
 **✪ Porn:** `{results.porn} %`
 **✪ Adult:** `{results.sexy} %`
 **✪ Hentai:** `{results.hentai} %`
 **✪ Drawings:** `{results.drawings} %`
-"""
+""",
+        parse_mode="HTML"
     )
 
 
-@app.on_message(filters.command(["nsfwscan", f"nsfwscan@{BOT_USERNAME}"]))
 @capture_err
-async def nsfw_scan_command(_, message):
+async def nsfw_scan_command(update: Update, context: CallbackContext):
+    message = update.effective_message
     if not message.reply_to_message:
         await message.reply_text(
             "Reply to an image/document/sticker/animation to scan it."
@@ -118,17 +113,20 @@ async def nsfw_scan_command(_, message):
     m = await message.reply_text("Scanning")
     file_id = await get_file_id_from_message(reply)
     if not file_id:
-        return await m.edit("Something wrong happened.")
-    file = await _.download_media(file_id)
+        return await m.edit_text("Something wrong happened.")
+    file = await context.bot.get_file(file_id)
+    file_path = file.file_path
+    file.download(custom_path=file_path)
+    
     try:
-        results = await arq.nsfw_scan(file=file)
+        results = await arq.nsfw_scan(file=file_path)
     except Exception:
         return
-    remove(file)
+    remove(file_path)
     if not results.ok:
-        return await m.edit(results.result)
+        return await m.edit_text(results.result)
     results = results.result
-    await m.edit(
+    await m.edit_text(
         f"""
 **➢ Neutral:** `{results.neutral} %`
 **➢ Porn:** `{results.porn} %`
@@ -140,17 +138,14 @@ async def nsfw_scan_command(_, message):
     )
 
 
-@app.on_message(
-    filters.command(["antinsfw", f"antinsfw@{BOT_USERNAME}"]) & ~filters.private
-)
 @can_restrict
-async def nsfw_enable_disable(_, message):
-    if len(message.command) != 2:
+async def nsfw_enable_disable(update: Update, context: CallbackContext):
+    message = update.effective_message
+    if len(context.args) != 1:
         await message.reply_text("Usage: /antinsfw [on/off]")
         return
-    status = message.text.split(None, 1)[1].strip()
-    status = status.lower()
-    chat_id = message.chat.id
+    status = context.args[0].strip().lower()
+    chat_id = message.chat_id
     if status in ("on", "yes"):
         if await is_nsfw_on(chat_id):
             await message.reply_text("Antinsfw is already enabled.")
@@ -167,16 +162,3 @@ async def nsfw_enable_disable(_, message):
         await message.reply_text("Disabled AntiNSFW System.")
     else:
         await message.reply_text("Unknown Suffix, Use /antinsfw [on/off]")
-
-
-__mod_name__ = "ANTI-NSFW"
-
-__help__ = """
-*🔞 Helps in detecting NSFW material and removing it*.
-
-➠ *Usage:*
-
-» /antinsfw [on/off]: Enables Anti-NSFW system.
-
-» /nsfwscan <reply to message>: Scans the file replied to.
-"""
