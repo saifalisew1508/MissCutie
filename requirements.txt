@@ -10,7 +10,7 @@ beautifulsoup4==4.10.0
 bing_image_downloader==1.1.2
 bleach==6.0.0
 cachetools==5.3.1
-certifi==2023.7.22
+certifi==2023.11.17
 cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==3.0.1
