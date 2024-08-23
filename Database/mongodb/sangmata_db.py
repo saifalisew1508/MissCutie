@@ -1,4 +1,4 @@
-from Database.mongodb.db import dbname
+from Database.mongodb import dbname
 
 matadb = dbname["sangmata"]
 
