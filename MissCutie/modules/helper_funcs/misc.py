@@ -1,7 +1,7 @@
-# <============================================== IMPORTS =========================================================>
 from math import ceil
 from typing import Dict, List
 from uuid import uuid4
+
 
 import cv2
 import ffmpeg
@@ -17,10 +17,8 @@ from telegram.error import TelegramError
 
 from MissCutie import NO_LOAD
 
-# <=======================================================================================================>
 
 
-# <================================================ FUNCTION =======================================================>
 class EqInlineKeyboardButton(InlineKeyboardButton):
     def __eq__(self, other):
         return self.text == other.text
@@ -260,6 +258,3 @@ def mention_username(username: str, name: str) -> str:
         :obj:`str`: The inline mention for the user as HTML.
     """
     return f'<a href="t.me/{username}">{escape(name)}</a>'
-
-
-# <================================================ END =======================================================>
