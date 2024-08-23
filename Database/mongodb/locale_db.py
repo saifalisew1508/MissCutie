@@ -2,7 +2,7 @@ from typing import Iterable
 
 from pyrogram.enums import ChatType
 
-from Database.mongodb.db import dbname
+from Database.mongodb import dbname
 
 localesdb = dbname.locale  # DB for localization
 
