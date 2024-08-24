@@ -34,18 +34,7 @@ from telegram.helpers import escape_markdown
 
 from strings.buttons import *
 from strings.messages import *
-from MissCutie import (
-    BOT_NAME,
-    LOGGER,
-    OWNER_ID,
-    SUPPORT_CHAT,
-    TOKEN,
-    StartTime,
-    app,
-    application,
-    loop,
-    tbot,
-)
+from MissCutie import *
 from MissCutie.plugins import ALL_MODULES
 from MissCutie.plugins.helper_funcs.chat_status import is_user_admin
 from MissCutie.plugins.helper_funcs.misc import paginate_modules
@@ -221,7 +210,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     chat = update.effective_chat
     if query.data == "saif_":
         await query.message.edit_text(
-            text="ABOUT_TEXT".format(
+            ABOUT_TEXT.format(
                 BOT_NAME, BOT_NAME, BOT_VERSION, uptime, PYTHON_VERSION, PYRO_VERSION, TELETHON_VERSION, PTB_VERSION, BOT_API_VERSION, MONGO_VERSION, SQL_VERSION, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -231,7 +220,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_support":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="SAIF_SUPPORT".format(
+            SAIF_SUPPORT.format(
                 BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -241,7 +230,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_sponsor":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="SAIF_SPONSORS".format(
+            SAIF_SPONSORS.format(
                 BOT_NAME, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -251,7 +240,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_developer":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="SAIF_DEVELOPERS".format(
+            SAIF_DEVELOPERS.format(
                 BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -261,7 +250,7 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
     elif query.data == "saif_source":
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="SAIF_SOURCE".format(
+            SAIF_SOURCE.format(
                 BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME, BOT_NAME,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -272,11 +261,63 @@ async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
         await query.message.delete()
             
     elif query.data == "saif_back":
-        chat = update.effective_chat
         first_name = update.effective_user.first_name
         await query.message.edit_text(
-            text="PM_START_TEXT".format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
-            reply_markup=InlineKeyboardMarkup(PM_START_BUTTON),
+            PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=False,
+        )
+
+async def music_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    first_name = update.effective_user.first_name 
+    if query.data == "Music_":
+        await query.message.edit_text(
+            text=MUSIC_TEXT.format(escape_markdown(first_name), 
+                                   escape_markdown(context.bot.first_name)),
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+
+    elif query.data == "Music_admin":
+        await query.message.edit_text(
+            text=MUSIC_ADMIN,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_play":
+        await query.message.edit_text(
+            text=MUSIC_PLAY,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_bot":
+        await query.message.edit_text(
+            text=MUSIC_BOT,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_extra":
+        await query.message.edit_text(
+            text=MUSIC_EXTRA,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(music_buttons),
+        )
+    elif query.data == "Music_close":
+        await query.message.delete()
+        
+    elif query.data == "Music_back":
+        first_name = update.effective_user.first_name
+        await query.message.edit_text(
+            PM_START_TEXT.format(escape_markdown(first_name),
+                                 escape_markdown(context.bot.first_name)),
+            reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
         )
