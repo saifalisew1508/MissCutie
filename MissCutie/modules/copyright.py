@@ -152,6 +152,32 @@ async def anticopy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="HTML"
         )
 
+
+__help__ = """
+➠ This feature protects your group from unwanted edits and media forwarding.
+
+➠ When enabled, I will delete:
+ • Edited messages
+ • Stickers
+ • Videos after 2 minutes
+
+➠ If disabled, I will still delete:
+ • Edited media immediately
+ • Edited text after 60 seconds
+
+➠ *Admin commands:*
+
+» /anticopyright - Show current status and get inline buttons to toggle.
+» /anticopyright on - Enable copyright protection.
+» /anticopyright off - Disable copyright protection.
+
+➠ Make sure I have *Delete Messages* permission or I will disable the protection automatically.
+"""
+
+__mod_name__ = "COPYRIGHT"
+__command_list__ = ["anticopyright"]
+
+
 # =================== HANDLER REGISTRATION ====================
 application.add_handler(CommandHandler("anticopyright", set_anticopyright))
 application.add_handler(CallbackQueryHandler(anticopy_callback, pattern="^anticopy_"))
