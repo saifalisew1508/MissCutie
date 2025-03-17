@@ -185,8 +185,52 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             keyboard.append([InlineKeyboardButton(f"{icon} {name}", callback_data=f"toggleperm|{user_id}|{p}")])
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(keyboard))
 
-__help__ = "Admin Commands:\n/admin or /promote [title] - Promote user as admin\n/unadmin or /demote - Demote admin\n/admins - List all admins"
+__help__ = """
+Admin Management Commands:
+
+/admin or /promote [optional title]
+- Promote a user to admin with default permissions.
+- Can be used by replying to a user's message or by providing username/userid.
+- Examples:
+  /admin (in reply to message)
+  /admin @username
+  /admin @username Group Moderator
+- After promotion, bot sends two buttons:
+  ❌ Remove Admin - Instantly demotes the user.
+  ⚙️ Edit Permissions - Lets you toggle each admin permission.
+- ✅ means the permission is enabled.
+- ❌ means the permission is disabled.
+- Tap on a permission to enable/disable it instantly.
+
+/unadmin or /demote
+- Demote a user and remove all admin rights.
+- Can be used by replying to a message or by username/userid.
+- Examples:
+  /demote (in reply)
+  /unadmin @username
+
+/admins
+- List all admins in the group along with their titles.
+
+/admin and /demote command usage formats:
+- Reply to user's message with /admin or /demote
+- /admin or /demote username/userid
+- /admin username title (title is optional)
+
+Rules & Behavior:
+- Only admins with full permissions (excluding anonymous and owner) can use these commands.
+- If you don't have required rights, the bot will tell which ones are missing.
+- If the user is already admin and only title is updated, bot replies: "User was already promoted, title updated."
+- If the user is already promoted by someone else and bot cannot change rights or demote, it replies: "User already promoted by someone else, I can't demote or change their rights."
+
+Permission Types:
+Change Info, Delete Messages, Invite Users, Restrict Members, Pin Messages,
+Promote Members, Manage Video Chats, Manage Chat, Post/Edit Messages, Manage Topics.
+"""
+
+
 __mod_name__ = "Admin Control"
+
 __command_list__ = ["admin", "promote", "unadmin", "demote", "admins"]
 
 def __handlers__():
