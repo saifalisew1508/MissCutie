@@ -2,7 +2,6 @@ from math import ceil
 from typing import Dict, List
 from uuid import uuid4
 
-
 import cv2
 import ffmpeg
 from telegram import (
@@ -16,7 +15,6 @@ from telegram.constants import MessageLimit, ParseMode
 from telegram.error import TelegramError
 
 from MissCutie import NO_LOAD
-
 
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
@@ -91,19 +89,19 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
         pairs = pairs[modulo_page * 6 : 6 * (modulo_page + 1)] + [
             (
                 EqInlineKeyboardButton(
-                    "◁", callback_data="{}_prev({})".format(prefix, modulo_page)
+                    "Previous", callback_data="{}_prev({})".format(prefix, modulo_page)
                 ),
                 EqInlineKeyboardButton(
-                    "Home Page", callback_data="extra_command_handler"
+                    "Main Menu", callback_data="extra_command_handler"
                 ),
                 EqInlineKeyboardButton(
-                    "▷", callback_data="{}_next({})".format(prefix, modulo_page)
+                    "Next", callback_data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
         ]
 
     else:
-        pairs += [[EqInlineKeyboardButton("🔙", callback_data="saif_back")]]
+        pairs += [[EqInlineKeyboardButton("Main Menu", callback_data="Miko_back")]]
 
     return pairs
 
