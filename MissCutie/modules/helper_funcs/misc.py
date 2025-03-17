@@ -101,7 +101,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
         ]
 
     else:
-        pairs += [[EqInlineKeyboardButton("Main Menu", callback_data="Miko_back")]]
+        pairs += [[EqInlineKeyboardButton("Main Menu", callback_data="saif_back")]]
 
     return pairs
 
