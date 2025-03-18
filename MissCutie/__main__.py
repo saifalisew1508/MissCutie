@@ -81,7 +81,7 @@ CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("MissCutie.plugins." + module_name)
+    imported_module = importlib.import_module("Mikobot.plugins." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
 
@@ -116,7 +116,6 @@ for module_name in ALL_MODULES:
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
 
-
 async def send_help(chat_id, text, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
@@ -145,7 +144,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="🔙", callback_data="help_back")]]
+                        [[InlineKeyboardButton(text="◁", callback_data="help_back")]]
                     ),
                 )
 
@@ -153,7 +152,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 IMPORTED["exᴛʀᴀs"].markdown_help_sender(update)
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
-                chat = application.bot.getChat(match.group(1))
+                chat = dispatcher.bot.getChat(match.group(1))
 
                 if is_user_admin(chat, update.effective_user.id):
                     send_settings(match.group(1), update.effective_user.id, False)
@@ -165,43 +164,30 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         else:
             first_name = update.effective_user.first_name
-            chat = update.effective_chat
+            lol = await message.reply_photo(
+                photo=str(choice(START_IMG)),
+                caption=FIRST_PART_TEXT.format(escape_markdown(first_name)),
+                parse_mode=ParseMode.MARKDOWN,
+            )
+            await asyncio.sleep(0.2)
+            guu = await update.effective_message.reply_text("🐾")
+            await asyncio.sleep(1.8)
+            await guu.delete()  # Await this line
             await update.effective_message.reply_text(
                 PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(PM_START_BUTTON).format(escape_markdown(first_name), escape_markdown(context.bot.first_name)),
+                reply_markup=InlineKeyboardMarkup(START_BTN),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=False,
             )
     else:
-        await update.effective_message.reply_text(
-            "Hello! I'm currently running on {} version {}.\n\n"
-            "<b>Uptime:</b> <code>{}</code>\n"
-            "<b>Python Version:</b> <code>v{}</code>\n"
-            "<b>Telethon Version:</b> <code>v{}</code>\n"
-            "<b>Pyrogram Version:</b> <code>v{}</code>\n"
-            "<b>Python Telegram Bot Version:</b> <code>v{}</code>\n"
-            "<b>Telegram Bot API Version:</b> <code>v{}</code>".format(
-                BOT_NAME, BOT_VERSION, uptime, PYTHON_VERSION, TELETHON_VERSION, PYRO_VERSION, PTB_VERSION, BOT_API_VERSION,
+        await message.reply_photo(
+            photo=str(choice(START_IMG)),
+            reply_markup=InlineKeyboardMarkup(GROUP_START_BTN),
+            caption="<b>I am Alive!</b>\n\n<b>Since​:</b> <code>{}</code>".format(
+                uptime
             ),
             parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="Developer 🧑‍💻",
-                            url="tg://user?id={}".format(OWNER_ID),
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text="Need help?",
-                            url="t.me/{}?start=help".format(context.bot.username),
-                        ),
-                    ],
-                ],
-            ),
         )
-
 
 async def saif_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
