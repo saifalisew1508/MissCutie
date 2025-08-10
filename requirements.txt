@@ -34,7 +34,7 @@ pytz==2024.1
 python-arq==6.0.7
 pyrogram==2.0.106
 python-telegram-bot==21.4
-regex==2024.7.24
+regex==2024.11.6
 requests==2.32.3
 safoneapi==1.0.48
 shortuuid==1.0.13
