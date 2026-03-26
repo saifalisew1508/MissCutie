@@ -7,7 +7,7 @@ beautifulsoup4==4.12.3
 bleach==6.1.0
 cachetools==5.5.0
 cockroachdb
-dateparser==1.2.0
+dateparser==1.4.0
 emoji==2.12.1
 emoji-country-flag==2.0.1
 ffmpeg-python
