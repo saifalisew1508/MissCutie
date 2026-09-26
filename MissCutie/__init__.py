@@ -1,32 +1,19 @@
+"""MissCutie, a Telegram bot built with python-telegram-bot.
+
+The package deliberately does not construct an application at import time.  This
+makes importing it safe for tools and tests, and keeps configuration validation
+at the executable boundary.
 """
-MissCutie – Bot initialisation.
-Builds the PTB Application and exposes it for modules to use.
-"""
 
-import logging
+from MissCutie.config import Settings
 
-from telegram.ext import Application
+__all__ = ("Settings", "create_application")
 
-from MissCutie import config
-from MissCutie.database import init_db
 
-logging.basicConfig(
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    level=logging.INFO,
-)
-logging.getLogger("httpx").setLevel(logging.WARNING)
-logger = logging.getLogger(__name__)
+def __getattr__(name: str):
+    """Import PTB-dependent application code only when it is requested."""
+    if name == "create_application":
+        from MissCutie.application import create_application
 
-# ── Initialise database ───────────────────────────────────────────────────────
-init_db()
-
-# ── Build the PTB Application ─────────────────────────────────────────────────
-application: Application = (
-    Application.builder()
-    .token(config.TOKEN)
-    .concurrent_updates(True)
-    .build()
-)
-
-bot = application.bot
-dispatcher = application 
+        return create_application
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
